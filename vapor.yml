@@ -1,4 +1,4 @@
-id: 2406
+id: 3049
 name: billio-api
 environments:
     production:
@@ -7,11 +7,13 @@ environments:
         build:
             - 'composer install --no-dev --classmap-authoritative'
             - 'php artisan event:cache'
-            - 'npm ci && npm run prod && rm -rf node_modules'
+            - 'npm install && npm run prod && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
     staging:
         memory: 1024
         cli-memory: 512
         build:
             - 'composer install --classmap-authoritative'
             - 'php artisan event:cache'
-            - 'npm ci && npm run dev && rm -rf node_modules'
+            - 'npm install && npm run dev && rm -rf node_modules'
