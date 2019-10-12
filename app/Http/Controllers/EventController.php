@@ -20,7 +20,7 @@ class EventController extends Controller
         {
             foreach ( $events as $event_key => $event)
             {
-                $events[ $event_key]['organisation'] = $event->organisation()->get();
+                $events[ $event_key]['organisation'] = $event->organisation()->first();
                 unset( $events[ $event_key] ['organisation_id'] );
 
                 $events[ $event_key]['dates'] = $event->dates()->get();
