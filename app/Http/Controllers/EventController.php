@@ -29,4 +29,69 @@ class EventController extends Controller
 
         return $events;
     }
+
+    /**
+     * Create an event
+     *
+     * @return void
+     */
+    public function create( Request $request )
+    {
+        // Validate the request...
+
+        $event = new Event;
+
+        $event->name = $request->name;
+        $event->description = $request->description;
+        $event->organisation_id = $request->organisationID;
+
+        $event->save();
+
+        return $event->id;
+    }
+
+    /**
+     * Update an event
+     *
+     * @return void
+     */
+    public function update( Request $request, int $id )
+    {
+        // Validate the request...
+
+        $event = Event::find( $id );
+
+        if ( $request->name )
+        {
+            $event->name = $request->name;
+        }
+
+        if ( $request->description )
+        {
+            $event->description = $request->description;
+        }
+
+        if ( $request->organisationID )
+        {
+            $event->organisation_id = $request->organisationID;
+        }
+
+        $event->save();
+
+        return $event->id;
+    }
+
+    /**
+     * Delete an event
+     *
+     * @return void
+     */
+    public function delete( Request $request, int $id )
+    {
+        $event = Event::find( $id );
+
+        $event->delete();
+
+        return 'Done';
+    }
 }
