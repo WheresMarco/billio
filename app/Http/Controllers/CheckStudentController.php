@@ -13,6 +13,11 @@ class CheckStudentController extends Controller
      */
     public function check( Request $request )
     {
-        return 'not implemented';
+        $nin = $request->nin;
+
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', 'https://medlem.lintek.liu.se/api/checkstudent/' . $nin . '?apikey=' . env('MONTANIA_API_KEY', null));
+
+        return $res->getBody();
     }
 }
