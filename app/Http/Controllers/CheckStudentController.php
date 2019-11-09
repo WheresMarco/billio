@@ -15,17 +15,40 @@ class CheckStudentController extends Controller
     public function check( Request $request )
     {
         $nin = $request->nin;
+
+        // Check if student is member.
+        $member = $this->isStudentMember( $nin );
+
+        // Return if member.
+        return [
+            'data'  => $member,
+            'links' => [
+                'self' => 'link-value',
+            ],
+        ];
+    }
+
+    /**
+     * Check if student is member.
+     *
+     * @param [type] $nin
+     * @return boolean
+     */
+    public function isStudentMember( $nin )
+    {
         $nin = str_replace( '-', '', $nin);
+
+        // Remove first two numbers if there is.
+        if ( 12 === strlen( $nin ) )
+        {
+            $nin = substr( $nin, 2 );
+        }
 
         // Check if NiN is valid.
         if ( ! Personnummer::valid( $nin ) )
         {
-            return [
-                'data'  => 'Not valid',
-                'links' => [
-                    'self' => 'link-value',
-                ],
-            ];
+            // TODO Error log
+            return false;
         }
 
         // Set up object to call.
@@ -34,29 +57,19 @@ class CheckStudentController extends Controller
         // Do request.
         $result = $client->request( 'GET', 'https://medlem.lintek.liu.se/api/checkstudent/' . $nin . '?apikey=' . env( 'MONTANIA_API_KEY', null ) );
 
-        // If not 200 status code exit out.
-        if ( 200 !== $result->getStatusCode() )
-        {
-            return [
-                'data' => 'API Unavailable',
-                'links' => [
-                    'self' => 'link-value',
-                ],
-            ];
-        }
+       // If not 200 status code exit out.
+       if ( 200 !== $result->getStatusCode() )
+       {
+           // TODO Error log
+           return false;
+       }
 
-        // Convert result to something we can work with.
-        $content_string = (string) $result->getBody();
-        $content        = json_decode($content_string);
+       // Convert result to something we can work with.
+       $content_string = (string) $result->getBody();
+       $content        = json_decode($content_string);
 
-        // TODO Add checks for Stuff and Consenus if false.
+       // TODO Add checks for Stuff and Consenus if false.
 
-        // Return if member.
-        return [
-            'data'  => $content->checkstudent->$nin->member,
-            'links' => [
-                'self' => 'link-value',
-            ],
-        ];
+       return $content->checkstudent->$nin->member;
     }
 }
