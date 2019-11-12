@@ -22,8 +22,21 @@ class HandleChargeableSource implements ShouldQueue
 
     public function handle()
     {
-        // do your work here
-
         // you can access the payload of the webhook call with `$this->webhookCall->payload`
+
+
+        // TODO Get ticket by source
+
+        // TODO Check correct status for ticket - awaiting_payment
+
+        // TODO Make charge
+
+        // TODO Add to transactions
+
+        // TODO Update ticket status.
+
+        // TODO Generate QR-code
+
+        // TODO Event ticket_charged or something - send ticket email, ping frontend
     }
 }
