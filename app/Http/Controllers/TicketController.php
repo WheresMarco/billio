@@ -117,6 +117,7 @@ class TicketController extends Controller
         $ticket->user_id        = $user->id;
         $ticket->ticket_type_id = $ticketType->id;
         $ticket->status         = 'unpaid';
+        $ticket->price          = $price;
         $ticket->save();
 
         // TODO Loop over all modfiers and save on ticket

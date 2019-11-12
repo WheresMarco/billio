@@ -33,6 +33,7 @@ class CreateTicketsTable extends Migration
                 ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
             $table->boolean('utilized')->default(0);
             $table->text('status');
+            $table->double('price', 8, 2);
             $table->timestamps();
         });
     }
