@@ -15,6 +15,7 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('uuid');
             $table->unsignedBigInteger('event_id'); // unsigned for foreign key.
             $table->foreign('event_id') // foreign key column name.
                 ->references('id') // parent table primary key.
@@ -25,8 +26,14 @@ class CreateTicketsTable extends Migration
                 ->references('id') // parent table primary key.
                 ->on('users') // parent table name.
                 ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
-            $table->boolean('utilized');
+            $table->unsignedBigInteger('ticket_type_id'); // unsigned for foreign key.
+            $table->foreign('ticket_type_id') // foreign key column name.
+                ->references('id') // parent table primary key.
+                ->on('ticket_types') // parent table name.
+                ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
+            $table->boolean('utilized')->default(0);
             $table->text('status');
+            $table->double('price', 8, 2);
             $table->timestamps();
         });
     }

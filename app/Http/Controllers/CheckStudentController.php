@@ -14,6 +14,7 @@ class CheckStudentController extends Controller
      */
     public function check( Request $request )
     {
+        // TODO Sanitize input.
         $nin = $request->nin;
 
         // Check if student is member.
