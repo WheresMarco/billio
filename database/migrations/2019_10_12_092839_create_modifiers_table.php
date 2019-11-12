@@ -15,6 +15,11 @@ class CreateModifiersTable extends Migration
     {
         Schema::create('modifiers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('ticket_type_id'); // unsigned for foreign key.
+            $table->foreign('ticket_type_id') // foreign key column name.
+                ->references('id') // parent table primary key.
+                ->on('ticket_types') // parent table name.
+                ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
             $table->text('name');
             $table->longText('description');
             $table->float('delta');
