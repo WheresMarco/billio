@@ -1,4 +1,4 @@
-name: Laravel
+name: UNIT Tests
 
 on: [push]
 
