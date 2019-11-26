@@ -54,8 +54,6 @@ class TicketType extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
-
             BelongsTo::make('Event'),
 
             Text::make('Name')

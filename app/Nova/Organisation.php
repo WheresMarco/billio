@@ -39,6 +39,9 @@ class Organisation extends Resource
      */
     public static $search = [
         'id',
+        'title',
+        'nin',
+        'email',
     ];
 
     /**
@@ -50,8 +53,6 @@ class Organisation extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
-
             Text::make('Title')
                 ->sortable()
                 ->rules('required', 'max:255'),

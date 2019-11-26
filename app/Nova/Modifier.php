@@ -36,6 +36,7 @@ class Modifier extends Resource
      */
     public static $search = [
         'id',
+        'name',
     ];
 
     /**
@@ -54,8 +55,6 @@ class Modifier extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
-
             BelongsTo::make('Ticket Type'),
 
             Text::make('Name')

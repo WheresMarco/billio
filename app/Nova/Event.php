@@ -35,6 +35,7 @@ class Event extends Resource
      */
     public static $search = [
         'id',
+        'name',
     ];
 
     /**
@@ -53,8 +54,6 @@ class Event extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
-
             BelongsTo::make('Organisation'),
 
             Text::make('Name')

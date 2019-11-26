@@ -34,6 +34,8 @@ class EventDate extends Resource
      */
     public static $search = [
         'id',
+        'event',
+        'location',
     ];
 
     /**
@@ -52,8 +54,6 @@ class EventDate extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
-
             BelongsTo::make('Event'),
 
             DateTime::make('Date from'),
