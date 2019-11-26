@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\TextArea;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Boolean;
+
+use Laravel\Nova\Fields\BelongsTo;
+
 class Modifier extends Resource
 {
     /**
@@ -20,7 +27,7 @@ class Modifier extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -48,6 +55,20 @@ class Modifier extends Resource
     {
         return [
             ID::make()->sortable(),
+
+            BelongsTo::make('Ticket Type'),
+
+            Text::make('Name')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
+            TextArea::make('Description'),
+
+            Number::make('Delta'),
+
+            Boolean::make('Student'),
+
+            Boolean::make('Variation')
         ];
     }
 

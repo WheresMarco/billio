@@ -9,6 +9,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\MorphToMany;
 
 class Ticket extends Resource
 {
@@ -61,7 +62,9 @@ class Ticket extends Resource
 
             Text::make('Status'),
 
-            Text::make('Price')
+            Text::make('Price'),
+
+            MorphToMany::make('Modifiers')
         ];
     }
 

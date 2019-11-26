@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\TextArea;
 
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 
 class Event extends Resource
 {
@@ -60,7 +61,13 @@ class Event extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            TextArea::make('Description')
+            TextArea::make('Description'),
+
+            HasMany::make('Event Dates'),
+
+            HasMany::make('Access Codes'),
+
+            HasMany::make('Tickets')
         ];
     }
 

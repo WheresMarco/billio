@@ -13,8 +13,18 @@ class Event extends Model
         return $this->belongsTo('App\Organisation');
     }
 
-    public function dates()
+    public function event_dates()
     {
         return $this->hasMany('App\EventDate');
+    }
+
+    public function access_codes()
+    {
+        return $this->hasMany('App\AccessCode');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany('App\Ticket');
     }
 }
