@@ -14,7 +14,7 @@ use App\Modifier;
 class TicketController extends Controller
 {
     /**
-     * Get ticket by id.
+     * Get ticket by id or stripe source id.
      *
      * @return void
      */

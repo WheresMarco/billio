@@ -11,4 +11,4 @@
 |
 */
 
-Route::stripeWebhooks('/stripe');
+Route::stripeWebhooks('/webhook/stripe');

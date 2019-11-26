@@ -8,6 +8,10 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Spatie\WebhookClient\Models\WebhookCall;
 
+use App\Http\Controllers\TicketController;
+
+use Illuminate\Support\Facades\Log;
+
 class HandleChargeableSource implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
@@ -24,6 +28,7 @@ class HandleChargeableSource implements ShouldQueue
     {
         // you can access the payload of the webhook call with `$this->webhookCall->payload`
 
+        Log::info('Got hooked: ' . print_r($this->webhookCall->payload));
 
         // TODO Get ticket by source
 
