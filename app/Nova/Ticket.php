@@ -35,9 +35,9 @@ class Ticket extends Resource
     public static $search = [
         'id',
         'uuid',
-        'event',
-        'ticket_type',
-        'user',
+        'event_id',
+        'ticket_type_id',
+        'user_id',
         'status',
     ];
 

@@ -36,7 +36,7 @@ class AccessCode extends Resource
      */
     public static $search = [
         'id',
-        'event',
+        'event_id',
         'code',
     ];
 

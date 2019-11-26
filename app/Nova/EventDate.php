@@ -34,7 +34,7 @@ class EventDate extends Resource
      */
     public static $search = [
         'id',
-        'event',
+        'event_id',
         'location',
     ];
 
