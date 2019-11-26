@@ -107,12 +107,8 @@ class TicketController extends Controller
             $user->save();
         }
 
-        // Create UUID for ticket id.
-        $uuid = $this->gen_uuid();
-
         // Create ticket.
         $ticket                 = new Ticket();
-        $ticket->uuid           = $uuid;
         $ticket->event_id       = $event->id;
         $ticket->user_id        = $user->id;
         $ticket->ticket_type_id = $ticketType->id;
@@ -177,7 +173,7 @@ class TicketController extends Controller
     * @access   public
     * @return   string
     */
-    public function gen_uuid() {
+    public function genUUID() {
        $uuid = null;
 
        while ( null === $uuid ) :
