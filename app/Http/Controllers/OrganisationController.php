@@ -18,34 +18,4 @@ class OrganisationController extends Controller
 
         return $organisations;
     }
-
-    /**
-     * Create organisation.
-     *
-     * @return void
-     */
-    public function create()
-    {
-        return 'not implemented';
-    }
-
-    /**
-     * Update organisation.
-     *
-     * @return void
-     */
-    public function update( Request $request, int $id )
-    {
-        return 'not implemented';
-    }
-
-    /**
-     * Delete organisation.
-     *
-     * @return void
-     */
-    public function delete( Request $request, int $id )
-    {
-        return 'not implemented';
-    }
 }
