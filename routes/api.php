@@ -23,8 +23,6 @@ Route::get('/events', 'EventController@events');
 Route::get('/tickets/{id}', 'TicketController@ticket'); // Get ticket by Stripe Source or id
 Route::post('/tickets', 'TicketController@create');
 Route::patch('/tickets/{id}', 'TicketController@update')->where('id', '[0-9]+');
-Route::delete('/tickets/{id}', 'TicketController@delete')->where('id', '[0-9]+');
-Route::get('/users/{id}/tickets', 'TicketController@user_tickets')->where('id', '[0-9]+'); // TODO AUTH
 
 // Checkstudent
 Route::post('/checkstudent', 'CheckStudentController@check');

@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Spatie\WebhookClient\Models\WebhookCall;
 
-use App\Http\Controllers\TicketController;
+use App\Transaction;
 
 use Illuminate\Support\Facades\Log;
 
@@ -26,19 +26,43 @@ class HandleChargeableSource implements ShouldQueue
 
     public function handle()
     {
-        // you can access the payload of the webhook call with `$this->webhookCall->payload`
+        $payload       = $this->webhookCall->payload;
+        $stripe_object = $payload['data']['object'];
+        $source_id     = $stripe_object['id'];
 
-        Log::info('Got hooked: ' . print_r($this->webhookCall->payload));
+        // Get transaction by source.
+        $transaction = Transaction::where( 'stripe_source', $source_id )->first();
 
-        // TODO Get ticket by source
+        Log::debug('Hooked ' . print_r( $transaction, true ));
 
-        // TODO Check correct status for ticket - awaiting_payment
+        if ( null === $transaction )
+        {
+            Log::error('Transaction not found ' . print_r( $source_id, true ));
+        }
 
-        // TODO Make charge
+        // Get ticket.
+        $ticket = $transaction->ticket();
 
-        // TODO Add to transactions
+        // Check correct status for ticket - awaiting_payment.
+        if ( 'awaiting_payment' !== $ticket->status )
+        {
+            Log::error('Ticket not awaiting payment ' . print_r( $ticket->id, true ));
+        }
 
-        // TODO Update ticket status.
+        // Make charge
+        $charge = Stripe::charges()->create([
+            'source'   => $source_id,
+            'currency' => 'SEK',
+            'amount'   => $ticket * 100,
+        ]);
+
+        // TODO Check that charge worked.
+
+        // Update ticket status.
+        $ticket->status = 'paid';
+        $ticket->save();
+
+        Log::debug('Ticket charged, all good ' . print_r( $ticket->id, true ));
 
         // TODO Generate QR-code
 

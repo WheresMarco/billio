@@ -22,15 +22,16 @@ class CreateTransactionsTable extends Migration
                 ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
             $table->unsignedBigInteger('user_id'); // unsigned for foreign key.
             $table->foreign('user_id') // foreign key column name.
-                    ->references('id') // parent table primary key.
-                    ->on('users') // parent table name.
-                    ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
+                ->references('id') // parent table primary key.
+                ->on('users') // parent table name.
+                ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
             $table->float('amount');
             $table->unsignedBigInteger('access_code_id'); // unsigned for foreign key.
             $table->foreign('access_code_id') // foreign key column name.
-                    ->references('id') // parent table primary key.
-                    ->on('access_codes') // parent table name.
-                    ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
+                ->references('id') // parent table primary key.
+                ->on('access_codes') // parent table name.
+                ->nullable()
+                ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
             $table->timestamps();
         });
     }

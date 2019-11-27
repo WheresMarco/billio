@@ -40,7 +40,6 @@ class TicketController extends Controller
      */
     public function create( Request $request )
     {
-
         $accessCode   = $request->accessCode;
         $email        = $request->email;
         $firstName    = $request->firstName;
@@ -120,6 +119,8 @@ class TicketController extends Controller
         $modifier = Modifier::find($ticketModifierID);
         $ticket->modifiers()->save($modifier);
 
+        // TODO Create transaction
+
         // Build and return the ticket array.
 		$return_array = array(
 		    'data'  => array(
@@ -136,26 +137,6 @@ class TicketController extends Controller
 
         // Return ticket to API.
         return $return_array;
-    }
-
-    /**
-     * Update ticket.
-     *
-     * @return void
-     */
-    public function update( Request $request, int $id )
-    {
-        return 'not implemented';
-    }
-
-    /**
-     * Delete ticket.
-     *
-     * @return void
-     */
-    public function delete( Request $request, int $id )
-    {
-        return 'not implemented';
     }
 
     public function ticketsSold( $eventID, $ticketTypeID )
