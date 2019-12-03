@@ -21,6 +21,7 @@ class CreateTicketTypesTable extends Migration
                 ->on('events') // parent table name.
                 ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
             $table->text('name');
+            $table->text('slug');
             $table->longText('description');
             $table->float('price');
             $table->boolean('active');

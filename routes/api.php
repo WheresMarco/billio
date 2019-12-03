@@ -18,11 +18,11 @@ Route::get('/organisations', 'OrganisationController@organisations');
 
 // Events
 Route::get('/events', 'EventController@events');
+Route::get('/events/{slug}', 'EventController@event');
 
 // Tickets
-Route::get('/tickets/{id}', 'TicketController@ticket'); // Get ticket by Stripe Source or id
+Route::get('/tickets/{id}', 'TicketController@ticket'); // Get ticket by uuid
 Route::post('/tickets', 'TicketController@create');
-Route::patch('/tickets/{id}', 'TicketController@update')->where('id', '[0-9]+');
 
 // Checkstudent
 Route::post('/checkstudent', 'CheckStudentController@check');

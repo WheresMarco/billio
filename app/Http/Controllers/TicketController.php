@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
+use Stripe;
 
 use App\AccessCode;
 use App\Event;
@@ -10,6 +13,7 @@ use App\Ticket;
 use App\TicketType;
 use App\User;
 use App\Modifier;
+use App\Transaction;
 
 class TicketController extends Controller
 {
@@ -20,17 +24,24 @@ class TicketController extends Controller
      */
     public function ticket( Request $request, $id )
     {
-        return 'not implemented';
-    }
+        $ticket = Ticket::where( 'uuid', $id )->first();
+        $event = $ticket->event()->first();
+        $user = $ticket->user()->first();
 
-    /**
-     * Get a users tickets.
-     *
-     * @return void
-     */
-    public function user_tickets( Request $request, int $id )
-    {
-        return 'not implemented';
+        // Build and return the ticket array.
+        $return_array = [
+            'id'         => $ticket->id,
+            'event'      => $event->name,
+            'eventSlug'  => $event->slug,
+            'status'     => $ticket->status,
+            'variations' => array(),
+            'user'       => [
+                'id'    => $user->id,
+                'name'  => $user->name,
+                'email' => $user->email,
+            ],
+        ];
+        return $return_array;
     }
 
     /**
@@ -111,28 +122,40 @@ class TicketController extends Controller
         $ticket->event_id       = $event->id;
         $ticket->user_id        = $user->id;
         $ticket->ticket_type_id = $ticketType->id;
-        $ticket->status         = 'unpaid';
+        $ticket->status         = 'awaiting_payment';
         $ticket->price          = $price;
         $ticket->save();
 
         // TODO Loop over all modfiers and save on ticket
-        $modifier = Modifier::find($ticketModifierID);
-        $ticket->modifiers()->save($modifier);
+        // $modifier = Modifier::find($ticketModifierID);
+        // $ticket->modifiers()->save($modifier);
 
-        // TODO Create transaction
+        // Make charge
+        $paymentIntent = Stripe::paymentIntents()->create([
+            'amount'        => $ticket->price,
+            'currency'      => 'sek',
+            'receipt_email' => $email,
+            'metadata'      => ['ticket_id' => $ticket->uuid]
+        ]);
+
+        // Create transaction
+        $transaction = new Transaction();
+        $transaction->ticket_id = $ticket->id;
+        $transaction->user_id = $user->id;
+        $transaction->amount = $ticket->price;
+        $transaction->save();
 
         // Build and return the ticket array.
 		$return_array = array(
-		    'data'  => array(
-			    'id'        => $ticket->uuid,
-				'eventID'   => $event->id,
-				'status'    => 'unpaid',
-				'user'      => array(
-					'id'            => $user->id,
-					'name'          => $user->name,
-					'email'         => $user->email,
-				),
-			)
+			'id'            => $ticket->uuid,
+			'eventID'       => $event->id,
+            'status'        => $ticket->status,
+            'intent_secret' => $paymentIntent['client_secret'],
+			'user'          => array(
+				'id'            => $user->id,
+				'name'          => $user->name,
+				'email'         => $user->email,
+			),
 		);
 
         // Return ticket to API.

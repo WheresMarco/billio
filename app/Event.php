@@ -27,4 +27,9 @@ class Event extends Model
     {
         return $this->hasMany('App\Ticket');
     }
+
+    public function ticket_types()
+    {
+        return $this->hasMany('App\TicketType');
+    }
 }

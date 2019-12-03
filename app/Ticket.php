@@ -42,4 +42,9 @@ class Ticket extends Model
     {
         return $this->morphToMany('App\Modifier', 'ticket_modifiers');
     }
+
+    public function transactions()
+    {
+        return $this->hasMany('App\Transaction');
+    }
 }

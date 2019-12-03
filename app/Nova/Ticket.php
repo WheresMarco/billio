@@ -69,7 +69,9 @@ class Ticket extends Resource
 
             Text::make('Price'),
 
-            MorphToMany::make('Modifiers')
+            MorphToMany::make('Modifiers'),
+
+            MorphToMany::make('Transactions')
         ];
     }
 
