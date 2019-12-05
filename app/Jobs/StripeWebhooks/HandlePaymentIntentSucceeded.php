@@ -10,8 +10,6 @@ use Spatie\WebhookClient\Models\WebhookCall;
 
 use App\Ticket;
 
-use Illuminate\Support\Facades\Log;
-
 class HandlePaymentIntentSucceeded implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
@@ -30,7 +28,7 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
         $stripe_object = $payload['data']['object'];
         $source_id     = $stripe_object['id'];
 
-        // Get transaction by source.
+        // Get ticket by uuid.
         $ticket = Ticket::where( 'uuid', $stripe_object['metadata']['ticket_id'] )->first();
 
         // Check correct status for ticket - awaiting_payment.
@@ -44,10 +42,7 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
         $ticket->status = 'paid';
         $ticket->save();
 
-        Log::debug('Ticket charged, all good ' . print_r( $ticket->id, true ));
-
-        // TODO Generate QR-code
-
-        // TODO Event ticket_charged or something - send ticket email, ping frontend
+        // Send of event to finilize ticket.
+        event(new \App\Events\TicketPurchased($ticket));
     }
 }

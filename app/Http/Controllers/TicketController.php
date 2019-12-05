@@ -13,7 +13,6 @@ use App\Ticket;
 use App\TicketType;
 use App\User;
 use App\Modifier;
-use App\Transaction;
 
 class TicketController extends Controller
 {
@@ -32,6 +31,7 @@ class TicketController extends Controller
         $return_array = [
             'id'         => $ticket->id,
             'event'      => $event->name,
+            'ticketCode' => $ticket->ticket_code,
             'eventSlug'  => $event->slug,
             'status'     => $ticket->status,
             'variations' => array(),
@@ -138,13 +138,6 @@ class TicketController extends Controller
             'metadata'      => ['ticket_id' => $ticket->uuid]
         ]);
 
-        // Create transaction
-        $transaction = new Transaction();
-        $transaction->ticket_id = $ticket->id;
-        $transaction->user_id = $user->id;
-        $transaction->amount = $ticket->price;
-        $transaction->save();
-
         // Build and return the ticket array.
 		$return_array = array(
 			'id'            => $ticket->uuid,
@@ -171,31 +164,58 @@ class TicketController extends Controller
     }
 
     /**
+     * Generate a ticket code.
+     *
+     * @since    1.0.0
+     * @access   public
+     * @param    int     $length - The length of the ticket code.
+     * @return   string
+     */
+    public function generateTicketCode( int $length = 6 ) {
+        $max_random_number = 3000000000 === 2147483647 ? (float) '4294967295' : 4294967295; // 4294967295 = 0xffffffff
+
+        // Create ticket code that is not taken.
+        $ticket_code = null;
+
+        while ( null === $ticket_code ) :
+            $temp_ticket_code = dechex( rand( $length / 2 + ( $length % 2 > 0 ), $max_random_number ) );
+
+            // Check if taken, if not assign to $uuid.
+            $ticket = Ticket::where( 'ticket_code', $temp_ticket_code )->first();
+            if ( ! $ticket ) :
+                $ticket_code = $temp_ticket_code;
+            endif;
+        endwhile;
+
+        return $ticket_code;
+    }
+
+    /**
     * Generates a unique ID
     *
     * @since    1.0.0
     * @access   public
     * @return   string
     */
-    public function genUUID() {
-       $uuid = null;
+    public function genTicketUUID() {
+        $uuid = null;
 
-       while ( null === $uuid ) :
-           $temp_uuid = sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-               rand( 0, 0xffff ), rand( 0, 0xffff ), // 32 bits for "time_low"
-               rand( 0, 0xffff ), // 16 bits for "time_mid"
-               rand( 0, 0x0fff ) | 0x4000, // 16 bits for "time_hi_and_version", four most significant bits holds version number 4
-               rand( 0, 0x3fff ) | 0x8000, // 16 bits, 8 bits for "clk_seq_hi_res", 8 bits for "clk_seq_low", two most significant bits holds zero and one for variant DCE1.1
-               rand( 0, 0xffff ), rand( 0, 0xffff ), rand( 0, 0xffff ) // 48 bits for "node"
-           );
+        while ( null === $uuid ) :
+            $temp_uuid = sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+                rand( 0, 0xffff ), rand( 0, 0xffff ), // 32 bits for "time_low"
+                rand( 0, 0xffff ), // 16 bits for "time_mid"
+                rand( 0, 0x0fff ) | 0x4000, // 16 bits for "time_hi_and_version", four most significant bits holds version number 4
+                rand( 0, 0x3fff ) | 0x8000, // 16 bits, 8 bits for "clk_seq_hi_res", 8 bits for "clk_seq_low", two most significant bits holds zero and one for variant DCE1.1
+                rand( 0, 0xffff ), rand( 0, 0xffff ), rand( 0, 0xffff ) // 48 bits for "node"
+            );
 
-           // Check if taken, if not assign to $uuid.
-           $ticket = Ticket::where( 'uuid', $temp_uuid )->first();
-           if ( ! $ticket ) :
-               $uuid = $temp_uuid;
-           endif;
-       endwhile;
+            // Check if taken, if not assign to $uuid.
+            $ticket = Ticket::where( 'uuid', $temp_uuid )->first();
+            if ( ! $ticket ) :
+                $uuid = $temp_uuid;
+            endif;
+        endwhile;
 
-       return $uuid;
-   }
+        return $uuid;
+    }
 }
