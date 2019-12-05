@@ -21,9 +21,10 @@ class CreateModifiersTable extends Migration
                 ->on('ticket_types') // parent table name.
                 ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
             $table->text('name');
+            $table->text('slug');
             $table->longText('description');
             $table->float('delta');
-            $table->boolean('student');
+            $table->boolean('hidden');
             $table->boolean('variation');
         });
     }

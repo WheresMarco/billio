@@ -16,6 +16,7 @@ class CreateTicketsTable extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid');
+            $table->string('ticket_code');
             $table->unsignedBigInteger('event_id'); // unsigned for foreign key.
             $table->foreign('event_id') // foreign key column name.
                 ->references('id') // parent table primary key.

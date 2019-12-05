@@ -64,6 +64,8 @@ class Event extends Resource
 
             HasMany::make('Event Dates'),
 
+            HasMany::make('Ticket Types'),
+
             HasMany::make('Access Codes'),
 
             HasMany::make('Tickets')

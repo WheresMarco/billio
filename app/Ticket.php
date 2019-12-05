@@ -19,7 +19,7 @@ class Ticket extends Model
 
         // auto-sets values on creation
         static::creating(function ($query) {
-            $query->uuid = ( new TicketController() )->genUUID();
+            $query->uuid = ( new TicketController() )->genTicketUUID();
         });
     }
 
@@ -41,5 +41,10 @@ class Ticket extends Model
     public function modifiers()
     {
         return $this->morphToMany('App\Modifier', 'ticket_modifiers');
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany('App\Transaction');
     }
 }

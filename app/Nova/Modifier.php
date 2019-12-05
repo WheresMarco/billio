@@ -61,11 +61,15 @@ class Modifier extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
+            Text::make('Slug')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
             TextArea::make('Description'),
 
             Number::make('Delta'),
 
-            Boolean::make('Student'),
+            Boolean::make('Hidden'),
 
             Boolean::make('Variation')
         ];
