@@ -18,6 +18,10 @@ class CreateEventsTable extends Migration
             $table->text('name');
             $table->text('slug');
             $table->longText('description');
+            $table->text('excerpt');
+            $table->text('hero_image');
+            $table->text('share_image');
+            $table->text('excerpt_image');
         });
     }
 

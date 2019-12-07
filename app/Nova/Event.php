@@ -8,6 +8,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\TextArea;
+use Laravel\Nova\Fields\Markdown;
+use Laravel\Nova\Fields\Image;
 
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
@@ -60,7 +62,9 @@ class Event extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            TextArea::make('Description'),
+            Markdown::make('Description'),
+
+            TextArea::make('Excerpt'),
 
             HasMany::make('Event Dates'),
 
@@ -68,7 +72,11 @@ class Event extends Resource
 
             HasMany::make('Access Codes'),
 
-            HasMany::make('Tickets')
+            HasMany::make('Tickets'),
+
+            Image::make('Hero image'),
+            Image::make('Share image'),
+            Image::make('Excerpt image'),
         ];
     }
 
