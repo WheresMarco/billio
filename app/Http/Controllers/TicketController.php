@@ -134,7 +134,8 @@ class TicketController extends Controller
         $paymentIntent = Stripe::paymentIntents()->create([
             'amount'        => $ticket->price,
             'currency'      => 'sek',
-            'receipt_email' => $email,
+            'receipt_email' => $user->email,
+            'description'   => $event->name . ' - ' . $ticketType->name,
             'metadata'      => ['ticket_id' => $ticket->uuid]
         ]);
 
