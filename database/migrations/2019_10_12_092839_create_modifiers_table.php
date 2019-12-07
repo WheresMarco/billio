@@ -24,7 +24,6 @@ class CreateModifiersTable extends Migration
             $table->text('slug');
             $table->longText('description');
             $table->float('delta');
-            $table->boolean('hidden');
             $table->boolean('variation');
         });
     }

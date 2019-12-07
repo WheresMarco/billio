@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Frozzare\Personnummer\Personnummer;
 use Illuminate\Support\Facades\Log;
 
+use App\Nin;
+
 class CheckStudentController extends Controller
 {
     /**
@@ -19,10 +21,10 @@ class CheckStudentController extends Controller
         $nin = $request->nin;
 
         // Check if student is member.
-        $member = $this->isStudentMember( $nin );
+        $corps = $this->isStudentMember( $nin );
 
         // Return if member.
-        return $member ? 'true' : 'false';
+        return json_encode($corps);
     }
 
     /**
@@ -35,6 +37,7 @@ class CheckStudentController extends Controller
     {
         $nin = str_replace( '-', '', $nin);
         $isStudent = false;
+        $corps = 'false';
 
         // Remove first two numbers if there is.
         if ( 12 === strlen( $nin ) )
@@ -50,20 +53,40 @@ class CheckStudentController extends Controller
             return false;
         }
 
+        // TODO CHECK IF USED FOR THIS EVENT.
+
         // Do request.
         $isStudent = $this->sendRequest('https://medlem.lintek.liu.se/api/checkstudent/' . $nin . '?apikey=' . env( 'MONTANIA_API_KEY_LINTEK', null ), $nin);
+        $corps = 'lintek';
 
         // No luck? Check Stuff.
         if ( ! $isStudent ) {
             $isStudent = $this->sendRequest('https://medlem.stuff.liu.se/api/checkstudent/' . $nin . '?apikey=' . env( 'MONTANIA_API_KEY_STUFF', null ), $nin);
+            $corps = 'stuff';
         }
 
         // No luck? Check Consensus.
         if ( ! $isStudent ) {
             $isStudent = $this->sendRequest('https://medlem.consensus.liu.se/api/checkstudent/' . $nin . '?apikey=' . env( 'MONTANIA_API_KEY_CONSENSUS', null ), $nin);
+            $corps = 'consensus';
         }
 
-        return $isStudent;
+        // Add to database for quick lookup when buying ticket.
+        if ( $isStudent ) {
+            $nin_object = Nin::where( [ [ 'nin', $nin ], [ 'ticket_id', null ] ] )->first();
+
+            if ( ! $nin_object ) :
+                $nin_object = new Nin();
+                $nin_object->nin = $nin;
+                $nin_object->corps = $corps;
+                $nin_object->utilized = false;
+                $nin_object->save();
+            endif;
+        } else {
+            $corps = 'false';
+        }
+
+        return $corps;
     }
 
     private function sendRequest($path, $nin)

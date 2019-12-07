@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Boolean;
 
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 
 class TicketType extends Resource
 {
@@ -74,6 +75,8 @@ class TicketType extends Resource
 
             Number::make('Limit per person', 'limit_person')
                 ->rules('required'),
+
+            HasMany::make('Modifiers'),
         ];
     }
 

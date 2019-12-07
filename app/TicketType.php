@@ -9,7 +9,7 @@ class TicketType extends Model
 {
     public $timestamps = false;
 
-    protected $appends = ['sold_out'];
+    protected $appends = ['modifiers', 'sold_out'];
 
     public function event()
     {
@@ -24,6 +24,13 @@ class TicketType extends Model
     public function modifiers()
     {
         return $this->hasMany('App\Modifier');
+    }
+
+    public function getModifiersAttribute()
+    {
+        $modifiers = $this->modifiers()->get();
+
+        return $modifiers;
     }
 
     public function getSoldOutAttribute()

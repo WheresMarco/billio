@@ -13,6 +13,7 @@ use App\Ticket;
 use App\TicketType;
 use App\User;
 use App\Modifier;
+use App\Nin;
 
 class TicketController extends Controller
 {
@@ -51,51 +52,65 @@ class TicketController extends Controller
      */
     public function create( Request $request )
     {
-        $accessCode   = $request->accessCode;
-        $email        = $request->email;
-        $firstName    = $request->firstName;
-        $lastName     = $request->lastName;
-        $eventID      = $request->eventID;
-        $ticketTypeID = $request->ticketTypeID;
-        $ticketModifierID = $request->ticketModifierID; // TODO Get as array.
+        $accessCode      = $request->accessCode;
+        $email           = $request->email;
+        $nin             = $request->nin;
+        $firstName       = $request->firstName;
+        $lastName        = $request->lastName;
+        $eventID         = $request->eventID;
+        $ticketTypeID    = $request->ticketTypeID;
+        $ticketModifiers = $request->modifiers;
 
         // Check if event is valid.
         $event = Event::find( $eventID );
         if ( null === $event )
         {
-            return 'false';
+            return 'Could not find event.';
         }
 
         // Check if ticket type is valid.
         $ticketType = TicketType::find( $ticketTypeID );
         if ( null === $ticketType )
         {
-            return 'false2';
+            return 'Ticket type not valid.';
         }
 
         // Check if you have an access code.
-        if ( $accessCode )
-        {
-            $accessCode = AccessCode::find( $accessCode ); // TODO Find by code
-        }
+        // if ( $accessCode )
+        // {
+        //     $accessCode = AccessCode::find( $accessCode ); // TODO Find by code
+        // }
 
-        // Check if ticket type is active.
-        if ( ! $ticketType->active )
-        {
-            if ( $accessCode && $event->id === $accessCode->event_id )
-            {
-                // TODO Implement
-            } else
-            {
-                return 'Not active';
-            }
-        }
+        // // Check if ticket type is active.
+        // if ( ! $ticketType->active )
+        // {
+        //     if ( $accessCode && $event->id === $accessCode->event_id )
+        //     {
+        //         // TODO Implement
+        //     } else
+        //     {
+        //         return 'Not active';
+        //     }
+        // }
 
         // Get ticket price.
         $price = $ticketType->price;
 
-        // TODO Calculate price based on modifiers.
-        // TODO Get modifers based on ID and do magic with price.
+        // Check if student
+        $nin_object = Nin::where( [ [ 'nin', $nin ], [ 'ticket_id', null ], [ 'utilized', false ] ] )->first();
+        if ( $nin_object ) {
+            $ticketModifiers[] = $nin_object->corps;
+        }
+
+        // Calculate price based on modifiers.
+        if ( $ticketModifiers ) {
+            foreach ($ticketModifiers as $ticketModifier) {
+                $modifier = Modifier::where( [ [ 'ticket_type_id', $ticketTypeID ], [ 'slug', $ticketModifier ] ] )->first();
+                if ( $modifier ) {
+                    $price = $price + $modifier->delta;
+                }
+            }
+        }
 
         // Check if there are any tickets left.
         $ticketsSold = $this->ticketsSold( $event->id, $ticketType->id );
@@ -126,9 +141,20 @@ class TicketController extends Controller
         $ticket->price          = $price;
         $ticket->save();
 
-        // TODO Loop over all modfiers and save on ticket
-        // $modifier = Modifier::find($ticketModifierID);
-        // $ticket->modifiers()->save($modifier);
+        // Loop over all modfiers and save on ticket
+        if ( $ticketModifiers ) {
+            foreach ($ticketModifiers as $ticketModifier) {
+                $modifier = Modifier::where( [ [ 'ticket_type_id', $ticketTypeID ], [ 'slug', $ticketModifier ] ] )->first();
+                $ticket->modifiers()->save($modifier);
+            }
+        }
+
+        // Save the nin-object with used data.
+        if ( $nin_object ) {
+            $nin_object->utilized  = true;
+            $nin_object->ticket_id = $ticket->id;
+            $nin_object->save();
+        }
 
         // Make charge
         $paymentIntent = Stripe::paymentIntents()->create([

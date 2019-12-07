@@ -47,4 +47,9 @@ class Ticket extends Model
     {
         return $this->hasMany('App\Transaction');
     }
+
+    public function nin()
+    {
+        return $this->hasOne('App\Nin');
+    }
 }

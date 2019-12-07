@@ -69,8 +69,6 @@ class Modifier extends Resource
 
             Number::make('Delta'),
 
-            Boolean::make('Hidden'),
-
             Boolean::make('Variation')
         ];
     }
