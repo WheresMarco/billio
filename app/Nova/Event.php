@@ -80,7 +80,10 @@ class Event extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            (new Metrics\TicketsSold)->onlyOnDetail(),
+            (new Metrics\TicketType)->onlyOnDetail(),
+        ];
     }
 
     /**

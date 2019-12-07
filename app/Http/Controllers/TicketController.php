@@ -102,7 +102,7 @@ class TicketController extends Controller
 
         if ( $ticketsSold >= $ticketType->limit )
         {
-            return 'no tickets left';
+            return 'No tickets left for this event.';
         }
 
         // Get user.
@@ -157,7 +157,7 @@ class TicketController extends Controller
 
     public function ticketsSold( $eventID, $ticketTypeID )
     {
-        $tickets     = Ticket::where( [ [ 'event_id', $eventID ] ])->get(); // TODO Add ticket type ID
+        $tickets     = Ticket::where( [ [ 'event_id', $eventID ], [ 'ticket_type_id', $ticketTypeID ] ])->get();
         $ticketsSold = $tickets->count();
 
         return $ticketsSold;
