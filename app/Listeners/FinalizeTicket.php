@@ -51,7 +51,10 @@ class FinalizeTicket
         // Get ticket by uuid.
         $user = $ticket->user()->first();
 
+        $event        = $ticket->event()->first();
+        $organisation = $event->organisation()->first();
+
         // Email the ticket.
-        Mail::to($user)->send(new \App\Mail\TicketPurchased());
+        Mail::to($user)->send(new \App\Mail\TicketPurchased($ticket, $event, $organisation, $user));
     }
 }
