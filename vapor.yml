@@ -3,7 +3,7 @@ name: billio-api
 environments:
     production:
         domain: service.billio.app
-        storage: billio
+        storage: billio-storage
         database: Billio
         memory: 1024
         cli-memory: 512
