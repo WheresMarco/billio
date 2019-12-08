@@ -4,7 +4,7 @@ environments:
     production:
         domain: service.billio.app
         storage: billio
-        database: billio
+        database: Billio
         memory: 1024
         cli-memory: 512
         build:
