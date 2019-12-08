@@ -27,5 +27,12 @@ Route::post('/tickets', 'TicketController@create');
 // Checkstudent
 Route::post('/checkstudent', 'CheckStudentController@check');
 
+// Login
+Route::post('login', 'UserController@login');
+
 // User
-Route::get('/users/{id}', 'UserController@user')->where('id', '[0-9]+'); // TODO AUTH
+Route::group(['user' => 'auth:api'], function()
+{
+   Route::get('users/me', 'UserController@details');
+   Route::get('users/tickets', 'UserController@tickets');
+});
