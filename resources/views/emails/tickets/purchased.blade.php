@@ -1,4 +1,4 @@
-@component('mail::message', ['event' => $event, 'orgName' => $orgName, 'orgEmail' => $orgEmail, 'orgAddress' => $orgAddress, 'name' => $name, 'ticketType' => $ticketType, 'ticketCode' => $ticketCode, 'qrPath' => $qrPath])
+@component('mail::message', ['event' => $event, 'orgName' => $orgName, 'orgEmail' => $orgEmail, 'orgAddress' => $orgAddress, 'name' => $name, 'ticketType' => $ticketType, 'ticketCode' => $ticketCode, 'modifiers' => $modifiers, 'qrPath' => $qrPath])
 {{-- Header --}}
 @slot('header')
 @component('mail::header', ['logo' => url('img/logo.png')])
@@ -8,12 +8,19 @@
 {{-- Body --}}
 # Här är din biljett till {{ $event }}
 
-Hej {{ $name }}! Det här mailet bekräftar ditt köp av en biljett av typen ”{{ $ticketType }}”.
+Hej {{ $name }}! Det här mailet bekräftar ditt köp av en biljett av typen "{{ $ticketType }}" till {{ $event }}.
 
 **Var god och notera att innehållet i det är mailet är en giltig biljett. Håll det hemligt.**
 
+@if(!$modifiers->isEmpty())
+## Du har valt följande
+@foreach($modifiers as $modifier => $modifierValue)
+* {{ $modifierValue->name }}
+@endforeach
+@endif
+
 ## Vid evenemanget
-Du kan kan komma in på evenemanget genom följande metoder:
+Du kan kan komma in på evenemanget på följande sätt:
 
 * Visa QR-koden nedan.
 * Visa biljettkoden **{{ $ticketCode }}** tillsammans med en giltig identitetshandling.

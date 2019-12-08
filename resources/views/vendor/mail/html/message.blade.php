@@ -21,7 +21,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            Du får det här mailet för att du har köpt en biljett till ett evenemang genom att använda det moderna biljettsystemet Billio. Om du har några frågor var god och kontakta värden.
+            Du får det här mailet för att du har köpt en biljett till ett evenemang genom att använda det moderna biljettsystemet Billio. Om du har några frågor var god och kontakta värden för evenemanget.
         @endcomponent
     @endslot
 @endcomponent

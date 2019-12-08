@@ -43,6 +43,7 @@ class TicketPurchased extends Mailable
     public function build()
     {
         return $this->from('hi@billio.app')
+                    ->subject($this->event->name . ': ' . $this->ticket->ticket_type()->first()->name . ' [' . $this->ticket->ticket_code . ']')
                     ->with([
                         'event'      => $this->event->name,
                         'orgName'    => $this->organisation->title,
@@ -51,6 +52,7 @@ class TicketPurchased extends Mailable
                         'name'       => $this->user->name,
                         'ticketType' => $this->ticket->ticket_type()->first()->name,
                         'ticketCode' => $this->ticket->ticket_code,
+                        'modifiers'  => $this->ticket->modifiers()->get(),
                         'qrPath'     => Storage::url('qr/' . $this->ticket->ticket_code . '.png'),
                     ])
                     ->markdown('emails.tickets.purchased');
