@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
 use App\Ticket;
 use App\Event;
@@ -41,16 +42,17 @@ class TicketPurchased extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.tickets.purchased')
+        return $this->from('hi@billio.app')
                     ->with([
                         'event'      => $this->event->name,
-                        'orgName'    => $this->organisation->name,
+                        'orgName'    => $this->organisation->title,
                         'orgEmail'   => $this->organisation->email,
                         'orgAddress' => $this->organisation->address,
                         'name'       => $this->user->name,
                         'ticketType' => $this->ticket->ticket_type()->first()->name,
                         'ticketCode' => $this->ticket->ticket_code,
-                        'logo'       => 'http://placehold.it/100x100',
-                    ]);
+                        'qrPath'     => Storage::url('qr/' . $this->ticket->ticket_code . '.png'),
+                    ])
+                    ->markdown('emails.tickets.purchased');
     }
 }

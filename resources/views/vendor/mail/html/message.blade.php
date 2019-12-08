@@ -1,7 +1,7 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => config('app.url')])
+        @component('mail::header', ['logo' => url('img/logo.png')])
             {{ config('app.name') }}
         @endcomponent
     @endslot
@@ -21,7 +21,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            © {{ date('Y') }} {{ config('app.name') }}. @lang('All rights reserved.')
+            Du får det här mailet för att du har köpt en biljett till ett evenemang genom att använda det moderna biljettsystemet Billio. Om du har några frågor var god och kontakta värden.
         @endcomponent
     @endslot
 @endcomponent

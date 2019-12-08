@@ -1,7 +1,7 @@
 <tr>
     <td class="header">
         <a href="https://billio.app">
-            <img src="#" alt="Billio" />
+            <img src="{{ $logo ?? '' }}" alt="Billio" />
         </a>
     </td>
 </tr>

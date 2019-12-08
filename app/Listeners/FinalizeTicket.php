@@ -43,7 +43,7 @@ class FinalizeTicket
             ->size(400)->errorCorrection('H')
             ->margin(0)
             ->generate($ticket->ticket_code);
-        $qr_path = 'qr/' . $ticket->ticket_code . '.png';
+        $qr_path = 'public/qr/' . $ticket->ticket_code . '.png';
 
         Storage::put($qr_path, $image);
         $url  = Storage::url($qr_path);
