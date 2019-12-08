@@ -1,9 +1,10 @@
-id: 3049
-name: billio-api
+id: 5011
+name: billio-service
 environments:
     production:
+        network: billio
         domain: service.billio.app
-        storage: billio-storage
+        storage: billio-service-storage
         database: Billio
         memory: 1024
         cli-memory: 512
@@ -11,6 +12,8 @@ environments:
             - 'composer install --no-dev --classmap-authoritative'
             - 'php artisan event:cache'
             - 'npm install && npm run prod && rm -rf node_modules'
+            - 'php artisan nova:install'
+            - 'php artisan nova:publish'
         deploy:
             - 'php artisan migrate --force'
     staging:

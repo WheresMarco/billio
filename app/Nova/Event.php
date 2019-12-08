@@ -7,7 +7,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\TextArea;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Image;
 
@@ -62,9 +62,12 @@ class Event extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
+            Text::make('Slug')
+                ->rules('required', 'max:255'),
+
             Markdown::make('Description'),
 
-            TextArea::make('Excerpt'),
+            Textarea::make('Excerpt'),
 
             HasMany::make('Event Dates'),
 

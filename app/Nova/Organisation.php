@@ -7,7 +7,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\TextArea;
+use Laravel\Nova\Fields\Textarea;
 
 class Organisation extends Resource
 {
@@ -71,7 +71,7 @@ class Organisation extends Resource
                 ->sortable()
                 ->rules('required', 'max:254'),
 
-            TextArea::make('Address')
+            Textarea::make('Address')
                 ->creationRules('required'),
         ];
     }

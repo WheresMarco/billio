@@ -7,7 +7,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\TextArea;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Boolean;
 
@@ -65,7 +65,7 @@ class Modifier extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            TextArea::make('Description'),
+            Textarea::make('Description'),
 
             Number::make('Delta'),
 

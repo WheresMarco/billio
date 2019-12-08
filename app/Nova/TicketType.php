@@ -7,7 +7,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\TextArea;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Boolean;
 
@@ -63,7 +63,7 @@ class TicketType extends Resource
             Text::make('Slug')
                 ->rules('required'),
 
-            TextArea::make('Description'),
+            Textarea::make('Description'),
 
             Number::make('Price')
                 ->rules('required'),
