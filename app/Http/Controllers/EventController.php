@@ -11,24 +11,18 @@ class EventController extends Controller
     public function event( Request $request, $slug ) {
         $event = Event::where( 'slug', $slug )->first();
 
-        $event['organisation'] = $event->organisation()->first();
-        unset( $event['organisation_id'] );
-
-        $event['dates']       = $event->event_dates()->get();
-        $event['ticketTypes'] = $event->ticket_types()->get();
-
         $return_array = array(
 			'id'            => $event->id,
 			'name'          => $event->name,
             'slug'          => $event->slug,
             'description'   => $event->description,
             'excerpt'       => $event->excerpt,
-            'hero_image'    => Storage::get( 'storage/' . $event->hero_image),
-            'share_image'   => Storage::get( 'storage/' . $event->share_image),
-            'excerpt_image' => Storage::get( 'storage/' . $event->excerpt_image),
-            'organisation'  => $event['organisation'],
-            'dates'         => $event['dates'],
-            'ticketTypes'   => $event['ticketTypes']
+            'hero_image'    => Storage::url($event->hero_image),
+            'share_image'   => Storage::url($event->share_image),
+            'excerpt_image' => Storage::url($event->excerpt_image),
+            'organisation'  => $event->organisation()->first(),
+            'dates'         => $event->event_dates()->get(),
+            'ticketTypes'   => $event->ticket_types()->get()
 		);
 
         return $return_array;
@@ -42,19 +36,28 @@ class EventController extends Controller
     public function events()
     {
         $events = Event::all();
+        $return_array = [];
 
         if ( $events )
         {
             foreach ( $events as $event_key => $event)
             {
-                $events[ $event_key]['organisation'] = $event->organisation()->first();
-                unset( $events[ $event_key] ['organisation_id'] );
-
-                $events[ $event_key]['dates']       = $event->event_dates()->get();
-                $events[ $event_key]['ticketTypes'] = $event->ticket_types()->get();
+                $return_array[] = array(
+                    'id'            => $event->id,
+                    'name'          => $event->name,
+                    'slug'          => $event->slug,
+                    'description'   => $event->description,
+                    'excerpt'       => $event->excerpt,
+                    'hero_image'    => Storage::url($event->hero_image),
+                    'share_image'   => Storage::url($event->share_image),
+                    'excerpt_image' => Storage::url($event->excerpt_image),
+                    'organisation'  => $event->organisation()->first(),
+                    'dates'         => $event->event_dates()->get(),
+                    'ticketTypes'   => $event->ticket_types()->get()
+                );
             }
         }
 
-        return $events;
+        return $return_array;
     }
 }
