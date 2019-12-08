@@ -1,0 +1,17 @@
+name: Deploy to staging
+on:
+  push:
+    branches:
+        - develop
+jobs:
+  vapor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Deploy to staging
+        env:
+            VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
+            GITHUB_SECRET: ${{ secrets.GITHUB_SECRET }}
+        uses: teamnovu/vapor-action@master
+        with:
+            args: deploy staging
