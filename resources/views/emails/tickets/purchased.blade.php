@@ -1,7 +1,7 @@
 @component('mail::message', ['event' => $event, 'orgName' => $orgName, 'orgEmail' => $orgEmail, 'orgAddress' => $orgAddress, 'name' => $name, 'ticketType' => $ticketType, 'ticketCode' => $ticketCode, 'modifiers' => $modifiers, 'qrPath' => $qrPath])
 {{-- Header --}}
 @slot('header')
-@component('mail::header', ['logo' => $logo)])
+@component('mail::header', ['logo' => $logo])
 @endcomponent
 @endslot
 
@@ -25,7 +25,7 @@ Du kan kan komma in på evenemanget på följande sätt:
 * Visa QR-koden nedan.
 * Visa biljettkoden **{{ $ticketCode }}** tillsammans med en giltig identitetshandling.
 
-![{{ $ticketCode }}]({{ $qrPath }} "{{ $ticketCode }}")
+![{{ $ticketCode }}](https://qrcode.tec-it.com/API/QRCode?data={{ $ticketCode }} "{{ $ticketCode }}")
 
 Var god och kontakta **{{ $orgName }}** på **{{ $orgEmail }}** om du har några frågor om evenemanget.
 
