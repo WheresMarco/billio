@@ -16,6 +16,8 @@ use App\User;
 use App\Modifier;
 use App\Nin;
 
+use QrCode;
+
 class TicketController extends Controller
 {
     /**
@@ -252,5 +254,26 @@ class TicketController extends Controller
         endwhile;
 
         return $uuid;
+    }
+
+    public function testsend() {
+        // Get ticket and generate ticket code.
+        $ticket = Ticket::where( 'id', 1 )->first();
+
+        // Generate QR-code
+        $image = QrCode::format('png')
+            ->size(400)->errorCorrection('H')
+            ->margin(0)
+            ->generate($ticket->ticket_code);
+        $qr_path = 'public/qr/' . $ticket->ticket_code . '.png';
+
+        // Get ticket by uuid.
+        $user = $ticket->user()->first();
+
+        $event        = $ticket->event()->first();
+        $organisation = $event->organisation()->first();
+
+        // Email the ticket.
+        Mail::to($user)->send(new \App\Mail\TicketPurchased($ticket, $event, $organisation, $user));
     }
 }

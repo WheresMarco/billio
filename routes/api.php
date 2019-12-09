@@ -36,3 +36,5 @@ Route::group(['user' => 'auth:api'], function()
    Route::get('users/me', 'UserController@details');
    Route::get('users/tickets', 'UserController@tickets');
 });
+
+Route::get('testsend', 'TicketController@testsend');
