@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 use Stripe;
 
@@ -97,6 +98,12 @@ class TicketController extends Controller
         $price = $ticketType->price;
 
         // Check if student
+        $nin = str_replace( '-', '', $nin);
+        if ( 12 === strlen( $nin ) )
+        {
+            $nin = substr( $nin, 2 );
+        }
+
         $nin_object = Nin::where( [ [ 'nin', $nin ], [ 'ticket_id', null ], [ 'utilized', false ] ] )->first();
         if ( $nin_object ) {
             $ticketModifiers[] = $nin_object->corps;
@@ -129,6 +136,7 @@ class TicketController extends Controller
             $user = new User();
             $user->email = $email;
             $user->name = $firstName . ' ' . $lastName;
+            $user->password = bcrypt(Str::random(10));
             $user->save();
         }
 

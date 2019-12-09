@@ -1,7 +1,7 @@
 @component('mail::message', ['event' => $event, 'orgName' => $orgName, 'orgEmail' => $orgEmail, 'orgAddress' => $orgAddress, 'name' => $name, 'ticketType' => $ticketType, 'ticketCode' => $ticketCode, 'modifiers' => $modifiers, 'qrPath' => $qrPath])
 {{-- Header --}}
 @slot('header')
-@component('mail::header', ['logo' => url('img/logo.png')])
+@component('mail::header', ['logo' => $logo)])
 @endcomponent
 @endslot
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "04b33ef2c7a7c7611d1b8d5314e6db76",
+    "content-hash": "b5cc47d9ed6cc9aa04550a93bb3ff33c",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -4588,6 +4588,48 @@
                 "sentry"
             ],
             "time": "2019-11-11T11:30:37+00:00"
+        },
+        {
+            "name": "simonhamp/laravel-nova-csv-import",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/simonhamp/laravel-nova-csv-import.git",
+                "reference": "482b842a807f36a2a3bc541dcb2941a3e5fa7d08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/simonhamp/laravel-nova-csv-import/zipball/482b842a807f36a2a3bc541dcb2941a3e5fa7d08",
+                "reference": "482b842a807f36a2a3bc541dcb2941a3e5fa7d08",
+                "shasum": ""
+            },
+            "require": {
+                "maatwebsite/excel": "^3.1",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SimonHamp\\LaravelNovaCsvImport\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SimonHamp\\LaravelNovaCsvImport\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A fully-fledged CSV import tool for Laravel Nova.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "time": "2019-10-25T11:35:26+00:00"
         },
         {
             "name": "simplesoftwareio/simple-qrcode",

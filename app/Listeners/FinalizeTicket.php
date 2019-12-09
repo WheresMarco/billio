@@ -45,8 +45,7 @@ class FinalizeTicket
             ->generate($ticket->ticket_code);
         $qr_path = 'public/qr/' . $ticket->ticket_code . '.png';
 
-        Storage::put($qr_path, $image);
-        $url  = Storage::url($qr_path);
+        Storage::disk('s3')->putFileAs($qr_path, $image, $ticket->ticket_code, 'public');
 
         // Get ticket by uuid.
         $user = $ticket->user()->first();
