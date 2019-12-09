@@ -64,6 +64,39 @@ class TicketController extends Controller
         $ticketTypeID    = $request->ticketTypeID;
         $ticketModifiers = $request->modifiers;
 
+        // Create the ticket
+        $ticket     = $this->createTicket($accessCode, $email, $nin, $firstName, $lastName, $eventID, $ticketTypeID, $ticketModifiers);
+        $event      = Event::find( $eventID );
+        $user       = User::where( 'email', $email )->first();
+        $ticketType = TicketType::find( $ticketTypeID );
+
+        // Make charge
+        $paymentIntent = Stripe::paymentIntents()->create([
+            'amount'        => $ticket->price,
+            'currency'      => 'sek',
+            'receipt_email' => $user->email,
+            'description'   => $event->name . ' - ' . $ticketType->name,
+            'metadata'      => ['ticket_id' => $ticket->uuid]
+        ]);
+
+        // Build and return the ticket array.
+		$return_array = array(
+			'id'            => $ticket->uuid,
+			'eventID'       => $event->id,
+            'status'        => $ticket->status,
+            'intent_secret' => $paymentIntent['client_secret'],
+			'user'          => array(
+				'id'            => $user->id,
+				'name'          => $user->name,
+				'email'         => $user->email,
+			),
+		);
+
+        // Return ticket to API.
+        return $return_array;
+    }
+
+    public function createTicket($accessCode, $email, $nin, $firstName, $lastName, $eventID, $ticketTypeID, $ticketModifiers) {
         // Check if event is valid.
         $event = Event::find( $eventID );
         if ( null === $event )
@@ -166,30 +199,7 @@ class TicketController extends Controller
             $nin_object->save();
         }
 
-        // Make charge
-        $paymentIntent = Stripe::paymentIntents()->create([
-            'amount'        => $ticket->price,
-            'currency'      => 'sek',
-            'receipt_email' => $user->email,
-            'description'   => $event->name . ' - ' . $ticketType->name,
-            'metadata'      => ['ticket_id' => $ticket->uuid]
-        ]);
-
-        // Build and return the ticket array.
-		$return_array = array(
-			'id'            => $ticket->uuid,
-			'eventID'       => $event->id,
-            'status'        => $ticket->status,
-            'intent_secret' => $paymentIntent['client_secret'],
-			'user'          => array(
-				'id'            => $user->id,
-				'name'          => $user->name,
-				'email'         => $user->email,
-			),
-		);
-
-        // Return ticket to API.
-        return $return_array;
+        return $ticket;
     }
 
     public function ticketsSold( $eventID, $ticketTypeID )
