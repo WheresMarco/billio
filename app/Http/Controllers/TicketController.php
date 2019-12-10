@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 use Stripe;
 
@@ -208,6 +209,21 @@ class TicketController extends Controller
         $ticketsSold = $tickets->count();
 
         return $ticketsSold;
+    }
+
+    /**
+     * Resend a ticket to user.
+     *
+     * @param Ticket $ticket
+     * @return void
+     */
+    public function resendTicket(Ticket $ticket) {
+        $user         = $ticket->user()->first();
+        $event        = $ticket->event()->first();
+        $organisation = $event->organisation()->first();
+
+        // Email the ticket.
+        Mail::to($user)->send(new \App\Mail\TicketPurchased($ticket, $event, $organisation, $user));
     }
 
     /**

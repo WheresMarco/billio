@@ -3,11 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Nova\Actions\Actionable;
+use Illuminate\Notifications\Notifiable;
 
 use App\Http\Controllers\TicketController;
 
 class Ticket extends Model
 {
+    use Actionable, Notifiable;
+
     /**
      * The "booting" method of the model.
      *

@@ -117,6 +117,7 @@ class Ticket extends Resource
     {
         return [
             new DownloadExcel,
+            new Actions\ResendTicket,
         ];
     }
 }
