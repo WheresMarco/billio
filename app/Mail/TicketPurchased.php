@@ -53,8 +53,8 @@ class TicketPurchased extends Mailable
                         'ticketType' => $this->ticket->ticket_type()->first()->name,
                         'ticketCode' => $this->ticket->ticket_code,
                         'modifiers'  => $this->ticket->modifiers()->get(),
-                        'qrPath'     => Storage::disk('s3')->url('qr/' . $this->ticket->ticket_code . '.png'),
-                        'logo'       => Storage::disk('s3')->url('img/logo.png'),
+                        'qrPath'     => '',
+                        'logo'       => '',
                     ])
                     ->markdown('emails.tickets.purchased');
     }

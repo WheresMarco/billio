@@ -39,13 +39,13 @@ class FinalizeTicket
         $ticket->save();
 
         // Generate QR-code
-        $image = QrCode::format('png')
-            ->size(400)->errorCorrection('H')
-            ->margin(0)
-            ->generate($ticket->ticket_code);
-        $qr_path = 'public/qr/' . $ticket->ticket_code . '.png';
+        // $image = QrCode::format('png')
+        //     ->size(400)->errorCorrection('H')
+        //     ->margin(0)
+        //     ->generate($ticket->ticket_code);
+        // $qr_path = 'public/qr/' . $ticket->ticket_code . '.png';
 
-        Storage::disk('s3')->putFileAs($qr_path, $image, $ticket->ticket_code, 'public');
+        // Storage::disk('s3')->putFileAs($qr_path, $image, $ticket->ticket_code, 'public');
 
         // Get ticket by uuid.
         $user = $ticket->user()->first();
