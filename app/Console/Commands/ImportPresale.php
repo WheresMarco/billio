@@ -14,7 +14,7 @@ class ImportPresale extends Command
      *
      * @var string
      */
-    protected $signature = 'billio:import {url}';
+    protected $signature = 'billio:import';
 
     /**
      * The console command description.
@@ -40,13 +40,7 @@ class ImportPresale extends Command
      */
     public function handle()
     {
-        // Get file
-        $url = $this->argument('url');
-        $contents = file_get_contents($url);
-        $name = substr($url, strrpos($url, '/') + 1);
-        Storage::put($name, $contents);
-
-        Excel::import(new PresaleImport, $name);
+        Excel::import(new PresaleImport, Storage::disk('s3')->url('presale.xlsx'));
 
         $this->info('Imported!');
     }
