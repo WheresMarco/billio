@@ -78,9 +78,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function tools()
     {
-        return [
-            new LaravelNovaCsvImport,
-        ];
+        return [];
     }
 
     /**

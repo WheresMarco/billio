@@ -3,9 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Imports\PresaleImport;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use Revolution\Google\Sheets\Facades\Sheets;
+
+use App\Ticket;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\CheckStudentController;
 
 class ImportPresale extends Command
 {
@@ -40,8 +44,53 @@ class ImportPresale extends Command
      */
     public function handle()
     {
-        Excel::import(new PresaleImport, Storage::disk('s3')->url('presale.xlsx'));
+        $sheets = Sheets::spreadsheet('1OAXRiWyFbDOa-LbVwiQeSwCHaIfXg5Ml5m-sbFPh4p4')
+        ->sheet('Data')
+        ->get();
 
-        $this->info('Imported!');
+        $header = $sheets->pull(0);
+        $posts = Sheets::collection($header, $sheets);
+        $posts = $posts->toArray();
+
+        if ($posts) {
+            foreach ($posts as $post) {
+                $ticketModifiers = [];
+                $ticketModifiers = explode(',', $post['modifiers']);
+                $valid = true;
+
+                if ('Betalat' !== $post['paid']) {
+                    $this->error('Ticket not paid: ' . $post['email']);
+                    continue;
+                }
+
+                // CheckStudent
+                if ('' !== $post['nin']) {
+                    $checkStudent = new CheckStudentController;
+                    $ninResult = $checkStudent->isStudentMember( $post['nin'] );
+
+                    if ('false' === $ninResult) {
+                        $valid = false;
+                        $this->error('Nin not valid: ' . $post['nin']);
+                    }
+                }
+
+                $ticketModifiers = array_filter($ticketModifiers);
+
+                $ticket = ( new TicketController() )->createTicket('', $post['email'], $post['nin'], $post['name'], '', $post['event_id'], $post['ticket_type_id'], $ticketModifiers);
+
+                if (!$ticket) {
+                    $this->error('Ticket not created: ' . $post['email']);
+                    continue;
+                }
+
+                if ($valid) {
+                    event(new \App\Events\TicketPurchased($ticket));
+                }
+
+                $this->info('Imported: ' . $post['email'] . ' - ' . $ticket->id);
+            }
+        }
+
+        $this->info('All imported!');
     }
 }

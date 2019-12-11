@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5cc47d9ed6cc9aa04550a93bb3ff33c",
+    "content-hash": "071a236592108325c3232939b375a7d8",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1216,6 +1216,155 @@
             "time": "2019-09-27T13:05:10+00:00"
         },
         {
+            "name": "google/apiclient",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/googleapis/google-api-php-client.git",
+                "reference": "cd3c37998020d91ae4eafca4f26a92da4dabba83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/cd3c37998020d91ae4eafca4f26a92da4dabba83",
+                "reference": "cd3c37998020d91ae4eafca4f26a92da4dabba83",
+                "shasum": ""
+            },
+            "require": {
+                "firebase/php-jwt": "~2.0||~3.0||~4.0||~5.0",
+                "google/apiclient-services": "~0.13",
+                "google/auth": "^1.0",
+                "guzzlehttp/guzzle": "~5.3.1||~6.0",
+                "guzzlehttp/psr7": "^1.2",
+                "monolog/monolog": "^1.17|^2.0",
+                "php": ">=5.4",
+                "phpseclib/phpseclib": "~0.3.10||~2.0"
+            },
+            "require-dev": {
+                "cache/filesystem-adapter": "^0.3.2",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "phpcompatibility/php-compatibility": "^9.2",
+                "phpunit/phpunit": "~4.8.36",
+                "squizlabs/php_codesniffer": "~2.3",
+                "symfony/css-selector": "~2.1",
+                "symfony/dom-crawler": "~2.1"
+            },
+            "suggest": {
+                "cache/filesystem-adapter": "For caching certs and tokens (using Google_Client::setCache)"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Google_": "src/"
+                },
+                "classmap": [
+                    "src/Google/Service/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Client library for Google APIs",
+            "homepage": "http://developers.google.com/api-client-library/php",
+            "keywords": [
+                "google"
+            ],
+            "time": "2019-09-11T17:38:10+00:00"
+        },
+        {
+            "name": "google/apiclient-services",
+            "version": "v0.121",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/googleapis/google-api-php-client-services.git",
+                "reference": "a33fd9ed19fe4e27f2ccebbf45646f38e7cb95af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/a33fd9ed19fe4e27f2ccebbf45646f38e7cb95af",
+                "reference": "a33fd9ed19fe4e27f2ccebbf45646f38e7cb95af",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Google_Service_": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Client library for Google APIs",
+            "homepage": "http://developers.google.com/api-client-library/php",
+            "keywords": [
+                "google"
+            ],
+            "time": "2019-11-03T00:23:34+00:00"
+        },
+        {
+            "name": "google/auth",
+            "version": "v1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/googleapis/google-auth-library-php.git",
+                "reference": "45635ac69d0b95f38885531d4ebcdfcb2ebb6f36"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/45635ac69d0b95f38885531d4ebcdfcb2ebb6f36",
+                "reference": "45635ac69d0b95f38885531d4ebcdfcb2ebb6f36",
+                "shasum": ""
+            },
+            "require": {
+                "firebase/php-jwt": "~2.0|~3.0|~4.0|~5.0",
+                "guzzlehttp/guzzle": "~5.3.1|~6.0",
+                "guzzlehttp/psr7": "^1.2",
+                "php": ">=5.4",
+                "psr/cache": "^1.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.11",
+                "guzzlehttp/promises": "0.1.1|^1.3",
+                "phpseclib/phpseclib": "^2",
+                "phpunit/phpunit": "^4.8.36|^5.7",
+                "sebastian/comparator": ">=1.2.3"
+            },
+            "suggest": {
+                "phpseclib/phpseclib": "May be used in place of OpenSSL for signing strings or for token management. Please require version ^2."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Google\\Auth\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Google Auth Library for PHP",
+            "homepage": "http://github.com/google/google-auth-library-php",
+            "keywords": [
+                "Authentication",
+                "google",
+                "oauth2"
+            ],
+            "time": "2019-10-29T20:13:04+00:00"
+        },
+        {
             "name": "guzzlehttp/guzzle",
             "version": "6.5.0",
             "source": {
@@ -1807,7 +1956,8 @@
             "dist": {
                 "type": "path",
                 "url": "./nova",
-                "reference": "cc21e037a52175eb0365cfdf8b61c6ceb4f575cc"
+                "reference": "cc21e037a52175eb0365cfdf8b61c6ceb4f575cc",
+                "shasum": null
             },
             "require": {
                 "cakephp/chronos": "^1.0",
@@ -3855,6 +4005,52 @@
             "time": "2019-09-17T03:41:22+00:00"
         },
         {
+            "name": "psr/cache",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/cache.git",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for caching libraries",
+            "keywords": [
+                "cache",
+                "psr",
+                "psr-6"
+            ],
+            "time": "2016-08-06T20:24:11+00:00"
+        },
+        {
             "name": "psr/container",
             "version": "1.0.0",
             "source": {
@@ -4224,6 +4420,66 @@
             "time": "2019-12-06T14:19:43+00:00"
         },
         {
+            "name": "pulkitjalan/google-apiclient",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pulkitjalan/google-apiclient.git",
+                "reference": "ad53d054dc60d3363f862dc9c4f965dc40f3b314"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pulkitjalan/google-apiclient/zipball/ad53d054dc60d3363f862dc9c4f965dc40f3b314",
+                "reference": "ad53d054dc60d3363f862dc9c4f965dc40f3b314",
+                "shasum": ""
+            },
+            "require": {
+                "google/apiclient": "^2.2",
+                "illuminate/support": "~5.8.0|^6.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2.3",
+                "phpunit/phpunit": "^8.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "PulkitJalan\\Google\\GoogleServiceProvider"
+                    ],
+                    "aliases": {
+                        "Google": "PulkitJalan\\Google\\Facades\\Google"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PulkitJalan\\Google\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pulkit Jalan"
+                }
+            ],
+            "description": "Google api php client wrapper with Cloud Platform and Laravel support",
+            "homepage": "https://github.com/pulkitjalan/google-apiclient",
+            "keywords": [
+                "cloud platform",
+                "google",
+                "laravel"
+            ],
+            "time": "2019-09-06T06:43:35+00:00"
+        },
+        {
             "name": "ralouphie/getallheaders",
             "version": "3.0.3",
             "source": {
@@ -4351,6 +4607,64 @@
             "time": "2019-12-01T04:55:27+00:00"
         },
         {
+            "name": "revolution/laravel-google-sheets",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kawax/laravel-google-sheets.git",
+                "reference": "a4298638c66f559bda3571ed4b974dc6a057b546"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kawax/laravel-google-sheets/zipball/a4298638c66f559bda3571ed4b974dc6a057b546",
+                "reference": "a4298638c66f559bda3571ed4b974dc6a057b546",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "*",
+                "php": "^7.2",
+                "pulkitjalan/google-apiclient": "^4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^4.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Revolution\\Google\\Sheets\\Providers\\SheetsServiceProvider"
+                    ],
+                    "aliases": {
+                        "Sheets": "Revolution\\Google\\Sheets\\Facades\\Sheets"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Revolution\\Google\\Sheets\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "kawax",
+                    "email": "kawaxbiz@gmail.com"
+                }
+            ],
+            "description": "Google Sheets API v4",
+            "keywords": [
+                "google",
+                "laravel",
+                "sheets"
+            ],
+            "time": "2019-09-07T04:33:56+00:00"
+        },
+        {
             "name": "riverline/multipart-parser",
             "version": "2.0.5",
             "source": {
@@ -4405,17 +4719,6 @@
         {
             "name": "sentry/sdk",
             "version": "2.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/getsentry/sentry-php-sdk.git",
-                "reference": "4c115873c86ad5bd0ac6d962db70ca53bf8fb874"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php-sdk/zipball/4c115873c86ad5bd0ac6d962db70ca53bf8fb874",
-                "reference": "4c115873c86ad5bd0ac6d962db70ca53bf8fb874",
-                "shasum": ""
-            },
             "require": {
                 "http-interop/http-factory-guzzle": "^1.0",
                 "php-http/curl-client": "^1.0|^2.0",
@@ -4588,48 +4891,6 @@
                 "sentry"
             ],
             "time": "2019-11-11T11:30:37+00:00"
-        },
-        {
-            "name": "simonhamp/laravel-nova-csv-import",
-            "version": "v0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/simonhamp/laravel-nova-csv-import.git",
-                "reference": "482b842a807f36a2a3bc541dcb2941a3e5fa7d08"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/simonhamp/laravel-nova-csv-import/zipball/482b842a807f36a2a3bc541dcb2941a3e5fa7d08",
-                "reference": "482b842a807f36a2a3bc541dcb2941a3e5fa7d08",
-                "shasum": ""
-            },
-            "require": {
-                "maatwebsite/excel": "^3.1",
-                "php": ">=7.1.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "SimonHamp\\LaravelNovaCsvImport\\ToolServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SimonHamp\\LaravelNovaCsvImport\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A fully-fledged CSV import tool for Laravel Nova.",
-            "keywords": [
-                "laravel",
-                "nova"
-            ],
-            "time": "2019-10-25T11:35:26+00:00"
         },
         {
             "name": "simplesoftwareio/simple-qrcode",

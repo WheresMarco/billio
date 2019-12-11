@@ -26,8 +26,8 @@
         "laravel/vapor-cli": "^1.3",
         "laravel/vapor-core": "^2.1",
         "maatwebsite/laravel-nova-excel": "^1.1",
+        "revolution/laravel-google-sheets": "^5.0",
         "sentry/sentry-laravel": "1.5.0",
-        "simonhamp/laravel-nova-csv-import": "^0.1.2",
         "simplesoftwareio/simple-qrcode": "^2.0",
         "spatie/laravel-cors": "^1.6",
         "spatie/laravel-stripe-webhooks": "^2.2"
