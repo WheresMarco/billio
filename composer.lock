@@ -1956,8 +1956,7 @@
             "dist": {
                 "type": "path",
                 "url": "./nova",
-                "reference": "cc21e037a52175eb0365cfdf8b61c6ceb4f575cc",
-                "shasum": null
+                "reference": "cc21e037a52175eb0365cfdf8b61c6ceb4f575cc"
             },
             "require": {
                 "cakephp/chronos": "^1.0",
@@ -4719,6 +4718,17 @@
         {
             "name": "sentry/sdk",
             "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/getsentry/sentry-php-sdk.git",
+                "reference": "4c115873c86ad5bd0ac6d962db70ca53bf8fb874"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/getsentry/sentry-php-sdk/zipball/4c115873c86ad5bd0ac6d962db70ca53bf8fb874",
+                "reference": "4c115873c86ad5bd0ac6d962db70ca53bf8fb874",
+                "shasum": ""
+            },
             "require": {
                 "http-interop/http-factory-guzzle": "^1.0",
                 "php-http/curl-client": "^1.0|^2.0",
@@ -7403,16 +7413,16 @@
         },
         {
             "name": "laravel/homestead",
-            "version": "v10.0.1",
+            "version": "v10.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/homestead.git",
-                "reference": "abded1035fda34475ba0e422708395830db4075a"
+                "reference": "09fce4ceac4244bc101514d435f0d0f0e6f3ff3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/homestead/zipball/abded1035fda34475ba0e422708395830db4075a",
-                "reference": "abded1035fda34475ba0e422708395830db4075a",
+                "url": "https://api.github.com/repos/laravel/homestead/zipball/09fce4ceac4244bc101514d435f0d0f0e6f3ff3d",
+                "reference": "09fce4ceac4244bc101514d435f0d0f0e6f3ff3d",
                 "shasum": ""
             },
             "require": {
@@ -7444,7 +7454,7 @@
                 }
             ],
             "description": "A virtual machine for web artisans.",
-            "time": "2019-12-01T20:29:11+00:00"
+            "time": "2019-12-14T18:54:07+00:00"
         },
         {
             "name": "mockery/mockery",
