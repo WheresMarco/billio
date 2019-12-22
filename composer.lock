@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.129.2",
+            "version": "3.130.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "68889a74c1be039e49719067d97532618999569f"
+                "reference": "d426a86391c5d7f1a979dad0fd3bd0fd48ba7575"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/68889a74c1be039e49719067d97532618999569f",
-                "reference": "68889a74c1be039e49719067d97532618999569f",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d426a86391c5d7f1a979dad0fd3bd0fd48ba7575",
+                "reference": "d426a86391c5d7f1a979dad0fd3bd0fd48ba7575",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-12-17T19:12:14+00:00"
+            "time": "2019-12-20T19:17:37+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -2212,16 +2212,16 @@
         },
         {
             "name": "laravel/vapor-core",
-            "version": "v2.2.3",
+            "version": "v2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-core.git",
-                "reference": "2058b1ac3675d25f7e4f73b01e7c0639416167f0"
+                "reference": "55be299c2a4e25cac466a86c116af5fd3473ffa8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/2058b1ac3675d25f7e4f73b01e7c0639416167f0",
-                "reference": "2058b1ac3675d25f7e4f73b01e7c0639416167f0",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/55be299c2a4e25cac466a86c116af5fd3473ffa8",
+                "reference": "55be299c2a4e25cac466a86c116af5fd3473ffa8",
                 "shasum": ""
             },
             "require": {
@@ -2276,7 +2276,7 @@
                 "laravel",
                 "vapor"
             ],
-            "time": "2019-12-03T16:27:04+00:00"
+            "time": "2019-12-19T15:37:12+00:00"
         },
         {
             "name": "lcobucci/jwt",
@@ -2878,16 +2878,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "f9d56fd2f5533322caccdfcddbb56aedd622ef1c"
+                "reference": "c861fcba2ca29404dc9e617eedd9eff4616986b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/f9d56fd2f5533322caccdfcddbb56aedd622ef1c",
-                "reference": "f9d56fd2f5533322caccdfcddbb56aedd622ef1c",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c861fcba2ca29404dc9e617eedd9eff4616986b8",
+                "reference": "c861fcba2ca29404dc9e617eedd9eff4616986b8",
                 "shasum": ""
             },
             "require": {
@@ -2955,7 +2955,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2019-11-13T10:27:43+00:00"
+            "time": "2019-12-20T14:22:59+00:00"
         },
         {
             "name": "moontoast/math",
@@ -4666,16 +4666,16 @@
         },
         {
             "name": "riverline/multipart-parser",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Riverline/multipart-parser.git",
-                "reference": "8bb18f1d374b5d611325c4ac36a5dbdc1cdd9248"
+                "reference": "f71c80281d8f04e840c31edede6516b63f4d699b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Riverline/multipart-parser/zipball/8bb18f1d374b5d611325c4ac36a5dbdc1cdd9248",
-                "reference": "8bb18f1d374b5d611325c4ac36a5dbdc1cdd9248",
+                "url": "https://api.github.com/repos/Riverline/multipart-parser/zipball/f71c80281d8f04e840c31edede6516b63f4d699b",
+                "reference": "f71c80281d8f04e840c31edede6516b63f4d699b",
                 "shasum": ""
             },
             "require": {
@@ -4691,7 +4691,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Riverline\\MultiPartParser\\": "src/Riverline/MultiPartParser/"
+                    "Riverline\\MultiPartParser\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4714,7 +4714,7 @@
                 "multipart",
                 "parser"
             ],
-            "time": "2019-08-26T14:21:49+00:00"
+            "time": "2019-12-16T11:23:08+00:00"
         },
         {
             "name": "sentry/sdk",
@@ -5729,16 +5729,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "8bccc59e61b41963d14c3dbdb23181e5c932a1d5"
+                "reference": "fcae1cff5b57b2a9c3aabefeb1527678705ddb62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/8bccc59e61b41963d14c3dbdb23181e5c932a1d5",
-                "reference": "8bccc59e61b41963d14c3dbdb23181e5c932a1d5",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/fcae1cff5b57b2a9c3aabefeb1527678705ddb62",
+                "reference": "fcae1cff5b57b2a9c3aabefeb1527678705ddb62",
                 "shasum": ""
             },
             "require": {
@@ -5780,7 +5780,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-28T13:33:56+00:00"
+            "time": "2019-12-19T15:57:49+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -5874,7 +5874,7 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v5.0.1",
+            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
@@ -6341,16 +6341,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "51c0135ef3f44c5803b33dc60e96bf4f77752726"
+                "reference": "b84501ad50adb72a94fb460a5b5c91f693e99c9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/51c0135ef3f44c5803b33dc60e96bf4f77752726",
-                "reference": "51c0135ef3f44c5803b33dc60e96bf4f77752726",
+                "url": "https://api.github.com/repos/symfony/process/zipball/b84501ad50adb72a94fb460a5b5c91f693e99c9b",
+                "reference": "b84501ad50adb72a94fb460a5b5c91f693e99c9b",
                 "shasum": ""
             },
             "require": {
@@ -6386,7 +6386,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2019-11-28T13:33:56+00:00"
+            "time": "2019-12-06T10:06:46+00:00"
         },
         {
             "name": "symfony/psr-http-message-bridge",
