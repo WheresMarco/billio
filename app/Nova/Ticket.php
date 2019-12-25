@@ -71,6 +71,21 @@ class Ticket extends Resource
             Text::make('Price'),
 
             MorphToMany::make('Modifiers'),
+
+            Text::make('Modifiers', function () {
+                if ( ! $this->modifiers->first() ) {
+                    return;
+                }
+
+                $returnString = array_map(
+                    function($modifier) {
+                        return $modifier->name;
+                    },
+                    $this->modifiers->all()
+                );
+
+                return implode(', ', $returnString);
+            })->onlyOnIndex(),
         ];
     }
 
@@ -93,7 +108,10 @@ class Ticket extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new Filters\TicketType,
+            new Filters\TicketModifier,
+        ];
     }
 
     /**
@@ -116,7 +134,7 @@ class Ticket extends Resource
     public function actions(Request $request)
     {
         return [
-            new DownloadExcel,
+            (new DownloadExcel)->withHeadings(),
             new Actions\ResendTicket,
         ];
     }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Ticket;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,37 @@ Route::post('/tickets', 'TicketController@create');
 
 // Checkstudent
 Route::post('/checkstudent', 'CheckStudentController@check');
+
+// Check in
+Route::post('/checkin', 'CheckInController@checkIn');
+
+Route::get('/checkin/search', function (Request $request) {
+    $tickets = App\Ticket::search($request->search)->get();
+    $return_array = [];
+
+    if ( $tickets ) {
+        foreach ( $tickets as $ticket_key => $ticket) {
+            $modifiers = [];
+            $modifiers = array_map(
+                function($modifier) {
+                    return $modifier['name'];
+                },
+                $ticket->modifiers()->get()->toArray()
+            );
+
+            $return_array[] = array(
+                'id'            => $ticket->id,
+                'name'          => $ticket->user()->first()->name,
+                'email'         => $ticket->user()->first()->email,
+                'code'          => $ticket->ticket_code,
+                'ticketType'    => $ticket->ticket_type()->first()->name,
+                'modifiers'     => implode(', ', $modifiers),
+            );
+        }
+    }
+
+    return $return_array;
+});
 
 // Login
 Route::post('login', 'UserController@login');

@@ -5,12 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Nova\Actions\Actionable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Scout\Searchable;
 
 use App\Http\Controllers\TicketController;
 
 class Ticket extends Model
 {
-    use Actionable, Notifiable;
+    use Actionable, Notifiable, Searchable;
 
     /**
      * The "booting" method of the model.
@@ -55,5 +56,15 @@ class Ticket extends Model
     public function nin()
     {
         return $this->hasOne('App\Nin');
+    }
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        $array['name']  = $this->user()->first()->name;
+        $array['email'] = $this->user()->first()->email;
+
+        return $array;
     }
 }
