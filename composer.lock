@@ -3138,6 +3138,7 @@
                 "bcmath",
                 "math"
             ],
+            "abandoned": "brick/math",
             "time": "2017-02-16T16:54:46+00:00"
         },
         {
@@ -4742,21 +4743,21 @@
         },
         {
             "name": "revolution/laravel-google-sheets",
-            "version": "5.0.0",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kawax/laravel-google-sheets.git",
-                "reference": "a4298638c66f559bda3571ed4b974dc6a057b546"
+                "reference": "d6e4cccf4527adc7498dd4b8f447b7bc7781e5a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kawax/laravel-google-sheets/zipball/a4298638c66f559bda3571ed4b974dc6a057b546",
-                "reference": "a4298638c66f559bda3571ed4b974dc6a057b546",
+                "url": "https://api.github.com/repos/kawax/laravel-google-sheets/zipball/d6e4cccf4527adc7498dd4b8f447b7bc7781e5a3",
+                "reference": "d6e4cccf4527adc7498dd4b8f447b7bc7781e5a3",
                 "shasum": ""
             },
             "require": {
                 "illuminate/container": "*",
-                "php": "^7.2",
+                "php": "^7.2||^8.0",
                 "pulkitjalan/google-apiclient": "^4.0"
             },
             "require-dev": {
@@ -4796,7 +4797,7 @@
                 "laravel",
                 "sheets"
             ],
-            "time": "2019-09-07T04:33:56+00:00"
+            "time": "2020-01-05T05:57:16+00:00"
         },
         {
             "name": "riverline/multipart-parser",
@@ -7160,6 +7161,7 @@
                 "psr",
                 "psr-7"
             ],
+            "abandoned": "laminas/laminas-diactoros",
             "time": "2019-11-13T19:16:13+00:00"
         }
     ],
