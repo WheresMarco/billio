@@ -1283,6 +1283,7 @@
                 "security",
                 "utility"
             ],
+            "abandoned": "personnummer/personnummer",
             "time": "2019-09-27T13:05:10+00:00"
         },
         {
@@ -2728,23 +2729,24 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "3.1.18",
+            "version": "3.1.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "d0231ab1f4bb93c8695630cb445ada1fdc54add0"
+                "reference": "bd377ad37b285d9bc25c9adca360e4392041dea6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/d0231ab1f4bb93c8695630cb445ada1fdc54add0",
-                "reference": "d0231ab1f4bb93c8695630cb445ada1fdc54add0",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/bd377ad37b285d9bc25c9adca360e4392041dea6",
+                "reference": "bd377ad37b285d9bc25c9adca360e4392041dea6",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
+                "opis/closure": "^3.1",
                 "php": "^7.0",
-                "phpoffice/phpspreadsheet": "^1.10"
+                "phpoffice/phpspreadsheet": "^1.6"
             },
             "require-dev": {
                 "mockery/mockery": "^1.1",
@@ -2791,25 +2793,25 @@
                 "php",
                 "phpspreadsheet"
             ],
-            "time": "2019-12-24T10:40:12+00:00"
+            "time": "2019-09-04T19:28:20+00:00"
         },
         {
             "name": "maatwebsite/laravel-nova-excel",
-            "version": "1.1.8",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Nova-Excel.git",
-                "reference": "a566e849e4e4ede3b88c8579f65087d89a7a4830"
+                "reference": "2e1e5f3b8715e3e7ee5d6b17a2f440001c90ac7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Nova-Excel/zipball/a566e849e4e4ede3b88c8579f65087d89a7a4830",
-                "reference": "a566e849e4e4ede3b88c8579f65087d89a7a4830",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Nova-Excel/zipball/2e1e5f3b8715e3e7ee5d6b17a2f440001c90ac7d",
+                "reference": "2e1e5f3b8715e3e7ee5d6b17a2f440001c90ac7d",
                 "shasum": ""
             },
             "require": {
                 "laravel/nova": "*",
-                "maatwebsite/excel": "^3.1",
+                "maatwebsite/excel": "3.1.17",
                 "php": ">=7.1.0"
             },
             "type": "library",
@@ -2844,7 +2846,7 @@
                 "nova",
                 "phpspreadsheet"
             ],
-            "time": "2019-12-24T10:20:31+00:00"
+            "time": "2020-01-11T20:00:55+00:00"
         },
         {
             "name": "markbaker/complex",
@@ -3138,6 +3140,7 @@
                 "bcmath",
                 "math"
             ],
+            "abandoned": "brick/math",
             "time": "2017-02-16T16:54:46+00:00"
         },
         {
@@ -7160,6 +7163,7 @@
                 "psr",
                 "psr-7"
             ],
+            "abandoned": "laminas/laminas-diactoros",
             "time": "2019-11-13T19:16:13+00:00"
         }
     ],
