@@ -78,30 +78,9 @@ class Event extends Resource
 
             HasMany::make('Tickets'),
 
-            Image::make('Hero image')
-                    ->store(function (Request $request, $model) {
-                        $name = $request->hero_image->getClientOriginalName();
-                        $savedName = Storage::disk('s3')->putFileAs('/assets/platforms', $request->hero_image, $name, 'public');
-                        return [
-                            'hero_image' => $savedName,
-                        ];
-                    }),
-            Image::make('Share image')
-                    ->store(function (Request $request, $model) {
-                        $name = $request->share_image->getClientOriginalName();
-                        $savedName = Storage::disk('s3')->putFileAs('/assets/platforms', $request->share_image, $name, 'public');
-                        return [
-                            'share_image' => $savedName,
-                        ];
-                    }),
-            Image::make('Excerpt image')
-                    ->store(function (Request $request, $model) {
-                        $name = $request->excerpt_image->getClientOriginalName();
-                        $savedName = Storage::disk('s3')->putFileAs('/assets/platforms', $request->excerpt_image, $name, 'public');
-                        return [
-                            'excerpt_image' => $savedName,
-                        ];
-                    }),
+            Image::make('Hero image'),
+            Image::make('Share image'),
+            Image::make('Excerpt image'),
         ];
     }
 
