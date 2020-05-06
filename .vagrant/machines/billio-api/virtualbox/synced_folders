@@ -1,1 +1,0 @@
-{"virtualbox":{"/home/vagrant/billio-api":{"type":null,"mount_options":["uid=1000","gid=1000"],"guestpath":"/home/vagrant/billio-api","hostpath":"/Users/marco/Documents/Web/Sites/billio-api","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/marco/Documents/Web/Sites/billio-api","disabled":false,"__vagrantfile":true}}}
