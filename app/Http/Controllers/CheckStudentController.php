@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Frozzare\Personnummer\Personnummer;
+use Personnummer\Personnummer;
 use Illuminate\Support\Facades\Log;
 
 use App\Nin;
