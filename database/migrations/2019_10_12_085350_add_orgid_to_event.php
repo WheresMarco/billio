@@ -14,7 +14,7 @@ class AddOrgidToEvent extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->unsignedBigInteger('organisation_id'); // unsigned for foreign key.
+            $table->unsignedBigInteger('organisation_id')->nullable(); // unsigned for foreign key.
             $table->foreign('organisation_id') // foreign key column name.
                 ->references('id') // parent table primary key.
                 ->on('organisations') // parent table name.
