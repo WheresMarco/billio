@@ -20,7 +20,7 @@ class CheckStudentTest extends TestCase
     {
         $checkStudent = new CheckStudentController;
 
-        $this->assertTrue( $checkStudent->isStudentMember( '9509232964' ) );
+        $this->assertEquals( 'lintek', $checkStudent->isStudentMember( '9509232964' ) );
     }
 
     /**
@@ -33,7 +33,7 @@ class CheckStudentTest extends TestCase
     {
         $checkStudent = new CheckStudentController;
 
-        $this->assertFalse( $checkStudent->isStudentMember( '9403308662' ) );
+        $this->assertEquals( 'false', $checkStudent->isStudentMember( '9403308662' ) );
     }
 
     /**
@@ -46,7 +46,7 @@ class CheckStudentTest extends TestCase
     {
         $checkStudent = new CheckStudentController;
 
-        $this->assertTrue( $checkStudent->isStudentMember( '19950923-2964' ) );
+        $this->assertEquals( 'lintek', $checkStudent->isStudentMember( '19950923-2964' ) );
     }
 
     /**
