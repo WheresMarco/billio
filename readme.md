@@ -46,4 +46,4 @@ Rename [.env.example](.env.example) to `.env` and customize it with your setting
 
 Status Badges
 -------------
-![UNIT Tests](https://github.com/WheresMarco/billio/workflows/UNIT%20Tests/badge.svg)
+![Tests](https://github.com/WheresMarco/billio/workflows/Tests/badge.svg)
