@@ -14,12 +14,17 @@ jobs:
     - name: Generate key
       run: php artisan key:generate
     - name: Create DB and schemas
+      env:
+         DB_CONNECTION: sqlite		
+         DB_DATABASE: database/database.sqlite
       run: |
         mkdir -p database
         touch database/database.sqlite
         php artisan migrate
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
+        DB_CONNECTION: sqlite		
+        DB_DATABASE: database/database.sqlite 
         MONTANIA_API_KEY_LINTEK: ${{ secrets.MONTANIA_API_KEY_LINTEK }}
         MONTANIA_API_KEY_STUFF: ${{ secrets.MONTANIA_API_KEY_STUFF }}
         MONTANIA_API_KEY_CONSENSUS: ${{ secrets.MONTANIA_API_KEY_CONSENSUS }}
