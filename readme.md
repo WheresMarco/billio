@@ -1,7 +1,7 @@
 Billio
 =======
 
-Billio is a simple, fast, and nice looking event system.
+Billio is a simple, fast, and nice looking event system. It has been used for [LiTHe Blås](https://litheblas.org/) Luciafest 2018 and 2019.
 
 ![Billio Screenshot](https://www.dropbox.com/s/oqyned2o7h7dfrq/billio-screenshot.jpg?raw=1)
 
