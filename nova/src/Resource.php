@@ -72,7 +72,7 @@ abstract class Resource implements ArrayAccess, JsonSerializable, UrlRoutable
     public static $displayInNavigation = true;
 
     /**
-     * Indicates if the resoruce should be globally searchable.
+     * Indicates if the resource should be globally searchable.
      *
      * @var bool
      */
@@ -84,6 +84,13 @@ abstract class Resource implements ArrayAccess, JsonSerializable, UrlRoutable
      * @var int
      */
     public static $globalSearchResults = 5;
+
+    /**
+     * Where should the global search link to?
+     *
+     * @var string
+     */
+    public static $globalSearchLink = 'detail';
 
     /**
      * The per-page options used the resource index.
@@ -105,6 +112,13 @@ abstract class Resource implements ArrayAccess, JsonSerializable, UrlRoutable
      * @var array
      */
     public static $softDeletes = [];
+
+    /**
+     * Indicates whether Nova should check for modifications between viewing and updating a resource.
+     *
+     * @var bool
+     */
+    public static $trafficCop = true;
 
     /**
      * The default displayable pivot class name.
@@ -160,7 +174,7 @@ abstract class Resource implements ArrayAccess, JsonSerializable, UrlRoutable
      */
     public static function availableForNavigation(Request $request)
     {
-        return true;
+        return static::$displayInNavigation;
     }
 
     /**
@@ -187,6 +201,18 @@ abstract class Resource implements ArrayAccess, JsonSerializable, UrlRoutable
     public static function searchable()
     {
         return ! empty(static::$search) || static::usesScout();
+    }
+
+    /**
+     * Detetermine whether the global search links will take the user to the detail page.
+     *
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
+     *
+     * @return string
+     */
+    public function globalSearchLink(NovaRequest $request)
+    {
+        return static::$globalSearchLink;
     }
 
     /**
@@ -295,17 +321,14 @@ abstract class Resource implements ArrayAccess, JsonSerializable, UrlRoutable
     }
 
     /**
-     * Filter and authorize the given values.
+     * Indicates whether Nova should check for modifications between viewing and updating a resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @param  array  $values
-     * @return \Illuminate\Support\Collection
+     * @param  \Illuminate\Http\Request  $request
+     * @return  bool
      */
-    protected function filterAndAuthorize(NovaRequest $request, $values)
+    public static function trafficCop(Request $request)
     {
-        return collect(
-            array_values($this->filter($values))
-        )->filter->authorize($request, $request->newResource())->values();
+        return static::$trafficCop;
     }
 
     /**
@@ -442,5 +465,26 @@ abstract class Resource implements ArrayAccess, JsonSerializable, UrlRoutable
     public static function redirectAfterUpdate(NovaRequest $request, $resource)
     {
         return '/resources/'.static::uriKey().'/'.$resource->getKey();
+    }
+
+    /**
+     * Return the location to redirect the user after deletion.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @return string
+     */
+    public static function redirectAfterDelete(NovaRequest $request)
+    {
+        return '/resources/'.static::uriKey();
+    }
+
+    /**
+     * Return a fresh resource instance.
+     *
+     * @return \Laravel\Nova\Resource
+     */
+    protected static function newResource()
+    {
+        return new static(static::newModel());
     }
 }

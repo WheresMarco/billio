@@ -24,7 +24,6 @@
               :value="selectedResource"
               :data="availableResources"
               trackBy="value"
-              searchBy="display"
               class="mb-3"
             >
               <div
@@ -83,7 +82,7 @@
               <checkbox-with-label
                 :dusk="field.resourceName + '-with-trashed-checkbox'"
                 :checked="withTrashed"
-                @change="toggleWithTrashed"
+                @input="toggleWithTrashed"
               >
                 {{ __('With Trashed') }}
               </checkbox-with-label>
@@ -107,7 +106,7 @@
 
       <!-- Attach Button -->
       <div class="flex items-center">
-        <cancel-button />
+        <cancel-button @click="$router.back()" />
 
         <progress-button
           class="mr-3"

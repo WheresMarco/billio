@@ -107,7 +107,7 @@ export default {
   }),
 
   watch: {
-    $route: function() {
+    $route: function () {
       this.closeSearch()
     },
   },
@@ -250,7 +250,7 @@ export default {
       )
 
       this.$router.push({
-        name: 'detail',
+        name: resource.linksTo,
         params: {
           resourceName: resource.resourceName,
           resourceId: resource.resourceId,

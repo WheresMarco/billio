@@ -61,6 +61,10 @@ export default {
         config.countries = this.field.countries
       }
 
+      if (this.field.language) {
+        config.language = this.field.language
+      }
+
       const placesAutocomplete = places(config)
 
       placesAutocomplete.on('change', e => {

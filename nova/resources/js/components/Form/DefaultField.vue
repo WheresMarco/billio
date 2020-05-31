@@ -55,7 +55,7 @@ export default {
         return ''
       }
 
-      return this.fieldName || this.field.singularLabel || this.field.name
+      return this.fieldName || this.field.name || this.field.singularLabel
     },
 
     /**

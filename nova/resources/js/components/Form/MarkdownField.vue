@@ -70,26 +70,34 @@
 
 <script>
 import _ from 'lodash'
-import marked from 'marked'
+const md = require('markdown-it')()
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/markdown/markdown'
 import { FormField, HandlesValidationErrors } from 'laravel-nova'
 
 const actions = {
   bold() {
+    if (!this.isEditable) return
+
     this.insertAround('**', '**')
   },
 
   italicize() {
+    if (!this.isEditable) return
+
     this.insertAround('*', '*')
   },
 
   image() {
-    this.insertBefore('![](http://)', 2)
+    if (!this.isEditable) return
+
+    this.insertBefore('![](url)', 2)
   },
 
   link() {
-    this.insertAround('[', '](http://)')
+    if (!this.isEditable) return
+
+    this.insertAround('[', '](url)')
   },
 
   toggleFullScreen() {
@@ -293,7 +301,11 @@ export default {
     },
 
     previewContent() {
-      return marked(this.rawContent)
+      return md.render(this.rawContent || '')
+    },
+
+    isEditable() {
+      return !this.isReadonly && this.mode == 'write'
     },
   },
 }

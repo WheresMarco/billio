@@ -29,6 +29,17 @@ Vue.component('index-text-field', require('./components/Index/TextField.vue'))
 Vue.component('detail-text-field', require('./components/Detail/TextField.vue'))
 Vue.component('form-text-field', require('./components/Form/TextField.vue'))
 
+// Hidden Field...
+Vue.component(
+  'index-hidden-field',
+  require('./components/Index/HiddenField.vue')
+)
+Vue.component(
+  'detail-hidden-field',
+  require('./components/Detail/HiddenField.vue')
+)
+Vue.component('form-hidden-field', require('./components/Form/HiddenField.vue'))
+
 // Password Field...
 Vue.component(
   'index-password-field',
@@ -61,6 +72,20 @@ Vue.component(
 Vue.component('index-code-field', require('./components/Index/TextField.vue'))
 Vue.component('detail-code-field', require('./components/Detail/CodeField.vue'))
 Vue.component('form-code-field', require('./components/Form/CodeField.vue'))
+
+// Currency Field...
+Vue.component(
+  'index-currency-field',
+  require('./components/Index/CurrencyField.vue')
+)
+Vue.component(
+  'detail-currency-field',
+  require('./components/Detail/CurrencyField.vue')
+)
+Vue.component(
+  'form-currency-field',
+  require('./components/Form/CurrencyField.vue')
+)
 
 // KeyValue Field...
 Vue.component(
@@ -121,10 +146,24 @@ Vue.component('form-select-field', require('@/components/Form/SelectField'))
 Vue.component('detail-select-field', require('@/components/Detail/TextField'))
 Vue.component('index-select-field', require('@/components/Index/TextField'))
 
-// Upload Field
+// File Field
 Vue.component('index-file-field', require('./components/Index/FileField.vue'))
 Vue.component('detail-file-field', require('./components/Detail/FileField.vue'))
 Vue.component('form-file-field', require('./components/Form/FileField.vue'))
+
+// Vapor File Field
+Vue.component(
+  'index-vapor-file-field',
+  require('./components/Index/FileField.vue')
+)
+Vue.component(
+  'detail-vapor-file-field',
+  require('./components/Detail/FileField.vue')
+)
+Vue.component(
+  'form-vapor-file-field',
+  require('./components/Form/FileField.vue')
+)
 
 // Status Field...
 Vue.component(

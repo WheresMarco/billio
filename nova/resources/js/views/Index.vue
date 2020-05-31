@@ -177,6 +177,10 @@
             :trashed="trashed"
             :per-page="perPage"
             :per-page-options="perPageOptions"
+            :show-trashed-option="
+              authorizedToForceDeleteAnyResources ||
+              authorizedToRestoreAnyResources
+            "
             @clear-selected-filters="clearSelectedFilters"
             @filter-changed="filterChanged"
             @trashed-changed="trashedChanged"
@@ -278,6 +282,7 @@
             :relationship-type="relationshipType"
             :update-selection-status="updateSelectionStatus"
             @order="orderByField"
+            @reset-order-by="resetOrderBy"
             @delete="deleteResources"
             @restore="restoreResources"
             @actionExecuted="getResources"
@@ -327,6 +332,7 @@ import {
   PerPageable,
   InteractsWithQueryString,
   InteractsWithResourceInformation,
+  mapProps,
 } from 'laravel-nova'
 
 export default {
@@ -344,23 +350,19 @@ export default {
     field: {
       type: Object,
     },
-    resourceName: {
-      type: String,
-      required: true,
-    },
-    viaResource: {
-      default: '',
-    },
-    viaResourceId: {
-      default: '',
-    },
-    viaRelationship: {
-      default: '',
-    },
+
+    ...mapProps([
+      'resourceName',
+      'viaResource',
+      'viaResourceId',
+      'viaRelationship',
+    ]),
+
     relationshipType: {
       type: String,
       default: '',
     },
+
     disablePagination: {
       type: Boolean,
       default: false,
@@ -695,6 +697,16 @@ export default {
     },
 
     /**
+     * Reset the order by to its default state
+     */
+    resetOrderBy(field) {
+      this.updateQueryString({
+        [this.orderByParameter]: field.sortableUriKey,
+        [this.orderByDirectionParameter]: null,
+      })
+    },
+
+    /**
      * Sync the current search value from the query string.
      */
     initializeSearchFromQueryString() {
@@ -946,7 +958,7 @@ export default {
      * Get the current order by direction from the query string.
      */
     currentOrderByDirection() {
-      return this.$route.query[this.orderByDirectionParameter] || 'desc'
+      return this.$route.query[this.orderByDirectionParameter] || null
     },
 
     /**
@@ -1093,7 +1105,7 @@ export default {
     },
 
     /**
-     * Determinw whether the delete menu should be shown to the user
+     * Determine whether the delete menu should be shown to the user
      */
     shouldShowDeleteMenu() {
       return (
