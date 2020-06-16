@@ -1,0 +1,55 @@
+.header {
+    background: rgba( 33, 42, 52, 1 );
+    color: #fff;
+    padding: 2rem 0;
+  }
+    .header .logo a {
+      text-decoration: none;
+    }
+
+    .header .logo svg {
+      width: 150px;
+      height: 63px;
+      position: relative;
+      top: -7px;
+    }
+
+    .header .logo text,
+    .header .logo path {
+      fill: #fff;
+    }
+
+    .header .faux-button {
+      position: relative;
+      top: 0.3rem;
+      float: right;
+    }
+
+
+  .main-nav {
+    float: right;
+    position: relative;
+    top: -20px;
+  }
+    .main-nav ul {
+      list-style: none;
+    }
+
+      .main-nav ul li {
+        float: left;
+      }
+
+        .main-nav ul li a {
+          display: block;
+          color: #fff;
+          padding: 3.5rem 1rem;
+        }
+
+        .main-nav ul li a:hover {
+          background-color: #ffffff80;
+          text-decoration: none;
+        }
+
+        .main-nav ul li:first-of-type {
+          margin-left: 0;
+        }

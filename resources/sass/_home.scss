@@ -1,0 +1,234 @@
+.frontpage-hero {
+    height: 600px;
+    background: rgba( 33, 42, 52, 1 );
+    color: #fff;
+    text-align: center;
+  }
+    .frontpage-hero-branding {
+      padding-top: 9rem;
+      width: 55%;
+      margin-left: 25%;
+    }
+
+    .frontpage-hero h1 {
+      font-size: 4.4rem;
+      line-height: 5rem;
+      margin-bottom: -1rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+    }
+
+    .frontpage-hero .logo a {
+      text-decoration: none;
+    }
+
+    .frontpage-hero-branding p {
+      margin-top: 4rem;
+      margin-bottom: 4rem;
+      /*max-width: 80%;*/
+      font-size: 2.0rem;
+      line-height: 1.5;
+    }
+
+    .frontpage-hero-branding .faux-button:first-of-type {
+      margin-right: 1rem;
+    }
+
+    .frontpage-hero h3 {
+      font-size: 2.4rem;
+      margin-top: 1rem;
+      background: -webkit-linear-gradient( 120deg, #EE4864, #F6854E );
+      background: linear-gradient( 120deg, #EE4864, #F6854E );
+        background-clip: border-box;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+    }
+
+  .slant {
+    background: rgba( 241, 242, 244, 1 );
+    overflow: hidden;
+    display: block;
+    position: absolute;
+    padding: 0 0 7% 0;
+    left: 0;
+    width: 100.2%;
+    -webkit-transform: translateY(-100%) rotateZ(3.5deg);
+    -webkit-transform-origin: 0% 0%;
+    z-index: 200;
+  }
+
+  .upcoming-events {
+    display: block;
+    background: rgba( 241, 242, 244, 1 );
+    padding-top: 3rem;
+    padding-bottom: 6rem;
+  }
+    .upcoming-events h3 {
+      font-size: 3.2rem;
+      margin: 0 0 4rem 0;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+  }
+
+  .app-promo {
+    margin-top: 12rem;
+    z-index: 300;
+    position: relative;
+  }
+    .app-promo-box {
+      width: 48%;
+      float: left;
+      margin-left: 2%;
+    }
+      .app-promo-box.image {
+        width: 50%;
+      }
+
+      .app-promo-box.image img {
+        max-width: 100%;
+        position: relative;
+        top: -15px;
+      }
+
+      .app-promo-box.image:first-of-type img {
+        left: -20px;
+      }
+
+      .app-promo-box.image:last-of-type img {
+        right: -20px;
+      }
+
+      .app-promo-box:first-of-type {
+        margin-left: 0;
+      }
+
+      .app-promo-box svg {
+        margin-bottom: 2rem;
+      }
+
+      .app-promo-box h3 {
+        font-size: 3.2rem;
+        margin: 0 0 1.5rem 0;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+      }
+
+      .app-promo-box p {
+        font-size: 2.0rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+      }
+
+      .app-promo-box p:last-of-type {
+        margin-bottom: 0;
+      }
+
+  .app-info {
+    margin-top: 6rem;
+    background: rgba( 241, 242, 244, 1 );
+    padding: 6rem;
+  }
+    .app-info:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    .app-info h2 {
+      font-size: 4rem;
+      margin-bottom: 12rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+    }
+
+    .app-info-box {
+      width: 30%;
+      float: left;
+      margin-left: 5%;
+    }
+      .app-info-box:first-of-type {
+        margin-left: 0;
+      }
+
+      .app-info-box svg {
+        margin-bottom: 2rem;
+      }
+
+      .app-info-box h3 {
+        font-size: 3.2rem;
+        margin: 0 0 1.5rem 0;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+      }
+
+      .app-info-box p {
+        font-size: 2.0rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+      }
+
+      .app-info-box p:last-of-type {
+        margin-bottom: 0;
+      }
+
+  @media only screen and (max-width: 600px) {
+    .frontpage-header {
+      height: 440px;
+    }
+    .frontpage-hero-branding {
+      width: 100%;
+      margin-top: -4rem;
+      margin-left: 0;
+    }
+
+    .frontpage-hero h1 {
+      font-size: 3.4rem;
+      line-height: 4rem;
+    }
+    .frontpage-header-branding p {
+      max-width: 100%;
+    }
+
+    .upcoming-events h3 {
+      margin: 0 0 2rem 0;
+    }
+
+    .app-promo-box {
+      width: 100%;
+      margin-bottom: 3rem;
+    }
+
+    .app-promo-box.image {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .app-promo-box.image:last-of-type img {
+      right: 0;
+    }
+
+    .app-promo-box.image:first-of-type img {
+      left: 0;
+    }
+
+    .app-promo {
+      margin-top: 6rem;
+    }
+
+    .app-info {
+      margin-top: 4rem;
+      margin-bottom: -8rem;
+    }
+    .app-info-box {
+      width: 100%;
+      margin-left: 0;
+      margin-bottom: 4rem;
+    }
+
+    .app-info {
+      padding: 1rem;
+      padding-top: 4rem;
+    }
+  }

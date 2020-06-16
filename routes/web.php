@@ -12,3 +12,7 @@
 */
 
 Route::stripeWebhooks('/webhook/stripe');
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');

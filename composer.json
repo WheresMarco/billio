@@ -23,6 +23,7 @@
         "laravel/passport": "^9.0",
         "laravel/scout": "^8.0",
         "laravel/tinker": "^2.0",
+        "laravel/ui": "^2.0",
         "maatwebsite/laravel-nova-excel": "^1.1",
         "personnummer/personnummer": "^3.0",
         "revolution/laravel-google-sheets": "^5.0",
