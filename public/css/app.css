@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Inter);/* $RESET */
+@import url(https://fonts.googleapis.com/css?family=Roboto);@import url(https://fonts.googleapis.com/css?family=Poppins);/* $RESET */
 
 html,
 body {
@@ -731,6 +731,99 @@ hr {
   .app-info {
     padding: 1rem;
     padding-top: 4rem;
+  }
+}
+
+.event-preview {
+  width: 100%;
+  margin-bottom: 3rem;
+  float: left;
+  background-color: #fff;
+  box-shadow: 0 0.5rem 2rem 0 rgba(0, 0, 0, 0.1);
+  border-radius: 0.8rem;
+  position: relative;
+}
+
+.event-preview:last-of-type {
+  margin-bottom: 0;
+}
+
+.event-preview-image {
+  height: 300px;
+  float: left;
+  width: 40%;
+  background-size: cover;
+  background-position: center;
+  border-bottom-left-radius: 0.8rem;
+  border-top-left-radius: 0.8rem;
+}
+
+.event-preview-content {
+  width: 100%;
+  padding: 40px;
+  float: left;
+}
+
+.event-preview-content h1 {
+  font-size: 3.2rem;
+  margin: 0 0 1.5rem 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+.event-preview-content h1 a {
+  text-decoration: none;
+  color: #d052a5;
+}
+
+.event-preview-content p {
+  width: 70%;
+  float: left;
+  padding-top: 15px;
+  font-size: 2rem;
+  line-height: 1.5;
+  color: #47525d;
+}
+
+.event-preview-meta {
+  width: 30%;
+  float: left;
+}
+
+.event-preview-meta-item {
+  width: 50%;
+  float: left;
+}
+
+.event-preview-meta-item h4 {
+  color: #b4b4b4;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.event-preview-meta-item span {
+  color: #b4b4b4;
+}
+
+@media only screen and (max-width: 600px) {
+  .event-preview {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .event-preview-image {
+    height: 150px;
+    width: 100%;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+  }
+
+  .event-preview-content {
+    padding: 2rem;
+    width: 100%;
   }
 }
 
