@@ -60,4 +60,9 @@ class EventController extends Controller
 
         return $return_array;
     }
+
+    public function single()
+    {
+        return view('event.single');
+    }
 }

@@ -22,7 +22,7 @@
             <section class="event-preview">
                 <div class="event-preview-content">
                     <div class="event-preview-meta">
-                        <h1><a href="#">Event name</a></h1>
+                        <h1><a href="/event">Event name</a></h1>
                         <div class="event-preview-meta-item">
                         <h4>Datum</h4>
                         <span>12/12 - 2020</span>
@@ -41,7 +41,7 @@
             <section class="event-preview">
                 <div class="event-preview-content">
                     <div class="event-preview-meta">
-                        <h1><a href="#">Event name</a></h1>
+                        <h1><a href="/event">Event name</a></h1>
                         <div class="event-preview-meta-item">
                         <h4>Datum</h4>
                         <span>12/12 - 2020</span>
@@ -60,7 +60,7 @@
             <section class="event-preview">
                 <div class="event-preview-content">
                     <div class="event-preview-meta">
-                        <h1><a href="#">Event name</a></h1>
+                        <h1><a href="/event">Event name</a></h1>
                         <div class="event-preview-meta-item">
                         <h4>Datum</h4>
                         <span>12/12 - 2020</span>
@@ -83,7 +83,7 @@
     <div class="wrapper">
         <section id="app-info" class="app-promo">
             <div class="app-promo-box">
-                LEAF
+                <img src="{{ URL::to('/img/icons/leaf.svg') }}" class="svg-icon">
                 <h3>Enkelt</h3>
                 <p>När du säljer biljetter med Billio får ni en egen sida för ditt evenemang. Med möjligheten att sälja olika biljettyper, biljettillägg, variationer så som kostalternativ, och mycket mer.</p>
 
@@ -91,7 +91,7 @@
             </div>
 
             <div class="app-promo-box image">
-                <img src="https://placehold.it/300x300" alt='' />
+                <img src="{{ URL::to('/img/eventpage.png') }}">
             </div>
         </section>
 
@@ -101,19 +101,19 @@
     <section id="app-info" class="app-info">
         <div class="wrapper">
             <div class="app-info-box">
-                SPARK ICON
+                <img src="{{ URL::to('/img/icons/spark.svg') }}" class="svg-icon">
                 <h3>Låga avgifter</h3>
                 <p>Med Billio betalar ni endast en låg avgift för varje biljett som säljs och inget mer. Det är allt - inga dolda kostnader! Och om era biljetter är gratis kostar inte tjänsten något att använda. Smidigt, eller hur?</p>
             </div>
 
             <div class="app-info-box">
-                LEAF ICON
+                <img src="{{ URL::to('/img/icons/leaf.svg') }}" class="svg-icon">
                 <h3>Flexibelt</h3>
                 <p>Vill ni sälja mer än biljetter? Med Billio kan ni sälja merchandise och andra tillägg för biljetten. Genom det kommer ni ha pengarna på ditt konto före evenemanget och reducera kontanthanteringen.</p>
             </div>
 
             <div class="app-info-box">
-                LifeBuoy ICON
+                <img src="{{ URL::to('/img/icons/lifebuoy.svg') }}" class="svg-icon">
                 <h3>Säkert</h3>
                 <p>All betalning hanteras av en säker tredjepart, och det garanterar att inga betaluppgifter någonsin sparas hos oss. Billio driftas även på en säker server som kontrolleras rutinmässigt efter säkerhetsluckor.</p>
             </div>
@@ -124,11 +124,11 @@
         <br style="clear: both;">
         <section id="app-info" class="app-promo">
             <div class="app-promo-box image">
-                <img src="https://placehold.it/300x300" alt='' />
+                <img src="{{ URL::to('/img/checkout.png') }}">
             </div>
 
             <div class="app-promo-box">
-                SPARK ICON
+                <img src="{{ URL::to('/img/icons/spark.svg') }}" class="svg-icon">
                 <h3>Smidigt</h3>
                 <p>Att köpa en biljett ska max ta några minuter. Med Billio är hela köpprocessen optimerad till att vara så snabb och smidig som möjligt för era gäster.</p>
 

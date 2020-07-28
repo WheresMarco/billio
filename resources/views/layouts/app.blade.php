@@ -13,7 +13,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" data-turbolinks-track="true">
 </head>
 <body>
     <header class="header">
@@ -44,7 +44,13 @@
                 <p><a href="mailto:hi@billio.app" class="faux-button white">Kontakta oss</a></p>
             </div>
 
-            <div class="footer-copy"><span><Link to="/privacy-policy">Integritetspolicy</Link> - <a href="https://wheresmar.co" target="_blank" rel="noopener noreferrer">Made with &hearts; in Linköping</a></span></div>
+            <div class="footer-copy">
+                <span>
+                    <a href="/privacy-policy">Integritetspolicy</a> -
+                    <a href="https://status.billio.app" target="_blank" rel="noopener noreferrer">System status</a> -
+                    <a href="https://wheresmar.co" target="_blank" rel="noopener noreferrer">Made with &hearts; in Linköping</a>
+                </span>
+            </div>
         </div>
     </section>
 </body>

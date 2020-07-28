@@ -5,10 +5,14 @@
 // Imports
 @import 'global';
 @import 'header';
-
-
-@import 'home';
-
-@import 'eventPreview';
-
 @import 'footer';
+
+// Pages
+@import 'home';
+@import 'event';
+@import 'purchase';
+@import 'confirmation';
+
+// Compontents
+@import 'eventPreview';
+@import 'ticketType';

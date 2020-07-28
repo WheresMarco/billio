@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +11,14 @@
 */
 
 Route::stripeWebhooks('/webhook/stripe');
-
 Auth::routes();
 
+// Home
 Route::get('/', 'HomeController@index')->name('home');
+
+// Single event
+Route::get('/event', 'EventController@single')->name('event');
+
+// Purchase
+Route::get('/event/fest', 'PurchaseController@single');
+Route::get('/event/fest/confirmation', 'PurchaseController@confirmation');
