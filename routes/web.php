@@ -22,3 +22,12 @@ Route::get('/event', 'EventController@single')->name('event');
 // Purchase
 Route::get('/event/fest', 'PurchaseController@single');
 Route::get('/event/fest/confirmation', 'PurchaseController@confirmation');
+
+
+Route::get('/terms', function() {
+    return view('terms');
+});
+
+Route::get('/privacy-policy', function() {
+    return view('privacy');
+});
