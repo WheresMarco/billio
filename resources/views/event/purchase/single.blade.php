@@ -9,18 +9,22 @@
             <form>
                 <h2>Kassa</h2>
 
-                <p>Du har valt en <strong>"TICKET TYPE"</strong>-biljett för <strong>EVENT NAME</strong>. Det kommer att kosta <strong>XXX SEK</strong>.</p>
+                <p>Du har valt en <strong>"{{$ticketType->name}}"</strong>-biljett för <strong>{{$event->name}}</strong>. Det kommer att kosta <strong>{{$ticketType->price}} SEK</strong>.</p>
 
-                <div class="modifiers">
-                    <ul>
-                        <li>
-                            <input class="faux-radio-checkbox faux-checkbox" id='ID' value='SLUG' data-delta='DELTA' type="checkbox" />
-                            <label for='ID' class="faux-radio-checkbox-label">
-                                NAME <span>-100 SEK</span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
+                @if (count($ticketType->modifiers) > 0)
+                    <div class="modifiers">
+                        <ul>
+                            @foreach ($ticketType->modifiers as $modifier)
+                                <li>
+                                    <input class="faux-radio-checkbox faux-checkbox" id='{{$modifier->slug}}' value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
+                                    <label for='{{$modifier->slug}}' class="faux-radio-checkbox-label">
+                                        {{$modifier->name}} <span>{{$modifier->delta}} SEK</span>
+                                    </label>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <hr />
 
@@ -30,17 +34,7 @@
 
                 <hr />
 
-                <div class="nin-enter">
-                    <p>Om du är medlem i LinTek, Consensus, eller Stuff kan du få kårrabatt. Mata in ditt personnummer nedan och tryck på verifiera för att få rabatten.</p>
-
-                    <input type="text" id="nin" placeholder="Valfritt" />
-                    <input type="button" id="nin-verify" class='added' value='Verifiera' />
-                    <span class="smallprint">Skriv in ditt personnummer i formatet ÅÅMMDD-XXXX.</span>
-
-                    <br style="clear: both;">
-
-                    <hr />
-                </div>
+                <livewire:check-student />
 
                 <p>Vi behöver även lite mer info innan vi kan skicka din biljett till dig.</p>
                 <input type="text" id="firstName" placeholder="Förnamn" />
@@ -48,7 +42,10 @@
 
                 <br style="clear: both;">
 
-                <p>CARD ELEMENT FROM STRIPE</p>
+                <div wire:ignore id="card-element"></div>
+
+                <!-- Used to display form errors. -->
+                <div id="card-errors" role="alert"></div>
 
                 <br style="clear: both;">
 
@@ -56,8 +53,8 @@
 
                 <br style="clear: both;">
 
-                <input id="submit" type="submit" class="pink" value='Köp biljett för XXX SEK' />
-                <span id="stripe-smallprint" class="smallprint">Köpet hanteras säkert genom <a href="https://stripe.com" target="_blank" rel="noopener noreferrer">Stripe</a> och dina<br /> kortuppgifter är aldrig tillgänliga för <a href="https://billio.app" target="_blank" rel="noopener noreferrer">Billio</a> eller <a href='' target="_blank" rel="noopener noreferrer">ORG NAME</a>.</span>
+                <input id="submit" type="submit" class="pink" value='Köp biljett för {{$ticketType->price}} SEK' />
+                <span id="stripe-smallprint" class="smallprint">Köpet hanteras säkert genom <a href="https://stripe.com" target="_blank" rel="noopener noreferrer">Stripe</a> och dina<br /> kortuppgifter är aldrig tillgänliga för <a href="https://billio.app" target="_blank" rel="noopener noreferrer">Billio</a> eller <a href='{{$event->organisation->url}}' target="_blank" rel="noopener noreferrer">{{$event->organisation->title}}</a>.</span>
 
                 <br style="clear: both;">
             </form>
@@ -65,3 +62,34 @@
     </div>
 </main>
 @endsection
+
+@push('scripts')
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+            const stripe = Stripe('{{env('STRIPE_PUBLIC_KEY')}}')
+            const elements = stripe.elements()
+            const cardElement = elements.create('card')
+
+            cardElement.mount('#card-element')
+
+            const cardHolderName = document.getElementById('card-holder-name')
+            const cardButton = document.getElementById('card-button')
+            const clientSecret = cardButton.dataset.secret
+
+            cardButton.addEventListener('click', async (e) => {
+                const {setupIntent, error} = await stripe.confirmCardSetup(clientSecret, {
+                    payment_method: {
+                        card: cardElement, billing_details: {name: cardHolderName.value},
+                    },
+                })
+
+                if (error) {
+                    let errorWrapper = document.getElementById('error-wrapper')
+                    errorWrapper.textContent = error.error
+                    console.info(error)
+                } else {
+                    //@this.set('paymentmethod', setupIntent.payment_method)
+                }
+            })
+    </script>
+@endpush

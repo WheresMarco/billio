@@ -21,6 +21,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" data-turbolinks-track="true">
+
+    <livewire:styles>
 </head>
 <body>
     <header class="header">

@@ -21,7 +21,7 @@
                         <div class="event-preview-image" style="background-image: url({{URL::asset($event->excerpt_image)}});"></div>
 
                         <div class="event-preview-content">
-                            <h1><a href="/{{$event->slug}}">{{$event->name}}</a></h1>
+                            <h1><a href="/event/{{$event->slug}}">{{$event->name}}</a></h1>
                             <p>{{$event->excerpt}}</p>
 
                             <div class="event-preview-meta">
@@ -44,7 +44,7 @@
                 @if ($event->upcoming() === false)
                     <section class="event-preview old">
                         <div class="event-preview-content">
-                            <h1><a href="/{{$event->slug}}">{{$event->name}}</a></h1>
+                            <h1><a href="/event/{{$event->slug}}">{{$event->name}}</a></h1>
 
                             <div class="event-preview-meta">
                                 <div class="event-preview-meta-item">

@@ -16,5 +16,8 @@
             </div>
         </div>
     </section>
+
+    <livewire:scripts>
+    @stack('scripts')
 </body>
 </html>

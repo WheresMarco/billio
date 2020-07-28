@@ -5,7 +5,7 @@
     <p>{{$ticketType->description}}</p>
 
     @if ( $ticketType->active && ! $ticketType->soldOut )
-        <a href="/{{$event->slug}}/{{$ticketType->slug}}" class="faux-button pink">Köp en "{{$ticketType->name}}"-biljett</a>
+        <a href="/event/{{$event->slug}}/{{$ticketType->slug}}" class="faux-button pink">Köp en "{{$ticketType->name}}"-biljett</a>
     @else
         <button class="faux-button pink disabled">Inte tillgänglig</button>
     @endif

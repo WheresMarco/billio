@@ -15,11 +15,11 @@
             <div class="event-content">
                 <h1>{{$event->name}}</h1>
 
-                <div class="description small">
-                    {{ Illuminate\Mail\Markdown::parse($event->description) }}
-                </div>
+                <div x-data="{ closed: true }">
+                    <div :class="{ 'description small': closed === true }">{{ Illuminate\Mail\Markdown::parse($event->description) }}</div>
 
-                <button class="description-read-more">Läs mer om evenemanget</button>
+                    <button @click="closed = false" x-show="closed" class="description-read-more">Läs mer om evenemanget</button>
+                </div>
             </div>
         </section>
     </div>

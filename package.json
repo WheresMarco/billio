@@ -25,6 +25,7 @@
         "sass-loader": "^7.1.0"
     },
     "dependencies": {
+        "alpinejs": "^2.5.0",
         "turbolinks": "^5.2.0"
     }
 }

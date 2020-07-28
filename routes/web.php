@@ -12,6 +12,7 @@
 
 Route::stripeWebhooks('/webhook/stripe');
 Auth::routes();
+Nova::routes();
 
 // Home
 Route::get('/', 'FrontpageController@index')->name('frontpage');
@@ -25,7 +26,9 @@ Route::get('/privacy-policy', function () {
     return view('privacy');
 });
 
-// Single event
-Route::get('/{eventSlug}', 'EventController@single')->name('event');
-Route::get('/{eventSlug}/{ticketType}', 'PurchaseController@single');
-Route::get('/{eventSlug}/{ticketType}/confirmation', 'PurchaseController@confirmation');
+// Event
+Route::prefix('event')->group(function () {
+    Route::get('{eventSlug}', 'EventController@single')->name('event');
+    Route::get('{eventSlug}/{ticketType}', 'PurchaseController@single');
+    Route::get('{eventSlug}/{ticketType}/confirmation', 'PurchaseController@confirmation');
+});
