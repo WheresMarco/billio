@@ -27,5 +27,5 @@ Route::get('/privacy-policy', function () {
 
 // Single event
 Route::get('/{eventSlug}', 'EventController@single')->name('event');
-// Route::get('/{eventSlug}/{ticketType}', 'PurchaseController@single');
-// Route::get('/{eventSlug}/{ticketType}/confirmation', 'PurchaseController@confirmation');
+Route::get('/{eventSlug}/{ticketType}', 'PurchaseController@single');
+Route::get('/{eventSlug}/{ticketType}/confirmation', 'PurchaseController@confirmation');

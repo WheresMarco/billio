@@ -663,7 +663,7 @@ hr {
 .upcoming-events {
   display: block;
   background: #f1f2f4;
-  padding-top: 5rem;
+  padding-top: 6rem;
   padding-bottom: 6rem;
 }
 
@@ -854,7 +854,7 @@ hr {
   width: 100%;
   background-size: cover;
   background-position: center;
-  margin-top: -21px;
+  margin-top: -20px;
 }
 
 .event-content {
@@ -1395,7 +1395,7 @@ hr {
   margin-left: 0;
 }
 
-.ticket-type svg {
+.ticket-type .svg-icon {
   margin-bottom: 2rem;
 }
 

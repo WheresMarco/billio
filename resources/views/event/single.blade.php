@@ -54,9 +54,9 @@
                     <p>{{$ticketType->description}}</p>
 
                     @if ( $ticketType->active && ! $ticketType->soldOut() )
-                        <a href="/{{$event->slug}}/{{$ticketType->slug}}" class="faux-button pink" data-turbolinks="false">Köp en "{{$ticketType->name}}"-biljett</a>
+                        <a href="/{{$event->slug}}/{{$ticketType->slug}}" class="faux-button pink">Köp en "{{$ticketType->name}}"-biljett</a>
                     @else
-                        <button class="faux-button pink disabled" data-turbolinks="false">Inte tillgänglig</button>
+                        <button class="faux-button pink disabled">Inte tillgänglig</button>
                     @endif
                 </div>
             @endforeach
