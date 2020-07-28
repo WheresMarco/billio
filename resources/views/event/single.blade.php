@@ -2,17 +2,16 @@
 
 @section('content')
 <main>
-    <div class="event-image" style="background-image: url(https://placehold.it/1000x1000);"></div>
+    <div class="event-image" style="background-image: url({{URL::asset($event->hero_image)}});"></div>
 
     <div class="wrapper">
         <section class="event">
             <div class="event-content">
-                <h1>Event name</h1>
+                <h1>{{$event->name}}</h1>
 
                 <div class="description small">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates nulla hic praesentium voluptatem quod ipsa, illo possimus obcaecati nihil eius voluptate dolorem ratione quaerat ut ipsam iusto nisi exercitationem veniam?</p>
+                    {{ Illuminate\Mail\Markdown::parse($event->description) }}
                 </div>
-
 
                 <button class="description-read-more">Läs mer om evenemanget</button>
             </div>
@@ -25,36 +24,42 @@
         <div class="wrapper">
             <div class="event-meta-item">
                 <h4>Datum</h4>
-                <span>12/12 - 2020</span>
+                <span>{{$event->event_dates[0]->date_from->format('d/m - Y')}}</span>
             </div>
 
             <div class="event-meta-item">
                 <h4>Plats</h4>
-                <span>Plats</span>
+                <span>{{$event->event_dates[0]->location}}</span>
             </div>
 
             <div class="event-meta-item">
                 <h4>Värd</h4>
-                <span>Värd</span>
+                <span>{{$event->organisation->title}}</span>
             </div>
 
             <div class="event-meta-item links">
-                <a href="#" class="faux-button">Kontakta värden</a>
-                <a href="" target="_blank" rel="noopener noreferrer" class="faux-button">Besök värdens webbplats</a>
+                <a href="mailto:{{$event->organisation->email}}" class="faux-button">Kontakta värden</a>
+                <a href="{{$event->organisation->url}}" target="_blank" rel="noopener noreferrer" class="faux-button">Besök värdens webbplats</a>
             </div>
         </div>
     </div>
 
     <div class="wrapper">
         <section class="tickets">
-            <div class="ticket-type">
-                <img src="{{ URL::to('/img/icons/ticket.svg') }}" class="svg-icon">
+            @foreach ($event->ticket_types as $ticketType)
+                <div class="ticket-type">
+                    <img src="{{ URL::to('/img/icons/ticket.svg') }}" class="svg-icon">
 
-                <h3>Ticket type name<br /><small>132 SEK</small></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus eum hic nulla nemo, facere modi alias culpa, inventore tenetur dolorem similique ut molestiae itaque, vel quasi soluta quos amet facilis.</p>
+                    <h3>{{$ticketType->name}}<br /><small>{{$ticketType->price}} SEK</small></h3>
+                    <p>{{$ticketType->description}}</p>
 
-                <a href="/event/fest" class="faux-button pink">Köp en ”ticket type”-biljett</a>
-            </div>
+                    @if ( $ticketType->active && ! $ticketType->soldOut() )
+                        <a href="/{{$event->slug}}/{{$ticketType->slug}}" class="faux-button pink" data-turbolinks="false">Köp en "{{$ticketType->name}}"-biljett</a>
+                    @else
+                        <button class="faux-button pink disabled" data-turbolinks="false">Inte tillgänglig</button>
+                    @endif
+                </div>
+            @endforeach
         </section>
 
         <br style="clear: both;">

@@ -12,69 +12,55 @@
     </div>
 </section>
 
-<div class="slant"></div>
-
 <main>
     <section id="upcoming-events" class="upcoming-events">
         <div class="wrapper">
-            <h3>Tidigare evenemang</h3>
+            @foreach ($events as $event)
+                @if ($event->upcoming())
+                    <section class="event-preview">
+                        <div class="event-preview-image" style="background-image: url({{URL::asset($event->excerpt_image)}});"></div>
 
-            <section class="event-preview">
-                <div class="event-preview-content">
-                    <div class="event-preview-meta">
-                        <h1><a href="/event">Event name</a></h1>
-                        <div class="event-preview-meta-item">
-                        <h4>Datum</h4>
-                        <span>12/12 - 2020</span>
+                        <div class="event-preview-content">
+                            <h1><a href="/{{$event->slug}}">{{$event->name}}</a></h1>
+                            <p>{{$event->excerpt}}</p>
+
+                            <div class="event-preview-meta">
+                                <div class="event-preview-meta-item">
+                                    <h4>Datum</h4>
+                                    <span>{{$event->event_dates[0]->date_from->format('d/m - Y')}}</span>
+                                </div>
+
+                                <div class="event-preview-meta-item">
+                                    <h4>Värd</h4>
+                                    <span>{{$event->organisation->title}}</span>
+                                </div>
+                            </div>
                         </div>
+                    </section>
+                @endif
+            @endforeach
 
-                        <div class="event-preview-meta-item">
-                        <h4>Värd</h4>
-                        <span>LiTHe Blås</span>
+            @foreach ($events as $event)
+                @if ($event->upcoming() === false)
+                    <section class="event-preview old">
+                        <div class="event-preview-content">
+                            <h1><a href="/{{$event->slug}}">{{$event->name}}</a></h1>
+
+                            <div class="event-preview-meta">
+                                <div class="event-preview-meta-item">
+                                    <h4>Datum</h4>
+                                    <span>{{$event->event_dates[0]->date_from}}</span>
+                                </div>
+
+                                <div class="event-preview-meta-item">
+                                    <h4>Värd</h4>
+                                    <span>{{$event->organisation->title}}</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <p>Årets fest</p>
-                </div>
-            </section>
-
-            <section class="event-preview">
-                <div class="event-preview-content">
-                    <div class="event-preview-meta">
-                        <h1><a href="/event">Event name</a></h1>
-                        <div class="event-preview-meta-item">
-                        <h4>Datum</h4>
-                        <span>12/12 - 2020</span>
-                        </div>
-
-                        <div class="event-preview-meta-item">
-                        <h4>Värd</h4>
-                        <span>LiTHe Blås</span>
-                        </div>
-                    </div>
-
-                    <p>Årets fest</p>
-                </div>
-            </section>
-
-            <section class="event-preview">
-                <div class="event-preview-content">
-                    <div class="event-preview-meta">
-                        <h1><a href="/event">Event name</a></h1>
-                        <div class="event-preview-meta-item">
-                        <h4>Datum</h4>
-                        <span>12/12 - 2020</span>
-                        </div>
-
-                        <div class="event-preview-meta-item">
-                        <h4>Värd</h4>
-                        <span>LiTHe Blås</span>
-                        </div>
-                    </div>
-
-                    <p>Årets fest</p>
-                </div>
-            </section>
+                    </section>
+                @endif
+            @endforeach
         </div>
 
         <br style="clear: both;">

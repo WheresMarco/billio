@@ -1,13 +1,12 @@
 .frontpage-hero {
-    height: 600px;
+    padding: 10rem 0 15rem;
     background: rgba( 33, 42, 52, 1 );
     color: #fff;
     text-align: center;
   }
     .frontpage-hero-branding {
-      padding-top: 9rem;
-      width: 55%;
-      margin-left: 25%;
+        width: 55%;
+        margin-left: 25%;
     }
 
     .frontpage-hero h1 {
@@ -46,23 +45,10 @@
       font-weight: 700;
     }
 
-  .slant {
-    background: rgba( 241, 242, 244, 1 );
-    overflow: hidden;
-    display: block;
-    position: absolute;
-    padding: 0 0 7% 0;
-    left: 0;
-    width: 100.2%;
-    -webkit-transform: translateY(-100%) rotateZ(3.5deg);
-    -webkit-transform-origin: 0% 0%;
-    z-index: 200;
-  }
-
   .upcoming-events {
     display: block;
     background: rgba( 241, 242, 244, 1 );
-    padding-top: 3rem;
+    padding-top: 6rem;
     padding-bottom: 6rem;
   }
     .upcoming-events h3 {

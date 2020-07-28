@@ -26,14 +26,7 @@ class TicketType extends Model
         return $this->hasMany('App\Modifier');
     }
 
-    public function getModifiersAttribute()
-    {
-        $modifiers = $this->modifiers()->get();
-
-        return $modifiers;
-    }
-
-    public function getSoldOutAttribute()
+    public function soldOut()
     {
         $tickets_sold = ( new TicketController() )->ticketsSold($this->event_id, $this->id);
 

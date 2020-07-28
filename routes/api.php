@@ -58,13 +58,3 @@ Route::get('/checkin/search', function (Request $request) {
 
     return $return_array;
 });
-
-// Login
-Route::post('login', 'UserController@login');
-
-// User
-Route::group(['user' => 'auth:api'], function()
-{
-   Route::get('users/me', 'UserController@details');
-   Route::get('users/tickets', 'UserController@tickets');
-});

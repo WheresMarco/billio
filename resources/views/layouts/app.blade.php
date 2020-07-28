@@ -20,6 +20,7 @@
         <div class="wrapper">
             <nav class="main-nav">
                 <ul>
+                    <li><a href="#">Resend ticket</a></li>
                     <li><a href="mailto:hi@billio.app">Kontakta oss</a></li>
                 </ul>
             </nav>

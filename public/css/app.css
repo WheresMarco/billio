@@ -444,6 +444,10 @@ hr {
   padding: 2rem 0;
 }
 
+.header .logo {
+  margin-bottom: -20px;
+}
+
 .header .logo a {
   text-decoration: none;
 }
@@ -610,14 +614,13 @@ hr {
 }
 
 .frontpage-hero {
-  height: 600px;
+  padding: 10rem 0 15rem;
   background: #212a34;
   color: #fff;
   text-align: center;
 }
 
 .frontpage-hero-branding {
-  padding-top: 9rem;
   width: 55%;
   margin-left: 25%;
 }
@@ -657,23 +660,10 @@ hr {
   font-weight: 700;
 }
 
-.slant {
-  background: #f1f2f4;
-  overflow: hidden;
-  display: block;
-  position: absolute;
-  padding: 0 0 7% 0;
-  left: 0;
-  width: 100.2%;
-  -webkit-transform: translateY(-100%) rotateZ(3.5deg);
-  -webkit-transform-origin: 0% 0%;
-  z-index: 200;
-}
-
 .upcoming-events {
   display: block;
   background: #f1f2f4;
-  padding-top: 3rem;
+  padding-top: 5rem;
   padding-bottom: 6rem;
 }
 
@@ -1298,7 +1288,7 @@ hr {
   margin-bottom: 0;
 }
 
-.event-preview-image {
+.event-preview .event-preview-image {
   height: 300px;
   float: left;
   width: 40%;
@@ -1308,52 +1298,70 @@ hr {
   border-top-left-radius: 0.8rem;
 }
 
-.event-preview-content {
-  width: 100%;
+.event-preview .event-preview-content {
+  width: 60%;
   padding: 40px;
   float: left;
 }
 
-.event-preview-content h1 {
+.event-preview .event-preview-content h1 {
   font-size: 3.2rem;
   margin: 0 0 1.5rem 0;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
 }
 
-.event-preview-content h1 a {
+.event-preview .event-preview-content h1 a {
   text-decoration: none;
   color: #d052a5;
 }
 
-.event-preview-content p {
-  width: 70%;
-  float: left;
-  padding-top: 15px;
+.event-preview .event-preview-content p {
   font-size: 2rem;
   line-height: 1.5;
   color: #47525d;
 }
 
-.event-preview-meta {
-  width: 30%;
-  float: left;
+.event-preview .event-preview-content .event-preview-meta {
+  margin-top: 2rem;
+  border-top: 3px solid #f3f3f6;
+  padding-top: 20px;
 }
 
-.event-preview-meta-item {
+.event-preview .event-preview-content .event-preview-meta-item {
   width: 50%;
   float: left;
 }
 
-.event-preview-meta-item h4 {
+.event-preview .event-preview-content .event-preview-meta-item h4 {
   color: #b4b4b4;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   margin-bottom: 5px;
 }
 
-.event-preview-meta-item span {
+.event-preview .event-preview-content .event-preview-meta-item span {
   color: #b4b4b4;
+}
+
+.event-preview.old .event-preview-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-preview.old .event-preview-content p {
+  width: 70%;
+  float: left;
+  padding-top: 15px;
+}
+
+.event-preview.old .event-preview-meta {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+  width: 30%;
+  float: left;
 }
 
 @media only screen and (max-width: 600px) {
