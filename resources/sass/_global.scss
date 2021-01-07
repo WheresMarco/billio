@@ -247,6 +247,27 @@ html, body {
     font-size: 1.3rem;
   }
 
+  .message-bar {
+    min-height: 40px;
+    text-align: center;
+    background-color: rgba( 74, 144, 226, 1 );
+  }
+    .message-bar.error {
+      background-color: rgba( 208, 82, 165, 1 );
+    }
+
+    .message-bar p {
+      line-height: 40px;
+      color: #fff;
+    }
+
+  @media only screen and (max-width: 600px) {
+    .message-bar p {
+      line-height: 30px;
+    }
+  }
+
+
   .turbolinks-progress-bar {
     background-color: rgba( 208, 82, 165, 1 );
   }

@@ -1,9 +1,12 @@
+@section('title', 'Terms and conditions | Billio')
+@section('og-title', 'Terms and conditions | Billio')
+
 @extends('layouts.app')
 
 @section('content')
 <main>
     <div class="wrapper">
-        <div class="terms">
+        <div class="page">
             <h2>Terms and conditions</h2>
             <p>Your tickets will be delivered electronically to your email and displayed on this website within a few seconds from your purchase.</p>
 

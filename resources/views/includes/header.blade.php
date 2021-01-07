@@ -18,6 +18,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/5c53f02145.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" data-turbolinks-track="true">
@@ -25,12 +26,17 @@
     <livewire:styles>
 </head>
 <body>
+    <div class="message-bar">
+        <p>Du har låst upp "Fest"-biljett för Luciafesten med koden "luciageneraler".</p>
+    </div>
+
     <header class="header">
         <div class="wrapper">
             <nav class="main-nav">
                 <ul>
                     <li><a href="#">{{ __('header.resend_ticket') }}</a></li>
                     <li><a href="mailto:hi@billio.app">{{ __('header.contact_us') }}</a></li>
+                    <li class="language-picker"><a href="#"><i class="fas fa-language"></i></a></li>
                 </ul>
             </nav>
 

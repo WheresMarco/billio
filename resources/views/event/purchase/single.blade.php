@@ -1,17 +1,23 @@
+@section('title', $ticketType->name . '-biljett - ' . $event->name . ' | Billio')
+@section('description', $event->excerpt)
+@section('og-title', $ticketType->name . '-biljett - ' . $event->name . ' | Billio')
+@section('og-content', $event->excerpt)
+@section('og-image', URL::asset($event->share_image))
+
 @extends('layouts.app')
 
 @section('content')
 <main>
     <div class="wrapper">
         <div class="purchase">
-            <div class="purchase-error">An error message.</div>
+            {{-- <div class="purchase-error">An error message.</div> --}}
 
             <form>
                 <h2>Kassa</h2>
 
                 <p>Du har valt en <strong>"{{$ticketType->name}}"</strong>-biljett för <strong>{{$event->name}}</strong>. Det kommer att kosta <strong>{{$ticketType->price}} SEK</strong>.</p>
 
-                @if (count($ticketType->modifiers) > 0)
+                @if (count($ticketType->modifiers) > 10)
                     <div class="modifiers">
                         <ul>
                             @foreach ($ticketType->modifiers as $modifier)
@@ -30,7 +36,7 @@
 
                 <p>Vänligen skriv in din e-postadress som du vill att <strong>biljetten skickas till</strong>.</p>
 
-                <input type="text" id="email" placeholder="Email" />
+                <input type="text" id="email" placeholder="E-postadress" />
 
                 <hr />
 
@@ -41,6 +47,19 @@
                 <input type="text" id="lastName" placeholder="Efternamn" />
 
                 <br style="clear: both;">
+                <input id="terms" type="checkbox" /> <label for="terms">Jag godkänner dom <a href="/terms" target="_blank">allmänna villkoren</a>.</label>
+
+                <br style="clear: both;">
+                <br style="clear: both;">
+
+                <p>
+                    <img src="{{ URL::to('/img/swish.png') }}" style="height: 40px;">
+                    <img src="https://developer.apple.com/design/human-interface-guidelines/apple-pay/images/ApplePay-Button_2x.png" style="height: 40px; margin-left: 10px;">
+                    <img src="{{ URL::to('/img/gpay.png') }}" style="height: 40px; margin-left: 10px;">
+                </p>
+
+                <div style="width: 100%; height: 3px; background: #f3f3f6; margin-top: 30px;"></div>
+                <p style="text-align: center;margin-top: -13px;margin-bottom: 20px;color: grey;"><span style="background: white; padding: 0 10px;">Eller betala med kort</span></p>
 
                 <div wire:ignore id="card-element"></div>
 
@@ -49,14 +68,12 @@
 
                 <br style="clear: both;">
 
-                <input id="terms" type="checkbox" /> <label htmlFor="terms">Jag godkänner dom <a href="/terms" target="_blank">allmänna villkoren</a>.</label>
+                <div style="opacity: 0.2;">
+                    <input id="submit" type="submit" class="pink" value='Köp biljett för {{$ticketType->price}} SEK' />
+                    <span id="stripe-smallprint" class="smallprint">Köpet hanteras säkert genom <a href="https://stripe.com" target="_blank" rel="noopener noreferrer">Stripe</a> och dina<br /> kortuppgifter är aldrig tillgängliga för <a href="https://billio.app" target="_blank" rel="noopener noreferrer">Billio</a> eller <a href='{{$event->organisation->url}}' target="_blank" rel="noopener noreferrer">{{$event->organisation->title}}</a>.</span>
 
-                <br style="clear: both;">
-
-                <input id="submit" type="submit" class="pink" value='Köp biljett för {{$ticketType->price}} SEK' />
-                <span id="stripe-smallprint" class="smallprint">Köpet hanteras säkert genom <a href="https://stripe.com" target="_blank" rel="noopener noreferrer">Stripe</a> och dina<br /> kortuppgifter är aldrig tillgänliga för <a href="https://billio.app" target="_blank" rel="noopener noreferrer">Billio</a> eller <a href='{{$event->organisation->url}}' target="_blank" rel="noopener noreferrer">{{$event->organisation->title}}</a>.</span>
-
-                <br style="clear: both;">
+                    <br style="clear: both;">
+                </div>
             </form>
         </div>
     </div>

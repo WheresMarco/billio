@@ -1,9 +1,12 @@
+@section('title', 'Privacy Policy | Billio')
+@section('og-title', 'Privacy Policy | Billio')
+
 @extends('layouts.app')
 
 @section('content')
 <main>
     <div class="wrapper">
-        <div class="privacy">
+        <div class="page">
             <h2>Privacy Policy</h2>
             <p>Last updated: 21 november 2018.</p>
 

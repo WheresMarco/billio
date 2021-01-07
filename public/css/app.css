@@ -354,6 +354,27 @@ input[type=submit].grey:hover {
   font-size: 1.3rem;
 }
 
+.message-bar {
+  min-height: 40px;
+  text-align: center;
+  background-color: #4a90e2;
+}
+
+.message-bar.error {
+  background-color: #d052a5;
+}
+
+.message-bar p {
+  line-height: 40px;
+  color: #fff;
+}
+
+@media only screen and (max-width: 600px) {
+  .message-bar p {
+    line-height: 30px;
+  }
+}
+
 .turbolinks-progress-bar {
   background-color: #d052a5;
 }
@@ -1217,59 +1238,35 @@ hr {
   text-align: center;
 }
 
-.terms {
+.page {
   width: 60%;
   margin: 4rem auto -5rem;
 }
 
-.terms h2 {
+.page h2 {
   font-size: 3.2rem;
   margin: 0 0 2rem 0;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
 }
 
-.terms h3 {
+.page h3 {
   font-size: 2.7rem;
   margin: 2rem 0 1.6rem 0;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
 }
 
-.terms p {
+.page p {
   margin-bottom: 1rem;
   line-height: 2.4rem;
 }
 
-.terms ul {
+.page ul {
   margin-left: 1.5rem;
 }
 
-.terms li {
-  margin-bottom: 1rem;
-  line-height: 2.4rem;
-}
-
-.privacy {
-  width: 60%;
-  margin: 4rem auto -5rem;
-}
-
-.privacy h2 {
-  font-size: 3.2rem;
-  margin: 0 0 2rem 0;
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-}
-
-.privacy h3 {
-  font-size: 2.7rem;
-  margin: 2rem 0 1.6rem 0;
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-}
-
-.privacy p {
+.page li {
   margin-bottom: 1rem;
   line-height: 2.4rem;
 }
