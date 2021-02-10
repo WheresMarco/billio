@@ -27,7 +27,7 @@
         "personnummer/personnummer": "^3.0",
         "revolution/laravel-google-sheets": "^5.0",
         "sentry/sentry-laravel": "^1.7",
-        "simplesoftwareio/simple-qrcode": "^2.0",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-stripe-webhooks": "^2.3"
     },
     "require-dev": {
