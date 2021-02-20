@@ -3,9 +3,10 @@
     <select
       ref="selectBox"
       v-if="actions.length > 1"
-      class="select-box-sm mr-2 h-6 text-xs appearance-none bg-40 pl-2 pr-6 active:outline-none active:shadow-outline focus:outline-none focus:shadow-outline"
-      style="max-width: 90px;"
+      class="rounded-sm select-box-sm mr-2 h-6 text-xs appearance-none bg-40 pl-2 pr-6 active:outline-none active:shadow-outline focus:outline-none focus:shadow-outline"
+      style="max-width: 90px"
       @change="handleSelectionChange"
+      dusk="inline-action-select"
     >
       <option disabled selected>{{ __('Actions') }}</option>
       <option
@@ -22,7 +23,10 @@
       v-for="action in actions"
       :key="action.uriKey"
       @click="executeSingleAction(action)"
-      class="btn btn-xs btn-primary mr-1"
+      class="btn btn-xs mr-1"
+      :class="action.class"
+      dusk="run-inline-action-button"
+      :data-testid="action.uriKey"
     >
       {{ action.name }}
     </button>
@@ -37,9 +41,17 @@
         :selected-resources="selectedResources"
         :resource-name="resourceName"
         :action="selectedAction"
+        :endpoint="actionsEndpoint"
         :errors="errors"
         @confirm="executeAction"
         @close="closeConfirmationModal"
+      />
+
+      <component
+        :is="actionResponseData.modal"
+        @close="closeActionResponseModal"
+        v-if="showActionResponseModal"
+        :data="actionResponseData"
       />
     </portal>
   </span>
@@ -55,6 +67,11 @@ export default {
     resource: {},
     actions: {},
   },
+
+  data: () => ({
+    showActionResponseModal: false,
+    actionResponseData: {},
+  }),
 
   methods: {
     handleSelectionChange(event) {

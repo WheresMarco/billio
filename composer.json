@@ -9,8 +9,8 @@
     "license": "MIT",
     "repositories": [
         {
-            "type": "composer",
-            "url": "https://nova.laravel.com"
+            "type": "path",
+            "url": "./nova"
         }
     ],
     "require": {
@@ -29,7 +29,8 @@
         "revolution/laravel-google-sheets": "^5.0",
         "sentry/sentry-laravel": "^1.7",
         "simplesoftwareio/simple-qrcode": "^2.0",
-        "spatie/laravel-stripe-webhooks": "^2.3"
+        "spatie/laravel-stripe-webhooks": "^2.3",
+        "laravel/nova": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
@@ -74,6 +75,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan nova:publish"
         ]
     }
 }

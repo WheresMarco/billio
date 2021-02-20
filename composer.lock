@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b71cea08e04156f897cc25278ce969f3",
+    "content-hash": "81c614d5a83aabba7cf96b309849caba",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -2053,16 +2053,10 @@
         {
             "name": "laravel/nova",
             "version": "3.22.0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:laravel/nova.git",
-                "reference": "41465f17785d04d946172f530bf01666e16dab0b"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-41465f17785d04d946172f530bf01666e16dab0b-zip-106723.zip",
-                "reference": "41465f17785d04d946172f530bf01666e16dab0b",
-                "shasum": "c521d11f45775d61b2b405b1cad8cd7aaabc9b4b"
+                "type": "path",
+                "url": "./nova",
+                "reference": "4ba9fb7ea196e0039e61cbea574e570a6b15535c"
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -2139,10 +2133,9 @@
                 "admin",
                 "laravel"
             ],
-            "support": {
-                "source": "https://github.com/laravel/nova/tree/v3.22.0"
-            },
-            "time": "2021-02-17T00:16:53+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "laravel/scout",
