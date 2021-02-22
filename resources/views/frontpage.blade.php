@@ -7,7 +7,7 @@
             <h1>Säg farväl till det jobbiga med att sälja biljetter</h1>
             <p>Vill ni sälja biljetter till ditt nästa evenemang? Med Billio får ni ett komplett system från försäljning till check-in. Med en kraftfull och snabb tjänst som kan hantera evenemang av alla storlekar.</p>
 
-            <a href="mailto:hi@billio.app" class="faux-button pink">Kontakta oss</a> <a href="/#app-info" class="faux-button orange">Läs mer</a>
+            <a href="mailto:hi@billio.app" class="faux-button pink">Kom igång</a> <a href="/#app-info" class="faux-button orange">Läs mer</a>
         </section>
     </div>
 </section>
@@ -15,6 +15,7 @@
 <main>
     <section id="upcoming-events" class="upcoming-events">
         <div class="wrapper">
+            <h3>Kommande evenemang</h3>
             @foreach ($events as $event)
                 @if ($event->upcoming())
                     <section class="event-preview">
@@ -70,7 +71,7 @@
         <section id="app-info" class="app-promo">
             <div class="app-promo-box">
                 <img src="{{ URL::to('/img/icons/leaf.svg') }}" class="svg-icon">
-                <h3>Enkelt</h3>
+                <h3>Billio är enkelt</h3>
                 <p>När du säljer biljetter med Billio får ni en egen sida för ditt evenemang. Med möjligheten att sälja olika biljettyper, biljettillägg, variationer så som kostalternativ, och mycket mer.</p>
 
                 <p>Med Billio får ni även möjligheten att skapa upp förköpslänkar som gör det möjligt att bjuda in personer att köpa biljetter före alla andra. Tillsammans med det här och flera andra funktioner gör det Billio till det moderna biljettsystemet.</p>
@@ -89,7 +90,7 @@
             <div class="app-info-box">
                 <img src="{{ URL::to('/img/icons/spark.svg') }}" class="svg-icon">
                 <h3>Låga avgifter</h3>
-                <p>Med Billio betalar ni endast en låg avgift för varje biljett som säljs och inget mer. Det är allt - inga dolda kostnader! Och om era biljetter är gratis kostar inte tjänsten något att använda. Smidigt, eller hur?</p>
+                <p>Med Billio betalar ni endast en låg avgift för varje biljett som säljs och inget mer. Inga dolda kostnader! Och om era biljetter är gratis kostar inte tjänsten något att använda. Smidigt, eller hur?</p>
             </div>
 
             <div class="app-info-box">
@@ -115,10 +116,12 @@
 
             <div class="app-promo-box">
                 <img src="{{ URL::to('/img/icons/spark.svg') }}" class="svg-icon">
-                <h3>Smidigt</h3>
+                <h3>Smidigt hela vägen</h3>
                 <p>Att köpa en biljett ska max ta några minuter. Med Billio är hela köpprocessen optimerad till att vara så snabb och smidig som möjligt för era gäster.</p>
 
                 <p>Sen när era gäster är på plats scannar dom en QR-kod för att komma in. Borta är tiden då det var långa köer för att komma in.</p>
+
+                <p style="margin-top: 20px;"><a href="mailto:hi@billio.app" class="faux-button pink">Kom igång med Billio</a></p>
             </div>
         </section>
 

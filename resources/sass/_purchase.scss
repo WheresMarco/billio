@@ -23,25 +23,21 @@
       line-height: 2.4rem;
     }
 
-    .modifiers {
-      background: rgba( 241, 242, 244, 1 );
-      margin-bottom: 20px;
-      margin-top: 20px;
-      border-radius: .8rem;
-    }
-
+    .modifiers {}
       .modifiers ul {
         list-style: none;
       }
 
       .modifiers ul li {
+        background: rgba( 241, 242, 244, 1 );
         font-size: 1.8rem;
         line-height: 3rem;
         min-height: 3rem;
-        font-family: 'Roboto', sans-serif;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
+        padding-top: 10px;
         padding-bottom: 10px;
         padding-left: 10px;
+        border-radius: .8rem;
       }
 
       .modifiers ul li:first-of-type {

@@ -5,7 +5,7 @@
     <div class="wrapper">
         <div class="confirmation">
             <div>
-                <div class="barloader">BARLOADER <h2>Din betalning hanteras</h2></div>
+                <div class="barloader"><h2>Din betalning hanteras</h2></div>
                 <p>Det här kan ta några minuter. Ladda inte om sidan. Om sidan inte har uppdaterats på 5 minuter var god och kontakta oss på <a href='#'>ORG EMAIL</a>.</p>
             </div>
 

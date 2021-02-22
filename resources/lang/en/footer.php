@@ -6,5 +6,5 @@ return [
     'contact_us' => 'Contact us',
     'privacy_policy' => 'Privacy Policy',
     'site_status' => 'Site status',
-    'made_in' => 'Made with &hearts; in Linköping'
+    'made_in' => 'Made with ♥️ in Linköping'
 ];

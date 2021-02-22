@@ -14,17 +14,6 @@ use App\Ticket;
 |
 */
 
-// Organisations
-Route::get('/organisations', 'OrganisationController@organisations');
-
-// Events
-Route::get('/events', 'EventController@events');
-Route::get('/events/{slug}', 'EventController@event');
-
-// Tickets
-Route::get('/tickets/{id}', 'TicketController@ticket'); // Get ticket by uuid
-Route::post('/tickets', 'TicketController@create');
-
 // Checkstudent
 Route::post('/checkstudent', 'CheckStudentController@check');
 
