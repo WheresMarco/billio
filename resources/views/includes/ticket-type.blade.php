@@ -4,8 +4,11 @@
     <h3>{{$ticketType->name}}<br /><small>{{$ticketType->price}} SEK</small></h3>
     <p>{{$ticketType->description}}</p>
 
+    <label style="font-weight: bold;">Antal biljetter:</label><br style="clear: both;">
+    <input type="number" placeholder="2" style="width: 120px; height: 43px; margin-right: 10px; float:left;">
+
     @if ( $ticketType->active && ! $ticketType->soldOut )
-        <a href="/event/{{$event->slug}}/{{$ticketType->slug}}" class="faux-button pink">Köp en "{{$ticketType->name}}"-biljett</a>
+        <a href="/event/{{$event->slug}}/{{$ticketType->slug}}" class="faux-button pink">Köp två "{{$ticketType->name}}"-biljetter</a>
     @else
         <button class="faux-button pink disabled">Inte tillgänglig</button>
     @endif

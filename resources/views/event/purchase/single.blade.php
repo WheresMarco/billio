@@ -15,7 +15,7 @@
             <form>
                 <h2>Kassa</h2>
 
-                <p>Du har valt en <strong>"{{$ticketType->name}}"</strong>-biljett för <strong>{{$event->name}}</strong>. Det kommer att kosta <strong>{{$ticketType->price}} SEK</strong>.</p>
+                <p>Du har valt två (2) <strong>"{{$ticketType->name}}"</strong>-biljetter för <strong>{{$event->name}}</strong>. Det kommer att kosta <strong>{{$ticketType->price}} SEK</strong>. Dom är nu reserverade i 10 minuter för att du ska hinna att betala dom.</p>
 
                 @if (count($ticketType->modifiers) < 10) <!-- What? -->
                     <div class="modifiers">
@@ -35,6 +35,14 @@
                 <hr />
 
                 <p>Vänligen skriv personuppgifterna för personen som ska använda biljetten. Biljetten kommer att sedan <strong>skickas till den e-postadress som du fyller i</strong>.</p>
+
+                <input type="text" id="firstName" placeholder="Förnamn" />
+                <input type="text" id="lastName" placeholder="Efternamn" />
+                <input type="text" id="email" placeholder="E-postadress" />
+
+                <hr />
+
+                <p>Biljett nummer två:</p>
 
                 <input type="text" id="firstName" placeholder="Förnamn" />
                 <input type="text" id="lastName" placeholder="Efternamn" />
@@ -110,7 +118,7 @@
                     errorWrapper.textContent = error.error
                     console.info(error)
                 } else {
-                    //@this.set('paymentmethod', setupIntent.payment_method)
+
                 }
             })
     </script>
