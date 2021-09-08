@@ -30,7 +30,7 @@
         <div class="wrapper">
             <div class="event-meta-item">
                 <h4>Datum</h4>
-                <span>{{$event->event_dates[0]->date_from->format('d/m - Y')}}</span>
+                <span>{{$event->event_dates[0]->date_from->format('d/m - Y')}} till {{$event->event_dates[0]->date_to->format('d/m - Y')}}</span>
             </div>
 
             <div class="event-meta-item">

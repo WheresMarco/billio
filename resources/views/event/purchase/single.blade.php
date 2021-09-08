@@ -34,18 +34,12 @@
 
                 <hr />
 
-                <p>Vänligen skriv personuppgifterna för personen som ska använda biljetten. Biljetten kommer att sedan <strong>skickas till den e-postadress som du fyller i</strong>.</p>
+                <p>Vänligen skriv uppgifterna för personerna som ska använda biljetterna. Biljetterna kommer att sedan <strong>skickas till den e-postadresserna som du fyller i</strong>.</p>
 
-                <input type="text" id="firstName" placeholder="Förnamn" />
-                <input type="text" id="lastName" placeholder="Efternamn" />
+                <p>Biljett nummer ett:</p>
                 <input type="text" id="email" placeholder="E-postadress" />
 
-                <hr />
-
                 <p>Biljett nummer två:</p>
-
-                <input type="text" id="firstName" placeholder="Förnamn" />
-                <input type="text" id="lastName" placeholder="Efternamn" />
                 <input type="text" id="email" placeholder="E-postadress" />
 
                 <hr />
