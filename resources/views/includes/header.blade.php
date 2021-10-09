@@ -26,9 +26,9 @@
     <livewire:styles>
 </head>
 <body>
-    {{-- <div class="message-bar">
+    <div class="message-bar">
         <p>Du har låst upp "Fest"-biljett för Luciafesten med koden "luciageneraler".</p>
-    </div> --}}
+    </div>
 
     <header class="header">
         <div class="wrapper">
@@ -36,8 +36,8 @@
                 <ul>
                     <li><a href="#">Support</a></li>
                     <li><a href="#">Om oss</a></li>
-                    {{-- <li><a href="#">{{ __('header.resend_ticket') }}</a></li> --}}
-                    {{-- <li><a href="mailto:hi@billio.app">{{ __('header.contact_us') }}</a></li> --}}
+                    <li><a href="#">{{ __('header.resend_ticket') }}</a></li>
+                    <li><a href="mailto:hi@billio.app">{{ __('header.contact_us') }}</a></li>
                     <li class="language-picker"><a href="#"><i class="fas fa-language"></i></a></li>
                 </ul>
             </nav>

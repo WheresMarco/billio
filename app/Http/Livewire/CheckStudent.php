@@ -13,7 +13,7 @@ class CheckStudent extends Component
     public function checkStudent()
     {
         // Check if student is member.
-        $valid = (new CheckStudentController)->isStudentMember($this->nin);
+        $valid = (new CheckStudentController())->isStudentMember($this->nin);
 
         $this->valid = $valid;
     }

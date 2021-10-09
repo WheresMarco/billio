@@ -44,7 +44,7 @@
 
                 <hr />
 
-                <livewire:check-student />
+                {{-- <livewire:check-student /> --}}
 
                 <p>Du kan betala din biljett antingen med Swish eller med ett kontokort (Visa, Mastercard).</p>
 
@@ -53,17 +53,22 @@
                     <button class="blue" style="width: 48%; margin-left: 3%; background: rgba( 74, 144, 226, 1 ); color: #fff;">Kreditkort</button>
                 </p>
 
-                {{-- <hr>
+                <hr>
 
                 <label>Telefonnummer som du vill Swisha ifrån:</label>
                 <input type="text" id="phoneNumber" placeholder="070 123 456 789" />
 
+                <br style="clear: both;">
+                <input id="terms" type="checkbox" /> <label for="terms">Jag godkänner de <a href="/terms" target="_blank">allmänna villkoren</a>.</label>
+
                 <div>
                     <input id="submit" type="submit" class="pink" value='Köp biljett för {{$ticketType->price}} SEK' />
-                    <span id="stripe-smallprint" class="smallprint">Köpet hanteras säkert genom <a href="https://stripe.com" target="_blank" rel="noopener noreferrer">Swish</a> och dina betaluppgifter<br> är aldrig tillgängliga för <a href="https://billio.app" target="_blank" rel="noopener noreferrer">Billio</a> eller <a href='{{$event->organisation->url}}' target="_blank" rel="noopener noreferrer">{{$event->organisation->title}}</a>.</span>
+                    <span id="stripe-smallprint" class="smallprint">Köpet hanteras säkert genom <a href="https://swish.se" target="_blank" rel="noopener noreferrer">Swish</a> och dina betaluppgifter<br> är aldrig tillgängliga för <a href="https://billio.app" target="_blank" rel="noopener noreferrer">Billio</a> eller <a href='{{$event->organisation->url}}' target="_blank" rel="noopener noreferrer">{{$event->organisation->title}}</a>.</span>
 
                     <br style="clear: both;">
-                </div> --}}
+                </div>
+
+                <hr>
 
                 <br style="clear: both;">
 
