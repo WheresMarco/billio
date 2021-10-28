@@ -27,4 +27,22 @@ class PurchaseController extends Controller
     {
         return view('event.purchase.confirmation');
     }
+
+    public function createPaymentIntent()
+    {
+        // Create a PaymentIntent with amount and currency
+        $paymentIntent = \Stripe::paymentIntents()->create([
+            'amount' => 1000,
+            'currency' => 'sek',
+            'payment_method_types' => [
+                'card'
+            ],
+        ]);
+
+        $output = [
+            'clientSecret' => $paymentIntent['client_secret'],
+        ];
+
+        return $output;
+    }
 }

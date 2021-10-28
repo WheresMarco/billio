@@ -30,5 +30,6 @@ Route::get('/privacy-policy', function () {
 Route::prefix('event')->group(function () {
     Route::get('{eventSlug}', 'EventController@single')->name('event');
     Route::get('{eventSlug}/{ticketType}', 'PurchaseController@single');
+    Route::post('{eventSlug}/{ticketType}', 'PurchaseController@createPaymentIntent');
     Route::get('{eventSlug}/{ticketType}/confirmation', 'PurchaseController@confirmation');
 });
