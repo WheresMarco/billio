@@ -15,7 +15,6 @@
 <main>
     <section id="upcoming-events" class="upcoming-events">
         <div class="wrapper">
-            <h3>Kommande evenemang</h3>
             @foreach ($events as $event)
                 @if ($event->upcoming())
                     <section class="event-preview">
@@ -50,7 +49,7 @@
                             <div class="event-preview-meta">
                                 <div class="event-preview-meta-item">
                                     <h4>Datum</h4>
-                                    <span>{{$event->event_dates[0]->date_from}}</span>
+                                    <span>{{$event->event_dates[0]->date_from->format('d/m - Y')}}</span>
                                 </div>
 
                                 <div class="event-preview-meta-item">

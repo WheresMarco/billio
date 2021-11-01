@@ -237,6 +237,13 @@ html, body {
     color: #fff;
   }
 
+  h4 {
+    color: #b4b4b4;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    margin-bottom: .5rem;
+  }
+
   .wrapper {
     max-width: 1100px;
     margin: 0 auto;
@@ -315,8 +322,8 @@ html, body {
       position: absolute;
       left: .45rem;
       top: calc( 50% - .9rem );
-      -webkit-transform: scale( 0 );
-      transform: scale( 0 );
+      -webkit-transform: scale( .9 );
+      transform: scale( .9 );
       width: 1.8rem;
     }
 

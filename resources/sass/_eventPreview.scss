@@ -68,6 +68,12 @@
     }
 
     &.old {
+        opacity: 0.7;
+
+        &:hover {
+            opacity: 1;
+        }
+
         .event-preview-content {
             width: 100%;
             display: flex;
@@ -78,6 +84,10 @@
             width: 70%;
             float: left;
             padding-top: 15px;
+        }
+
+        .event-preview-content h1 {
+            margin-bottom: 0;
         }
 
         .event-preview-meta {
