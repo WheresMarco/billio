@@ -12,14 +12,12 @@
         <div class="purchase">
             <form id="payment-form" action="/event/luciafesten/party/payment">
                 @csrf
-                <h4>Steg 2 av 3</h4>
+                <h4>Steg 1 av 2</h4>
                 <h2>Ange biljettuppgifter</h2>
 
-                <p>Du har valt tre <strong>"{{$ticketType->name}}"</strong>-biljetter för <strong>{{$event->name}}</strong>. Vänligen skriv in uppgifterna för vardera biljett. <strong><a href="#">Ändra biljetttyp eller antal</a></strong>.</p>
+                <p>Du har valt tre <strong>"{{$ticketType->name}}"</strong>-biljetter för <strong>{{$event->name}}</strong>. <strong>Vi har reserverat dom i XX minuter och XX sekunder till</strong>. Vänligen skriv in uppgifterna för vardera biljett. <strong><a href="#">Ändra biljetttyp eller antal</a></strong>.</p>
 
                 <br style="clear: both;">
-
-                {{-- <img src="{{ URL::to('/img/temppicker.png') }}" style="max-width: 100%;"> --}}
 
                 <div class="ticket" style="padding: 20px; box-shadow: 0 .5rem 2rem 0 rgba(0,0,0,.1);">
                     <h3>Biljett #1</h3>

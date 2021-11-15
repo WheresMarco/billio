@@ -44,7 +44,6 @@
             <div class="footer-copy">
                 <span>
                     <a href="/privacy-policy">{{ __('footer.privacy_policy') }}</a> -
-                    <a href="https://status.billio.app" target="_blank" rel="noopener noreferrer">{{ __('footer.site_status') }}</a> -
                     <a href="https://wheresmar.co" target="_blank" rel="noopener noreferrer">{{ __('footer.made_in') }}</a>
                 </span>
             </div>

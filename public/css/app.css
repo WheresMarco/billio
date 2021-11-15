@@ -1100,6 +1100,11 @@ hr {
   float: right;
 }
 
+.purchase .StripeElement {
+  border: none !important;
+  padding: 0 !important;
+}
+
 .purchase #stripe-smallprint {
   float: left;
   position: relative;

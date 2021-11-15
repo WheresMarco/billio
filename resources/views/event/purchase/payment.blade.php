@@ -14,16 +14,21 @@
 
             <form id="payment-form">
                 @csrf
-                <h4>Steg 3 av 3</h4>
+                <h4>Steg 2 av 2</h4>
                 <h2>Betalning</h2>
 
                 <p>Du har valt två (2) <strong>"TYP"</strong>-biljett för <strong>EVENT</strong> den <strong>11 december 2021</strong>. Det kommer att totalt kosta <strong>XXX SEK</strong>. <a href="#">Ändra någonting</a>.</p>
 
                 <hr>
 
-                <p>Vänligen ange dina betaluppgifter.</p>
-                <input type="text" id="firstName" placeholder="Förnamn" />
-                <input type="text" id="lastName" placeholder="Efternamn" />
+                <label for="firstName">Förnamn</label>
+                <input type="text" id="firstName" placeholder="Kalle" />
+
+                <label for="lastName">Efternamn</label>
+                <input type="text" id="lastName" placeholder="Kula" />
+
+                <label for="email">E-postadress för kvittot</label>
+                <input type="text" id="email" placeholder="kalle@kula.se"/>
 
                 <br style="clear: both;">
 
@@ -88,7 +93,14 @@
             const { error } = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
-                return_url: window.location.href,
+                    return_url: window.location.href + '/confirmation',
+                    receipt_email: document.getElementById("email").value,
+                    payment_method_data: {
+                        billing_details: {
+                            name: document.getElementById("firstName").value + " " + document.getElementById("lastName").value,
+                            email: document.getElementById("email").value,
+                        }
+                    },
                 },
             });
 
