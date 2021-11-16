@@ -18,7 +18,12 @@
           'form-select': shouldShowDropdownArrow,
           disabled,
         }"
-        class="flex items-center form-control form-input form-input-bordered pr-6"
+        class="
+          flex
+          items-center
+          form-control form-input form-input-bordered
+          pr-6
+        "
         :tabindex="show ? -1 : 0"
       >
         <div
@@ -37,7 +42,7 @@
         v-if="!shouldShowDropdownArrow && !disabled"
         tabindex="-1"
         class="absolute p-2 inline-block"
-        style="right: 4px; top: 6px;"
+        style="right: 4px; top: 6px"
       >
         <svg
           class="block fill-current icon h-2 w-2"
@@ -54,7 +59,15 @@
     <div
       v-if="show"
       ref="dropdown"
-      class="form-input px-0 border border-60 absolute pin-t pin-l my-1 overflow-hidden"
+      class="
+        form-input
+        px-0
+        border border-60
+        absolute
+        pin-t pin-l
+        my-1
+        overflow-hidden
+      "
       :style="{ width: inputWidth + 'px', zIndex: 2000 }"
     >
       <div class="p-2 bg-grey-300">
@@ -66,7 +79,17 @@
           @keydown.enter.prevent="chooseSelected"
           @keydown.down.prevent="move(1)"
           @keydown.up.prevent="move(-1)"
-          class="outline-none search-input-input w-full px-2 py-1.5 text-sm leading-normal bg-white rounded"
+          class="
+            outline-none
+            search-input-input
+            w-full
+            px-2
+            py-1.5
+            text-sm
+            leading-normal
+            bg-white
+            rounded
+          "
           tabindex="-1"
           type="text"
           :placeholder="__('Search')"
@@ -76,9 +99,15 @@
 
       <div
         ref="container"
-        class="search-input-options relative overflow-y-scroll scrolling-touch text-sm"
+        class="
+          search-input-options
+          relative
+          overflow-y-scroll
+          scrolling-touch
+          text-sm
+        "
         tabindex="-1"
-        style="max-height: 155px;"
+        style="max-height: 155px"
       >
         <div
           v-for="(option, index) in data"
@@ -135,6 +164,7 @@ export default {
   },
 
   data: () => ({
+    debouncer: null,
     show: false,
     search: '',
     selected: 0,
@@ -180,15 +210,27 @@ export default {
       }
     },
   },
+
+  created() {
+    this.debouncer = _.debounce(callback => callback(), this.debounce)
+  },
+
   mounted() {
-    document.addEventListener('keydown', e => {
-      if (this.show && (e.keyCode == 9 || e.keyCode == 27)) {
-        setTimeout(() => this.close(), 50)
-      }
-    })
+    document.addEventListener('keydown', this.handleEscape)
+  },
+
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.handleEscape)
   },
 
   methods: {
+    handleEscape(e) {
+      // 'tab' or 'escape'
+      if (this.show && (e.keyCode == 9 || e.keyCode == 27)) {
+        setTimeout(() => this.close(), 50)
+      }
+    },
+
     getTrackedByKey(option) {
       return _.get(option, this.trackBy)
     },
@@ -270,11 +312,6 @@ export default {
         this.$emit('input', e.target.value)
       })
     },
-
-    /**
-     * Debounce function for the input handler
-     */
-    debouncer: _.debounce(callback => callback(), 500),
   },
 
   computed: {

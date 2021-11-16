@@ -1,0 +1,63 @@
+@section('title', $event->name . ' | Billio')
+@section('description', $event->excerpt)
+@section('og-title', $event->name . ' | Billio')
+@section('og-content', $event->excerpt)
+@section('og-image', URL::asset($event->share_image))
+
+@extends('layouts.app')
+
+@section('content')
+<main>
+    <div class="event-image" style="background-image: url({{URL::asset($event->hero_image)}});"></div>
+
+    <div class="wrapper">
+        <section class="event">
+            <div class="event-content">
+                <h1>{{$event->name}}</h1>
+
+                <div x-data="{ closed: true }">
+                    <div :class="{ 'description small': closed === true }">{{ Illuminate\Mail\Markdown::parse($event->description) }}</div>
+
+                    <button @click="closed = false" x-show="closed" class="description-read-more">Läs mer om evenemanget</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <br style="clear: both;">
+
+    <div class="event-meta">
+        <div class="wrapper">
+            <div class="event-meta-item">
+                <h4>Datum</h4>
+                <span>{{$event->event_dates[0]->date_from->format('d/m - Y')}} till {{$event->event_dates[0]->date_to->format('d/m - Y')}}</span>
+            </div>
+
+            <div class="event-meta-item">
+                <h4>Plats</h4>
+                <span>{{$event->event_dates[0]->location}}</span>
+            </div>
+
+            <div class="event-meta-item">
+                <h4>Värd</h4>
+                <span>{{$event->organisation->title}}</span>
+            </div>
+
+            <div class="event-meta-item links">
+                <a href="mailto:{{$event->organisation->email}}" class="faux-button">Kontakta värden</a>
+                <a href="{{$event->organisation->url}}" target="_blank" rel="noopener noreferrer" class="faux-button">Besök värdens webbplats</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <section class="tickets">
+            @foreach ($event->ticket_types as $ticketType)
+                @include('includes.ticket-type', $ticketType)
+            @endforeach
+        </section>
+
+        <br style="clear: both;">
+    </div>
+</main>
+@endsection

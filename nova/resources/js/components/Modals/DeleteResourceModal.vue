@@ -4,7 +4,7 @@
       @submit.prevent="handleConfirm"
       slot-scope="props"
       class="bg-white rounded-lg shadow-lg overflow-hidden"
-      style="width: 460px;"
+      style="width: 460px"
     >
       <slot :uppercaseMode="uppercaseMode" :mode="mode">
         <div class="p-8">
@@ -33,15 +33,17 @@
             {{ __('Cancel') }}
           </button>
 
-          <button
+          <loading-button
             id="confirm-delete-button"
             ref="confirmButton"
             data-testid="confirm-button"
+            :processing="working"
+            :disabled="working"
             type="submit"
             class="btn btn-default btn-danger"
           >
             {{ __(uppercaseMode) }}
-          </button>
+          </loading-button>
         </div>
       </div>
     </form>
@@ -60,13 +62,19 @@ export default {
     },
   },
 
+  data: () => ({
+    working: false,
+  }),
+
   methods: {
     handleClose() {
       this.$emit('close')
+      this.working = false
     },
 
     handleConfirm() {
       this.$emit('confirm')
+      this.working = true
     },
   },
 

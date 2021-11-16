@@ -85,7 +85,7 @@ abstract class Metric extends Card
     /**
      * Determine for how many minutes the metric should be cached.
      *
-     * @return  \DateTimeInterface|\DateInterval|float|int
+     * @return \DateTimeInterface|\DateInterval|float|int
      */
     public function cacheFor()
     {
@@ -129,5 +129,20 @@ abstract class Metric extends Card
             'helpText' => $this->getHelpText(),
             'refreshWhenActionRuns' => $this->refreshWhenActionRuns,
         ]);
+    }
+
+    /**
+     * Convert datetime to application timezone.
+     *
+     * @param  \Cake\Chronos\ChronosInterface|\Carbon\CarbonInterface  $datetime
+     * @return \Cake\Chronos\ChronosInterface|\Carbon\CarbonInterface
+     */
+    protected function asQueryDatetime($datetime)
+    {
+        if (! $datetime instanceof \DateTimeImmutable) {
+            return $datetime->copy()->timezone(config('app.timezone'));
+        }
+
+        return $datetime->timezone(config('app.timezone'));
     }
 }

@@ -3,7 +3,7 @@
     :field="field"
     :errors="errors"
     :full-width-content="true"
-    :show-help-text="!isReadonly"
+    :show-help-text="!isReadonly && showHelpText"
   >
     <template slot="field">
       <div v-if="hasValue" :class="{ 'mb-6': !isReadonly }">
@@ -18,7 +18,14 @@
 
         <template v-if="field.value && !imageUrl">
           <card
-            class="flex item-center relative border border-lg border-50 overflow-hidden p-4"
+            class="
+              flex
+              item-center
+              relative
+              border border-lg border-50
+              overflow-hidden
+              p-4
+            "
           >
             <span class="truncate mr-3"> {{ field.value }} </span>
 
@@ -130,16 +137,27 @@ export default {
 
   mounted() {
     this.field.fill = formData => {
+      let attribute = this.field.attribute
+
       if (this.file && !this.isVaporField) {
-        formData.append(this.field.attribute, this.file, this.fileName)
+        formData.append(attribute, this.file, this.fileName)
       }
 
       if (this.file && this.isVaporField) {
-        formData.append(this.field.attribute, this.fileName)
-        formData.append('vaporFile[key]', this.vaporFile.key)
-        formData.append('vaporFile[uuid]', this.vaporFile.uuid)
-        formData.append('vaporFile[filename]', this.vaporFile.filename)
-        formData.append('vaporFile[extension]', this.vaporFile.extension)
+        formData.append(attribute, this.fileName)
+        formData.append('vaporFile[' + attribute + '][key]', this.vaporFile.key)
+        formData.append(
+          'vaporFile[' + attribute + '][uuid]',
+          this.vaporFile.uuid
+        )
+        formData.append(
+          'vaporFile[' + attribute + '][filename]',
+          this.vaporFile.filename
+        )
+        formData.append(
+          'vaporFile[' + attribute + '][extension]',
+          this.vaporFile.extension
+        )
       }
     }
   },
@@ -204,9 +222,12 @@ export default {
       } = this
       const attribute = this.field.attribute
 
-      const uri = this.viaRelationship
-        ? `/nova-api/${resourceName}/${resourceId}/${relatedResourceName}/${relatedResourceId}/field/${attribute}?viaRelationship=${viaRelationship}`
-        : `/nova-api/${resourceName}/${resourceId}/field/${attribute}`
+      const uri =
+        this.viaRelationship &&
+        this.relatedResourceName &&
+        this.relatedResourceId
+          ? `/nova-api/${resourceName}/${resourceId}/${relatedResourceName}/${relatedResourceId}/field/${attribute}?viaRelationship=${viaRelationship}`
+          : `/nova-api/${resourceName}/${resourceId}/field/${attribute}`
 
       try {
         await Nova.request().delete(uri)
@@ -259,7 +280,13 @@ export default {
      * The label attribute to use for the file field.
      */
     labelFor() {
-      return `file-${this.field.attribute}`
+      let name = this.resourceName
+
+      if (this.relatedResourceName) {
+        name += '-' + this.relatedResourceName
+      }
+
+      return `file-${name}-${this.field.attribute}`
     },
 
     /**
@@ -309,7 +336,7 @@ export default {
     },
 
     /**
-     * Determing if the field is a Vapor field.
+     * Determining if the field is a Vapor field.
      */
     isVaporField() {
       return this.field.component == 'vapor-file-field'

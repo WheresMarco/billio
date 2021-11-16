@@ -15,7 +15,11 @@
 
     <!-- Tool Styles -->
     @foreach(\Laravel\Nova\Nova::availableStyles(request()) as $name => $path)
-        <link rel="stylesheet" href="/nova-api/styles/{{ $name }}">
+        @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))
+            <link rel="stylesheet" href="{!! $path !!}">
+        @else
+            <link rel="stylesheet" href="/nova-api/styles/{{ $name }}">
+        @endif
     @endforeach
 
     <!-- Custom Meta Data -->
@@ -26,11 +30,11 @@
         <link rel="stylesheet" href="{{ $publicPath }}">
     @endforeach
 </head>
-<body class="min-w-site bg-40 text-black min-h-full">
+<body class="min-w-site bg-40 text-90 font-medium min-h-full">
     <div id="nova">
         <div v-cloak class="flex min-h-screen">
             <!-- Sidebar -->
-            <div class="min-h-screen flex-none pt-header min-h-screen w-sidebar bg-grad-sidebar px-6">
+            <div class="flex-none pt-header min-h-screen w-sidebar bg-grad-sidebar px-6">
                 <a href="{{ \Laravel\Nova\Nova::path() }}">
                     <div class="absolute pin-t pin-l pin-r bg-logo flex items-center w-sidebar h-header px-6 text-white">
                        @include('nova::partials.logo')

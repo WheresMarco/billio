@@ -11,23 +11,6 @@ use App\Nin;
 class CheckStudentController extends Controller
 {
     /**
-     * Check if user is a student.
-     *
-     * @return void
-     */
-    public function check(Request $request)
-    {
-        // Sanitize input.
-        $nin = $request->nin;
-
-        // Check if student is member.
-        $corps = $this->isStudentMember($nin);
-
-        // Return if member.
-        return json_encode($corps);
-    }
-
-    /**
      * Check if student is member.
      *
      * @param [type] $nin
@@ -54,7 +37,10 @@ class CheckStudentController extends Controller
         // TODO CHECK IF USED FOR THIS EVENT.
 
         // Do request.
-        $isStudent = $this->sendRequest('https://medlem.lintek.liu.se/api/checkstudent/' . $nin . '?apikey=' . env('MONTANIA_API_KEY_LINTEK', null), $nin);
+        $isStudent = $this->sendRequest(
+            'https://medlem.lintek.liu.se/api/checkstudent/' . $nin . '?apikey=' . env('MONTANIA_API_KEY_LINTEK', null),
+            $nin
+        );
         $corps = 'lintek';
 
         // No luck? Check Stuff.
@@ -65,7 +51,10 @@ class CheckStudentController extends Controller
 
         // No luck? Check Consensus.
         if (! $isStudent) {
-            $isStudent = $this->sendRequest('https://medlem.consensus.liu.se/api/checkstudent/' . $nin . '?apikey=' . env('MONTANIA_API_KEY_CONSENSUS', null), $nin);
+            $isStudent = $this->sendRequest(
+                'https://medlem.consensus.liu.se/api/checkstudent/' . $nin . '?apikey=' . env('MONTANIA_API_KEY_CONSENSUS', null),
+                $nin
+            );
             $corps = 'consensus';
         }
 

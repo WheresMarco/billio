@@ -1,1 +1,19 @@
-//
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+// Imports
+@import 'global';
+@import 'header';
+@import 'footer';
+
+// Pages
+@import 'frontpage';
+@import 'event';
+@import 'purchase';
+@import 'confirmation';
+@import 'page';
+
+// Compontents
+@import 'eventPreview';
+@import 'ticketType';

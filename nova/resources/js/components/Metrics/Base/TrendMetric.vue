@@ -3,8 +3,8 @@
     <div class="flex mb-4">
       <h3 class="mr-3 text-base text-80 font-bold">{{ title }}</h3>
 
-      <div v-if="helpText" class="absolute pin-r pin-b p-2 z-50">
-        <tooltip trigger="click">
+      <div v-if="helpText" class="absolute pin-r pin-b p-2 z-20">
+        <tooltip trigger="click" placement="top-start">
           <icon
             type="help"
             viewBox="0 0 17 17"
@@ -24,7 +24,19 @@
       <select
         v-if="ranges.length > 0"
         @change="handleChange"
-        class="select-box-sm ml-auto min-w-24 h-6 text-xs appearance-none bg-40 pl-2 pr-6 active:outline-none active:shadow-outline focus:outline-none focus:shadow-outline"
+        class="
+          select-box-sm
+          ml-auto
+          min-w-24
+          h-6
+          text-xs
+          appearance-none
+          bg-40
+          pl-2
+          pr-6
+          active:outline-none active:shadow-outline
+          focus:outline-none focus:shadow-outline
+        "
       >
         <option
           v-for="option in ranges"
@@ -47,15 +59,12 @@
     <div
       ref="chart"
       class="absolute pin rounded-b-lg ct-chart"
-      style="top: 60%;"
+      style="top: 60%"
     />
   </loading-card>
 </template>
 
 <script>
-import numbro from 'numbro'
-import numbroLanguages from 'numbro/dist/languages.min'
-Object.values(numbroLanguages).forEach(l => numbro.registerLanguage(l))
 import _ from 'lodash'
 import Chartist from 'chartist'
 import 'chartist-plugin-tooltips'
@@ -85,7 +94,10 @@ export default {
     },
   },
 
-  data: () => ({ chartist: null }),
+  data: () => ({
+    chartist: null,
+    resizeObserver: null,
+  }),
 
   watch: {
     selectedRangeKey: function (newRange, oldRange) {
@@ -97,11 +109,17 @@ export default {
     },
   },
 
-  mounted() {
-    if (Nova.config.locale) {
-      numbro.setLanguage(Nova.config.locale.replace('_', '-'))
-    }
+  created() {
+    const debouncer = _.debounce(callback => callback(), Nova.config.debounce)
 
+    this.resizeObserver = new ResizeObserver(entries => {
+      debouncer(() => {
+        this.renderChart()
+      })
+    })
+  },
+
+  mounted() {
     const low = Math.min(...this.chartData)
     const high = Math.max(...this.chartData)
 
@@ -138,14 +156,19 @@ export default {
         Chartist.plugins.tooltip({
           anchorToPoint: true,
           transformTooltipTextFnc: value => {
-            let formattedValue = numbro(new String(value)).format(this.format)
+            let formattedValue = Nova.formatNumber(
+              new String(value),
+              this.format
+            )
 
             if (this.prefix) {
               return `${this.prefix}${formattedValue}`
             }
 
             if (this.suffix) {
-              const suffix = SingularOrPlural(value, this.suffix)
+              const suffix = this.suffixInflection
+                ? SingularOrPlural(value, this.suffix)
+                : this.suffix
 
               return `${formattedValue} ${suffix}`
             }
@@ -155,6 +178,12 @@ export default {
         }),
       ],
     })
+
+    this.resizeObserver.observe(this.$refs.chart)
+  },
+
+  beforeDestroy() {
+    this.resizeObserver.unobserve(this.$refs.chart)
   },
 
   methods: {
@@ -174,7 +203,7 @@ export default {
 
     formattedValue() {
       if (!this.isNullValue) {
-        const value = numbro(new String(this.value)).format(this.format)
+        const value = Nova.formatNumber(new String(this.value), this.format)
 
         return `${this.prefix}${value}`
       }

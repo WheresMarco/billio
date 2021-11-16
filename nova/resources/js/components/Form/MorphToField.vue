@@ -1,6 +1,11 @@
 <template>
   <div>
-    <default-field :field="field" :show-errors="false" :field-name="fieldName">
+    <default-field
+      :field="field"
+      :show-errors="false"
+      :field-name="fieldName"
+      :show-help-text="field.helpText != null"
+    >
       <select
         v-if="hasMorphToTypes"
         :disabled="isLocked || isReadonly"
@@ -9,7 +14,12 @@
         slot="field"
         :value="resourceType"
         @change="refreshResourcesForTypeChange"
-        class="block w-full form-control form-input form-input-bordered form-select mb-3"
+        class="
+          block
+          w-full
+          form-control form-input form-input-bordered form-select
+          mb-3
+        "
       >
         <option value="" selected :disabled="!field.nullable">
           {{ __('Choose Type') }}
@@ -47,6 +57,7 @@
             @input="performSearch"
             @clear="clearSelection"
             @selected="selectResource"
+            :debounce="field.debounce"
             :value="selectedResource"
             :data="availableResources"
             :clearable="field.nullable"
@@ -120,6 +131,7 @@
             v-if="canShowNewRelationModal"
             @click="openRelationModal"
             class="ml-1"
+            :dusk="`${field.attribute}-inline-create`"
           />
         </div>
 
@@ -190,17 +202,16 @@ export default {
       this.initializingWithExistingResource = true
       this.resourceType = this.field.morphToType
       this.selectedResourceId = this.field.morphToId
-    }
-
-    if (this.creatingViaRelatedResource) {
+    } else if (this.creatingViaRelatedResource) {
       this.initializingWithExistingResource = true
       this.resourceType = this.viaResource
       this.selectedResourceId = this.viaResourceId
     }
 
-    if (this.shouldSelectInitialResource && !this.isSearchable) {
-      this.getAvailableResources().then(() => this.selectInitialResource())
-    } else if (this.shouldSelectInitialResource && this.isSearchable) {
+    if (this.shouldSelectInitialResource) {
+      if (!this.resourceType && this.field.defaultResource) {
+        this.resourceType = this.field.defaultResource
+      }
       this.getAvailableResources().then(() => this.selectInitialResource())
     }
 
@@ -218,6 +229,10 @@ export default {
     selectResourceFromSelectControl(e) {
       this.selectedResourceId = e.target.value
       this.selectInitialResource()
+
+      if (this.field) {
+        Nova.$emit(this.field.attribute + '-change', this.selectedResourceId)
+      }
     },
 
     /**
@@ -309,11 +324,13 @@ export default {
     },
 
     openRelationModal() {
+      Nova.$emit('create-relation-modal-opened')
       this.relationModalOpen = true
     },
 
     closeRelationModal() {
       this.relationModalOpen = false
+      Nova.$emit('create-relation-modal-closed')
     },
 
     handleSetResource({ id }) {
@@ -335,7 +352,14 @@ export default {
      * Determine if we are creating a new resource via a parent relation
      */
     creatingViaRelatedResource() {
-      return Boolean(this.viaResource && this.viaResourceId)
+      return Boolean(
+        _.find(
+          this.field.morphToTypes,
+          type => type.value == this.viaResource
+        ) &&
+          this.viaResource &&
+          this.viaResourceId
+      )
     },
 
     /**
@@ -343,7 +367,9 @@ export default {
      */
     shouldSelectInitialResource() {
       return Boolean(
-        this.editingExistingResource || this.creatingViaRelatedResource
+        this.editingExistingResource ||
+          this.creatingViaRelatedResource ||
+          Boolean(this.field.value && this.field.defaultResource)
       )
     },
 
@@ -376,6 +402,11 @@ export default {
           viaResource: this.viaResource,
           viaResourceId: this.viaResourceId,
           viaRelationship: this.viaRelationship,
+          editing: true,
+          editMode:
+            _.isNil(this.resourceId) || this.resourceId === ''
+              ? 'create'
+              : 'update',
         },
       }
     },

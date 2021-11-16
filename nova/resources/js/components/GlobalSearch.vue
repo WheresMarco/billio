@@ -19,13 +19,25 @@
           type="search"
           :placeholder="__('Press / to search')"
           class="pl-search w-full form-global-search"
+          spellcheck="false"
         />
       </div>
 
       <!-- Loader -->
       <div
         v-if="loading"
-        class="bg-white py-3 overflow-hidden absolute rounded-lg shadow-lg w-full mt-2 max-h-search overflow-y-auto"
+        class="
+          bg-white
+          py-3
+          overflow-hidden
+          absolute
+          rounded-lg
+          shadow-lg
+          w-full
+          mt-2
+          max-h-search
+          overflow-y-auto
+        "
       >
         <loader class="text-60" width="40" />
       </div>
@@ -33,7 +45,17 @@
       <!-- No Results Found -->
       <div
         v-if="shouldShowNoResults"
-        class="bg-white overflow-hidden absolute rounded-lg shadow-lg w-full mt-2 max-h-search overflow-y-auto"
+        class="
+          bg-white
+          overflow-hidden
+          absolute
+          rounded-lg
+          shadow-lg
+          w-full
+          mt-2
+          max-h-search
+          overflow-y-auto
+        "
       >
         <h3 class="text-xs uppercase tracking-wide text-80 bg-40 py-4 px-3">
           {{ __('No Results Found.') }}
@@ -43,7 +65,16 @@
       <!-- Results -->
       <div
         v-if="shouldShowResults"
-        class="overflow-hidden absolute rounded-lg shadow-lg w-full mt-2 max-h-search overflow-y-auto"
+        class="
+          overflow-hidden
+          absolute
+          rounded-lg
+          shadow-lg
+          w-full
+          mt-2
+          max-h-search
+          overflow-y-auto
+        "
         ref="container"
       >
         <div v-for="group in formattedResults">
@@ -60,7 +91,17 @@
               <a
                 :dusk="item.resourceName + ' ' + item.index"
                 @click.prevent="navigate(item.index)"
-                class="cursor-pointer flex items-center hover:bg-20 block py-2 px-3 no-underline font-normal"
+                class="
+                  cursor-pointer
+                  flex
+                  items-center
+                  hover:bg-20
+                  block
+                  py-2
+                  px-3
+                  no-underline
+                  font-normal
+                "
                 :class="{
                   'bg-white': highlightedResultIndex != item.index,
                   'bg-20': highlightedResultIndex == item.index,
@@ -92,13 +133,17 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import { Minimum } from 'laravel-nova'
 import { mixin as clickaway } from 'vue-clickaway'
+import { CancelToken, Cancel } from 'axios'
 
 export default {
   mixins: [clickaway],
 
   data: () => ({
+    debouncer: null,
+    canceller: null,
     loading: false,
     currentlySearching: false,
     searchTerm: '',
@@ -112,6 +157,10 @@ export default {
     },
   },
 
+  created() {
+    this.debouncer = _.debounce(callback => callback(), Nova.config.debounce)
+  },
+
   mounted() {
     // Open search menu if the user types '/'
     Nova.addShortcut('/', () => {
@@ -122,7 +171,7 @@ export default {
   },
 
   destroyed() {
-    Nova.removeShortcut('/')
+    Nova.disableShortcut('/')
   },
 
   methods: {
@@ -159,10 +208,14 @@ export default {
       this.loading = true
 
       if (this.searchTerm == '') {
+        if (this.canceller !== null) this.canceller()
+
         this.loading = false
         this.results = []
       } else {
         this.debouncer(() => {
+          if (this.canceller !== null) this.canceller()
+
           this.fetchResults(event.target.value)
         }, 500)
       }
@@ -176,6 +229,9 @@ export default {
           const { data: results } = await Minimum(
             Nova.request().get('/nova-api/search', {
               params: { search },
+              cancelToken: new CancelToken(canceller => {
+                this.canceller = canceller
+              }),
             })
           )
 
@@ -184,15 +240,14 @@ export default {
           this.loading = false
         } catch (e) {
           this.loading = false
+          if (e instanceof Cancel) {
+            return
+          }
+
           throw e
         }
       }
     },
-
-    /**
-     * Debounce function for the search handler
-     */
-    debouncer: _.debounce(callback => callback(), 500),
 
     /**
      * Move the highlighted results

@@ -33,7 +33,7 @@
         >&larr;</router-link
       >
 
-      <span class="px-2 text-70">/</span> {{ resourceResponse.name }}
+      <span class="px-2 text-70">/</span> {{ lenseName }}
     </heading>
 
     <card>
@@ -87,9 +87,9 @@
         <div class="flex items-center ml-auto px-3">
           <!-- Action Selector -->
           <action-selector
-            v-if="selectedResources.length > 0"
+            v-if="selectedResources.length > 0 || haveStandaloneActions"
             :resource-name="resourceName"
-            :actions="actions"
+            :actions="availableActions"
             :pivot-actions="pivotActions"
             :pivot-name="pivotName"
             :selected-resources="selectedResourcesForActionSelector"
@@ -112,7 +112,9 @@
             :via-has-one="viaHasOne"
             :trashed="trashed"
             :per-page="perPage"
-            :per-page-options="perPageOptions"
+            :per-page-options="
+              perPageOptions || resourceInformation.perPageOptions
+            "
             :show-trashed-option="
               authorizedToForceDeleteAnyResources ||
               authorizedToRestoreAnyResources
@@ -161,115 +163,129 @@
       </div>
 
       <loading-view :loading="loading">
-        <div
-          v-if="!resources.length"
-          class="flex justify-center items-center px-6 py-8"
-        >
-          <div class="text-center">
-            <svg
-              class="mb-3"
-              xmlns="http://www.w3.org/2000/svg"
-              width="65"
-              height="51"
-              viewBox="0 0 65 51"
-            >
-              <path
-                fill="#A8B9C5"
-                d="M56 40h2c.552285 0 1 .447715 1 1s-.447715 1-1 1h-2v2c0 .552285-.447715 1-1 1s-1-.447715-1-1v-2h-2c-.552285 0-1-.447715-1-1s.447715-1 1-1h2v-2c0-.552285.447715-1 1-1s1 .447715 1 1v2zm-5.364125-8H38v8h7.049375c.350333-3.528515 2.534789-6.517471 5.5865-8zm-5.5865 10H6c-3.313708 0-6-2.686292-6-6V6c0-3.313708 2.686292-6 6-6h44c3.313708 0 6 2.686292 6 6v25.049375C61.053323 31.5511 65 35.814652 65 41c0 5.522847-4.477153 10-10 10-5.185348 0-9.4489-3.946677-9.950625-9zM20 30h16v-8H20v8zm0 2v8h16v-8H20zm34-2v-8H38v8h16zM2 30h16v-8H2v8zm0 2v4c0 2.209139 1.790861 4 4 4h12v-8H2zm18-12h16v-8H20v8zm34 0v-8H38v8h16zM2 20h16v-8H2v8zm52-10V6c0-2.209139-1.790861-4-4-4H6C3.790861 2 2 3.790861 2 6v4h52zm1 39c4.418278 0 8-3.581722 8-8s-3.581722-8-8-8-8 3.581722-8 8 3.581722 8 8 8z"
+        <index-error-dialog
+          v-if="resourceResponseError != null"
+          :resource="resourceInformation"
+          @click="getResources"
+        />
+
+        <template v-else>
+          <div
+            v-if="!resources.length"
+            class="flex justify-center items-center px-6 py-8"
+          >
+            <div class="text-center">
+              <svg
+                class="mb-3"
+                xmlns="http://www.w3.org/2000/svg"
+                width="65"
+                height="51"
+                viewBox="0 0 65 51"
+              >
+                <path
+                  fill="#A8B9C5"
+                  d="M56 40h2c.552285 0 1 .447715 1 1s-.447715 1-1 1h-2v2c0 .552285-.447715 1-1 1s-1-.447715-1-1v-2h-2c-.552285 0-1-.447715-1-1s.447715-1 1-1h2v-2c0-.552285.447715-1 1-1s1 .447715 1 1v2zm-5.364125-8H38v8h7.049375c.350333-3.528515 2.534789-6.517471 5.5865-8zm-5.5865 10H6c-3.313708 0-6-2.686292-6-6V6c0-3.313708 2.686292-6 6-6h44c3.313708 0 6 2.686292 6 6v25.049375C61.053323 31.5511 65 35.814652 65 41c0 5.522847-4.477153 10-10 10-5.185348 0-9.4489-3.946677-9.950625-9zM20 30h16v-8H20v8zm0 2v8h16v-8H20zm34-2v-8H38v8h16zM2 30h16v-8H2v8zm0 2v4c0 2.209139 1.790861 4 4 4h12v-8H2zm18-12h16v-8H20v8zm34 0v-8H38v8h16zM2 20h16v-8H2v8zm52-10V6c0-2.209139-1.790861-4-4-4H6C3.790861 2 2 3.790861 2 6v4h52zm1 39c4.418278 0 8-3.581722 8-8s-3.581722-8-8-8-8 3.581722-8 8 3.581722 8 8 8z"
+                />
+              </svg>
+
+              <h3 class="text-base text-80 font-normal mb-6">
+                {{
+                  __('No :resource matched the given criteria.', {
+                    resource: resourceInformation.label.toLowerCase(),
+                  })
+                }}
+              </h3>
+
+              <create-resource-button
+                classes="btn btn-sm btn-outline"
+                :singular-name="singularName"
+                :resource-name="resourceName"
+                :via-resource="viaResource"
+                :via-resource-id="viaResourceId"
+                :via-relationship="viaRelationship"
+                :relationship-type="relationshipType"
+                :authorized-to-create="authorizedToCreate && !resourceIsFull"
+                :authorized-to-relate="authorizedToRelate"
               />
-            </svg>
+            </div>
+          </div>
 
-            <h3 class="text-base text-80 font-normal mb-6">
-              {{
-                __('No :resource matched the given criteria.', {
-                  resource: resourceInformation.label.toLowerCase(),
-                })
-              }}
-            </h3>
-
-            <create-resource-button
-              classes="btn btn-sm btn-outline"
-              :singular-name="singularName"
+          <!-- Resource Table -->
+          <div class="overflow-hidden overflow-x-auto relative">
+            <resource-table
+              :authorized-to-relate="authorizedToRelate"
               :resource-name="resourceName"
+              :resources="resources"
+              :singular-name="singularName"
+              :selected-resources="selectedResources"
+              :selected-resource-ids="selectedResourceIds"
+              :actions-are-available="allActions.length > 0"
+              :actions-endpoint="lensActionEndpoint"
+              :should-show-checkboxes="shouldShowCheckBoxes"
               :via-resource="viaResource"
               :via-resource-id="viaResourceId"
               :via-relationship="viaRelationship"
               :relationship-type="relationshipType"
-              :authorized-to-create="authorizedToCreate && !resourceIsFull"
-              :authorized-to-relate="authorizedToRelate"
+              :update-selection-status="updateSelectionStatus"
+              :sortable="true"
+              @order="orderByField"
+              @reset-order-by="resetOrderBy"
+              @delete="deleteResources"
+              @restore="restoreResources"
+              @actionExecuted="getResources"
+              ref="resourceTable"
             />
           </div>
-        </div>
 
-        <!-- Resource Table -->
-        <div class="overflow-hidden overflow-x-auto relative">
-          <resource-table
-            :authorized-to-relate="authorizedToRelate"
-            :resource-name="resourceName"
-            :resources="resources"
-            :singular-name="singularName"
-            :selected-resources="selectedResources"
-            :selected-resource-ids="selectedResourceIds"
-            :actions-are-available="allActions.length > 0"
-            :should-show-checkboxes="shouldShowCheckBoxes"
-            :via-resource="viaResource"
-            :via-resource-id="viaResourceId"
-            :via-relationship="viaRelationship"
-            :relationship-type="relationshipType"
-            :update-selection-status="updateSelectionStatus"
-            @order="orderByField"
-            @delete="deleteResources"
-            @restore="restoreResources"
-            @actionExecuted="getResources"
-            ref="resourceTable"
-          />
-        </div>
-
-        <!-- Pagination -->
-        <component
-          :is="paginationComponent"
-          v-if="resourceResponse && resources.length > 0"
-          :next="hasNextPage"
-          :previous="hasPreviousPage"
-          @load-more="loadMore"
-          @page="selectPage"
-          :pages="totalPages"
-          :page="currentPage"
-          :per-page="perPage"
-          :resource-count-label="resourceCountLabel"
-          :current-resource-count="resources.length"
-          :all-matching-resource-count="allMatchingResourceCount"
-        >
-          <span
-            v-if="resourceCountLabel"
-            class="text-sm text-80 px-4"
-            :class="{
-              'ml-auto': paginationComponent == 'pagination-links',
-            }"
+          <!-- Pagination -->
+          <component
+            :is="paginationComponent"
+            v-if="resourceResponse && resources.length > 0"
+            :next="hasNextPage"
+            :previous="hasPreviousPage"
+            @load-more="loadMore"
+            @page="selectPage"
+            :pages="totalPages"
+            :page="currentPage"
+            :per-page="perPage"
+            :resource-count-label="resourceCountLabel"
+            :current-resource-count="resources.length"
+            :all-matching-resource-count="allMatchingResourceCount"
           >
-            {{ resourceCountLabel }}
-          </span>
-        </component>
+            <span
+              v-if="resourceCountLabel"
+              class="text-sm text-80 px-4"
+              :class="{
+                'ml-auto': paginationComponent == 'pagination-links',
+              }"
+            >
+              {{ resourceCountLabel }}
+            </span>
+          </component>
+        </template>
       </loading-view>
     </card>
   </loading-view>
 </template>
 
 <script>
-import { Errors, Minimum } from 'laravel-nova'
-
 import {
   HasCards,
   Deletable,
+  Errors,
   Filterable,
+  Minimum,
   Paginatable,
   PerPageable,
   InteractsWithQueryString,
   InteractsWithResourceInformation,
 } from 'laravel-nova'
+import HasActions from '@/mixins/HasActions'
+import { CancelToken, Cancel } from 'axios'
 
 export default {
   mixins: [
+    HasActions,
     HasCards,
     Deletable,
     Filterable,
@@ -279,24 +295,35 @@ export default {
     InteractsWithQueryString,
   ],
 
+  metaInfo() {
+    return {
+      title: this.lenseName,
+    }
+  },
+
   props: {
     resourceName: {
       type: String,
       required: true,
     },
+
     viaResource: {
       default: '',
     },
+
     viaResourceId: {
       default: '',
     },
+
     viaRelationship: {
       default: '',
     },
+
     relationshipType: {
       type: String,
       default: '',
     },
+
     lens: {
       type: String,
       required: true,
@@ -304,10 +331,12 @@ export default {
   },
 
   data: () => ({
+    canceller: null,
     initialLoading: true,
     loading: true,
 
     resourceResponse: null,
+    resourceResponseError: null,
     resources: [],
     softDeletes: false,
     selectedResources: [],
@@ -317,8 +346,6 @@ export default {
 
     deleteModalOpen: false,
 
-    actions: [],
-    pivotActions: null,
     actionValidationErrors: new Errors(),
 
     authorizedToRelate: false,
@@ -343,8 +370,6 @@ export default {
     this.initializeTrashedFromQueryString()
     this.initializeOrderingFromQueryString()
 
-    this.perPage = this.resourceInformation.perPageOptions[0]
-
     await this.initializeFilters(this.lens)
     this.getResources()
     // this.getAuthorizationToRelate()
@@ -367,14 +392,25 @@ export default {
         )
       },
       () => {
+        if (this.canceller !== null) this.canceller()
+
         this.getResources()
       }
     )
   },
 
-  beforeRouteUpdate(to, from, next) {
-    next()
-    this.initializeState(this.lens)
+  watch: {
+    $route(to, from) {
+      if (
+        to.params.resourceName === from.params.resourceName &&
+        to.params.lens === from.params.lens
+      ) {
+        this.initializeState(this.lens)
+      } else {
+        this.initializeFilters(this.lens)
+        this.getActions()
+      }
+    },
   },
 
   methods: {
@@ -413,6 +449,7 @@ export default {
      */
     getResources() {
       this.loading = true
+      this.resourceResponseError = null
 
       this.$nextTick(() => {
         this.clearResourceSelections()
@@ -422,24 +459,38 @@ export default {
             '/nova-api/' + this.resourceName + '/lens/' + this.lens,
             {
               params: this.resourceRequestQueryString,
+              cancelToken: new CancelToken(canceller => {
+                this.canceller = canceller
+              }),
             }
           ),
           300
-        ).then(({ data }) => {
-          this.resources = []
+        )
+          .then(({ data }) => {
+            this.resources = []
 
-          this.resourceResponse = data
-          this.resources = data.resources
-          this.softDeletes = data.softDeletes
-          this.perPage = data.per_page
-          this.hasId = data.hasId
+            this.resourceResponse = data
+            this.resources = data.resources
+            this.softDeletes = data.softDeletes
+            this.perPage = data.per_page
+            this.hasId = data.hasId
 
-          this.loading = false
+            this.loading = false
 
-          this.getAllMatchingResourceCount()
+            this.getAllMatchingResourceCount()
 
-          Nova.$emit('resources-loaded')
-        })
+            Nova.$emit('resources-loaded')
+          })
+          .catch(e => {
+            if (e instanceof Cancel) {
+              return
+            }
+
+            this.loading = false
+            this.resourceResponseError = e
+
+            throw e
+          })
       })
     },
 
@@ -456,10 +507,11 @@ export default {
             viaResourceId: this.viaResourceId,
             viaRelationship: this.viaRelationship,
             relationshipType: this.relationshipType,
+            display: 'index',
           },
         })
         .then(response => {
-          this.actions = _.filter(response.data.actions, a => a.showOnIndex)
+          this.actions = response.data.actions
           this.pivotActions = response.data.pivotActions
         })
     },
@@ -492,13 +544,25 @@ export default {
      * Sort the resources by the given field.
      */
     orderByField(field) {
-      var direction = this.currentOrderByDirection == 'asc' ? 'desc' : 'asc'
-      if (this.currentOrderBy != field.attribute) {
+      let direction = this.currentOrderByDirection == 'asc' ? 'desc' : 'asc'
+
+      if (this.currentOrderBy != field.sortableUriKey) {
         direction = 'asc'
       }
+
       this.updateQueryString({
-        [this.orderByParameter]: field.attribute,
+        [this.orderByParameter]: field.sortableUriKey,
         [this.orderByDirectionParameter]: direction,
+      })
+    },
+
+    /**
+     * Reset the order by to its default state
+     */
+    resetOrderBy(field) {
+      this.updateQueryString({
+        [this.orderByParameter]: field.sortableUriKey,
+        [this.orderByDirectionParameter]: null,
       })
     },
 
@@ -583,7 +647,8 @@ export default {
      */
     initializePerPageFromQueryString() {
       this.perPage =
-        this.$route.query[this.perPageParameter] || _.first(this.perPageOptions)
+        this.$route.query[this.perPageParameter] ||
+        this.resourceInformation.perPageOptions[0]
     },
   },
 
@@ -681,36 +746,6 @@ export default {
     },
 
     /**
-     * Get all of the actions available to the resource.
-     */
-    allActions() {
-      return this.hasPivotActions
-        ? this.actions.concat(this.pivotActions.actions)
-        : this.actions
-    },
-
-    /**
-     * Determine if the resource has any pivot actions available.
-     */
-    hasPivotActions() {
-      return this.pivotActions && this.pivotActions.actions.length > 0
-    },
-
-    /**
-     * Determine if the resource has any actions available.
-     */
-    actionsAreAvailable() {
-      return this.allActions.length > 0
-    },
-
-    /**
-     * Get the name of the pivot model for the resource.
-     */
-    pivotName() {
-      return this.pivotActions ? this.pivotActions.name : ''
-    },
-
-    /**
      * Get the current search value from the query string.
      */
     currentSearch() {
@@ -769,13 +804,6 @@ export default {
      */
     singularName() {
       return this.resourceInformation.singularLabel
-    },
-
-    /**
-     * Get the selected resources for the action selector.
-     */
-    selectedResourcesForActionSelector() {
-      return this.selectAllMatchingChecked ? 'all' : this.selectedResourceIds
     },
 
     /**
@@ -964,6 +992,15 @@ export default {
     perPageOptions() {
       if (this.resourceResponse) {
         return this.resourceResponse.per_page_options
+      }
+    },
+
+    /**
+     * The Lense name.
+     */
+    lenseName() {
+      if (this.resourceResponse) {
+        return this.resourceResponse.name
       }
     },
   },

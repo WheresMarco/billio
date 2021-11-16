@@ -1,0 +1,120 @@
+.event-preview {
+    width: 100%;
+    margin-bottom: 3rem;
+    float: left;
+    background-color: #fff;
+    box-shadow: 0 .5rem 2rem 0 rgba( 0, 0, 0, .1 );
+    border-radius: .8rem;
+    position: relative;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .event-preview-image {
+        height: 300px;
+        float: left;
+        width: 40%;
+        background-size: cover;
+        background-position: center;
+        border-bottom-left-radius: .8rem;
+        border-top-left-radius: .8rem;
+    }
+
+    .event-preview-content {
+        width: 60%;
+        padding: 40px;
+        float: left;
+
+        h1 {
+            font-size: 3.2rem;
+            margin: 0 0 1.5rem 0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+
+            a {
+                text-decoration: none;
+                color: rgba( 208, 82, 165, 1 );
+            }
+        }
+
+        p {
+            font-size: 2.0rem;
+            line-height: 1.5;
+            color: rgba( 71, 82, 93, 1 );
+        }
+
+        .event-preview-meta {
+            margin-top: 2rem;
+            border-top: 3px solid rgba( 243, 243, 246, 1 );
+            padding-top: 20px;
+        }
+
+        .event-preview-meta-item {
+            width: 50%;
+            float: left;
+
+            h4 {
+                color: rgb(180, 180, 180);
+                font-family: 'Poppins', sans-serif;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+
+            span {
+                color: rgb(180, 180, 180);
+            }
+        }
+    }
+
+    &.old {
+        opacity: 0.7;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        .event-preview-content {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .event-preview-content p {
+            width: 70%;
+            float: left;
+            padding-top: 15px;
+        }
+
+        .event-preview-content h1 {
+            margin-bottom: 0;
+        }
+
+        .event-preview-meta {
+            margin-top: 0;
+            border-top: 0;
+            padding-top: 0;
+            width: 30%;
+            float: left;
+        }
+    }
+  }
+
+@media only screen and (max-width: 600px) {
+  .event-preview {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .event-preview-image {
+    height: 150px;
+    width: 100%;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: .8rem;
+    border-top-right-radius: .8rem;
+  }
+  .event-preview-content {
+    padding: 2rem;
+    width: 100%;
+  }
+}

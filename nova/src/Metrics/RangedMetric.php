@@ -21,7 +21,7 @@ abstract class RangedMetric extends Metric
     /**
      * Get the ranges available for the metric.
      *
-     * @return array
+     * @return \Illuminate\Support\Collection|array
      */
     public function ranges()
     {
@@ -31,8 +31,7 @@ abstract class RangedMetric extends Metric
     /**
      * Set the default range.
      *
-     * @param string $key
-     *
+     * @param  string  $key
      * @return $this
      */
     public function defaultRange($key)

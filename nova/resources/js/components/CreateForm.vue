@@ -5,12 +5,14 @@
     <form
       v-if="panels"
       @submit="submitViaCreateResource"
+      @change="onUpdateFormStatus"
       autocomplete="off"
       ref="form"
     >
       <form-panel
         class="mb-8"
         v-for="panel in panelsWithFields"
+        @field-changed="onUpdateFormStatus"
         @file-upload-started="handleFileUploadStarted"
         @file-upload-finished="handleFileUploadFinished"
         :shown-via-new-relation-modal="shownViaNewRelationModal"
@@ -47,7 +49,7 @@
           :disabled="isWorking"
           :processing="wasSubmittedViaCreateResource"
         >
-          {{ __('Create :resource', { resource: singularName }) }}
+          {{ createButtonLabel }}
         </progress-button>
       </div>
     </form>
@@ -61,10 +63,25 @@ import {
   Minimum,
   InteractsWithResourceInformation,
 } from 'laravel-nova'
+import HandlesFormRequest from '@/mixins/HandlesFormRequest'
 import HandlesUploads from '@/mixins/HandlesUploads'
 
 export default {
-  mixins: [InteractsWithResourceInformation, HandlesUploads],
+  mixins: [
+    InteractsWithResourceInformation,
+    HandlesFormRequest,
+    HandlesUploads,
+  ],
+
+  metaInfo() {
+    if (this.shouldOverrideMeta && this.resourceInformation) {
+      return {
+        title: this.__('Create :resource', {
+          resource: this.resourceInformation.singularLabel,
+        }),
+      }
+    }
+  },
 
   props: {
     mode: {
@@ -73,11 +90,17 @@ export default {
       validator: val => ['modal', 'form'].includes(val),
     },
 
+    updateFormStatus: {
+      type: Function,
+      default: () => {},
+    },
+
     ...mapProps([
       'resourceName',
       'viaResource',
       'viaResourceId',
       'viaRelationship',
+      'shouldOverrideMeta',
     ]),
   },
 
@@ -88,7 +111,6 @@ export default {
     submittedViaCreateResource: false,
     fields: [],
     panels: [],
-    validationErrors: new Errors(),
   }),
 
   async created() {
@@ -112,7 +134,21 @@ export default {
       this.relationResponse = data
 
       if (this.isHasOneRelationship && this.alreadyFilled) {
-        Nova.error(this.__('The HasOne relationship has already filled.'))
+        Nova.error(this.__('The HasOne relationship has already been filled.'))
+
+        this.$router.push({
+          name: 'detail',
+          params: {
+            resourceId: this.viaResourceId,
+            resourceName: this.viaResource,
+          },
+        })
+      }
+
+      if (this.isHasOneThroughRelationship && this.alreadyFilled) {
+        Nova.error(
+          this.__('The HasOneThrough relationship has already been filled.')
+        )
 
         this.$router.push({
           name: 'detail',
@@ -180,6 +216,8 @@ export default {
             data: { redirect, id },
           } = await this.createRequest()
 
+          this.canLeave = true
+
           Nova.success(
             this.__('The :resource was created!', {
               resource: this.resourceInformation.singularLabel.toLowerCase(),
@@ -199,14 +237,17 @@ export default {
             return
           }
         } catch (error) {
+          window.scrollTo(0, 0)
+
           this.submittedViaCreateAndAddAnother = false
           this.submittedViaCreateResource = true
           this.isWorking = false
 
-          if (error.response.status == 422) {
-            this.validationErrors = new Errors(error.response.data.errors)
-            Nova.error(this.__('There was a problem submitting the form.'))
+          if (this.resourceInformation.preventFormAbandonment) {
+            this.canLeave = false
           }
+
+          this.handleOnCreateResponseError(error)
         }
       }
 
@@ -245,6 +286,15 @@ export default {
         formData.append('viaRelationship', this.viaRelationship)
       })
     },
+
+    /**
+     * Prevent accidental abandonment only if form was changed.
+     */
+    onUpdateFormStatus() {
+      if (this.resourceInformation.preventFormAbandonment) {
+        this.updateFormStatus()
+      }
+    },
   },
 
   computed: {
@@ -273,6 +323,10 @@ export default {
       return this.resourceInformation.singularLabel
     },
 
+    createButtonLabel() {
+      return this.resourceInformation.createButtonLabel
+    },
+
     isRelation() {
       return Boolean(this.viaResourceId && this.viaRelationship)
     },
@@ -297,9 +351,16 @@ export default {
       return this.relationResponse && this.relationResponse.hasOneRelationship
     },
 
+    isHasOneThroughRelationship() {
+      return (
+        this.relationResponse && this.relationResponse.hasOneThroughRelationship
+      )
+    },
+
     shouldShowAddAnotherButton() {
       return (
-        this.inFormMode && !this.alreadyFilled && !this.isHasOneRelationship
+        Boolean(this.inFormMode && !this.alreadyFilled) &&
+        !Boolean(this.isHasOneRelationship || this.isHasOneThroughRelationship)
       )
     },
   },

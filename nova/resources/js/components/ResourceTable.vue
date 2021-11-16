@@ -2,6 +2,10 @@
   <table
     v-if="resources.length > 0"
     class="table w-full"
+    :class="[
+      `table-${resourceInformation.tableStyle}`,
+      resourceInformation.showColumnBorders ? 'table-grid' : '',
+    ]"
     cellpadding="0"
     cellspacing="0"
     data-testid="resource-table"
@@ -9,9 +13,7 @@
     <thead>
       <tr>
         <!-- Select Checkbox -->
-        <th class="w-16" v-if="shouldShowCheckboxes">
-          &nbsp;
-        </th>
+        <th class="w-16" v-if="shouldShowCheckboxes">&nbsp;</th>
 
         <!-- Field Names -->
         <th v-for="field in fields" :class="`text-${field.textAlign}`">
@@ -20,7 +22,7 @@
             @reset="resetOrderBy(field)"
             :resource-name="resourceName"
             :uri-key="field.sortableUriKey"
-            v-if="field.sortable"
+            v-if="sortable && field.sortable"
           >
             {{ field.indexName }}
           </sortable-icon>
@@ -50,6 +52,7 @@
         :via-many-to-many="viaManyToMany"
         :checked="selectedResources.indexOf(resource) > -1"
         :actions-are-available="actionsAreAvailable"
+        :actions-endpoint="actionsEndpoint"
         :should-show-checkboxes="shouldShowCheckboxes"
         :update-selection-status="updateSelectionStatus"
       />
@@ -105,6 +108,13 @@ export default {
     updateSelectionStatus: {
       type: Function,
     },
+    actionsEndpoint: {
+      default: null,
+    },
+    sortable: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data: () => ({
@@ -119,7 +129,6 @@ export default {
      */
     deleteResource(resource) {
       this.$emit('delete', [resource])
-      Nova.$emit('metric-refresh')
     },
 
     /**
@@ -127,7 +136,6 @@ export default {
      */
     restoreResource(resource) {
       this.$emit('restore', [resource])
-      Nova.$emit('metric-refresh')
     },
 
     /**

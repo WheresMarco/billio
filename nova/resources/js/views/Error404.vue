@@ -151,7 +151,7 @@
                 stroke="#4A90E2"
                 rx="17.51"
                 ry="17.27"
-                style="mix-blend-mode: multiply;"
+                style="mix-blend-mode: multiply"
               />
             </g>
             <path
@@ -314,7 +314,14 @@
         </p>
         <router-link
           :to="{ name: 'dashboard' }"
-          class="dim btn btn-lg btn-default btn-white text-90 no-text-shadow tracking-wide uppercase"
+          class="
+            dim
+            btn btn-lg btn-default btn-white
+            text-90
+            no-text-shadow
+            tracking-wide
+            uppercase
+          "
         >
           {{ __('Go Home') }}
         </router-link>
@@ -322,3 +329,13 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  metaInfo() {
+    return {
+      title: 'Page Not Found',
+    }
+  },
+}
+</script>

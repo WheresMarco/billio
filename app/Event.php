@@ -3,10 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Event extends Model
 {
     public $timestamps = false;
+
+    /**
+     * Check if upcoming date.
+     *
+     * @return void
+     */
+    public function upcoming()
+    {
+        return count($this->event_dates()->get()) > 0 ? $this->event_dates()->get()[0]->date_to >= (new Carbon) : null;
+    }
 
     public function organisation()
     {

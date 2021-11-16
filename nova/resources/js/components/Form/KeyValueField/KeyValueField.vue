@@ -1,5 +1,10 @@
 <template>
-  <default-field :field="field" :errors="errors" :full-width-content="true">
+  <default-field
+    :field="field"
+    :errors="errors"
+    :full-width-content="true"
+    :show-help-text="showHelpText"
+  >
     <template slot="field">
       <KeyValueTable
         :edit-mode="!field.readonly"
@@ -31,8 +36,21 @@
       >
         <button
           @click="addRowAndSelect"
+          :dusk="`${field.attribute}-add-key-value`"
           type="button"
-          class="btn btn-link dim cursor-pointer rounded-lg mx-auto text-primary mt-3 px-3 rounded-b-lg flex items-center"
+          class="
+            btn btn-link
+            dim
+            cursor-pointer
+            rounded-lg
+            mx-auto
+            text-primary
+            mt-3
+            px-3
+            rounded-b-lg
+            flex
+            items-center
+          "
         >
           <icon type="add" width="24" height="24" view-box="0 0 24 24" />
           <span class="ml-1">{{ field.actionText }}</span>
@@ -78,7 +96,7 @@ export default {
   mounted() {
     this.theData = _.map(this.value || {}, (value, key) => ({
       id: guid(),
-      key,
+      key: `${key}`,
       value,
     }))
 

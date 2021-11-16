@@ -3,6 +3,11 @@ import Vue from 'vue'
 Vue.component('default-field', require('./components/Form/DefaultField.vue'))
 Vue.component('field-wrapper', require('./components/Form/FieldWrapper.vue'))
 
+// ID Field...
+Vue.component('index-id-field', require('./components/Index/IdField.vue'))
+Vue.component('detail-id-field', require('./components/Detail/TextField.vue'))
+Vue.component('form-id-field', require('./components/Form/TextField.vue'))
+
 // Panels...
 Vue.component('panel', require('./components/Detail/Panel.vue'))
 Vue.component(
@@ -23,6 +28,21 @@ Vue.component(
   'form-heading-field',
   require('./components/Form/HeadingField.vue')
 )
+
+// Line Field...
+Vue.component('index-line-field', require('./components/Index/LineField.vue'))
+
+// Stack Field...
+Vue.component('index-stack-field', require('./components/Index/StackField.vue'))
+Vue.component(
+  'detail-stack-field',
+  require('./components/Detail/StackField.vue')
+)
+
+// Slug Field...
+Vue.component('index-slug-field', require('./components/Index/TextField.vue'))
+Vue.component('detail-slug-field', require('./components/Detail/TextField.vue'))
+Vue.component('form-slug-field', require('./components/Form/SlugField.vue'))
 
 // Text Field...
 Vue.component('index-text-field', require('./components/Index/TextField.vue'))
@@ -212,10 +232,22 @@ Vue.component(
   require('./components/Detail/HasOneField.vue')
 )
 
+// Has One Through Field...
+Vue.component(
+  'detail-has-one-through-field',
+  require('./components/Detail/HasOneThroughField.vue')
+)
+
 // Has Many Field...
 Vue.component(
   'detail-has-many-field',
   require('./components/Detail/HasManyField.vue')
+)
+
+// Has Many Through Field...
+Vue.component(
+  'detail-has-many-through-field',
+  require('./components/Detail/HasManyThroughField.vue')
 )
 
 // Belongs To Field...

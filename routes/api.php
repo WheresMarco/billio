@@ -14,17 +14,6 @@ use App\Ticket;
 |
 */
 
-// Organisations
-Route::get('/organisations', 'OrganisationController@organisations');
-
-// Events
-Route::get('/events', 'EventController@events');
-Route::get('/events/{slug}', 'EventController@event');
-
-// Tickets
-Route::get('/tickets/{id}', 'TicketController@ticket'); // Get ticket by uuid
-Route::post('/tickets', 'TicketController@create');
-
 // Checkstudent
 Route::post('/checkstudent', 'CheckStudentController@check');
 
@@ -57,14 +46,4 @@ Route::get('/checkin/search', function (Request $request) {
     }
 
     return $return_array;
-});
-
-// Login
-Route::post('login', 'UserController@login');
-
-// User
-Route::group(['user' => 'auth:api'], function()
-{
-   Route::get('users/me', 'UserController@details');
-   Route::get('users/tickets', 'UserController@tickets');
 });

@@ -1,0 +1,46 @@
+.confirmation {
+    width: 60%;
+    margin: 4rem auto -5rem;
+  }
+    .confirmation .barloader {
+      padding-top: 1rem;
+      text-align: center;
+    }
+
+    .confirmation .barloader div {
+      margin: 0 auto;
+      margin-bottom: 2rem;
+    }
+    .confirmation h2 {
+      font-size: 3.2rem;
+      margin: 0 0 2rem 0;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+    }
+
+    .confirmation h3 {
+      font-size: 2.7rem;
+      margin: 2rem 0 1.6rem 0;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+    }
+
+    .confirmation p,
+    .confirmation label {
+      margin-bottom: 1rem;
+      line-height: 2.4rem;
+    }
+
+    .confirmation ul {
+      margin-left: 1.5rem;
+    }
+
+    .confirmation li {
+      margin-bottom: 1rem;
+      line-height: 2.4rem;
+    }
+
+    .confirmation .qr {
+      margin: 2rem 0;
+      text-align: center;
+    }
