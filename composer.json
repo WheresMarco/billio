@@ -31,6 +31,7 @@
         "revolution/laravel-google-sheets": "*",
         "sentry/sentry-laravel": "*",
         "simplesoftwareio/simple-qrcode": "*",
+        "spatie/laravel-robots-middleware": "*",
         "spatie/laravel-stripe-webhooks": "*"
     },
     "require-dev": {
