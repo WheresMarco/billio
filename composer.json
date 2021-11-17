@@ -39,7 +39,8 @@
         "fzaninotto/faker": "*",
         "mockery/mockery": "*",
         "nunomaduro/collision": "*",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "spatie/laravel-ray": "^1.26"
     },
     "config": {
         "optimize-autoloader": true,

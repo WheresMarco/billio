@@ -2,210 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
-
-use Stripe;
-
-use App\AccessCode;
-use App\Event;
 use App\Ticket;
-use App\TicketType;
-use App\User;
-use App\Modifier;
-use App\Nin;
-
-use QrCode;
 
 class TicketController extends Controller
 {
-    /**
-     * Get ticket by id or stripe source id.
-     *
-     * @return void
-     */
-    public function ticket( Request $request, $id )
+    public function ticketsSold($eventID, $ticketTypeID)
     {
-        $ticket = Ticket::where( 'uuid', $id )->first();
-        $event = $ticket->event()->first();
-        $user = $ticket->user()->first();
-
-        // Build and return the ticket array.
-        $return_array = [
-            'id'         => $ticket->id,
-            'event'      => $event->name,
-            'ticketCode' => $ticket->ticket_code,
-            'eventSlug'  => $event->slug,
-            'status'     => $ticket->status,
-            'variations' => array(),
-            'user'       => [
-                'id'    => $user->id,
-                'name'  => $user->name,
-                'email' => $user->email,
-            ],
-        ];
-        return $return_array;
-    }
-
-    /**
-     * Create ticket.
-     *
-     * @return void
-     */
-    public function create( Request $request )
-    {
-        $accessCode      = $request->accessCode;
-        $email           = $request->email;
-        $nin             = $request->nin;
-        $firstName       = $request->firstName;
-        $lastName        = $request->lastName;
-        $eventID         = $request->eventID;
-        $ticketTypeID    = $request->ticketTypeID;
-        $ticketModifiers = $request->modifiers;
-
-        // Create the ticket
-        $ticket     = $this->createTicket($accessCode, $email, $nin, $firstName, $lastName, $eventID, $ticketTypeID, $ticketModifiers);
-        $event      = Event::find( $eventID );
-        $user       = User::where( 'email', $email )->first();
-        $ticketType = TicketType::find( $ticketTypeID );
-
-        // Make charge
-        $paymentIntent = Stripe::paymentIntents()->create([
-            'amount'        => $ticket->price,
-            'currency'      => 'sek',
-            'receipt_email' => $user->email,
-            'description'   => $event->name . ' - ' . $ticketType->name,
-            'metadata'      => ['ticket_id' => $ticket->uuid]
-        ]);
-
-        // Build and return the ticket array.
-		$return_array = array(
-			'id'            => $ticket->uuid,
-			'eventID'       => $event->id,
-            'status'        => $ticket->status,
-            'intent_secret' => $paymentIntent['client_secret'],
-			'user'          => array(
-				'id'            => $user->id,
-				'name'          => $user->name,
-				'email'         => $user->email,
-			),
-		);
-
-        // Return ticket to API.
-        return $return_array;
-    }
-
-    public function createTicket($accessCode, $email, $nin, $firstName, $lastName, $eventID, $ticketTypeID, $ticketModifiers) {
-        // Check if event is valid.
-        $event = Event::find( $eventID );
-        if ( null === $event )
-        {
-            return 'Could not find event.';
-        }
-
-        // Check if ticket type is valid.
-        $ticketType = TicketType::find( $ticketTypeID );
-        if ( null === $ticketType )
-        {
-            return 'Ticket type not valid.';
-        }
-
-        // Check if you have an access code.
-        // if ( $accessCode )
-        // {
-        //     $accessCode = AccessCode::find( $accessCode ); // TODO Find by code
-        // }
-
-        // // Check if ticket type is active.
-        // if ( ! $ticketType->active )
-        // {
-        //     if ( $accessCode && $event->id === $accessCode->event_id )
-        //     {
-        //         // TODO Implement
-        //     } else
-        //     {
-        //         return 'Not active';
-        //     }
-        // }
-
-        // Get ticket price.
-        $price = $ticketType->price;
-
-        // Check if student
-        $nin = str_replace( '-', '', $nin);
-        if ( 12 === strlen( $nin ) )
-        {
-            $nin = substr( $nin, 2 );
-        }
-
-        $nin_object = Nin::where( [ [ 'nin', $nin ], [ 'ticket_id', null ], [ 'utilized', false ] ] )->first();
-        if ( $nin_object ) {
-            $ticketModifiers[] = $nin_object->corps;
-        }
-
-        // Calculate price based on modifiers.
-        if ( $ticketModifiers ) {
-            foreach ($ticketModifiers as $ticketModifier) {
-                $modifier = Modifier::where( [ [ 'ticket_type_id', $ticketTypeID ], [ 'slug', $ticketModifier ] ] )->first();
-                if ( $modifier ) {
-                    $price = $price + $modifier->delta;
-                }
-            }
-        }
-
-        // Check if there are any tickets left.
-        $ticketsSold = $this->ticketsSold( $event->id, $ticketType->id );
-
-        if ( $ticketsSold >= $ticketType->limit )
-        {
-            return 'No tickets left for this event.';
-        }
-
-        // Get user.
-        $user = User::where( 'email', $email )->first();
-
-        // If no user, create.
-        if ( ! $user )
-        {
-            $user = new User();
-            $user->email = $email;
-            $user->name = $firstName . ' ' . $lastName;
-            $user->password = bcrypt(Str::random(10));
-            $user->save();
-        }
-
-        // Create ticket.
-        $ticket                 = new Ticket();
-        $ticket->event_id       = $event->id;
-        $ticket->user_id        = $user->id;
-        $ticket->ticket_type_id = $ticketType->id;
-        $ticket->status         = 'awaiting_payment';
-        $ticket->price          = $price;
-        $ticket->save();
-
-        // Loop over all modfiers and save on ticket
-        if ( $ticketModifiers ) {
-            foreach ($ticketModifiers as $ticketModifier) {
-                $modifier = Modifier::where( [ [ 'ticket_type_id', $ticketTypeID ], [ 'slug', $ticketModifier ] ] )->first();
-                $ticket->modifiers()->save($modifier);
-            }
-        }
-
-        // Save the nin-object with used data.
-        if ( $nin_object ) {
-            $nin_object->utilized  = true;
-            $nin_object->ticket_id = $ticket->id;
-            $nin_object->save();
-        }
-
-        return $ticket;
-    }
-
-    public function ticketsSold( $eventID, $ticketTypeID )
-    {
-        $tickets     = Ticket::where( [ [ 'event_id', $eventID ], [ 'ticket_type_id', $ticketTypeID ] ])->get();
+        $tickets     = Ticket::where([['event_id', $eventID], ['ticket_type_id', $ticketTypeID]])->get();
         $ticketsSold = $tickets->count();
 
         return $ticketsSold;
@@ -217,7 +21,8 @@ class TicketController extends Controller
      * @param Ticket $ticket
      * @return void
      */
-    public function resendTicket(Ticket $ticket) {
+    public function resendTicket(Ticket $ticket)
+    {
         $user         = $ticket->user()->first();
         $event        = $ticket->event()->first();
         $organisation = $event->organisation()->first();
@@ -234,7 +39,8 @@ class TicketController extends Controller
      * @param    int     $length - The length of the ticket code.
      * @return   string
      */
-    public function generateTicketCode( int $length = 6 ) {
+    public function generateTicketCode(int $length = 6)
+    {
         $max_random_number = 3000000000 === 2147483647 ? (float) '4294967295' : 4294967295; // 4294967295 = 0xffffffff
 
         // Create ticket code that is not taken.
@@ -260,7 +66,8 @@ class TicketController extends Controller
     * @access   public
     * @return   string
     */
-    public function genTicketUUID() {
+    public function genTicketUUID()
+    {
         $uuid = null;
 
         while ( null === $uuid ) :

@@ -26,9 +26,18 @@ Route::get('/privacy-policy', function () {
     return view('privacy');
 });
 
+// Route to display session storage
+Route::get('/session', function () {
+    // Get session data
+    $data = session()->all();
+    return $data;
+});
+
 // Event
 Route::prefix('event')->group(function () {
     Route::get('{eventSlug}', 'EventController@single')->name('event');
+
+    Route::post('{eventSlug}/{ticketType}', 'PurchaseController@addToCart');
 
     Route::get('{eventSlug}/{ticketType}/seating', 'PurchaseController@selectSeating');
 

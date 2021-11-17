@@ -12,6 +12,16 @@ use App\Http\Controllers\TicketController;
 class Ticket extends Model
 {
     use Actionable, Notifiable, Searchable;
+    protected $fillable = [
+        'uuid',
+        'ticket_code',
+        'event_id',
+        'user_id',
+        'ticket_type_id',
+        'utlized',
+        'status',
+        'price'
+    ];
 
     /**
      * The "booting" method of the model.

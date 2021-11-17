@@ -21,105 +21,43 @@
 
                 <br style="clear: both;">
 
-                <div class="ticket" style="padding: 20px; box-shadow: 0 .5rem 2rem 0 rgba(0,0,0,.1);">
-                    <h3>Biljett #1</h3>
+                @foreach ($cart as $key => $item)
+                    <div class="ticket" style="padding: 20px; box-shadow: 0 .5rem 2rem 0 rgba(0,0,0,.1);">
+                        <h3>Biljett #{{$key + 1}}</h3>
 
-                    <input type="text" id="firstName" placeholder="Förnamn" />
-                    <input type="text" id="lastName" placeholder="Efternamn" />
-                    <input type="text" id="email" placeholder="E-postadress"/>
+                        <input type="text" id="firstName" placeholder="Förnamn" />
+                        <input type="text" id="lastName" placeholder="Efternamn" />
+                        <input type="text" id="email" placeholder="E-postadress"/>
 
-                    @if (count($ticketType->modifiers) > 0)
-                        <div class="modifiers">
-                            <ul>
-                                @foreach ($ticketType->modifiers as $modifier)
+                        @if (count($ticketType->modifiers) > 0)
+                            <div class="modifiers">
+                                <ul>
+                                    @foreach ($ticketType->modifiers as $modifier)
+                                        <li>
+                                            <input class="faux-radio-checkbox faux-checkbox" id='{{$modifier->slug}}' value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
+                                            <label for='{{$modifier->slug}}' class="faux-radio-checkbox-label">
+                                                {{$modifier->name}} <span>{{$modifier->delta}} SEK</span>
+                                            </label>
+                                        </li>
+                                    @endforeach
+
                                     <li>
-                                        <input class="faux-radio-checkbox faux-checkbox" id='{{$modifier->slug}}' value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
-                                        <label for='{{$modifier->slug}}' class="faux-radio-checkbox-label">
-                                            {{$modifier->name}} <span>{{$modifier->delta}} SEK</span>
+                                        <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" checked />
+                                        <label for='karmedlemTEMP' class="faux-radio-checkbox-label">
+                                            Jag är kårmedlem <span>-20 SEK</span>
                                         </label>
                                     </li>
-                                @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
-                                <li>
-                                    <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" />
-                                    <label for='karmedlemTEMP' class="faux-radio-checkbox-label">
-                                        Jag är kårmedlem <span>-20 SEK</span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    @endif
-                </div>
+                        <br style="clear: both;">
 
-                <br style="clear: both;">
-
-                <div class="ticket" style="padding: 20px; box-shadow: 0 .5rem 2rem 0 rgba(0,0,0,.1);">
-                    <h3>Biljett #2</h3>
-
-                    <input type="text" id="firstName" placeholder="Förnamn" />
-                    <input type="text" id="lastName" placeholder="Efternamn" />
-                    <input type="text" id="email" placeholder="E-postadress"/>
-
-                    @if (count($ticketType->modifiers) > 0)
-                        <div class="modifiers">
-                            <ul>
-                                @foreach ($ticketType->modifiers as $modifier)
-                                    <li>
-                                        <input class="faux-radio-checkbox faux-checkbox" id='{{$modifier->slug}}' value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
-                                        <label for='{{$modifier->slug}}' class="faux-radio-checkbox-label">
-                                            {{$modifier->name}} <span>{{$modifier->delta}} SEK</span>
-                                        </label>
-                                    </li>
-                                @endforeach
-
-                                <li>
-                                    <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" checked />
-                                    <label for='karmedlemTEMP' class="faux-radio-checkbox-label">
-                                        Jag är kårmedlem <span>-20 SEK</span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    @endif
+                        <livewire:check-student />
+                    </div>
 
                     <br style="clear: both;">
-
-                    <livewire:check-student />
-                </div>
-
-                <br style="clear: both;">
-
-                <div class="ticket" style="padding: 20px; box-shadow: 0 .5rem 2rem 0 rgba(0,0,0,.1);">
-                    <h3>Biljett #3</h3>
-
-                    <input type="text" id="firstName" placeholder="Förnamn" />
-                    <input type="text" id="lastName" placeholder="Efternamn" />
-                    <input type="text" id="email" placeholder="E-postadress"/>
-
-                    @if (count($ticketType->modifiers) > 0)
-                        <div class="modifiers">
-                            <ul>
-                                @foreach ($ticketType->modifiers as $modifier)
-                                    <li>
-                                        <input class="faux-radio-checkbox faux-checkbox" id='{{$modifier->slug}}' value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
-                                        <label for='{{$modifier->slug}}' class="faux-radio-checkbox-label">
-                                            {{$modifier->name}} <span>{{$modifier->delta}} SEK</span>
-                                        </label>
-                                    </li>
-                                @endforeach
-
-                                <li>
-                                    <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" />
-                                    <label for='karmedlemTEMP' class="faux-radio-checkbox-label">
-                                        Jag är kårmedlem <span>-20 SEK</span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    @endif
-                </div>
-
-                <br style="clear: both;">
+                @endforeach
 
                 <div>
                     <input id="submit" type="submit" class="pink" value='Gå vidare till betalning' />

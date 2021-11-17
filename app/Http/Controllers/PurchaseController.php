@@ -9,16 +9,25 @@ class PurchaseController extends Controller
 {
     public function info($eventSlug, $ticketType)
     {
+        // Get cart from session
+        $cart = session()->get('cart');
+
+        // If cart is empty redirect to event page
+        if (!$cart) {
+            return redirect()->route('event', ['eventSlug' => $eventSlug]);
+        }
+
         $ticketType = TicketType::where('slug', $ticketType)->first();
 
         if (! $ticketType) {
-            return redirect('/');
+            return redirect()->route('event', ['eventSlug' => $eventSlug]);
         }
 
         $event = $ticketType->event->first();
 
         return view('event.purchase.info', [
-            'event' => $event,
+            'cart'       => $cart,
+            'event'      => $event,
             'ticketType' => $ticketType
         ]);
     }
@@ -58,7 +67,7 @@ class PurchaseController extends Controller
         ]);
 
         // Empty cart when adding to cart
-        $request->session()->forget('cart');
+        // $request->session()->forget('cart');
 
         // Get the ticket type
         $ticketType = TicketType::find($request->ticket_type_id);
@@ -84,7 +93,10 @@ class PurchaseController extends Controller
         // Create tickets with status pending based on quantity
         $tickets = $ticketType->tickets()->createMany(
             array_fill(0, $request->quantity, [
-                'status' => 'pending'
+                'event_id' => $event->id,
+                'user_id'  => 1, // TODO Change to null when bug fix.
+                'price'    => 0,
+                'status'   => 'pending'
             ])
         );
 
@@ -92,12 +104,15 @@ class PurchaseController extends Controller
         $cart = $request->session()->get('cart', []);
 
         // Add item to cart
-        $cart[] = $tickets;
+        $cart = $tickets;
 
         // Store cart back in session
         $request->session()->put('cart', $cart);
+        $request->session()->put('test', 'testar');
 
-        return redirect('/event/' . $event->eventSlug . '/' . $request->ticketType . '/info');
+        // TODO Depending on seating or not, redirect to the appropriate page
+
+        return redirect('/event/' . $event->slug . '/' . $ticketType->slug . '/info');
     }
 
     public function createPaymentIntent()
