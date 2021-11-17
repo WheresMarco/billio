@@ -50,6 +50,8 @@
         </div>
     </section>
 
+    @include('includes.cookiebar')
+
     <livewire:scripts>
     @stack('scripts')
 </body>
