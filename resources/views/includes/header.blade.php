@@ -20,6 +20,16 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/5c53f02145.js" crossorigin="anonymous"></script>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129583569-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129583569-1');
+    </script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" data-turbolinks-track="true">
 
@@ -36,7 +46,7 @@
                 <ul>
                     <li><a href="#">{{ __('header.resend_ticket') }}</a></li>
                     <li><a href="#">{{ __('header.help') }}</a></li>
-                    <li class="language-picker"><a href="#"><i class="fas fa-language"></i></a></li>
+                    {{-- <li class="language-picker"><a href="#"><i class="fas fa-language"></i></a></li> --}}
                 </ul>
             </nav>
 
