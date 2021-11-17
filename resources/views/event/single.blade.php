@@ -30,7 +30,7 @@
         <div class="wrapper">
             <div class="event-meta-item">
                 <h4>Datum</h4>
-                <span>{{$event->event_dates[0]->date_from->format('d/m - Y')}} till {{$event->event_dates[0]->date_to->format('d/m - Y')}}</span>
+                <span>{{$event->event_dates[0]->date_from->format('d/m - Y')}}</span>
             </div>
 
             <div class="event-meta-item">
@@ -51,6 +51,10 @@
     </div>
 
     <div class="wrapper">
+        @if(count($event->ticket_types) > 0)
+            <div class="alert-bar">Observera att du behöver ett giltigt Covidpass för att kunna delta på {{$event->name}}.</div>
+        @endif
+
         <section class="tickets">
             @foreach ($event->ticket_types as $ticketType)
                 @include('includes.ticket-type', $ticketType)

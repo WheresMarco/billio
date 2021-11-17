@@ -10,6 +10,8 @@
 <main>
     <div class="wrapper">
         <div class="purchase">
+            <div class="alert-bar">Observera att du behöver ett giltigt Covidpass för att kunna delta på Luciafesten.</div>
+
             <form id="payment-form" action="/event/luciafesten/party/payment">
                 @csrf
                 <h4>Steg 1 av 2</h4>

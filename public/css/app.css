@@ -247,7 +247,7 @@ h4 {
   color: #b4b4b4;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .wrapper {
@@ -282,6 +282,15 @@ h4 {
 }
 .turbolinks-progress-bar {
   background-color: #d052a5;
+}
+
+.alert-bar {
+  background-color: #d052a5;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 4rem;
+  text-align: center;
+  border-radius: 0.8rem;
 }
 
 hr {
@@ -843,6 +852,7 @@ hr {
 
 .event-meta {
   margin-top: 2rem;
+  margin-bottom: 4rem;
   padding: 30px;
   background: #f1f2f4;
   border-radius: 0.8rem;
@@ -872,10 +882,6 @@ hr {
 
 .event-meta-item.links .faux-button {
   margin-left: 1rem;
-}
-
-.tickets {
-  margin-top: 10rem;
 }
 
 @media only screen and (max-width: 600px) {
