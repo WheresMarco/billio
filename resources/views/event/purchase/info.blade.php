@@ -12,7 +12,7 @@
         <div class="purchase">
             <div class="alert-bar">Observera att du behöver ett giltigt Covidpass för att kunna delta på Luciafesten.</div>
 
-            <form id="payment-form" action="/event/luciafesten/party/payment">
+            <form action="/event/{{$event->slug}}/{{$ticketType->slug}}/info" method="post">
                 @csrf
                 <h4>Steg 1 av 2</h4>
                 <h2>Ange biljettuppgifter</h2>
@@ -25,9 +25,9 @@
                     <div class="ticket" style="padding: 20px; box-shadow: 0 .5rem 2rem 0 rgba(0,0,0,.1);">
                         <h3>Biljett #{{$key + 1}}</h3>
 
-                        <input type="text" id="firstName" placeholder="Förnamn" />
-                        <input type="text" id="lastName" placeholder="Efternamn" />
-                        <input type="text" id="email" placeholder="E-postadress"/>
+                        <input type="text" id="firstName" name="firstName[{{$key + 1}}]" placeholder="Förnamn" />
+                        <input type="text" id="lastName" name="lastName[{{$key + 1}}]" placeholder="Efternamn" />
+                        <input type="text" id="email" name="email[{{$key + 1}}]" placeholder="E-postadress"/>
 
                         @if (count($ticketType->modifiers) > 0)
                             <div class="modifiers">
@@ -41,19 +41,19 @@
                                         </li>
                                     @endforeach
 
-                                    <li>
+                                    {{-- <li>
                                         <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" checked />
                                         <label for='karmedlemTEMP' class="faux-radio-checkbox-label">
                                             Jag är kårmedlem <span>-20 SEK</span>
                                         </label>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         @endif
 
                         <br style="clear: both;">
 
-                        <livewire:check-student />
+                        {{-- <livewire:check-student /> --}}
                     </div>
 
                     <br style="clear: both;">

@@ -42,6 +42,7 @@ Route::prefix('event')->group(function () {
     Route::get('{eventSlug}/{ticketType}/seating', 'PurchaseController@selectSeating');
 
     Route::get('{eventSlug}/{ticketType}/info', 'PurchaseController@info');
+    Route::post('{eventSlug}/{ticketType}/info', 'PurchaseController@updateCartWithTicketInfo');
 
     Route::get('{eventSlug}/{ticketType}/payment', 'PurchaseController@payment');
     Route::post('{eventSlug}/{ticketType}/payment', 'PurchaseController@createPaymentIntent');

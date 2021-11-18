@@ -122,6 +122,9 @@ class PurchaseController extends Controller
 
     public function updateCartWithTicketInfo(Request $request)
     {
+        echo '<pre>';
+        var_dump($request->all());
+        die();
         // TODO Validate the request
 
 
