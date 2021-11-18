@@ -1,8 +1,8 @@
-{{-- @section('title', $ticketType->name . '-biljett - ' . $event->name . ' | Billio')
+@section('title', $ticketType->name . '-biljett - ' . $event->name . ' | Billio')
 @section('description', $event->excerpt)
 @section('og-title', $ticketType->name . '-biljett - ' . $event->name . ' | Billio')
 @section('og-content', $event->excerpt)
-@section('og-image', URL::asset($event->share_image)) --}}
+@section('og-image', URL::asset($event->share_image))
 
 @extends('layouts.app')
 
@@ -17,7 +17,7 @@
                 <h4>Steg 2 av 2</h4>
                 <h2>Betalning</h2>
 
-                <p>Du har valt två (2) <strong>"TYP"</strong>-biljett för <strong>EVENT</strong> den <strong>11 december 2021</strong>. Det kommer att totalt kosta <strong>XXX SEK</strong>. <a href="#">Ändra någonting</a>.</p>
+                <p>Du har valt XXXX <strong>"{{$ticketType->name}}"</strong>-biljetter för <strong>{{$event->name}}</strong>. <strong>Vi har reserverat dom i XX minuter och XX sekunder till</strong>. Vänligen skriv in uppgifterna för vardera biljett. <strong><a href="#">Ändra biljetttyp eller antal</a></strong>.</p>
 
                 <hr>
 
@@ -43,7 +43,7 @@
                 <div>
                     <div class="spinner hidden" id="spinner"></div>
 
-                    <input id="submit" type="submit" class="pink" value='Köp biljett för 100 SEK' />
+                    <input id="submit" type="submit" class="pink" value='Köp biljett för XXX SEK' />
                     <span id="stripe-smallprint" class="smallprint">Köpet hanteras säkert genom <a href="https://stripe.com" target="_blank" rel="noopener noreferrer">Stripe</a> och dina betaluppgifter<br> är aldrig tillgängliga för <a href="https://billio.app" target="_blank" rel="noopener noreferrer">Billio</a> eller <a href='#' target="_blank" rel="noopener noreferrer">EVENT</a>.</span>
 
                     <br style="clear: both;">
@@ -61,9 +61,6 @@
 
         let elements;
 
-        // The items the customer wants to buy
-        const items = [{ id: "xl-tshirt" }];
-
         initialize();
         checkStatus();
 
@@ -71,16 +68,7 @@
 
         // Fetches a payment intent and captures the client secret
         async function initialize() {
-            const { clientSecret } = await fetch(window.location.href, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    'X-CSRF-TOKEN': document.getElementsByName('_token')[0].value
-                },
-                body: JSON.stringify({ items }),
-            }).then((r) => r.json());
-
-            elements = stripe.elements({ clientSecret });
+            elements = stripe.elements({clientSecret: '{{$client_secret}}'});
 
             const paymentElement = elements.create("payment");
             paymentElement.mount("#payment-element");

@@ -14,10 +14,13 @@
 
             <form action="/event/{{$event->slug}}/{{$ticketType->slug}}/info" method="post">
                 @csrf
+                <input type="hidden" name="ticket_type_id" value="{{$ticketType->id}}">
+                <input type="hidden" name="event_id" value="{{$event->id}}">
+
                 <h4>Steg 1 av 2</h4>
                 <h2>Ange biljettuppgifter</h2>
 
-                <p>Du har valt tre <strong>"{{$ticketType->name}}"</strong>-biljetter för <strong>{{$event->name}}</strong>. <strong>Vi har reserverat dom i XX minuter och XX sekunder till</strong>. Vänligen skriv in uppgifterna för vardera biljett. <strong><a href="#">Ändra biljetttyp eller antal</a></strong>.</p>
+                <p>Du har valt XXXX <strong>"{{$ticketType->name}}"</strong>-biljetter för <strong>{{$event->name}}</strong>. <strong>Vi har reserverat dom i XX minuter och XX sekunder till</strong>. Vänligen skriv in uppgifterna för vardera biljett. <strong><a href="#">Ändra biljetttyp eller antal</a></strong>.</p>
 
                 <br style="clear: both;">
 
@@ -25,16 +28,16 @@
                     <div class="ticket" style="padding: 20px; box-shadow: 0 .5rem 2rem 0 rgba(0,0,0,.1);">
                         <h3>Biljett #{{$key + 1}}</h3>
 
-                        <input type="text" id="firstName" name="firstName[{{$key + 1}}]" placeholder="Förnamn" />
-                        <input type="text" id="lastName" name="lastName[{{$key + 1}}]" placeholder="Efternamn" />
-                        <input type="text" id="email" name="email[{{$key + 1}}]" placeholder="E-postadress"/>
+                        <input type="text" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Förnamn" />
+                        <input type="text" id="lastName" name="tickets[{{$key}}][lastName]" placeholder="Efternamn" />
+                        <input type="text" id="email" name="tickets[{{$key}}][email]" placeholder="E-postadress"/>
 
                         @if (count($ticketType->modifiers) > 0)
                             <div class="modifiers">
                                 <ul>
                                     @foreach ($ticketType->modifiers as $modifier)
                                         <li>
-                                            <input class="faux-radio-checkbox faux-checkbox" id='{{$modifier->slug}}' value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
+                                            <input class="faux-radio-checkbox faux-checkbox" id='{{$modifier->slug}}' name="tickets[{{$key}}][modifier][]" value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
                                             <label for='{{$modifier->slug}}' class="faux-radio-checkbox-label">
                                                 {{$modifier->name}} <span>{{$modifier->delta}} SEK</span>
                                             </label>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TicketType;
+use App\User;
+use Illuminate\Support\Str;
 
 class PurchaseController extends Controller
 {
@@ -48,9 +50,34 @@ class PurchaseController extends Controller
         ]);
     }
 
-    public function payment()
+    public function payment($eventSlug, $ticketType)
     {
-        return view('event.purchase.payment');
+        // Get cart from session
+        $cart = session()->get('cart');
+
+        // If cart is empty redirect to event page
+        if (!$cart) {
+            return redirect()->route('event', ['eventSlug' => $eventSlug]);
+        }
+
+        // Get clientSecret from session
+        $client_secret = session()->get('client_secret');
+
+        // Get ticket type
+        $ticketType = TicketType::where('slug', $ticketType)->first();
+
+        if (! $ticketType) {
+            return redirect()->route('event', ['eventSlug' => $eventSlug]);
+        }
+
+        $event = $ticketType->event->first();
+
+        return view('event.purchase.payment', [
+            'client_secret' => $client_secret,
+            'cart'         => $cart,
+            'event'        => $event,
+            'ticketType'   => $ticketType
+        ]);
     }
 
     public function confirmation()
@@ -120,42 +147,127 @@ class PurchaseController extends Controller
         return redirect('/event/' . $event->slug . '/' . $ticketType->slug . '/info');
     }
 
+    /**
+     * Update the cart with ticket information from checkout flow.
+     *
+     * @param Request $request
+     * @return void
+     */
     public function updateCartWithTicketInfo(Request $request)
     {
-        echo '<pre>';
-        var_dump($request->all());
-        die();
-        // TODO Validate the request
+        // Validate the request
+        $this->validate($request, [
+            'event_id'       => 'required|exists:events,id',
+            'ticket_type_id' => 'required|exists:ticket_types,id',
+            'tickets.*'      => 'array:firstName,lastName,email'
+        ]);
 
+        // Get the ticket type
+        $ticketType = TicketType::find($request->ticket_type_id);
 
-        // TODO Create a payment intent
+        // Get the event
+        $event = $ticketType->event->first();
 
-        // TODO Redirect to payment page
+        // Get cart from session
+        $cart = $request->session()->get('cart', []);
 
+        // If cart is empty redirect to event page
+        if (! $cart) {
+            return redirect()->route('event', ['eventSlug' => $event->slug]);
+        }
+
+        // Loop through tickets
+        foreach ($request->tickets as $key => $ticket) {
+            // Check if ticket exists in cart
+            if (isset($cart[$key])) {
+                // Get user by email
+                $user = User::where('email', $ticket['email'])->first();
+
+                // If user doesn't exist create one
+                if (! $user) {
+                    $user = User::create([
+                        'name' => $ticket['firstName'] . ' ' . $ticket['lastName'],
+                        'email'      => $ticket['email'],
+                        'password'   => bcrypt(Str::random(10))
+                    ]);
+                }
+
+                // Update ticket
+                $cart[$key]->update([
+                    'user_id' => $user->id,
+                ]);
+            }
+        }
+
+        // Store cart back in session
+        $request->session()->put('cart', $cart);
+
+        // Create a payment intent
+        $client_secret = $this->createPaymentIntent($cart);
+
+        // Store payment intent in session
+        $request->session()->put('client_secret', $client_secret);
+
+        // Redirect to payment page
+        return redirect('/event/' . $event->slug . '/' . $ticketType->slug . '/payment');
     }
 
-    public function createPaymentIntent()
+    /**
+     * Create a payment intent to be used on payment page.
+     *
+     * @param [type] $cart
+     * @return void
+     */
+    public function createPaymentIntent($cart)
     {
+        $total      = 0;
+        $ticketIds  = [];
+        $ticketType = null;
+        $event      = null;
 
-        // TODO Create a pending ticket in database.
+        // Loop over cart
+        foreach ($cart as $ticket) {
+            // Add ticket id to array
+            $ticketIds[] = $ticket->id;
+
+            // Get the ticket type
+            $ticketType = $ticket->ticket_type->first();
+
+            // Get the event
+            $event = $ticketType->event->first();
+
+            // Get the price
+            $price = $ticketType->price;
+
+            // TODO Calculate modifiers price
+
+            // Add price to total
+            $total += $price;
+        }
+
+        // If total is 0 redirect to event page. No free tickets!
+        if ($total == 0) {
+            return redirect()->route('event', ['eventSlug' => $event->slug]);
+        }
 
         // Create a PaymentIntent with amount and currency
         $paymentIntent = \Stripe::paymentIntents()->create([
-            'amount' => 1000,
+            'amount' => $total * 100,
             'currency' => 'sek',
             'payment_method_types' => [
                 'card'
             ],
-            'description'   => 'Luciafesten - 3X TICKET NAME',
-            'metadata'      => ['ticket_id' => 123],
+            'description'   => $event->name . ' - ' . count($cart) . 'x ' . $ticketType->name,
+            'metadata'      => [
+                'tickets' => implode(',', $ticketIds),
+            ],
         ]);
 
-        $output = [
-            'clientSecret' => $paymentIntent['client_secret'],
-        ];
+        // Check if payment intent was created
+        if (! $paymentIntent) {
+            return redirect()->back()->with('error', 'Could not create payment intent.');
+        }
 
-        // TODO Save ticket secret in ticket object and clear unused ones after 10 min.
-
-        return $output;
+        return $paymentIntent['client_secret'];
     }
 }
