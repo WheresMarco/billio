@@ -8,10 +8,10 @@
     <p>{{$ticketType->description}}</p>
 
     <label style="font-weight: bold;">Antal biljetter</label><br style="clear: both;">
-    <input type="number" name="quantity" id="quantity" placeholder="1" style="width: 120px; height: 43px; margin-right: 10px; margin-top: 10px; float:left;">
+    <input type="number" name="quantity" id="quantity" placeholder="1" min="1" max="{{$ticketType->limit_person}}">
 
     @if ( $ticketType->active && ! $ticketType->soldOut )
-        <input type="submit" class="faux-button pink" value='Köp tre "{{$ticketType->name}}"-biljetter' />
+        <input type="submit" class="faux-button pink" value='Gå vidare' />
     @else
         <button class="faux-button pink disabled">Inte tillgänglig</button>
     @endif

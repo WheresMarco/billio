@@ -67,7 +67,8 @@ class PurchaseController extends Controller
         ]);
 
         // Empty cart when adding to cart
-        // $request->session()->forget('cart');
+        // TODO When emptying the cart remove the pending tickets from the database to free them up
+        $request->session()->forget('cart');
 
         // Get the ticket type
         $ticketType = TicketType::find($request->ticket_type_id);
@@ -75,6 +76,11 @@ class PurchaseController extends Controller
         // Redirect to the event page if the ticket type doesn't exist
         if (! $ticketType) {
             return redirect()->back()->with('error', 'Ticket type does not exist.');
+        }
+
+        // Check if user is trying to buy more tickets than per person limit
+        if ($ticketType->limit_person > 0 && $request->quantity > $ticketType->limit_person) {
+            return redirect()->back()->with('error', 'You can only buy ' . $ticketType->limit_person . ' tickets per person.');
         }
 
         // Get the event
@@ -108,11 +114,21 @@ class PurchaseController extends Controller
 
         // Store cart back in session
         $request->session()->put('cart', $cart);
-        $request->session()->put('test', 'testar');
 
         // TODO Depending on seating or not, redirect to the appropriate page
 
         return redirect('/event/' . $event->slug . '/' . $ticketType->slug . '/info');
+    }
+
+    public function updateCartWithTicketInfo(Request $request)
+    {
+        // TODO Validate the request
+
+
+        // TODO Create a payment intent
+
+        // TODO Redirect to payment page
+
     }
 
     public function createPaymentIntent()
