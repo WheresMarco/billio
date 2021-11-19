@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Spatie\RobotsMiddleware\RobotsMiddleware;
 
-class MyRobotsMiddleware extends RobotsMiddleware
+class RobotsMiddleware extends RobotsMiddleware
 {
     /**
      * @return string|bool
