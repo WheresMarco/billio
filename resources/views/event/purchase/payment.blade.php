@@ -19,28 +19,31 @@
 
                 <p>Du har valt {{count($cart)}} <strong>"{{$ticketType->name}}"</strong>-@if(count($cart) > 1)biljetter @else biljett @endif för <strong>{{$event->name}}</strong>. Det kommer att kosta {{$total}} SEK.</p>
 
+                <p><strong>Vi har reserverat biljetterna i XX minuter och XX sekunder till.</strong></p>
+
                 <p><strong><a href="/event/{{$event->slug}}/{{$ticketType->slug}}/info">Ändra biljettinfo</a></strong></p>
 
                 <hr>
 
-                <label for="firstName">Förnamn</label>
-                <input type="text" id="firstName" placeholder="Kalle" />
+                <div class="firstNameContainer">
+                    <label for="firstName">Förnamn</label>
+                    <input type="text" id="firstName" placeholder="Kalle" />
+                </div>
 
-                <label for="lastName">Efternamn</label>
-                <input type="text" id="lastName" placeholder="Kula" />
+                <div class="lastNameContainer">
+                    <label for="lastName">Efternamn</label>
+                    <input type="text" id="lastName" placeholder="Kula" />
+                </div>
 
-                <label for="email">E-postadress för kvittot</label>
+                <label for="email">E-postadress att skicka kvittot till</label>
                 <input type="text" id="email" placeholder="kalle@kula.se"/>
 
-                <br style="clear: both;">
+                <hr>
 
-                <div wire:ignore id="payment-element"></div>
-
-                <!-- Used to display form errors. -->
-                <div id="card-errors" role="alert"></div>
+                <div id="payment-element"></div>
 
                 <br style="clear: both;">
-                <input id="terms" type="checkbox" /> <label for="terms">Jag godkänner de <a href="/terms" target="_blank">allmänna villkoren</a>.</label>
+                <input id="terms" type="checkbox" /> <label class="terms-checkbox" for="terms">Jag godkänner de <a href="/terms" target="_blank">allmänna villkoren</a>.</label>
 
                 <div>
                     <div class="spinner hidden" id="spinner"></div>

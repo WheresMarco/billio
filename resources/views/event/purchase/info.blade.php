@@ -22,7 +22,7 @@
 
                 <p>Du har valt {{count($cart)}} <strong>"{{$ticketType->name}}"</strong>-@if(count($cart) > 1)biljetter @else biljett @endif för <strong>{{$event->name}}</strong>. Vänligen skriv in uppgifterna för vardera biljett.</p>
 
-                <p><strong>Vi har reserverat biljetterna i XX minuter och XX sekunder till</strong>.</p>
+                <p><strong>Vi har reserverat biljetterna i XX minuter och XX sekunder till.</strong></p>
 
                 <br style="clear: both;">
 
@@ -32,11 +32,15 @@
                             <h3>Biljett #{{$key + 1}}</h3>
                         @endif
 
-                        <label for="firstName">Förnamn</label>
-                        <input type="text" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Förnamn" />
+                        <div class="firstNameContainer">
+                            <label for="firstName">Förnamn</label>
+                            <input type="text" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Förnamn" />
+                        </div>
 
-                        <label for="lastName">Efternamn</label>
-                        <input type="text" id="lastName" name="tickets[{{$key}}][lastName]" placeholder="Efternamn" />
+                        <div class="lastNameContainer">
+                            <label for="lastName">Efternamn</label>
+                            <input type="text" id="lastName" name="tickets[{{$key}}][lastName]" placeholder="Efternamn" />
+                        </div>
 
                         <label for="email">E-postadress</label>
                         <input type="text" id="email" name="tickets[{{$key}}][email]" placeholder="E-postadress"/>
