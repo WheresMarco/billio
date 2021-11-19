@@ -34,16 +34,16 @@
 
                         <div class="firstNameContainer">
                             <label for="firstName">Förnamn</label>
-                            <input type="text" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Förnamn" />
+                            <input type="text" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Förnamn" required/>
                         </div>
 
                         <div class="lastNameContainer">
                             <label for="lastName">Efternamn</label>
-                            <input type="text" id="lastName" name="tickets[{{$key}}][lastName]" placeholder="Efternamn" />
+                            <input type="text" id="lastName" name="tickets[{{$key}}][lastName]" placeholder="Efternamn" required/>
                         </div>
 
                         <label for="email">E-postadress</label>
-                        <input type="text" id="email" name="tickets[{{$key}}][email]" placeholder="E-postadress"/>
+                        <input type="text" id="email" name="tickets[{{$key}}][email]" placeholder="E-postadress" required/>
 
                         <h4>Tillval</h4>
                         @if (count($ticketType->modifiers) > 0)

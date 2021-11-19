@@ -44,8 +44,7 @@
         <div class="wrapper">
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#">{{ __('header.resend_ticket') }}</a></li>
-                    <li><a href="#">{{ __('header.help') }}</a></li>
+                    <li><a href="/help">{{ __('header.help') }}</a></li>
                     {{-- <li class="language-picker"><a href="#"><i class="fas fa-language"></i></a></li> --}}
                 </ul>
             </nav>

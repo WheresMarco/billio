@@ -27,16 +27,16 @@
 
                 <div class="firstNameContainer">
                     <label for="firstName">Förnamn</label>
-                    <input type="text" id="firstName" placeholder="Kalle" />
+                    <input type="text" id="firstName" placeholder="Kalle" required />
                 </div>
 
                 <div class="lastNameContainer">
                     <label for="lastName">Efternamn</label>
-                    <input type="text" id="lastName" placeholder="Kula" />
+                    <input type="text" id="lastName" placeholder="Kula" required />
                 </div>
 
                 <label for="email">E-postadress att skicka kvittot till</label>
-                <input type="text" id="email" placeholder="kalle@kula.se"/>
+                <input type="text" id="email" placeholder="kalle@kula.se" required />
 
                 <hr>
 

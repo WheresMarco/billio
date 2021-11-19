@@ -50,7 +50,7 @@
         </div>
     </section>
 
-    @include('includes.cookiebar')
+    @include('cookie-consent::index')
 
     <livewire:scripts>
     @stack('scripts')

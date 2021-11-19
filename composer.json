@@ -30,6 +30,7 @@
         "personnummer/personnummer": "*",
         "revolution/laravel-google-sheets": "*",
         "sentry/sentry-laravel": "*",
+        "spatie/laravel-cookie-consent": "*",
         "spatie/laravel-robots-middleware": "*",
         "spatie/laravel-stripe-webhooks": "*"
     },

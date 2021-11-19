@@ -26,11 +26,8 @@ Route::get('/privacy-policy', function () {
     return view('privacy');
 });
 
-// Route to display session storage
-Route::get('/session', function () {
-    // Get session data
-    $data = session()->all();
-    return $data;
+Route::get('/help', function () {
+    return view('help');
 });
 
 // Event
@@ -48,4 +45,12 @@ Route::prefix('event')->group(function () {
     Route::post('{eventSlug}/{ticketType}/payment', 'PurchaseController@createPaymentIntent');
 
     Route::get('{eventSlug}/{ticketType}/confirmation', 'PurchaseController@confirmation');
+});
+
+
+// Route to display session storage
+Route::get('/session', function () {
+    // Get session data
+    $data = session()->all();
+    return $data;
 });

@@ -19,7 +19,7 @@
         "sass-loader": "*"
     },
     "dependencies": {
-        "alpinejs": "*",
+        "alpinejs": "^3.5.1",
         "turbolinks": "*"
     }
 }

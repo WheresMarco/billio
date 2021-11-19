@@ -7,7 +7,7 @@
             <h1>Säg farväl till det jobbiga med att sälja biljetter</h1>
             <p>Vill ni sälja biljetter till ditt nästa evenemang? Med Billio får ni ett komplett system från försäljning till check-in. Med en kraftfull och snabb tjänst som kan hantera evenemang av alla storlekar.</p>
 
-            <a href="mailto:hi@billio.app" class="faux-button pink">Kom igång</a> <a href="/#app-info" class="faux-button orange">Läs mer</a>
+            <a href="mailto:hi@billio.app" class="faux-button pink">Använd Billio på ditt nästa evenemang</a> <a href="/#app-info" class="faux-button orange">Läs mer</a>
         </section>
     </div>
 </section>
