@@ -58,19 +58,19 @@
                                         </li>
                                     @endforeach
 
-                                    {{-- <li>
+                                    <li>
                                         <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" checked />
                                         <label for='karmedlemTEMP' class="faux-radio-checkbox-label">
                                             Jag är kårmedlem <span>-20 SEK</span>
                                         </label>
-                                    </li> --}}
+                                    </li>
                                 </ul>
                             </div>
                         @endif
 
                         <br style="clear: both;">
 
-                        {{-- <livewire:check-student /> --}}
+                        <livewire:check-student />
                     </div>
 
                     <br style="clear: both;">
@@ -78,7 +78,7 @@
 
                 <div>
                     <input id="submit" type="submit" class="pink" value='Gå vidare till betalning' />
-                    <a href="/event/{{$event->slug}}/" class="faux-button grey">Avbryt</a>
+                    <a href="/event/{{$event->slug}}/" class="faux-button grey" style="line-height: 2.1rem; margin-top: 10px;">Avbryt</a>
                     <br style="clear: both;">
                 </div>
             </form>

@@ -1256,6 +1256,7 @@ hr {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   margin-bottom: 5px;
+  margin-top: 0;
 }
 .event-preview .event-preview-content .event-preview-meta-item span {
   color: #b4b4b4;

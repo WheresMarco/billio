@@ -53,8 +53,6 @@ class TicketPurchased extends Mailable
                         'ticketType' => $this->ticket->ticket_type()->first()->name,
                         'ticketCode' => $this->ticket->ticket_code,
                         'modifiers'  => $this->ticket->modifiers()->get(),
-                        'qrPath'     => '',
-                        'logo'       => '',
                     ])
                     ->markdown('emails.tickets.purchased');
     }

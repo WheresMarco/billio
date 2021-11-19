@@ -1,16 +1,16 @@
-@component('mail::message', ['event' => $event, 'orgName' => $orgName, 'orgEmail' => $orgEmail, 'orgAddress' => $orgAddress, 'name' => $name, 'ticketType' => $ticketType, 'ticketCode' => $ticketCode, 'modifiers' => $modifiers, 'qrPath' => $qrPath])
+@component('mail::message', ['event' => $event, 'orgName' => $orgName, 'orgEmail' => $orgEmail, 'orgAddress' => $orgAddress, 'name' => $name, 'ticketType' => $ticketType, 'ticketCode' => $ticketCode, 'modifiers' => $modifiers])
 {{-- Header --}}
 @slot('header')
-@component('mail::header', ['logo' => $logo])
+@component('mail::header')
 @endcomponent
 @endslot
 
 {{-- Body --}}
 # Här är din biljett till {{ $event }}
 
-Hej {{ $name }}! Det här mailet bekräftar ditt köp av en biljett av typen "{{ $ticketType }}" till {{ $event }}.
+Hej {{ $name }}! Det här brevet är din "{{ $ticketType }}"-biljett till {{ $event }}.
 
-**Var god och notera att innehållet i det är mailet är en giltig biljett. Håll det hemligt.**
+**Var god och notera att innehållet i det är brevet är en giltig biljett. Håll det hemligt.**
 
 @if(!$modifiers->isEmpty())
 ## Du har valt följande
@@ -20,12 +20,14 @@ Hej {{ $name }}! Det här mailet bekräftar ditt köp av en biljett av typen "{{
 @endif
 
 ## Vid evenemanget
-Du kan kan komma in på evenemanget på följande sätt:
+Kom ihåg att det är krav på Covidpass för att komma in på {{ $event }}.
 
-* Visa QR-koden nedan.
-* Visa biljettkoden **{{ $ticketCode }}** tillsammans med en giltig identitetshandling.
+Du kan komma in på {{ $event }} på följande sätt:
 
-![{{ $ticketCode }}](https://qrcode.tec-it.com/API/QRCode?data={{ $ticketCode }} "{{ $ticketCode }}")
+* Visa QR-koden nedan tillsammans med en giltig identitetshandling.
+* Visa upp biljettkoden **{{ $ticketCode }}** tillsammans med en giltig identitetshandling.
+
+![{{ $ticketCode }}](https://qrcode.tec-it.com/API/QRCode?quietzone=3&backcolor=fff&data={{ $ticketCode }} "{{ $ticketCode }}")
 
 Var god och kontakta **{{ $orgName }}** på **{{ $orgEmail }}** om du har några frågor om evenemanget.
 
