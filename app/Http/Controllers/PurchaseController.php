@@ -60,6 +60,9 @@ class PurchaseController extends Controller
             return redirect()->route('event', ['eventSlug' => $eventSlug]);
         }
 
+        // Get total from session
+        $total = session()->get('total');
+
         // Get clientSecret from session
         $client_secret = session()->get('client_secret');
 
@@ -73,10 +76,11 @@ class PurchaseController extends Controller
         $event = $ticketType->event->first();
 
         return view('event.purchase.payment', [
+            'total'         => $total,
             'client_secret' => $client_secret,
-            'cart'         => $cart,
-            'event'        => $event,
-            'ticketType'   => $ticketType
+            'cart'          => $cart,
+            'event'         => $event,
+            'ticketType'    => $ticketType
         ]);
     }
 
@@ -159,7 +163,7 @@ class PurchaseController extends Controller
         $this->validate($request, [
             'event_id'       => 'required|exists:events,id',
             'ticket_type_id' => 'required|exists:ticket_types,id',
-            'tickets.*'      => 'array:firstName,lastName,email'
+            'tickets.*'      => 'array:firstName,lastName,email' // TODO Check validation.
         ]);
 
         // Get the ticket type
@@ -195,6 +199,7 @@ class PurchaseController extends Controller
                 // Update ticket
                 $cart[$key]->update([
                     'user_id' => $user->id,
+                    'status'  => 'awaiting_payment',
                 ]);
             }
         }
@@ -220,15 +225,15 @@ class PurchaseController extends Controller
      */
     public function createPaymentIntent($cart)
     {
-        $total      = 0;
-        $ticketIds  = [];
-        $ticketType = null;
-        $event      = null;
+        $total       = 0;
+        $ticketUuids = [];
+        $ticketType  = null;
+        $event       = null;
 
         // Loop over cart
         foreach ($cart as $ticket) {
             // Add ticket id to array
-            $ticketIds[] = $ticket->id;
+            $ticketUuids[] = $ticket->uuid;
 
             // Get the ticket type
             $ticketType = $ticket->ticket_type->first();
@@ -250,16 +255,19 @@ class PurchaseController extends Controller
             return redirect()->route('event', ['eventSlug' => $event->slug]);
         }
 
+        // Save total price in session
+        session()->put('total', $total);
+
         // Create a PaymentIntent with amount and currency
         $paymentIntent = \Stripe::paymentIntents()->create([
-            'amount' => $total * 100,
+            'amount' => $total,
             'currency' => 'sek',
             'payment_method_types' => [
                 'card'
             ],
             'description'   => $event->name . ' - ' . count($cart) . 'x ' . $ticketType->name,
             'metadata'      => [
-                'tickets' => implode(',', $ticketIds),
+                'tickets' => implode(',', $ticketUuids),
             ],
         ]);
 

@@ -26,19 +26,22 @@ class HandleFailedCharge implements ShouldQueue
     {
         $payload       = $this->webhookCall->payload;
         $stripe_object = $payload['data']['object'];
-        $source_id     = $stripe_object['id'];
+        $tickets       = explode(',', $stripe_object['metadata']['tickets']) ?? [];
 
-        // Get ticket by uuid.
-        $ticket = Ticket::where( 'uuid', $stripe_object['metadata']['ticket_id'] )->first();
+        foreach ($tickets as $ticket_id) {
+            $ticket = Ticket::where('uuid', $ticket_id)->first();
 
-        // Check correct status for ticket - awaiting_payment.
-        if ( 'awaiting_payment' !== $ticket->status )
-        {
-            Log::error('Ticket not awaiting payment ' . print_r( $ticket->id, true ));
-            return;
+            if ($ticket) {
+                // Check correct status for ticket - awaiting_payment.
+                if ('awaiting_payment' !== $ticket->status) {
+                    Log::error('Ticket not awaiting payment ' . print_r($ticket->id, true));
+                    return;
+                }
+
+                $ticket->delete();
+
+                // TODO Send of email notifing user of failed payment.
+            }
         }
-
-        // Remove ticket.
-        $ticket->delete();
     }
 }

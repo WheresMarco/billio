@@ -35,6 +35,6 @@ class TicketPurchased
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('ticket.' . $this->ticket->uuid);
     }
 }

@@ -931,6 +931,10 @@ hr {
   text-align: center;
 }
 
+.purchase-error.hidden {
+  display: none;
+}
+
 .purchase h2 {
   font-size: 3.2rem;
   margin: 0 0 2rem 0;

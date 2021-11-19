@@ -4,14 +4,9 @@
 <main>
     <div class="wrapper">
         <div class="confirmation">
-            <div>
-                <div class="barloader"><h2>Din betalning hanteras</h2></div>
-                <p>Det här kan ta några minuter. Ladda inte om sidan. Om sidan inte har uppdaterats på 5 minuter var god och kontakta oss på <a href='#'>ORG EMAIL</a>.</p>
-            </div>
-
-            <hr>
-
             <h2>Tack!</h2>
+                <p><strong>Infotext om flera biljetter. Skriv även ut dom nedan.</strong></p>
+
                 <p>Du har nu en biljett till TICKETN NAME! Biljetten och alla detaljer (inklusive koden nedan) har skickats till dig (USER EMAIL).</p>
 
                 <p><strong>Var god att notera att innehållet på den här sidan och e-postbrevet är gilltigt som en biljett. Håll det hemligt.</strong></p>

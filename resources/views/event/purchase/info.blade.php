@@ -20,7 +20,9 @@
                 <h4>Steg 1 av 2</h4>
                 <h2>Ange biljettuppgifter</h2>
 
-                <p>Du har valt XXXX <strong>"{{$ticketType->name}}"</strong>-biljetter för <strong>{{$event->name}}</strong>. <strong>Vi har reserverat dom i XX minuter och XX sekunder till</strong>. Vänligen skriv in uppgifterna för vardera biljett. <strong><a href="#">Ändra biljetttyp eller antal</a></strong>.</p>
+                <p>Du har valt {{count($cart)}} <strong>"{{$ticketType->name}}"</strong>-@if(count($cart) > 1)biljetter @else biljett @endif för <strong>{{$event->name}}</strong>. Vänligen skriv in uppgifterna för vardera biljett.</p>
+
+                <p><strong>Vi har reserverat biljetterna i XX minuter och XX sekunder till</strong>.</p>
 
                 <br style="clear: both;">
 
@@ -28,10 +30,16 @@
                     <div class="ticket" style="padding: 20px; box-shadow: 0 .5rem 2rem 0 rgba(0,0,0,.1);">
                         <h3>Biljett #{{$key + 1}}</h3>
 
+                        <label for="firstName">Förnamn</label>
                         <input type="text" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Förnamn" />
+
+                        <label for="lastName">Efternamn</label>
                         <input type="text" id="lastName" name="tickets[{{$key}}][lastName]" placeholder="Efternamn" />
+
+                        <label for="email">E-postadress</label>
                         <input type="text" id="email" name="tickets[{{$key}}][email]" placeholder="E-postadress"/>
 
+                        <h4>Tillval</h4>
                         @if (count($ticketType->modifiers) > 0)
                             <div class="modifiers">
                                 <ul>
@@ -64,6 +72,7 @@
 
                 <div>
                     <input id="submit" type="submit" class="pink" value='Gå vidare till betalning' />
+                    <a href="/event/{{$event->slug}}/" class="faux-button grey">Avbryt</a>
                     <br style="clear: both;">
                 </div>
             </form>
@@ -71,3 +80,9 @@
     </div>
 </main>
 @endsection
+
+@push('scripts')
+<script>
+// TODO Add countdown
+</script>
+@endpush

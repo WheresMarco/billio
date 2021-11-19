@@ -10,14 +10,16 @@
 <main>
     <div class="wrapper">
         <div class="purchase">
-            <div class="purchase-error" id="payment-error"></div>
+            <div class="purchase-error hidden" id="payment-error"></div>
 
             <form id="payment-form">
                 @csrf
                 <h4>Steg 2 av 2</h4>
                 <h2>Betalning</h2>
 
-                <p>Du har valt XXXX <strong>"{{$ticketType->name}}"</strong>-biljetter för <strong>{{$event->name}}</strong>. <strong>Vi har reserverat dom i XX minuter och XX sekunder till</strong>. Vänligen skriv in uppgifterna för vardera biljett. <strong><a href="#">Ändra biljetttyp eller antal</a></strong>.</p>
+                <p>Du har valt {{count($cart)}} <strong>"{{$ticketType->name}}"</strong>-@if(count($cart) > 1)biljetter @else biljett @endif för <strong>{{$event->name}}</strong>. Det kommer att kosta {{$total}} SEK.</p>
+
+                <p><strong><a href="/event/{{$event->slug}}/{{$ticketType->slug}}/info">Ändra biljettinfo</a></strong></p>
 
                 <hr>
 
@@ -43,8 +45,8 @@
                 <div>
                     <div class="spinner hidden" id="spinner"></div>
 
-                    <input id="submit" type="submit" class="pink" value='Köp biljett för XXX SEK' />
-                    <span id="stripe-smallprint" class="smallprint">Köpet hanteras säkert genom <a href="https://stripe.com" target="_blank" rel="noopener noreferrer">Stripe</a> och dina betaluppgifter<br> är aldrig tillgängliga för <a href="https://billio.app" target="_blank" rel="noopener noreferrer">Billio</a> eller <a href='#' target="_blank" rel="noopener noreferrer">EVENT</a>.</span>
+                    <input id="submit" type="submit" class="pink" value='Köp biljett för {{$total}} SEK' />
+                    <span id="stripe-smallprint" class="smallprint">Köpet hanteras säkert genom <a href="https://stripe.com" target="_blank" rel="noopener noreferrer">Stripe</a> och dina betaluppgifter<br> är aldrig tillgängliga för <a href="https://billio.app" target="_blank" rel="noopener noreferrer">Billio</a> eller <a href='{{$event->organisation->url}}' target="_blank" rel="noopener noreferrer">{{$event->organisation->title}}</a>.</span>
 
                     <br style="clear: both;">
                 </div>
@@ -81,7 +83,7 @@
             const { error } = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
-                    return_url: window.location.href + '/confirmation',
+                    return_url: window.location.origin + '/event/{{$event->slug}}/{{$ticketType->slug}}/confirmation',
                     receipt_email: document.getElementById("email").value,
                     payment_method_data: {
                         billing_details: {
@@ -92,11 +94,6 @@
                 },
             });
 
-            // This point will only be reached if there is an immediate error when
-            // confirming the payment. Otherwise, your customer will be redirected to
-            // your `return_url`. For some payment methods like iDEAL, your customer will
-            // be redirected to an intermediate site first to authorize the payment, then
-            // redirected to the `return_url`.
             if (error.type === "card_error" || error.type === "validation_error") {
                 showMessage(error.message);
             } else {
@@ -119,9 +116,6 @@
             const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
 
             switch (paymentIntent.status) {
-                case "succeeded":
-                showMessage("Payment succeeded!");
-                break;
                 case "processing":
                 showMessage("Your payment is processing.");
                 break;
@@ -138,6 +132,7 @@
         function showMessage(messageText) {
             const messageContainer = document.querySelector("#payment-error");
 
+            messageContainer.classList.remove("hidden");
             messageContainer.textContent = messageText;
 
             setTimeout(function () {
