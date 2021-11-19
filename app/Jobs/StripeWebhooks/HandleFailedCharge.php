@@ -7,6 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Spatie\WebhookClient\Models\WebhookCall;
+use Illuminate\Support\Facades\Log;
 
 use App\Ticket;
 

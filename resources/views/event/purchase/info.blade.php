@@ -28,7 +28,9 @@
 
                 @foreach ($cart as $key => $item)
                     <div class="ticket" style="padding: 20px; box-shadow: 0 .5rem 2rem 0 rgba(0,0,0,.1);">
-                        <h3>Biljett #{{$key + 1}}</h3>
+                        @if (count($cart) > 1)
+                            <h3>Biljett #{{$key + 1}}</h3>
+                        @endif
 
                         <label for="firstName">Förnamn</label>
                         <input type="text" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Förnamn" />

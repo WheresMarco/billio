@@ -133,7 +133,7 @@ class PurchaseController extends Controller
                 'event_id' => $event->id,
                 'user_id'  => 1, // TODO Change to null when bug fix.
                 'price'    => 0,
-                'status'   => 'pending'
+                'status'   => 'hold'
             ])
         );
 
