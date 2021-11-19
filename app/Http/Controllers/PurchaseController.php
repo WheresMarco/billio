@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TicketType;
 use App\User;
+use App\Ticket;
 use Illuminate\Support\Str;
 
 class PurchaseController extends Controller
@@ -184,6 +185,14 @@ class PurchaseController extends Controller
         foreach ($request->tickets as $key => $ticket) {
             // Check if ticket exists in cart
             if (isset($cart[$key])) {
+                // Get ticket from database
+                $ticket = Ticket::find($cart[$key]->id);
+
+                // If no ticket is found, redirect to event page
+                if (! $ticket) {
+                    return redirect()->route('event', ['eventSlug' => $event->slug]);
+                }
+
                 // Get user by email
                 $user = User::where('email', $ticket['email'])->first();
 
