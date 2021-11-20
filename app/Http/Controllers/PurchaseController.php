@@ -17,13 +17,13 @@ class PurchaseController extends Controller
 
         // If cart is empty redirect to event page
         if (!$cart) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug]);
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Your ticket session has expired. Please try again.');
         }
 
         $ticketType = TicketType::where('slug', $ticketType)->first();
 
         if (! $ticketType) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug]);
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'That ticket type does not exist. Please try again.');
         }
 
         $event = $ticketType->event->first();
@@ -58,7 +58,7 @@ class PurchaseController extends Controller
 
         // If cart is empty redirect to event page
         if (!$cart) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug]);
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Your ticket session has expired. Please try again.');
         }
 
         // Get total from session
@@ -71,7 +71,7 @@ class PurchaseController extends Controller
         $ticketType = TicketType::where('slug', $ticketType)->first();
 
         if (! $ticketType) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug]);
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'That ticket type does not exist. Please try again.');
         }
 
         $event = $ticketType->event->first();
@@ -112,7 +112,7 @@ class PurchaseController extends Controller
 
         // Check if user is trying to buy more tickets than per person limit
         if ($ticketType->limit_person > 0 && $request->quantity > $ticketType->limit_person) {
-            return redirect()->back()->with('error', 'You can only buy ' . $ticketType->limit_person . ' tickets per person.');
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'You can only buy ' . $ticketType->limit_person . ' tickets per person.');
         }
 
         // Get the event
@@ -120,12 +120,12 @@ class PurchaseController extends Controller
 
         // Check if the event is sold out
         if ($event->sold_out) {
-            return redirect()->back()->with('error', 'This event is sold out.');
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'This event is sold out.');
         }
 
         // Check if the ticket type is sold out
         if ($ticketType->sold_out) {
-            return redirect()->back()->with('error', 'This ticket type is sold out.');
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'This ticket type is sold out.');
         }
 
         // Create tickets with status pending based on quantity
@@ -178,7 +178,7 @@ class PurchaseController extends Controller
 
         // If cart is empty redirect to event page
         if (! $cart) {
-            return redirect()->route('event', ['eventSlug' => $event->slug]);
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Your ticket session has expired. Please try again.');
         }
 
         // Loop through tickets
@@ -190,7 +190,7 @@ class PurchaseController extends Controller
 
                 // If no ticket is found, redirect to event page
                 if (! $ticket) {
-                    return redirect()->route('event', ['eventSlug' => $event->slug]);
+                    return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Your ticket session has expired. Please try again.');
                 }
 
                 // Get user by email
@@ -261,7 +261,7 @@ class PurchaseController extends Controller
 
         // If total is 0 redirect to event page. No free tickets!
         if ($total == 0) {
-            return redirect()->route('event', ['eventSlug' => $event->slug]);
+            return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Something has gone wrong, please try again.');
         }
 
         // Save total price in session

@@ -36,9 +36,11 @@
     <livewire:styles>
 </head>
 <body>
-    {{-- <div class="message-bar">
-        <p>Du har låst upp "Fest"-biljett för Luciafesten med koden "luciageneraler".</p>
-    </div> --}}
+    @if (session('error'))
+        <div class="message-bar">
+            <p>{{ session('error') }}</p>
+        </div>
+    @endif
 
     <header class="header">
         <div class="wrapper">
