@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\TicketType;
 use App\User;
 use App\Ticket;
+use App\Transaction;
 use Illuminate\Support\Str;
 
 class PurchaseController extends Controller
@@ -85,9 +86,9 @@ class PurchaseController extends Controller
         ]);
     }
 
-    public function confirmation()
+    public function confirmation(Request $request)
     {
-        return view('event.purchase.confirmation');
+        return view('event.purchase.confirmation', ['stripe_id' => $request->payment_intent]);
     }
 
     public function addToCart(Request $request)
@@ -178,7 +179,7 @@ class PurchaseController extends Controller
 
         // If cart is empty redirect to event page
         if (! $cart) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Your ticket session has expired. Please try again.');
+            return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Your ticket session has expired. Please try again.');
         }
 
         // Loop through tickets
@@ -186,11 +187,11 @@ class PurchaseController extends Controller
             // Check if ticket exists in cart
             if (isset($cart[$key])) {
                 // Get ticket from database
-                $ticket = Ticket::find($cart[$key]->id);
+                $databaseTicket = Ticket::find($cart[$key]->id);
 
                 // If no ticket is found, redirect to event page
-                if (! $ticket) {
-                    return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Your ticket session has expired. Please try again.');
+                if (! $databaseTicket) {
+                    return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Your ticket session has expired. Please try again.');
                 }
 
                 // Get user by email
@@ -282,7 +283,23 @@ class PurchaseController extends Controller
 
         // Check if payment intent was created
         if (! $paymentIntent) {
-            return redirect()->back()->with('error', 'Could not create payment intent.');
+            return redirect()->back()->with('error', 'Could not create payment intent. Please try again.');
+        }
+
+        // Loop over cart and create a row in transaction table
+        foreach ($cart as $ticket) {
+            // Create a transaction
+            $transaction = Transaction::create([
+                'user_id'   => $ticket->user_id,
+                'ticket_id' => $ticket->id,
+                'amount'    => $ticket->ticket_type->price,
+                'stripe_id' => $paymentIntent['id'],
+            ]);
+
+            // Check if transaction was created
+            if (! $transaction) {
+                return redirect()->back()->with('error', 'Could not create transaction. Please try again.');
+            }
         }
 
         return $paymentIntent['client_secret'];

@@ -26,14 +26,13 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-129583569-1');
     </script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" data-turbolinks-track="true">
 
-    <livewire:styles>
+    @livewireStyles
 </head>
 <body>
     @if (session('error'))

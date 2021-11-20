@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    public $timestamps = false;
+    protected $fillable = [
+        'ticket_id',
+        'user_id',
+        'amount',
+        'access_code_id',
+        'stripe_id',
+    ];
 
     public function ticket()
     {

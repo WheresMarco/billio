@@ -39,10 +39,6 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
                     return;
                 }
 
-                $ticket->update([
-                    'status' => 'paid',
-                ]);
-
                 // Send of event to finalize ticket.
                 event(new \App\Events\TicketPurchased($ticket));
             }

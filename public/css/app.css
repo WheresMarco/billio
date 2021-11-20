@@ -1419,3 +1419,81 @@ hr {
     line-height: 3rem;
   }
 }
+.ticket {
+  background-color: #fff;
+  box-shadow: 0 0.5rem 2rem 0 rgba(0, 0, 0, 0.1);
+  border-radius: 0.8rem;
+  width: 100%;
+  position: relative;
+  float: left;
+}
+
+.ticket:nth-child(odd) {
+  margin-right: 0;
+}
+
+.ticket .qr {
+  padding: 2rem;
+  padding-right: 0;
+  float: left;
+  width: 40%;
+}
+
+.ticket .qr img {
+  max-width: 100%;
+}
+
+.ticket-preview-content {
+  width: 60%;
+  float: right;
+  padding: 0 2rem;
+}
+
+.ticket-preview-meta {
+  position: absolute;
+  width: 53%;
+  border-top: 3px solid #f3f3f6;
+  padding-top: 1rem;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.ticket-preview-meta-item {
+  width: 50%;
+  float: left;
+}
+
+.ticket-preview-meta-item h4 {
+  color: #b4b4b4;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.ticket-preview-meta-item span {
+  color: #b4b4b4;
+}
+
+@media only screen and (max-width: 600px) {
+  .ticket {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .ticket .qr,
+.ticket-preview-content,
+.ticket-preview-meta {
+    width: 100%;
+  }
+
+  .ticket-preview-content {
+    padding-bottom: 2rem;
+  }
+
+  .ticket-preview-meta {
+    position: relative;
+    bottom: 2rem;
+    left: 2rem;
+    border-top: none;
+  }
+}
