@@ -26,7 +26,6 @@
         @endforeach
 
         <br style="clear: both;" />
-        <br style="clear: both;" />
 
         <p>Var god och kontakta ORG NAME på <a href='#'>ORG EMAIL</a> om du har några frågor om evenemanget.</p>
     </div>

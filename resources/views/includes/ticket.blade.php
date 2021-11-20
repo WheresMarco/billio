@@ -20,3 +20,6 @@
         </div>
     </div>
 </div>
+
+<br style="clear: both;" />
+<br style="clear: both;" />
