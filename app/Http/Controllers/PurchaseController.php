@@ -88,6 +88,15 @@ class PurchaseController extends Controller
 
     public function confirmation(Request $request)
     {
+        // Empty cart in session
+        session()->forget('cart');
+
+        // Remove client secret from session
+        session()->forget('client_secret');
+
+        // Remove total from session
+        session()->forget('total');
+
         return view('event.purchase.confirmation', ['stripe_id' => $request->payment_intent]);
     }
 
