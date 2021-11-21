@@ -72,8 +72,8 @@ class Ticket extends Model
     {
         $array = $this->toArray();
 
-        $array['name']  = $this->user()->first()->name;
-        $array['email'] = $this->user()->first()->email;
+        // $array['name']  = $this->user()->first()->name;
+        // $array['email'] = $this->user()->first()->email;
 
         return $array;
     }

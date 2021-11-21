@@ -143,7 +143,6 @@ class PurchaseController extends Controller
         $tickets = $ticketType->tickets()->createMany(
             array_fill(0, $request->quantity, [
                 'event_id' => $event->id,
-                'user_id'  => 1, // TODO Change to null when bug fix.
                 'price'    => 0,
                 'status'   => 'hold'
             ])
