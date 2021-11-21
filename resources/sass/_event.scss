@@ -123,8 +123,9 @@
 
   @media only screen and (max-width: 600px) {
     .event {
-      margin-top: 3rem;
+      margin-top: 2rem;
     }
+
     .event-image {
       height: 200px;
     }
@@ -146,6 +147,6 @@
       margin-bottom: 1rem;
     }
     .tickets {
-      margin-top: 3rem;
+      margin-top: -2rem;
     }
   }

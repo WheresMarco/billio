@@ -369,3 +369,10 @@ html, body {
 
     .faux-radio-checkbox:checked + label:before { border-color: rgba( 208, 82, 165, 1 ); }
     .faux-radio-checkbox:checked + label:after { background-color: rgba( 208, 82, 165, 1 ); }
+
+@media only screen and (max-width: 600px) {
+    .wrapper {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+}

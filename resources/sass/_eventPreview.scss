@@ -103,19 +103,19 @@
 
 @media only screen and (max-width: 600px) {
   .event-preview {
-    width: 100%;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    width: auto;
+    margin-top: 2rem!important;
+    margin-bottom: 2rem!important;
   }
   .event-preview-image {
-    height: 150px;
-    width: 100%;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: .8rem;
+    height: 150px!important;
+    width: 100%!important;
+    border-bottom-left-radius: 0!important;
+    border-top-left-radius: .8rem!important;
     border-top-right-radius: .8rem;
   }
   .event-preview-content {
-    padding: 2rem;
-    width: 100%;
+    padding: 2rem!important;
+    width: 100%!important;
   }
 }

@@ -379,6 +379,12 @@ hr {
   background-color: #d052a5;
 }
 
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
 .header {
   background: #212a34;
   color: #fff;
@@ -549,8 +555,25 @@ hr {
     padding: 8rem 0rem 5rem;
   }
 
+  .footer h1 {
+    font-size: 3.4rem;
+    line-height: 4rem;
+  }
+
+  .about-us {
+    margin-top: 8rem;
+  }
+
+  .footer-intro {
+    text-align: left;
+  }
+
   .footer p {
     max-width: 100%;
+  }
+
+  .footer-copy {
+    text-align: left;
   }
 }
 .frontpage-hero {
@@ -720,14 +743,16 @@ hr {
 }
 
 @media only screen and (max-width: 600px) {
-  .frontpage-header {
-    height: 440px;
+  .frontpage-hero {
+    padding-top: 8rem;
+    padding-bottom: 6rem;
   }
 
   .frontpage-hero-branding {
     width: 100%;
     margin-top: -4rem;
     margin-left: 0;
+    text-align: left;
   }
 
   .frontpage-hero h1 {
@@ -741,6 +766,11 @@ hr {
 
   .upcoming-events h3 {
     margin: 0 0 2rem 0;
+  }
+
+  .upcoming-events {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
   .app-promo-box {
@@ -895,7 +925,7 @@ hr {
 
 @media only screen and (max-width: 600px) {
   .event {
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 
   .event-image {
@@ -924,7 +954,7 @@ hr {
   }
 
   .tickets {
-    margin-top: 3rem;
+    margin-top: -2rem;
   }
 }
 .purchase {
@@ -1201,6 +1231,11 @@ hr {
   line-height: 2.4rem;
 }
 
+@media only screen and (max-width: 600px) {
+  .page {
+    width: 100%;
+  }
+}
 .event-preview {
   width: 100%;
   margin-bottom: 3rem;
@@ -1290,22 +1325,22 @@ hr {
 
 @media only screen and (max-width: 600px) {
   .event-preview {
-    width: 100%;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    width: auto;
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
   }
 
   .event-preview-image {
-    height: 150px;
-    width: 100%;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0.8rem;
+    height: 150px !important;
+    width: 100% !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0.8rem !important;
     border-top-right-radius: 0.8rem;
   }
 
   .event-preview-content {
-    padding: 2rem;
-    width: 100%;
+    padding: 2rem !important;
+    width: 100% !important;
   }
 }
 .ticket-type {
@@ -1360,7 +1395,7 @@ hr {
   .ticket-type {
     width: 100%;
     margin-left: 0;
-    margin-top: 4rem;
+    margin-top: 2rem;
   }
 
   .ticket-type svg {

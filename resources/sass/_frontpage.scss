@@ -160,25 +160,34 @@
       }
 
   @media only screen and (max-width: 600px) {
-    .frontpage-header {
-      height: 440px;
+    .frontpage-hero {
+        padding-top: 8rem;
+        padding-bottom: 6rem;
     }
+
     .frontpage-hero-branding {
       width: 100%;
       margin-top: -4rem;
       margin-left: 0;
+      text-align: left;
     }
 
     .frontpage-hero h1 {
       font-size: 3.4rem;
       line-height: 4rem;
     }
+
     .frontpage-header-branding p {
       max-width: 100%;
     }
 
     .upcoming-events h3 {
       margin: 0 0 2rem 0;
+    }
+
+    .upcoming-events {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
     }
 
     .app-promo-box {
@@ -217,4 +226,4 @@
       padding: 1rem;
       padding-top: 4rem;
     }
-  }
+}

@@ -18,7 +18,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://kit.fontawesome.com/5c53f02145.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/5c53f02145.js" crossorigin="anonymous" defer></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129583569-1"></script>
