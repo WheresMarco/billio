@@ -51,26 +51,26 @@
                                 <ul>
                                     @foreach ($ticketType->modifiers as $modifier)
                                         <li>
-                                            <input class="faux-radio-checkbox faux-checkbox" id='{{$modifier->slug}}' name="tickets[{{$key}}][modifier][]" value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
+                                            <input class="faux-radio-checkbox faux-checkbox" id='{{$modifier->slug}}' name="tickets[{{$key}}][modifiers][]" value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
                                             <label for='{{$modifier->slug}}' class="faux-radio-checkbox-label">
                                                 {{$modifier->name}} <span>{{$modifier->delta}} SEK</span>
                                             </label>
                                         </li>
                                     @endforeach
 
-                                    <li>
+                                    {{-- <li>
                                         <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" checked />
                                         <label for='karmedlemTEMP' class="faux-radio-checkbox-label">
                                             Jag är kårmedlem <span>-20 SEK</span>
                                         </label>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         @endif
 
                         <br style="clear: both;">
 
-                        <livewire:check-student />
+                        {{-- <livewire:check-student /> --}}
                     </div>
 
                     <br style="clear: both;">

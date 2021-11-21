@@ -7,6 +7,7 @@ use App\TicketType;
 use App\User;
 use App\Ticket;
 use App\Transaction;
+use App\Modifier;
 use Illuminate\Support\Str;
 
 class PurchaseController extends Controller
@@ -174,7 +175,7 @@ class PurchaseController extends Controller
         $this->validate($request, [
             'event_id'       => 'required|exists:events,id',
             'ticket_type_id' => 'required|exists:ticket_types,id',
-            'tickets.*'      => 'array:firstName,lastName,email' // TODO Check validation.
+            'tickets.*'      => 'array:firstName,lastName,email,modifiers' // TODO Check validation.
         ]);
 
         // Get the ticket type
@@ -213,6 +214,14 @@ class PurchaseController extends Controller
                         'email'      => $ticket['email'],
                         'password'   => bcrypt(Str::random(10))
                     ]);
+                }
+
+                // Loop over all modfiers and save on ticket
+                if (isset($ticket['modifiers'])) {
+                    foreach ($ticket['modifiers'] as $ticketModifier) {
+                        $modifier = Modifier::where([['ticket_type_id', $cart[$key]->ticket_type->id], ['slug', $ticketModifier ]])->first();
+                        $cart[$key]->modifiers()->save($modifier);
+                    }
                 }
 
                 // Update ticket
@@ -263,14 +272,20 @@ class PurchaseController extends Controller
             // Get the price
             $price = $ticketType->price;
 
-            // TODO Calculate modifiers price
+            // Calculate modifiers price
+            $modifiers = $ticket->modifiers->all();
+            if ($modifiers) {
+                foreach ($modifiers as $modfier) {
+                    $price = $price + $modfier->delta;
+                }
+            }
 
             // Add price to total
             $total += $price;
         }
 
         // If total is 0 redirect to event page. No free tickets!
-        if ($total == 0) {
+        if ($total <= 0) {
             return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Something has gone wrong, please try again.');
         }
 
