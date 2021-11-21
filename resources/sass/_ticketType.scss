@@ -48,7 +48,11 @@
   .ticket-type {
     width: 100%;
     margin-left: 0;
-    margin-top: 2rem;
+    margin-top: 4rem;
+  }
+
+  .ticket-type p {
+      font-size: 1.8rem;
   }
 
   .ticket-type svg {

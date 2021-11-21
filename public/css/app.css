@@ -384,6 +384,10 @@ hr {
     margin-left: 2rem;
     margin-right: 2rem;
   }
+
+  .alert-bar {
+    margin: 2rem;
+  }
 }
 .header {
   background: #212a34;
@@ -562,6 +566,7 @@ hr {
 
   .about-us {
     margin-top: 8rem;
+    padding-top: 5rem;
   }
 
   .footer-intro {
@@ -893,7 +898,6 @@ hr {
   margin-bottom: 4rem;
   padding: 30px;
   background: #f1f2f4;
-  border-radius: 0.8rem;
 }
 
 .event-meta:after {
@@ -954,7 +958,7 @@ hr {
   }
 
   .tickets {
-    margin-top: -2rem;
+    margin-top: -4rem;
   }
 }
 .purchase {
@@ -1395,7 +1399,11 @@ hr {
   .ticket-type {
     width: 100%;
     margin-left: 0;
-    margin-top: 2rem;
+    margin-top: 4rem;
+  }
+
+  .ticket-type p {
+    font-size: 1.8rem;
   }
 
   .ticket-type svg {
