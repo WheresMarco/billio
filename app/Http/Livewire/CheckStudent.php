@@ -7,7 +7,7 @@ use App\Http\Controllers\CheckStudentController;
 
 class CheckStudent extends Component
 {
-    public $nin;
+    public $nin = "";
     public $valid = false;
 
     public function checkStudent()

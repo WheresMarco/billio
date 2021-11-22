@@ -16,7 +16,7 @@ class CheckStudentController extends Controller
      * @param [type] $nin
      * @return boolean
      */
-    public function isStudentMember($nin)
+    public function isStudentMember(String $nin)
     {
         $nin = str_replace('-', '', $nin);
         $isStudent = false;

@@ -45,8 +45,9 @@
                         <label for="email">E-postadress</label>
                         <input type="text" id="email" name="tickets[{{$key}}][email]" placeholder="E-postadress" required/>
 
-                        <h4>Tillval</h4>
                         @if (count($ticketType->modifiers) > 0)
+                            <br style="clear: both;">
+
                             <div class="modifiers">
                                 <ul>
                                     @foreach ($ticketType->modifiers as $modifier)
@@ -58,19 +59,19 @@
                                         </li>
                                     @endforeach
 
-                                    {{-- <li>
-                                        <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" checked />
+                                    <li>
+                                        <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" />
                                         <label for='karmedlemTEMP' class="faux-radio-checkbox-label">
                                             Jag är kårmedlem <span>-20 SEK</span>
                                         </label>
-                                    </li> --}}
+                                    </li>
                                 </ul>
                             </div>
                         @endif
 
                         <br style="clear: both;">
 
-                        {{-- <livewire:check-student /> --}}
+                        <livewire:check-student />
                     </div>
 
                     <br style="clear: both;">
