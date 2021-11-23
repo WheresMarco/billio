@@ -57,7 +57,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards()
     {
         return [
-            new Help,
+            new \Tightenco\NovaGoogleAnalytics\VisitorsMetric,
+            new \Tightenco\NovaGoogleAnalytics\MostVisitedPagesCard,
+            new \Tightenco\NovaGoogleAnalytics\ReferrersList,
+            new \Tightenco\NovaGoogleAnalytics\SessionsByDeviceMetric,
+            new \Tightenco\NovaGoogleAnalytics\SessionsByCountryMetric,
+            new \Llaski\NovaScheduledJobs\NovaScheduledJobsCard,
         ];
     }
 
@@ -78,7 +83,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function tools()
     {
-        return [];
+        return [
+            new \Llaski\NovaScheduledJobs\NovaScheduledJobsTool,
+        ];
     }
 
     /**

@@ -70,6 +70,8 @@ class TicketType extends Resource
 
             Boolean::make('Active'),
 
+            Boolean::make('Check student'),
+
             Number::make('Limit')
                 ->rules('required'),
 

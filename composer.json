@@ -19,6 +19,7 @@
         "cartalyst/stripe-laravel": "*",
         "coconutcraig/laravel-postmark": "*",
         "fideloper/proxy": "*",
+        "gregoriohc/laravel-nova-theme-responsive": "*",
         "guzzlehttp/guzzle": "*",
         "laravel/framework": "*",
         "laravel/nova": "*",
@@ -26,6 +27,7 @@
         "laravel/tinker": "*",
         "laravel/ui": "*",
         "livewire/livewire": "*",
+        "llaski/nova-scheduled-jobs": "*",
         "maatwebsite/laravel-nova-excel": "*",
         "personnummer/personnummer": "*",
         "revolution/laravel-google-sheets": "*",
@@ -33,7 +35,8 @@
         "spatie/calendar-links": "*",
         "spatie/laravel-cookie-consent": "*",
         "spatie/laravel-robots-middleware": "*",
-        "spatie/laravel-stripe-webhooks": "*"
+        "spatie/laravel-stripe-webhooks": "*",
+        "tightenco/nova-google-analytics": "*"
     },
     "require-dev": {
         "facade/ignition": "*",

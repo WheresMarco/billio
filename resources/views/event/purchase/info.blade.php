@@ -59,19 +59,22 @@
                                         </li>
                                     @endforeach
 
-                                    <li>
-                                        <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" />
-                                        <label for='karmedlemTEMP' class="faux-radio-checkbox-label">
-                                            Jag är kårmedlem <span>-20 SEK</span>
-                                        </label>
-                                    </li>
+                                    @if ($ticketType->check_student)
+                                        <li>
+                                            <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" />
+                                            <label for='karmedlemTEMP' class="faux-radio-checkbox-label">
+                                                Jag är kårmedlem <span>-20 SEK</span>
+                                            </label>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         @endif
 
-                        <br style="clear: both;">
-
-                        <livewire:check-student />
+                        @if ($ticketType->check_student)
+                            <br style="clear: both;">
+                            <livewire:check-student />
+                        @endif
                     </div>
 
                     <br style="clear: both;">
