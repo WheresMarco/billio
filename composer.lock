@@ -12598,16 +12598,16 @@
         },
         {
             "name": "spatie/laravel-ray",
-            "version": "1.26.2",
+            "version": "1.26.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ray.git",
-                "reference": "11d0042f3d3007d6a54d0fb55e4f0d17b4181000"
+                "reference": "ec971959bc8e513cbfa1163e6af030cdaa5ce7bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/11d0042f3d3007d6a54d0fb55e4f0d17b4181000",
-                "reference": "11d0042f3d3007d6a54d0fb55e4f0d17b4181000",
+                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/ec971959bc8e513cbfa1163e6af030cdaa5ce7bf",
+                "reference": "ec971959bc8e513cbfa1163e6af030cdaa5ce7bf",
                 "shasum": ""
             },
             "require": {
@@ -12664,7 +12664,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-ray/issues",
-                "source": "https://github.com/spatie/laravel-ray/tree/1.26.2"
+                "source": "https://github.com/spatie/laravel-ray/tree/1.26.3"
             },
             "funding": [
                 {
@@ -12676,7 +12676,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-11-15T08:21:15+00:00"
+            "time": "2021-11-22T15:57:41+00:00"
         },
         {
             "name": "spatie/macroable",
@@ -12990,16 +12990,16 @@
         },
         {
             "name": "zbateson/mb-wrapper",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zbateson/mb-wrapper.git",
-                "reference": "547d73a04912728cf0bb772d43e5a17e63cdf168"
+                "reference": "bfd45fb3e2a8cf4c496b2c3ebd63b5f815721498"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zbateson/mb-wrapper/zipball/547d73a04912728cf0bb772d43e5a17e63cdf168",
-                "reference": "547d73a04912728cf0bb772d43e5a17e63cdf168",
+                "url": "https://api.github.com/repos/zbateson/mb-wrapper/zipball/bfd45fb3e2a8cf4c496b2c3ebd63b5f815721498",
+                "reference": "bfd45fb3e2a8cf4c496b2c3ebd63b5f815721498",
                 "shasum": ""
             },
             "require": {
@@ -13045,7 +13045,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zbateson/mb-wrapper/issues",
-                "source": "https://github.com/zbateson/mb-wrapper/tree/1.1.0"
+                "source": "https://github.com/zbateson/mb-wrapper/tree/1.1.1"
             },
             "funding": [
                 {
@@ -13053,7 +13053,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-09T18:05:07+00:00"
+            "time": "2021-11-22T21:59:45+00:00"
         },
         {
             "name": "zbateson/stream-decorators",
