@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,11 +12,11 @@ class AccessCode extends Model
 
     public function event()
     {
-        return $this->belongsTo('App\Event');
+        return $this->belongsTo('App\Models\Event');
     }
 
     public function ticket_type()
     {
-        return $this->belongsTo('App\TicketType');
+        return $this->belongsTo('App\Models\TicketType');
     }
 }

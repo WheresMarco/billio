@@ -1,13 +1,13 @@
-    <section class="footer about-us">
-        <div class="wrapper">
-            <div class="footer-intro">
-                <h1>{{ __('footer.header') }}</h1>
+    <section class="bg-dark-grey text-white text-center py-16">
+        <div class="container mx-auto sm:text-center px-4 lg:px-0 space-y-6 sm:w-9/12 lg:w-1/2">
+            <div>
+                <h1 class="font-headline text-4xl">{{ __('footer.header') }}</h1>
                 <p>{{ __('footer.copy') }}</p>
 
-                <p><a href="mailto:hi@billio.app" class="faux-button white">{{ __('footer.contact_us') }}</a></p>
+                <p><a href="mailto:hi@billio.app" class="btn btn-white">{{ __('footer.contact_us') }}</a></p>
             </div>
 
-            <div class="footer-copy">
+            <div>
                 <span>
                     <a href="/privacy-policy">{{ __('footer.privacy_policy') }}</a> -
                     <a href="https://wheresmar.co" target="_blank" rel="noopener noreferrer">{{ __('footer.made_in') }}</a>

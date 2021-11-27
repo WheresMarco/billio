@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Transaction;
-use App\Ticket;
+use App\Models\Transaction;
+use App\Models\Ticket;
 use Spatie\CalendarLinks\Link;
 
 class TicketConfirmation extends Component

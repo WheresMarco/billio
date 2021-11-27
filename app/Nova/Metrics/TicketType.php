@@ -5,7 +5,7 @@ namespace App\Nova\Metrics;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
 
-use App\Ticket;
+use App\Models\Ticket;
 
 class TicketType extends Partition
 {

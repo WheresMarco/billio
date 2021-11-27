@@ -5,7 +5,7 @@ namespace App\Nova\Metrics;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Trend;
 
-use App\Ticket;
+use App\Models\Ticket;
 
 class TicketsSold extends Trend
 {

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Personnummer\Personnummer;
 use Illuminate\Support\Facades\Log;
 
-use App\Nin;
+use App\Models\Nin;
 
 class CheckStudentController extends Controller
 {

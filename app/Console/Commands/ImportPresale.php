@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use Revolution\Google\Sheets\Facades\Sheets;
 
-use App\Ticket;
+use App\Models\Ticket;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CheckStudentController;
 

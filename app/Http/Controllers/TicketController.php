@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Mail;
-use App\Ticket;
+
+use App\Models\Ticket;
 
 class TicketController extends Controller
 {

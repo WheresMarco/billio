@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    *,
+    *:before,
+    *:after {
+      -webkit-box-sizing: inherit;
+      -moz-box-sizing: inherit;
+      box-sizing: inherit;
+      font-family: inherit;
+      -webkit-font-smoothing: antialiased;
+      word-break: break-word;
+    }
+
+    .btn {
+        @apply rounded-md bg-none font-semibold inline-block px-4 py-2 border font-normal text-base leading-6 text-gray-700 transition duration-150 ease-in-out;
+    }
+
+    .btn-pink {
+        @apply border-pink text-pink hover:bg-pink hover:text-white;
+    }
+
+    .btn-orange {
+        @apply border-orange text-orange hover:bg-orange hover:text-white;
+    }
+
+    .btn-white {
+        @apply border-white text-white hover:bg-white hover:text-black;
+    }
+
+    p {
+        @apply py-2;
+    }
+
+    a {
+    }
+}

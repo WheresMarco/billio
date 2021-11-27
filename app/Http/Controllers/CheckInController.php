@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Ticket;
+use App\Models\Ticket;
 
 class CheckInController extends Controller
 {

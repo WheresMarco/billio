@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\TicketType;
-use App\User;
-use App\Ticket;
-use App\Transaction;
-use App\Modifier;
 use Illuminate\Support\Str;
+
+use App\Models\TicketType;
+use App\Models\User;
+use App\Models\Ticket;
+use App\Models\Transaction;
+use App\Models\Modifier;
 
 class PurchaseController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,11 +10,11 @@ class Modifier extends Model
 
     public function tickets()
     {
-        return $this->morphedByMany('App\Ticket', 'ticket_modifiers');
+        return $this->morphedByMany('App\Models\Ticket', 'ticket_modifiers');
     }
 
     public function ticket_type()
     {
-        return $this->belongsTo('App\TicketType');
+        return $this->belongsTo('App\Models\TicketType');
     }
 }

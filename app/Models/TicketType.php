@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\TicketController;
@@ -13,17 +13,17 @@ class TicketType extends Model
 
     public function event()
     {
-        return $this->belongsTo('App\Event');
+        return $this->belongsTo('App\Models\Event');
     }
 
     public function tickets()
     {
-        return $this->hasMany('App\Ticket');
+        return $this->hasMany('App\Models\Ticket');
     }
 
     public function modifiers()
     {
-        return $this->hasMany('App\Modifier');
+        return $this->hasMany('App\Models\Modifier');
     }
 
     public function getModifiersAttribute()

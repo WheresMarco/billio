@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Ticket;
 
 class RemoveUnusedTickets implements ShouldQueue, ShouldBeUnique
 {
@@ -21,7 +22,7 @@ class RemoveUnusedTickets implements ShouldQueue, ShouldBeUnique
     public function handle()
     {
         // Get all tickets with status hold or awaiting_payment
-        $tickets = \App\Ticket::where('status', 'hold')->get();
+        $tickets = Ticket::where('status', 'hold')->get();
 
         // Loop through tickets
         foreach ($tickets as $ticket) {

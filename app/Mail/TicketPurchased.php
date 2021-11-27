@@ -8,10 +8,10 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 
-use App\Ticket;
-use App\Event;
-use App\Organisation;
-use App\User;
+use App\Models\Ticket;
+use App\Models\Event;
+use App\Models\Organisation;
+use App\Models\User;
 
 class TicketPurchased extends Mailable
 {

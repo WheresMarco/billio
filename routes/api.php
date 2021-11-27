@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Ticket;
+use App\Models\Ticket;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ Route::post('/checkstudent', 'CheckStudentController@check');
 Route::post('/checkin', 'CheckInController@checkIn');
 
 Route::get('/checkin/search', function (Request $request) {
-    $tickets = App\Ticket::search($request->search)->get();
+    $tickets = Ticket::search($request->search)->get();
     $return_array = [];
 
     if ( $tickets ) {

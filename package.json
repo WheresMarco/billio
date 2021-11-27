@@ -10,13 +10,17 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "autoprefixer": "^10.4.0",
         "axios": "*",
+        "browser-sync": "^2.27.7",
+        "browser-sync-webpack-plugin": "^2.3.0",
         "laravel-mix": "*",
         "lodash": "*",
-        "postcss": "*",
+        "postcss": "^8.4.1",
         "resolve-url-loader": "*",
         "sass": "*",
-        "sass-loader": "*"
+        "sass-loader": "*",
+        "tailwindcss": "^2.2.19"
     },
     "dependencies": {
         "alpinejs": "^3.5.2",

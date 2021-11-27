@@ -4,7 +4,7 @@ namespace App\Nova\Filters;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
-use App\Modifier;
+use App\Models\Modifier;
 
 class TicketModifier extends Filter
 {

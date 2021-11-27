@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Nova\Actions\Actionable;
@@ -40,32 +40,32 @@ class Ticket extends Model
 
     public function ticket_type()
     {
-        return $this->belongsTo('App\TicketType');
+        return $this->belongsTo('App\Models\TicketType');
     }
 
     public function event()
     {
-        return $this->belongsTo('App\Event');
+        return $this->belongsTo('App\Models\Event');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function modifiers()
     {
-        return $this->morphToMany('App\Modifier', 'ticket_modifiers');
+        return $this->morphToMany('App\Models\Modifier', 'ticket_modifiers');
     }
 
     public function transactions()
     {
-        return $this->hasMany('App\Transaction');
+        return $this->hasMany('App\Models\Transaction');
     }
 
     public function nin()
     {
-        return $this->hasOne('App\Nin');
+        return $this->hasOne('App\Models\Nin');
     }
 
     public function toSearchableArray()

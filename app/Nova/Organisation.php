@@ -16,7 +16,7 @@ class Organisation extends Resource
      *
      * @var string
      */
-    public static $model = 'App\Organisation';
+    public static $model = 'App\Models\Organisation';
 
     /**
      * The single value that should be used to represent the resource when being displayed.

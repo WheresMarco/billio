@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Ticket;
+use App\Models\Ticket;
 use Maatwebsite\Excel\Concerns\ToModel;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CheckStudentController;

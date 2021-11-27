@@ -20,7 +20,7 @@ class Modifier extends Resource
      *
      * @var string
      */
-    public static $model = 'App\Modifier';
+    public static $model = 'App\Models\Modifier';
 
     /**
      * The single value that should be used to represent the resource when being displayed.

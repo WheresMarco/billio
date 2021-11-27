@@ -20,7 +20,7 @@ class AccessCode extends Resource
      *
      * @var string
      */
-    public static $model = 'App\AccessCode';
+    public static $model = 'App\Models\AccessCode';
 
     /**
      * The single value that should be used to represent the resource when being displayed.

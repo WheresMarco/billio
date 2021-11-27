@@ -35,7 +35,7 @@ class TicketType extends Filter
      */
     public function options(Request $request)
     {
-        $ticketTypes = \App\TicketType::all();
+        $ticketTypes = \App\Models\TicketType::all();
         $returnArray = [];
 
         foreach ($ticketTypes as $ticketType) {
