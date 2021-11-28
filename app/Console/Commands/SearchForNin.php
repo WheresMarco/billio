@@ -38,7 +38,6 @@ class SearchForNin extends Command
      */
     public function handle()
     {
-        ray((new CheckStudentController())->isStudentMember($this->argument('nin')));
         return 'test';
     }
 }
