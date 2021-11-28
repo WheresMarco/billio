@@ -19,7 +19,7 @@
                         <div class="col-span-full sm:col-span-3 bg-cover sm:rounded-tl-md sm:rounded-bl-md" style="background-image: url({{URL::asset($event->excerpt_image)}});"></div>
 
                         <div class="col-span-full sm:col-span-5 py-8 sm:py-12 pl-10 sm:pl-0 pr-10">
-                            <h1><a href="/event/{{$event->slug}}" class="font-headline text-3xl text-pink font-semibold hover:no-underline">{{$event->name}}</a></h1>
+                            <h1><a href="/event/{{$event->slug}}" class="font-headline text-3xl text-pink font-normal hover:no-underline">{{$event->name}}</a></h1>
                             <p class="pb-4 pt-2">{{$event->excerpt}}</p>
 
                             <div class="border-t-4 border-grey-100 grid grid-cols-2 py-2">
@@ -41,9 +41,9 @@
             @foreach ($events as $event)
                 @if ($event->upcoming() === false)
                     <div class="group bg-white rounded-md grid grid-cols-8 sm:gap-6 transition duration-300 ease-in-out">
-                        <h1 class="col-span-full sm:col-span-3 justify-self-start pl-8 self-center font-headline text-3xl text-grey group-hover:text-pink font-semibold hover:no-underline"><a href="/event/{{$event->slug}}">{{$event->name}}</a></h1>
+                        <h1 class="col-span-full sm:col-span-3 justify-self-start pl-8 self-center font-headline text-3xl text-grey group-hover:text-pink"><a class="font-normal hover:no-underline" href="/event/{{$event->slug}}">{{$event->name}}</a></h1>
 
-                        <div class="col-span-full sm:col-span-5 py-6 grid grid-cols-2 py-2">
+                        <div class="col-span-full sm:col-span-5 py-6 grid grid-cols-2">
                             <div>
                                 <h4 class="text-grey font-semibold group-hover:text-black"><x-heroicon-s-clock class="inline-block h-4" /> Datum</h4>
                                 <span class="text-grey group-hover:text-black">{{$event->event_dates[0]->date_from->format('d/m - Y')}}</span>
