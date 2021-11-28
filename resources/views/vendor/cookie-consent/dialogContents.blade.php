@@ -1,5 +1,5 @@
-<div class="js-cookie-consent cookie-bar-wrapper">
-    <div class="cookie-bar">
-        <p>{!! trans('cookie-consent::texts.message') !!} <a class="js-cookie-consent-agree faux-button white">{{ trans('cookie-consent::texts.agree') }}</a></p>
+<div class="js-cookie-consent fixed bottom-0 md:bottom-4 flex justify-center w-full">
+    <div class="cookie-bar bg-blue md:text-center text-white md:rounded-md px-4 md:px-8">
+        <p>Genom att använda Billio godkänner du alla kakor i enlighet med vår <a href="/privacy-policy">Integritetspolicy</a>. <a class="js-cookie-consent-agree btn btn-white mt-2 md:mt-0 text-center md:ml-2 w-full md:w-auto">Jag godkänner</a></p>
     </div>
 </div>

@@ -7,92 +7,80 @@
 @extends('layouts.app')
 
 @section('content')
-<main>
-    <div class="wrapper">
-        <div class="purchase">
-            <div class="alert-bar">Observera att du behöver ett giltigt Covidpass för att kunna delta på Luciafesten.</div>
+<main class="container mx-auto py-8 px-4 md:w-2/3 lg:w-1/3">
+    <div class="bg-pink text-white px-8 py-2 rounded-md mb-4 text-center mx-4 lg:mx-0">Observera att du behöver ett giltigt Covidpass för att kunna delta på {{$event->name}}.</div>
 
-            <form action="/event/{{$event->slug}}/{{$ticketType->slug}}/info" method="post">
-                @csrf
-                <input type="hidden" name="ticket_type_id" value="{{$ticketType->id}}">
-                <input type="hidden" name="event_id" value="{{$event->id}}">
+    <form action="/event/{{$event->slug}}/{{$ticketType->slug}}/info" method="post">
+        @csrf
+        <input type="hidden" name="ticket_type_id" value="{{$ticketType->id}}">
+        <input type="hidden" name="event_id" value="{{$event->id}}">
 
-                <h4>Steg 1 av 2</h4>
-                <h2>Ange biljettuppgifter</h2>
+        <h4 class="font-headline font-semibold text-grey">Steg 1 av 2</h4>
+        <h2 class="font-headline text-3xl">Ange biljettuppgifter</h2>
 
-                <p>Du har valt {{count($cart)}} <strong>"{{$ticketType->name}}"</strong>-@if(count($cart) > 1)biljetter @else biljett @endif för <strong>{{$event->name}}</strong>. Vänligen skriv in uppgifterna för vardera biljett.</p>
+        <p>Du har valt {{count($cart)}} <strong>"{{$ticketType->name}}"</strong>-@if(count($cart) > 1)biljetter @else biljett @endif för <strong>{{$event->name}}</strong>. Vänligen skriv in uppgifterna för vardera biljett.</p>
 
-                <p><strong>Vi har reserverat biljetterna i XX minuter och XX sekunder till.</strong></p>
+        @include('includes.countdown')
 
-                <br style="clear: both;">
+        @foreach ($cart as $key => $item)
+            <div class="p-5 shadow-xl border rounded-md my-4" x-data="{ tickets{{$key}}karmedlem: false }">
+                @if (count($cart) > 1)
+                    <h3 class="font-headline text-2xl mb-2">Biljett #{{$key + 1}}</h3>
+                @endif
 
-                @foreach ($cart as $key => $item)
-                    <div class="ticket" style="padding: 20px; box-shadow: 0 .5rem 2rem 0 rgba(0,0,0,.1);">
-                        @if (count($cart) > 1)
-                            <h3>Biljett #{{$key + 1}}</h3>
-                        @endif
+                <div class="grid grid-cols-2 space-x-2">
+                    <label class="block">
+                        <span class="text-gray-700">Förnamn</span>
+                        <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Anna" required>
+                    </label>
 
-                        <div class="firstNameContainer">
-                            <label for="firstName">Förnamn</label>
-                            <input type="text" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Förnamn" required/>
-                        </div>
-
-                        <div class="lastNameContainer">
-                            <label for="lastName">Efternamn</label>
-                            <input type="text" id="lastName" name="tickets[{{$key}}][lastName]" placeholder="Efternamn" required/>
-                        </div>
-
-                        <label for="email">E-postadress</label>
-                        <input type="text" id="email" name="tickets[{{$key}}][email]" placeholder="E-postadress" required/>
-
-                        @if (count($ticketType->modifiers) > 0)
-                            <br style="clear: both;">
-
-                            <div class="modifiers">
-                                <ul>
-                                    @foreach ($ticketType->modifiers as $modifier)
-                                        <li>
-                                            <input class="faux-radio-checkbox faux-checkbox" id='{{$modifier->slug}}' name="tickets[{{$key}}][modifiers][]" value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
-                                            <label for='{{$modifier->slug}}' class="faux-radio-checkbox-label">
-                                                {{$modifier->name}} <span>{{$modifier->delta}} SEK</span>
-                                            </label>
-                                        </li>
-                                    @endforeach
-
-                                    @if ($ticketType->check_student)
-                                        <li>
-                                            <input class="faux-radio-checkbox faux-checkbox" id='karmedlemTEMP' value='karmedlemTEMP' data-delta='-20' type="checkbox" />
-                                            <label for='karmedlemTEMP' class="faux-radio-checkbox-label">
-                                                Jag är kårmedlem <span>-20 SEK</span>
-                                            </label>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </div>
-                        @endif
-
-                        @if ($ticketType->check_student)
-                            <br style="clear: both;">
-                            <livewire:check-student />
-                        @endif
-                    </div>
-
-                    <br style="clear: both;">
-                @endforeach
-
-                <div>
-                    <input id="submit" type="submit" class="pink" value='Gå vidare till betalning' />
-                    <a href="/event/{{$event->slug}}/" class="faux-button grey" style="line-height: 2.1rem; margin-top: 10px;">Avbryt</a>
-                    <br style="clear: both;">
+                    <label class="block">
+                        <span class="text-gray-700">Efternamn</span>
+                        <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="lastName" name="tickets[{{$key}}][lastName]" placeholder="Andersson" required>
+                    </label>
                 </div>
-            </form>
+
+                <label class="block mt-2">
+                    <span class="text-gray-700">E-postadress</span>
+                    <input type="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="email" name="tickets[{{$key}}][email]" placeholder="anna@andersson.se" required>
+                </label>
+
+                @if (count($ticketType->modifiers) > 0)
+                    <div class="mt-4">
+                        <ul class="space-y-2">
+                            @foreach ($ticketType->modifiers as $modifier)
+                                <li class="bg-gray-100 p-2 leading-relaxed rounded-md">
+                                    <input class="rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-offset-0 focus:ring-blue focus:ring-opacity-50 cursor-pointer" id='tickets[{{$key}}][modifiers][{{$modifier->slug}}]' name="tickets[{{$key}}][modifiers][]" value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
+                                    <label for='tickets[{{$key}}][modifiers][{{$modifier->slug}}]' class="cursor-pointer">
+                                        {{$modifier->name}} <span class="text-grey ml-2">{{$modifier->delta}} SEK</span>
+                                    </label>
+                                </li>
+                            @endforeach
+
+                            @if ($ticketType->check_student)
+                                <li class="bg-gray-100 p-2 leading-relaxed rounded-md">
+                                    <input class="rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-offset-0 focus:ring-blue focus:ring-opacity-50 cursor-pointer" id='tickets[{{$key}}][modifiers][karmedlem]' value='true' data-delta='-20' type="checkbox" x-model="tickets{{$key}}karmedlem" />
+                                    <label for='tickets[{{$key}}][modifiers][karmedlem]' class="cursor-pointer">
+                                        Jag är kårmedlem <span class="text-grey ml-2">-20 SEK</span>
+                                    </label>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
+                @endif
+
+                @if ($ticketType->check_student)
+                    <div x-show="tickets{{$key}}karmedlem">
+                        <livewire:check-student />
+                    </div>
+                @endif
+            </div>
+        @endforeach
+
+        <div class="flex justify-between">
+            <a href="/event/{{$event->slug}}/" class="btn btn-grey">Avbryt</a>
+            <input id="submit" type="submit" class="btn btn-pink" value='Gå vidare till betalning' />
         </div>
-    </div>
+    </form>
 </main>
 @endsection
-
-@push('scripts')
-<script>
-// TODO Add countdown
-</script>
-@endpush

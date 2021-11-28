@@ -23,13 +23,17 @@ class TicketConfirmation extends Component
         // Get transactions by stripe_id
         $transactions = Transaction::where('stripe_id', $this->stripe_id)->get();
 
-        // Retrive tickets by ticket_id from transactions
-        $tickets = $transactions->map(function ($transaction) {
-            return Ticket::where('id', $transaction->ticket_id)->where('status', 'unused')->get();
-        });
+        $tickets = [];
+        foreach ($transactions as $transaction) {
+            $ticket = $transaction->ticket;
+
+            if ($ticket->status == 'unused') {
+                $tickets[] = $ticket;
+            }
+        }
 
         // If there are tickets, set them to the tickets property
-        if ($tickets->count() > 0) {
+        if (count($tickets) > 0) {
             $this->tickets = $tickets;
         }
     }
@@ -44,19 +48,24 @@ class TicketConfirmation extends Component
             return redirect()->route('home')->with('error', 'Could not find your ticket. Please contact us.');
         }
 
-        // Retrive tickets by ticket_id from transactions
-        $tickets = $transactions->map(function ($transaction) {
-            return Ticket::where('id', $transaction->ticket_id)->where('status', 'unused')->get();
-        });
+        $tickets = [];
+
+        foreach ($transactions as $transaction) {
+            $ticket = $transaction->ticket;
+
+            if ($ticket->status == 'unused') {
+                $tickets[] = $ticket;
+            }
+        }
 
         $calendar_link = [];
 
         // If there are tickets, set them to the tickets property
-        if ($tickets->count() > 0) {
+        if (count($tickets) > 0) {
             $this->tickets = $tickets;
 
             // Get event from the first ticket
-            $event = $this->tickets->first()[0]->event;
+            $event = $tickets[0]->event;
 
             $calendar_link = Link::create($event->name, $event->event_dates[0]->date_from, $event->event_dates[0]->date_to)
                 ->description($event->excerpt)

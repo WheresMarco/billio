@@ -7,55 +7,51 @@
 @extends('layouts.app')
 
 @section('content')
-<main>
-    <div class="wrapper">
-        <div class="purchase">
-            <div class="purchase-error hidden" id="payment-error"></div>
+<main class="container mx-auto py-8 px-4 md:w-2/3 lg:w-1/3" x-data="{termsAccepted: false}">
+    <div class="purchase-error hidden" id="payment-error"></div>
 
-            <form id="payment-form">
-                @csrf
-                <h4>Steg 2 av 2</h4>
-                <h2>Betalning</h2>
+    <form id="payment-form">
+        @csrf
+        <h4 class="font-headline font-semibold text-grey">Steg 2 av 2</h4>
+        <h2 class="font-headline text-3xl">Betalning</h2>
 
-                <p>Du har valt {{count($cart)}} <strong>"{{$ticketType->name}}"</strong>-@if(count($cart) > 1)biljetter @else biljett @endif för <strong>{{$event->name}}</strong>. Det kommer att kosta {{$total}} SEK.</p>
+        <p>Du har valt {{count($cart)}} <strong>"{{$ticketType->name}}"</strong>-@if(count($cart) > 1)biljetter @else biljett @endif för <strong>{{$event->name}}</strong>. Det kommer att kosta {{$total}} SEK.</p>
 
-                <p><strong>Vi har reserverat biljetterna i XX minuter och XX sekunder till.</strong></p>
+        @include('includes.countdown')
 
-                <p><strong><a href="/event/{{$event->slug}}/{{$ticketType->slug}}/info">Ändra biljettinfo</a></strong></p>
+        <hr>
 
-                <hr>
+        <div class="grid grid-cols-2 space-x-2">
+            <label class="block">
+                <span class="text-gray-700">Förnamn</span>
+                <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="firstName" name="firstNamen" placeholder="Anna" required>
+            </label>
 
-                <div class="firstNameContainer">
-                    <label for="firstName">Förnamn</label>
-                    <input type="text" id="firstName" placeholder="Kalle" required />
-                </div>
-
-                <div class="lastNameContainer">
-                    <label for="lastName">Efternamn</label>
-                    <input type="text" id="lastName" placeholder="Kula" required />
-                </div>
-
-                <label for="email">E-postadress att skicka kvittot till</label>
-                <input type="text" id="email" placeholder="kalle@kula.se" required />
-
-                <hr>
-
-                <div id="payment-element"></div>
-
-                <br style="clear: both;">
-                <input id="terms" type="checkbox" /> <label class="terms-checkbox" for="terms">Jag godkänner de <a href="/terms" target="_blank">allmänna villkoren</a>.</label>
-
-                <div>
-                    <div class="spinner hidden" id="spinner"></div>
-
-                    <input id="submit" type="submit" class="pink" value='Köp biljett för {{$total}} SEK' />
-                    <span id="stripe-smallprint" class="smallprint">Köpet hanteras säkert genom <a href="https://stripe.com" target="_blank" rel="noopener noreferrer">Stripe</a> och dina betaluppgifter<br> är aldrig tillgängliga för <a href="https://billio.app" target="_blank" rel="noopener noreferrer">Billio</a> eller <a href='{{$event->organisation->url}}' target="_blank" rel="noopener noreferrer">{{$event->organisation->title}}</a>.</span>
-
-                    <br style="clear: both;">
-                </div>
-            </form>
+            <label class="block">
+                <span class="text-gray-700">Efternamn</span>
+                <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="lastName" name="lastName" placeholder="Andersson" required>
+            </label>
         </div>
-    </div>
+
+        <label class="block mt-4">
+            <span class="text-gray-700">E-postadress att skicka kvittot till</span>
+            <input type="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="email" name="email" placeholder="anna@andersson.se" required>
+        </label>
+
+        <hr>
+
+        <div id="payment-element"></div>
+
+        <div class="py-4">
+            <input id="terms" class="rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-offset-0 focus:ring-blue focus:ring-opacity-50 cursor-pointer" type="checkbox" x-model="termsAccepted" /> <label for="terms">Jag godkänner de <a href="/terms" class="font-medium" target="_blank">allmänna villkoren</a>.</label>
+        </div>
+
+        <div class="flex justify-between">
+            <span class="text-xs text-grey mt-1">Köpet hanteras säkert genom <a href="https://stripe.com" class="font-bold hover:text-black" target="_blank" rel="noopener noreferrer">Stripe</a> och dina betaluppgifter<br> är aldrig tillgängliga för <a href="https://billio.app" class="font-bold hover:text-black" target="_blank" rel="noopener noreferrer">Billio</a> eller <a href='{{$event->organisation->url}}' class="font-bold hover:text-black" target="_blank" rel="noopener noreferrer">{{$event->organisation->title}}</a>.</span>
+
+            <input x-bind:disabled="!termsAccepted" id="submit" type="submit" class="btn btn-pink" value='Köp biljett för {{$total}} SEK' />
+        </div>
+    </form>
 </main>
 @endsection
 
@@ -148,11 +144,9 @@
         function setLoading(isLoading) {
             if (isLoading) {
                 // Disable the button and show a spinner
-                document.querySelector("#submit").disabled = true;
-                document.querySelector("#spinner").classList.remove("hidden");
+                console.log('Fix spinner');
             } else {
-                document.querySelector("#submit").disabled = false;
-                document.querySelector("#spinner").classList.add("hidden");
+                console.log('Stop spinner');
             }
         }
     </script>

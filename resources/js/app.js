@@ -9,6 +9,6 @@ import Alpine from 'alpinejs'
 window.Alpine = Alpine
 Alpine.start()
 
-var Turbolinks = require("turbolinks");
-Turbolinks.start();
-Turbolinks.setProgressBarDelay(0)
+// var Turbolinks = require("turbolinks");
+// Turbolinks.start();
+// Turbolinks.setProgressBarDelay(0)

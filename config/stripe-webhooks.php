@@ -22,7 +22,18 @@ return [
 
     /*
      * The classname of the model to be used. The class should equal or extend
-     * Spatie\StripeWebhooks\ProcessStripeWebhookJob.
+     * Spatie\WebhookClient\Models\WebhookCall.
      */
-    'model' => \Spatie\StripeWebhooks\ProcessStripeWebhookJob::class,
+    'model' => \Spatie\WebhookClient\Models\WebhookCall::class,
+
+    /**
+     * This class determines if the webhook call should be stored and processed.
+     */
+    'profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
+
+    /*
+     * When disabled, the package will not verify if the signature is valid.
+     * This can be handy in local environments.
+     */
+    'verify_signature' => env('STRIPE_SIGNATURE_VERIFY', true),
 ];

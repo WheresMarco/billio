@@ -1,24 +1,24 @@
-<div class='ticket'>
-    <div class="qr">
-        <img src="https://qrcode.tec-it.com/API/QRCode?quietzone=3&backcolor=fff&data={{$ticket[0]->ticket_code}}" />
+<div class="p-5 shadow-xl border rounded-md my-4 grid grid-cols-8 sm:gap-6">
+    <div class="col-span-full sm:col-span-3">
+        <img src="https://qrcode.tec-it.com/API/QRCode?quietzone=3&backcolor=fff&data={{$ticket->ticket_code}}" />
     </div>
 
-    <div class="ticket-meta">
-        <h3>{{$ticket[0]->user->name}}</h3>
-        <p>{{$ticket[0]->user->email}}</p>
+    <div class="col-span-full sm:col-span-5">
+        <h3 class="font-headline text-2xl">{{$ticket->user->name}}</h3>
+        <p>{{$ticket->user->email}}</p>
 
-        <hr>
+        <hr class="my-2">
 
-        <h4>Tillval</h4>
-        <ul>
-            <li>Tillvalsnamn</li>
-            <li>Tillvalsnamn</li>
-        </ul>
+        @if (!$ticket->modifiers->isEmpty())
+            <h4 class="font-headline text-xl">Tillval</h4>
+            <ul class="mb-2 list-disc">
+                @foreach ($ticket->modifiers as $modifier)
+                    <li class="ml-4">{{$modifier->name}}</li>
+                @endforeach
+            </ul>
+        @endif
 
-        <h4>Kod</h4>
-        <span>{{$ticket[0]->ticket_code}}</span>
+        <h4 class="font-headline text-xl">Kod</h4>
+        <span>{{$ticket->ticket_code}}</span>
     </div>
 </div>
-
-<br style="clear: both;" />
-<br style="clear: both;" />

@@ -16,6 +16,8 @@
     "require": {
         "php": "*",
         "algolia/algoliasearch-client-php": "*",
+        "blade-ui-kit/blade-heroicons": "*",
+        "blade-ui-kit/blade-icons": "*",
         "cartalyst/stripe-laravel": "*",
         "coconutcraig/laravel-postmark": "*",
         "fideloper/proxy": "*",
