@@ -16,7 +16,7 @@
         <div x-data="{ closed: true }">
             <div :class="{ 'description small': closed === true }">{{ Illuminate\Mail\Markdown::parse($event->description) }}</div>
 
-            <a @click="closed = false" x-show="closed" class="btn">Läs mer om evenemanget</a>
+            <a @click="closed = false" x-show="closed" class="btn btn-grey">Läs mer om evenemanget</a>
         </div>
     </div>
 
@@ -24,24 +24,24 @@
         <div class="container mx-auto md:grid md:grid-cols-2 md:space-x-8 px-4 lg:px-0 py-4">
             <div class="md:grid md:grid-cols-3">
                 <div>
-                    <h4 class="text-grey font-semibold"><x-heroicon-s-clock class="inline-block h-4" /> Datum</h4>
+                    <h4 class="text-grey font-semibold"><x-heroicon-s-clock class="inline-block h-4 relative" style="margin-top: -2px;" /> Datum</h4>
                     <span class="text-grey">{{$event->event_dates[0]->date_from->format('d/m - Y')}}</span>
                 </div>
 
                 <div>
-                    <h4 class="text-grey font-semibold"><x-heroicon-s-location-marker class="inline-block h-4" /> Plats</h4>
+                    <h4 class="text-grey font-semibold"><x-heroicon-s-location-marker class="inline-block h-4 relative" style="margin-top: -3px;" /> Plats</h4>
                     <span class="text-grey">{{$event->event_dates[0]->location}}</span>
                 </div>
 
                 <div>
-                    <h4 class="text-grey font-semibold"><x-heroicon-s-user-group class="inline-block h-4" /> Värd</h4>
+                    <h4 class="text-grey font-semibold"><x-heroicon-s-user-group class="inline-block h-4 relative" style="margin-top: -3px;" /> Värd</h4>
                     <span class="text-grey">{{$event->organisation->title}}</span>
                 </div>
             </div>
 
-            <div>
-                <a href="mailto:{{$event->organisation->email}}" class="btn">Kontakta värden</a>
-                <a href="{{$event->organisation->url}}" target="_blank" rel="noopener noreferrer" class="btn">Besök värdens webbplats</a>
+            <div class="flex justify-end items-center">
+                <a href="mailto:{{$event->organisation->email}}" class="btn btn-grey mr-2">Kontakta värden</a>
+                <a href="{{$event->organisation->url}}" target="_blank" rel="noopener noreferrer" class="btn btn-grey">Besök värdens webbplats</a>
             </div>
         </div>
     </div>

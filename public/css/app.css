@@ -907,6 +907,21 @@ select {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
+.btn-disabled {
+  cursor: not-allowed;
+}
+
+.btn-disabled:hover {
+  cursor: not-allowed;
+  background-color: transparent;
+  --tw-text-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-text-opacity));
+}
+
+.btn-disabled {
+  opacity: 0.5;
+}
+
 p {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -21488,6 +21503,78 @@ hr {
 }
 
 .font-black {
+  font-weight: 900;
+}
+
+.hover\:font-thin:hover {
+  font-weight: 100;
+}
+
+.hover\:font-extralight:hover {
+  font-weight: 200;
+}
+
+.hover\:font-light:hover {
+  font-weight: 300;
+}
+
+.hover\:font-normal:hover {
+  font-weight: 400;
+}
+
+.hover\:font-medium:hover {
+  font-weight: 500;
+}
+
+.hover\:font-semibold:hover {
+  font-weight: 600;
+}
+
+.hover\:font-bold:hover {
+  font-weight: 700;
+}
+
+.hover\:font-extrabold:hover {
+  font-weight: 800;
+}
+
+.hover\:font-black:hover {
+  font-weight: 900;
+}
+
+.focus\:font-thin:focus {
+  font-weight: 100;
+}
+
+.focus\:font-extralight:focus {
+  font-weight: 200;
+}
+
+.focus\:font-light:focus {
+  font-weight: 300;
+}
+
+.focus\:font-normal:focus {
+  font-weight: 400;
+}
+
+.focus\:font-medium:focus {
+  font-weight: 500;
+}
+
+.focus\:font-semibold:focus {
+  font-weight: 600;
+}
+
+.focus\:font-bold:focus {
+  font-weight: 700;
+}
+
+.focus\:font-extrabold:focus {
+  font-weight: 800;
+}
+
+.focus\:font-black:focus {
   font-weight: 900;
 }
 
@@ -50233,6 +50320,78 @@ hr {
     font-weight: 900;
   }
 
+  .sm\:hover\:font-thin:hover {
+    font-weight: 100;
+  }
+
+  .sm\:hover\:font-extralight:hover {
+    font-weight: 200;
+  }
+
+  .sm\:hover\:font-light:hover {
+    font-weight: 300;
+  }
+
+  .sm\:hover\:font-normal:hover {
+    font-weight: 400;
+  }
+
+  .sm\:hover\:font-medium:hover {
+    font-weight: 500;
+  }
+
+  .sm\:hover\:font-semibold:hover {
+    font-weight: 600;
+  }
+
+  .sm\:hover\:font-bold:hover {
+    font-weight: 700;
+  }
+
+  .sm\:hover\:font-extrabold:hover {
+    font-weight: 800;
+  }
+
+  .sm\:hover\:font-black:hover {
+    font-weight: 900;
+  }
+
+  .sm\:focus\:font-thin:focus {
+    font-weight: 100;
+  }
+
+  .sm\:focus\:font-extralight:focus {
+    font-weight: 200;
+  }
+
+  .sm\:focus\:font-light:focus {
+    font-weight: 300;
+  }
+
+  .sm\:focus\:font-normal:focus {
+    font-weight: 400;
+  }
+
+  .sm\:focus\:font-medium:focus {
+    font-weight: 500;
+  }
+
+  .sm\:focus\:font-semibold:focus {
+    font-weight: 600;
+  }
+
+  .sm\:focus\:font-bold:focus {
+    font-weight: 700;
+  }
+
+  .sm\:focus\:font-extrabold:focus {
+    font-weight: 800;
+  }
+
+  .sm\:focus\:font-black:focus {
+    font-weight: 900;
+  }
+
   .sm\:uppercase {
     text-transform: uppercase;
   }
@@ -78960,6 +79119,78 @@ hr {
   }
 
   .md\:font-black {
+    font-weight: 900;
+  }
+
+  .md\:hover\:font-thin:hover {
+    font-weight: 100;
+  }
+
+  .md\:hover\:font-extralight:hover {
+    font-weight: 200;
+  }
+
+  .md\:hover\:font-light:hover {
+    font-weight: 300;
+  }
+
+  .md\:hover\:font-normal:hover {
+    font-weight: 400;
+  }
+
+  .md\:hover\:font-medium:hover {
+    font-weight: 500;
+  }
+
+  .md\:hover\:font-semibold:hover {
+    font-weight: 600;
+  }
+
+  .md\:hover\:font-bold:hover {
+    font-weight: 700;
+  }
+
+  .md\:hover\:font-extrabold:hover {
+    font-weight: 800;
+  }
+
+  .md\:hover\:font-black:hover {
+    font-weight: 900;
+  }
+
+  .md\:focus\:font-thin:focus {
+    font-weight: 100;
+  }
+
+  .md\:focus\:font-extralight:focus {
+    font-weight: 200;
+  }
+
+  .md\:focus\:font-light:focus {
+    font-weight: 300;
+  }
+
+  .md\:focus\:font-normal:focus {
+    font-weight: 400;
+  }
+
+  .md\:focus\:font-medium:focus {
+    font-weight: 500;
+  }
+
+  .md\:focus\:font-semibold:focus {
+    font-weight: 600;
+  }
+
+  .md\:focus\:font-bold:focus {
+    font-weight: 700;
+  }
+
+  .md\:focus\:font-extrabold:focus {
+    font-weight: 800;
+  }
+
+  .md\:focus\:font-black:focus {
     font-weight: 900;
   }
 
@@ -107693,6 +107924,78 @@ hr {
     font-weight: 900;
   }
 
+  .lg\:hover\:font-thin:hover {
+    font-weight: 100;
+  }
+
+  .lg\:hover\:font-extralight:hover {
+    font-weight: 200;
+  }
+
+  .lg\:hover\:font-light:hover {
+    font-weight: 300;
+  }
+
+  .lg\:hover\:font-normal:hover {
+    font-weight: 400;
+  }
+
+  .lg\:hover\:font-medium:hover {
+    font-weight: 500;
+  }
+
+  .lg\:hover\:font-semibold:hover {
+    font-weight: 600;
+  }
+
+  .lg\:hover\:font-bold:hover {
+    font-weight: 700;
+  }
+
+  .lg\:hover\:font-extrabold:hover {
+    font-weight: 800;
+  }
+
+  .lg\:hover\:font-black:hover {
+    font-weight: 900;
+  }
+
+  .lg\:focus\:font-thin:focus {
+    font-weight: 100;
+  }
+
+  .lg\:focus\:font-extralight:focus {
+    font-weight: 200;
+  }
+
+  .lg\:focus\:font-light:focus {
+    font-weight: 300;
+  }
+
+  .lg\:focus\:font-normal:focus {
+    font-weight: 400;
+  }
+
+  .lg\:focus\:font-medium:focus {
+    font-weight: 500;
+  }
+
+  .lg\:focus\:font-semibold:focus {
+    font-weight: 600;
+  }
+
+  .lg\:focus\:font-bold:focus {
+    font-weight: 700;
+  }
+
+  .lg\:focus\:font-extrabold:focus {
+    font-weight: 800;
+  }
+
+  .lg\:focus\:font-black:focus {
+    font-weight: 900;
+  }
+
   .lg\:uppercase {
     text-transform: uppercase;
   }
@@ -136423,6 +136726,78 @@ hr {
     font-weight: 900;
   }
 
+  .xl\:hover\:font-thin:hover {
+    font-weight: 100;
+  }
+
+  .xl\:hover\:font-extralight:hover {
+    font-weight: 200;
+  }
+
+  .xl\:hover\:font-light:hover {
+    font-weight: 300;
+  }
+
+  .xl\:hover\:font-normal:hover {
+    font-weight: 400;
+  }
+
+  .xl\:hover\:font-medium:hover {
+    font-weight: 500;
+  }
+
+  .xl\:hover\:font-semibold:hover {
+    font-weight: 600;
+  }
+
+  .xl\:hover\:font-bold:hover {
+    font-weight: 700;
+  }
+
+  .xl\:hover\:font-extrabold:hover {
+    font-weight: 800;
+  }
+
+  .xl\:hover\:font-black:hover {
+    font-weight: 900;
+  }
+
+  .xl\:focus\:font-thin:focus {
+    font-weight: 100;
+  }
+
+  .xl\:focus\:font-extralight:focus {
+    font-weight: 200;
+  }
+
+  .xl\:focus\:font-light:focus {
+    font-weight: 300;
+  }
+
+  .xl\:focus\:font-normal:focus {
+    font-weight: 400;
+  }
+
+  .xl\:focus\:font-medium:focus {
+    font-weight: 500;
+  }
+
+  .xl\:focus\:font-semibold:focus {
+    font-weight: 600;
+  }
+
+  .xl\:focus\:font-bold:focus {
+    font-weight: 700;
+  }
+
+  .xl\:focus\:font-extrabold:focus {
+    font-weight: 800;
+  }
+
+  .xl\:focus\:font-black:focus {
+    font-weight: 900;
+  }
+
   .xl\:uppercase {
     text-transform: uppercase;
   }
@@ -165150,6 +165525,78 @@ hr {
   }
 
   .\32xl\:font-black {
+    font-weight: 900;
+  }
+
+  .\32xl\:hover\:font-thin:hover {
+    font-weight: 100;
+  }
+
+  .\32xl\:hover\:font-extralight:hover {
+    font-weight: 200;
+  }
+
+  .\32xl\:hover\:font-light:hover {
+    font-weight: 300;
+  }
+
+  .\32xl\:hover\:font-normal:hover {
+    font-weight: 400;
+  }
+
+  .\32xl\:hover\:font-medium:hover {
+    font-weight: 500;
+  }
+
+  .\32xl\:hover\:font-semibold:hover {
+    font-weight: 600;
+  }
+
+  .\32xl\:hover\:font-bold:hover {
+    font-weight: 700;
+  }
+
+  .\32xl\:hover\:font-extrabold:hover {
+    font-weight: 800;
+  }
+
+  .\32xl\:hover\:font-black:hover {
+    font-weight: 900;
+  }
+
+  .\32xl\:focus\:font-thin:focus {
+    font-weight: 100;
+  }
+
+  .\32xl\:focus\:font-extralight:focus {
+    font-weight: 200;
+  }
+
+  .\32xl\:focus\:font-light:focus {
+    font-weight: 300;
+  }
+
+  .\32xl\:focus\:font-normal:focus {
+    font-weight: 400;
+  }
+
+  .\32xl\:focus\:font-medium:focus {
+    font-weight: 500;
+  }
+
+  .\32xl\:focus\:font-semibold:focus {
+    font-weight: 600;
+  }
+
+  .\32xl\:focus\:font-bold:focus {
+    font-weight: 700;
+  }
+
+  .\32xl\:focus\:font-extrabold:focus {
+    font-weight: 800;
+  }
+
+  .\32xl\:focus\:font-black:focus {
     font-weight: 900;
   }
 

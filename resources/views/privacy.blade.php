@@ -5,7 +5,12 @@
 
 @section('content')
 <main class="container mx-auto py-8 px-4 md:w-2/3 lg:w-1/3">
-    <h2 class="font-headline text-4xl">Privacy Policy</h2>
+    <h2 class="font-headline text-4xl">Integritetspolicy</h2>
+
+    <p class="bg-gray-100 rounded-md p-4 my-4">
+        Den här sidan är enbart tillgänglig på engelska.
+    </p>
+
     <p>Last updated: 21 november 2018.</p>
 
     <p>Billio ("us", "we", or "our") operates https://billio.app (the "Site"). This page informs you of our policies regarding the collection, use and disclosure of Personal Information we receive from users of the Site.</p>

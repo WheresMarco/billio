@@ -9,12 +9,11 @@
 
     <p>{{$ticketType->description}}</p>
 
-    <label class="font-bold mb-2 inline-block">Antal biljetter:</label><br>
-    <input class="rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" type="number" name="quantity" id="quantity" value="1" min="1" max="{{$ticketType->limit_person}}" required>
-
     @if ( $ticketType->active && ! $ticketType->soldOut )
+        <label class="font-bold mb-2 inline-block">Antal biljetter:</label><br>
+        <input class="rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50 mr-1" type="number" name="quantity" id="quantity" value="1" min="1" max="{{$ticketType->limit_person}}" required>
         <input type="submit" class="btn btn-pink" value='Gå vidare' />
     @else
-        <button class="faux-button pink disabled">Inte tillgänglig</button>
+        <a href="#" class="btn btn-grey btn-disabled mt-1">Inte tillgänglig</a>
     @endif
 </form>
