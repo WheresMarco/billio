@@ -2,13 +2,13 @@
 @section('description', $event->excerpt)
 @section('og-title', $ticketType->name . '-biljett - ' . $event->name . ' | Billio')
 @section('og-content', $event->excerpt)
-@section('og-image', URL::asset($event->share_image))
+@section('og-image', Storage::url($event->share_image))
 
 @extends('layouts.app')
 
 @section('content')
 <main class="container mx-auto py-8 px-4 md:w-2/3 lg:w-1/3">
-    <div class="bg-pink text-white px-8 py-2 rounded-md mb-4 text-center mx-4 lg:mx-0">Observera att du behöver ett giltigt Covidpass för att kunna delta på {{$event->name}}.</div>
+    <div class="bg-pink text-white px-2 sm:px-8 py-2 rounded-md mb-8 text-center sm:mx-4 lg:mx-0">Observera att du behöver ett giltigt Covidpass för att kunna delta på {{$event->name}}.</div>
 
     <form action="/event/{{$event->slug}}/{{$ticketType->slug}}/info" method="post">
         @csrf
@@ -28,19 +28,19 @@
                     <h3 class="font-headline text-2xl mb-2">Biljett #{{$key + 1}}</h3>
                 @endif
 
-                <div class="grid grid-cols-2 space-x-2">
+                <div class="grid sm:grid-cols-2 sm:space-x-2">
                     <label class="block">
                         <span class="text-gray-700">Förnamn</span>
                         <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Anna" required>
                     </label>
 
-                    <label class="block">
+                    <label class="block mt-4 sm:mt-0">
                         <span class="text-gray-700">Efternamn</span>
                         <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="lastName" name="tickets[{{$key}}][lastName]" placeholder="Andersson" required>
                     </label>
                 </div>
 
-                <label class="block mt-2">
+                <label class="block mt-4 sm:mt-2">
                     <span class="text-gray-700">E-postadress</span>
                     <input type="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="email" name="tickets[{{$key}}][email]" placeholder="anna@andersson.se" required>
                 </label>

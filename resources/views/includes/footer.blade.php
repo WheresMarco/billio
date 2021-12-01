@@ -1,4 +1,4 @@
-    <section class="bg-dark-grey text-white text-center py-16">
+    <section class="bg-dark-grey text-white sm:text-center py-16">
         <div class="container mx-auto sm:text-center px-4 space-y-6 sm:w-9/12 lg:w-3/5">
             <div class="space-y-2">
                 <h1 class="font-headline text-4xl">Intresserad? Kontakta oss!</h1>

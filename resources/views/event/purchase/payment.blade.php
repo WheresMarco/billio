@@ -2,7 +2,7 @@
 @section('description', $event->excerpt)
 @section('og-title', $ticketType->name . '-biljett - ' . $event->name . ' | Billio')
 @section('og-content', $event->excerpt)
-@section('og-image', URL::asset($event->share_image))
+@section('og-image', Storage::url($event->share_image))
 
 @extends('layouts.app')
 
