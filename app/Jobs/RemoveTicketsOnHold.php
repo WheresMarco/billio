@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Ticket;
 
-class RemoveUnusedTickets implements ShouldQueue, ShouldBeUnique
+class RemoveTicketsOnHold implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
