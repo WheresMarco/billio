@@ -75,7 +75,7 @@
             </p>
         </div>
 
-        <img src="{{ URL::to('/img/eventpage.png') }}" class="w-full md:pr-4 lg:pr-0">
+        <img src="{{ URL::to('/img/eventpage.jpg') }}" class="w-full md:pr-4 lg:pr-0">
     </div>
 
     <div class="bg-gray-100 py-16">
@@ -101,7 +101,7 @@
     </div>
 
     <div class="container mx-auto grid sm:grid-cols-2 py-16 sm:space-x-4">
-        <img src="{{ URL::to('/img/checkout.png') }}" class="w-full md:pl-4 lg:pl-0">
+        <img src="{{ URL::to('/img/checkout.jpg') }}" class="w-full md:pl-4 lg:pl-0">
 
         <div class="px-4 md:px-0 md:pr-4 lg:pl-0 mt-3">
             <x-heroicon-o-emoji-happy class="h-12 text-pink" />
