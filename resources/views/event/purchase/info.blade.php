@@ -80,7 +80,7 @@
         @endforeach
 
         <div class="flex justify-between">
-            <a href="/event/{{$event->slug}}/" class="btn btn-grey">Avbryt</a>
+            <a href="/event/{{$event->slug}}/?clearcart" class="btn btn-grey">Avbryt</a>
             <input id="submit" type="submit" class="btn btn-pink" value='Gå vidare till betalning' />
         </div>
     </form>
