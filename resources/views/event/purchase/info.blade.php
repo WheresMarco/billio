@@ -53,7 +53,7 @@
                                     <li class="bg-gray-100 p-2 leading-relaxed rounded-md">
                                         <input class="rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-offset-0 focus:ring-blue focus:ring-opacity-50 cursor-pointer" id='tickets[{{$key}}][modifiers][{{$modifier->slug}}]' name="tickets[{{$key}}][modifiers][]" value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
                                         <label for='tickets[{{$key}}][modifiers][{{$modifier->slug}}]' class="cursor-pointer">
-                                            {{$modifier->name}} <span class="text-grey ml-2">{{$modifier->delta}} SEK</span>
+                                            {{$modifier->name}} @if ($modifier->delta != 0)<span class="text-grey ml-2 font-bold">{{$modifier->delta}} SEK</span>@endif
                                         </label>
                                     </li>
                                 @endif
@@ -63,7 +63,7 @@
                                 <li class="bg-gray-100 p-2 leading-relaxed rounded-md">
                                     <input class="rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-offset-0 focus:ring-blue focus:ring-opacity-50 cursor-pointer" id='tickets[{{$key}}][modifiers][karmedlem]' value='true' data-delta='-20' type="checkbox" x-model="tickets{{$key}}karmedlem" />
                                     <label for='tickets[{{$key}}][modifiers][karmedlem]' class="cursor-pointer">
-                                        Jag är kårmedlem <span class="text-grey ml-2">-20 SEK</span>
+                                        Jag är kårmedlem <span class="text-grey ml-2 font-bold">-20 SEK</span>
                                     </label>
                                 </li>
                             @endif

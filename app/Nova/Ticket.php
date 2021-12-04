@@ -9,11 +9,15 @@ use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 
 use Laravel\Nova\Fields\Text;
 
+use Laravel\Nova\Actions\Actionable;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\MorphToMany;
 
 class Ticket extends Resource
 {
+    use Actionable, Notifiable;
+
     /**
      * The model the resource corresponds to.
      *
@@ -136,6 +140,7 @@ class Ticket extends Resource
         return [
             (new DownloadExcel)->withHeadings(),
             new Actions\ResendTicket,
+            new Actions\ImportTickets,
         ];
     }
 }

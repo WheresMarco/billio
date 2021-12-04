@@ -16,6 +16,7 @@
     "require": {
         "php": "*",
         "algolia/algoliasearch-client-php": "*",
+        "anaseqal/nova-import": "*",
         "blade-ui-kit/blade-heroicons": "*",
         "blade-ui-kit/blade-icons": "*",
         "cartalyst/stripe-laravel": "*",

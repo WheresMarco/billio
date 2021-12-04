@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b30759cda063170a54a9b9dea88c3d50",
+    "content-hash": "b67ad12a90ade6343f80d54c7361c796",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -79,6 +79,53 @@
                 "source": "https://github.com/algolia/algoliasearch-client-php/tree/3.1.0"
             },
             "time": "2021-08-31T14:17:19+00:00"
+        },
+        {
+            "name": "anaseqal/nova-import",
+            "version": "0.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anaseqal/nova-import.git",
+                "reference": "94d4ab1991d5c86ae70b7219d94fe56e3d234d5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anaseqal/nova-import/zipball/94d4ab1991d5c86ae70b7219d94fe56e3d234d5f",
+                "reference": "94d4ab1991d5c86ae70b7219d94fe56e3d234d5f",
+                "shasum": ""
+            },
+            "require": {
+                "maatwebsite/excel": "*",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Anaseqal\\NovaImport\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Anaseqal\\NovaImport\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova import tool.",
+            "keywords": [
+                "import",
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/anaseqal/nova-import/issues",
+                "source": "https://github.com/anaseqal/nova-import/tree/0.0.6"
+            },
+            "time": "2020-08-26T16:13:47+00:00"
         },
         {
             "name": "blade-ui-kit/blade-heroicons",

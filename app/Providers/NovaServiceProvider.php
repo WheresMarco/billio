@@ -6,7 +6,7 @@ use Laravel\Nova\Nova;
 use Laravel\Nova\Cards\Help;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\NovaApplicationServiceProvider;
-use SimonHamp\LaravelNovaCsvImport\LaravelNovaCsvImport;
+use Anaseqal\NovaImport\NovaImport;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -85,6 +85,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             new \Llaski\NovaScheduledJobs\NovaScheduledJobsTool,
+            new NovaImport,
         ];
     }
 
