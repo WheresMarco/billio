@@ -49,12 +49,14 @@
                     <div class="mt-4">
                         <ul class="space-y-2">
                             @foreach ($ticketType->modifiers as $modifier)
-                                <li class="bg-gray-100 p-2 leading-relaxed rounded-md">
-                                    <input class="rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-offset-0 focus:ring-blue focus:ring-opacity-50 cursor-pointer" id='tickets[{{$key}}][modifiers][{{$modifier->slug}}]' name="tickets[{{$key}}][modifiers][]" value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
-                                    <label for='tickets[{{$key}}][modifiers][{{$modifier->slug}}]' class="cursor-pointer">
-                                        {{$modifier->name}} <span class="text-grey ml-2">{{$modifier->delta}} SEK</span>
-                                    </label>
-                                </li>
+                                @if (! $modifier->hidden)
+                                    <li class="bg-gray-100 p-2 leading-relaxed rounded-md">
+                                        <input class="rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-offset-0 focus:ring-blue focus:ring-opacity-50 cursor-pointer" id='tickets[{{$key}}][modifiers][{{$modifier->slug}}]' name="tickets[{{$key}}][modifiers][]" value='{{$modifier->slug}}' data-delta='{{$modifier->delta}}' type="checkbox" />
+                                        <label for='tickets[{{$key}}][modifiers][{{$modifier->slug}}]' class="cursor-pointer">
+                                            {{$modifier->name}} <span class="text-grey ml-2">{{$modifier->delta}} SEK</span>
+                                        </label>
+                                    </li>
+                                @endif
                             @endforeach
 
                             @if ($ticketType->check_student)
