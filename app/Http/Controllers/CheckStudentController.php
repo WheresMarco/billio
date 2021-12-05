@@ -18,9 +18,9 @@ class CheckStudentController extends Controller
      */
     public function isStudentMember(String $nin)
     {
-        $nin = str_replace('-', '', $nin);
+        $nin       = str_replace('-', '', $nin);
         $isStudent = false;
-        $corps = 'false';
+        $corps     = 'false';
 
         // Remove first two numbers if there is.
         if (12 === strlen($nin)) {
@@ -34,7 +34,16 @@ class CheckStudentController extends Controller
             return false;
         }
 
-        // TODO CHECK IF USED FOR THIS EVENT.
+        // Get nin from the database if it is not utilized
+        $ninDB = Nin::where('nin', $nin)->first();
+
+        if ($ninDB) {
+            if ($ninDB->utilized) {
+                return false;
+            }
+
+            return true;
+        }
 
         // Do request.
         $isStudent = $this->sendRequest(
@@ -69,11 +78,9 @@ class CheckStudentController extends Controller
                 $nin_object->utilized = false;
                 $nin_object->save();
             }
-        } else {
-            $corps = 'false';
         }
 
-        return $corps;
+        return $isStudent;
     }
 
     private function sendRequest($path, $nin)

@@ -35,6 +35,10 @@
         @apply border-orange text-orange hover:bg-orange hover:text-white;
     }
 
+    .btn-blue {
+        @apply border-blue text-blue hover:bg-blue hover:text-white;
+    }
+
     .btn-white {
         @apply border-white text-white hover:bg-white hover:text-black;
     }

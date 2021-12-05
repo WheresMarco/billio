@@ -8,6 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Nin;
 
 use App\Http\Controllers\TicketController;
 
@@ -36,6 +37,9 @@ class FinalizeTicket implements ShouldQueue
         $ticket->ticket_code = (new TicketController())->generateTicketCode();
         $ticket->status = 'unused';
         $ticket->save();
+
+        // Get nin from database on ticket_id and mark it as utilized.
+        $nin_object = Nin::where([ [ 'ticket_id', $ticket->id ]])->first()->update(['utilized' => true]);
 
         // Get ticket by uuid.
         $user = $ticket->user()->first();

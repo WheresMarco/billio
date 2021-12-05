@@ -867,6 +867,26 @@ select {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
+.btn-blue {
+  --tw-border-opacity: 1;
+  border-color: rgba(74, 144, 226, var(--tw-border-opacity));
+}
+
+.btn-blue:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(74, 144, 226, var(--tw-bg-opacity));
+}
+
+.btn-blue {
+  --tw-text-opacity: 1;
+  color: rgba(74, 144, 226, var(--tw-text-opacity));
+}
+
+.btn-blue:hover {
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
 .btn-white {
   --tw-border-opacity: 1;
   border-color: rgba(255, 255, 255, var(--tw-border-opacity));

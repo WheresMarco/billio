@@ -17,11 +17,19 @@ class EventController extends Controller
         if (request()->has('clearcart')) {
             $cart = session()->get('cart');
 
-            foreach ($cart as $ticketId => $ticket) {
-                $ticket->delete();
-            }
+            if ($cart) {
+                foreach ($cart as $ticketId => $ticket) {
+                    // Get ticket from database
+                    $ticket = Ticket::find($ticket['id']);
 
-            session()->forget('cart');
+                    // If status is hold delete ticket
+                    if ($ticket->status == 'hold') {
+                        $ticket->delete();
+                    }
+                }
+
+                session()->forget('cart');
+            }
         }
 
         if (! $event) {

@@ -31,18 +31,18 @@
                 <div class="grid sm:grid-cols-2 sm:space-x-2">
                     <label class="block">
                         <span class="text-gray-700">Förnamn</span>
-                        <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Anna" required>
+                        <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="firstName" name="tickets[{{$key}}][firstName]" placeholder="Anna" value="{{ old('tickets[' . $key .'][firstName]') }}" required>
                     </label>
 
                     <label class="block mt-4 sm:mt-0">
                         <span class="text-gray-700">Efternamn</span>
-                        <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="lastName" name="tickets[{{$key}}][lastName]" placeholder="Andersson" required>
+                        <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="lastName" name="tickets[{{$key}}][lastName]" placeholder="Andersson" value="{{ old('tickets[' . $key .'][lastName]') }}" required>
                     </label>
                 </div>
 
                 <label class="block mt-4 sm:mt-2">
                     <span class="text-gray-700">E-postadress</span>
-                    <input type="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="email" name="tickets[{{$key}}][email]" placeholder="anna@andersson.se" required>
+                    <input type="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" id="email" name="tickets[{{$key}}][email]" placeholder="anna@andersson.se" value="{{ old('tickets[' . $key .'][email]') }}" required>
                 </label>
 
                 @if (count($ticketType->modifiers) > 0)
@@ -73,7 +73,15 @@
 
                 @if ($ticketType->check_student)
                     <div x-show="tickets{{$key}}karmedlem">
-                        <livewire:check-student />
+                        <div class="mt-2">
+                            <p>Om biljettmottagaren är medlem i LinTek, Consensus, eller Stuff kan hen få kårrabatt. Mata in hens personnummer nedan och tryck på verifiera för att få rabatten.</p>
+
+                            <div class="flex flex-row">
+                                <input type="text" id="nin" name="tickets[{{$key}}][nin]" placeholder="Valfritt" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50 mr-2" value="{{ old('tickets[' . $key .'][nin]') }}" />
+                                {{-- <input type="button" id="nin-verify" class='btn btn-blue' value="Validera" /> --}}
+                            </div>
+                            <span class="text-grey text-sm mt-2 inline-block">Skriv in ditt personnummer i formatet ÅÅMMDD-XXXX.</span>
+                        </div>
                     </div>
                 @endif
             </div>

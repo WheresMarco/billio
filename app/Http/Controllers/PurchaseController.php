@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+use App\Http\Controllers\CheckStudentController;
+
 use App\Models\TicketType;
 use App\Models\User;
 use App\Models\Ticket;
 use App\Models\Transaction;
 use App\Models\Modifier;
+use App\Models\Nin;
 
 class PurchaseController extends Controller
 {
@@ -20,13 +23,13 @@ class PurchaseController extends Controller
 
         // If cart is empty redirect to event page
         if (!$cart) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Your ticket session has expired. Please try again.');
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Din köptid har gått ut, vänligen försök igen.');
         }
 
         $ticketType = TicketType::where('slug', $ticketType)->first();
 
         if (! $ticketType) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'That ticket type does not exist. Please try again.');
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Den här biljettypen finns inte.');
         }
 
         $event = $ticketType->event->first();
@@ -61,7 +64,7 @@ class PurchaseController extends Controller
 
         // If cart is empty redirect to event page
         if (!$cart) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Your ticket session has expired. Please try again.');
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Din köptid har gått ut, vänligen försök igen.');
         }
 
         // Get total from session
@@ -74,7 +77,7 @@ class PurchaseController extends Controller
         $ticketType = TicketType::where('slug', $ticketType)->first();
 
         if (! $ticketType) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'That ticket type does not exist. Please try again.');
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Den här biljettypen finns inte. Försök igen.');
         }
 
         $event = $ticketType->event->first();
@@ -119,12 +122,12 @@ class PurchaseController extends Controller
 
         // Redirect to the event page if the ticket type doesn't exist
         if (! $ticketType) {
-            return redirect()->back()->with('error', 'Ticket type does not exist.');
+            return redirect()->back()->with('error', 'Den här biljettypen finns inte.');
         }
 
         // Check if user is trying to buy more tickets than per person limit
         if ($ticketType->limit_person > 0 && $request->quantity > $ticketType->limit_person) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'You can only buy ' . $ticketType->limit_person . ' tickets per person.');
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Du kan bara köpa ' . $ticketType->limit_person . ' biljetter per person.');
         }
 
         // Get the event
@@ -132,12 +135,12 @@ class PurchaseController extends Controller
 
         // Check if the event is sold out
         if ($event->sold_out) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'This event is sold out.');
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Det här evenemanget är slutsålt.');
         }
 
         // Check if the ticket type is sold out
         if ($ticketType->sold_out) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'This ticket type is sold out.');
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Den här biljettypen är utsåld.');
         }
 
         // Create tickets with status pending based on quantity
@@ -171,11 +174,13 @@ class PurchaseController extends Controller
      */
     public function updateCartWithTicketInfo(Request $request)
     {
+        ray($request->all());
+
         // Validate the request
         $this->validate($request, [
             'event_id'       => 'required|exists:events,id',
             'ticket_type_id' => 'required|exists:ticket_types,id',
-            'tickets.*'      => 'array:firstName,lastName,email,modifiers' // TODO Check validation.
+            'tickets.*'      => 'array:firstName,lastName,email,modifiers,nin'
         ]);
 
         // Get the ticket type
@@ -189,19 +194,46 @@ class PurchaseController extends Controller
 
         // If cart is empty redirect to event page
         if (! $cart) {
-            return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Your ticket session has expired. Please try again.');
+            return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Din köptid har gått ut, vänligen försök igen.');
         }
 
         // Loop through tickets
         foreach ($request->tickets as $key => $ticket) {
             // Check if ticket exists in cart
             if (isset($cart[$key])) {
+                // Check nin
+                if (isset($ticket['nin'])) {
+                    // Check if nin is valid
+                    $valid = (new CheckStudentController())->isStudentMember($ticket['nin']);
+
+                    if (! $valid) {
+                        return redirect()->back()->with('error', 'Personnumret du matade in är inte en kårmedlem.')->withInput();
+                    }
+
+                    // Add ticket modifier to array
+                    $ticket['modifiers'][] = 'union-discount';
+
+                    // Remove first two numbers if there is.
+                    $nin  = str_replace('-', '', $ticket['nin']);
+                    if (12 === strlen($nin)) {
+                        $nin = substr($nin, 2);
+                    }
+
+                    // Get Nin from database
+                    $nin = Nin::where('nin', $nin)->first();
+
+                    // Update nin with ticket id
+                    $nin->update([
+                        'ticket_id' => $cart[$key]->id
+                    ]);
+                }
+
                 // Get ticket from database
                 $databaseTicket = Ticket::find($cart[$key]->id);
 
                 // If no ticket is found, redirect to event page
                 if (! $databaseTicket) {
-                    return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Your ticket session has expired. Please try again.');
+                    return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Din köptid har gått ut, vänligen försök igen.');
                 }
 
                 // Get user by email
@@ -280,13 +312,18 @@ class PurchaseController extends Controller
                 }
             }
 
+            // Update ticket with price
+            $ticket->update([
+                'price' => $price
+            ]);
+
             // Add price to total
             $total += $price;
         }
 
         // If total is 0 redirect to event page. No free tickets!
         if ($total <= 0) {
-            return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Something has gone wrong, please try again.');
+            return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Något har gått fel, vänligen försök igen.');
         }
 
         // Save total price in session
@@ -307,7 +344,7 @@ class PurchaseController extends Controller
 
         // Check if payment intent was created
         if (! $paymentIntent) {
-            return redirect()->back()->with('error', 'Could not create payment intent. Please try again.');
+            return redirect()->back()->with('error', 'Kunde inte skapa betalning, vänligen försök igen.');
         }
 
         // Loop over cart and create a row in transaction table
@@ -316,13 +353,13 @@ class PurchaseController extends Controller
             $transaction = Transaction::create([
                 'user_id'   => $ticket->user_id,
                 'ticket_id' => $ticket->id,
-                'amount'    => $ticket->ticket_type->price,
+                'amount'    => $total,
                 'stripe_id' => $paymentIntent['id'],
             ]);
 
             // Check if transaction was created
             if (! $transaction) {
-                return redirect()->back()->with('error', 'Could not create transaction. Please try again.');
+                return redirect()->back()->with('error', 'Kunde inte skapa transaktion, vänligen försök igen.');
             }
         }
 

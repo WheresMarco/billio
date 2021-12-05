@@ -46,11 +46,3 @@ Route::prefix('event')->group(function () {
 
     Route::get('{eventSlug}/{ticketType}/confirmation', 'PurchaseController@confirmation');
 });
-
-
-// Route to display session storage
-Route::get('/session', function () {
-    // Get session data
-    $data = session()->all();
-    return $data;
-});
