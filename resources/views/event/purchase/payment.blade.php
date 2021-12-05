@@ -58,7 +58,7 @@
 @push('scripts')
     <script src="https://js.stripe.com/v3/"></script>
     <script>
-        const stripe = Stripe('{{env('STRIPE_PUBLIC_KEY')}}')
+        const stripe = Stripe('{{env("STRIPE_PUBLIC_KEY")}}')
 
         let elements;
 
