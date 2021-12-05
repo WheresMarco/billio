@@ -39,7 +39,11 @@ class FinalizeTicket implements ShouldQueue
         $ticket->save();
 
         // Get nin from database on ticket_id and mark it as utilized.
-        $nin_object = Nin::where([ [ 'ticket_id', $ticket->id ]])->first()->update(['utilized' => true]);
+        $nin_object = Nin::where([ [ 'ticket_id', $ticket->id ]])->first();
+
+        if ($nin_object) {
+            $nin_object->update(['utilized' => true]);
+        }
 
         // Get ticket by uuid.
         $user = $ticket->user()->first();

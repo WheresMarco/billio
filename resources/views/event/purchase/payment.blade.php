@@ -15,7 +15,7 @@
         <h4 class="font-headline font-semibold text-grey">Steg 2 av 2</h4>
         <h2 class="font-headline text-3xl">Betalning</h2>
 
-        <p>Du har valt {{count($cart)}} <strong>"{{$ticketType->name}}"</strong>-@if(count($cart) > 1)biljetter @else biljett @endif för <strong>{{$event->name}}</strong>. Det kommer att kosta {{$total}} SEK.</p>
+        <p>Du har valt {{count($cart)}} <strong>"{{$ticketType->name}}"</strong>-@if(count($cart) > 1)biljetter @else biljett @endif till <strong>{{$event->name}}</strong>. Det kommer att kosta {{$total}} SEK.</p>
 
         @include('includes.countdown')
 

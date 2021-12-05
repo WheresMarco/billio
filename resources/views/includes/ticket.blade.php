@@ -18,7 +18,7 @@
             </ul>
         @endif
 
-        <h4 class="font-headline text-xl">Kod</h4>
+        <h4 class="font-headline text-xl">Biljettkod</h4>
         <span>{{$ticket->ticket_code}}</span>
     </div>
 </div>
