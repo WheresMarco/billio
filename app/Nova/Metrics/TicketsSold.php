@@ -3,11 +3,11 @@
 namespace App\Nova\Metrics;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Metrics\Trend;
+use Laravel\Nova\Metrics\Value;
 
 use App\Models\Ticket;
 
-class TicketsSold extends Trend
+class TicketsSold extends Value
 {
     /**
      * Calculate the value of the metric.
@@ -17,7 +17,7 @@ class TicketsSold extends Trend
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->countByDays($request, Ticket::class)->showLatestValue();
+        return $this->count($request, Ticket::class);
     }
 
     /**

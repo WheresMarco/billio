@@ -17,7 +17,21 @@ class TicketType extends Partition
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Ticket::class, 'ticket_type_id');
+        return $this->count($request, Ticket::class, 'ticket_type_id')
+            ->label(function ($value) {
+                switch ($value) {
+                    case 1:
+                        return 'Fest';
+                    case 2:
+                        return 'Fest + Sittning';
+                    case null:
+                        return 'None';
+                    default:
+                        return ucfirst($value);
+                }
+            });
+
+        // return $this->count($request, Ticket::class, 'ticket_type_id');
     }
 
     /**

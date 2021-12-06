@@ -95,7 +95,6 @@ class Event extends Resource
         return [
             (new Metrics\TicketsSold)->onlyOnDetail(),
             (new Metrics\TicketType)->onlyOnDetail(),
-            (new Metrics\TicketsUtilized)->onlyOnDetail(),
             (new Metrics\TicketStatus)->onlyOnDetail(),
         ];
     }
