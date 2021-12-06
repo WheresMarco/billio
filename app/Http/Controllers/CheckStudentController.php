@@ -47,7 +47,7 @@ class CheckStudentController extends Controller
 
         // Do request.
         $isStudent = $this->sendRequest(
-            'https://medlem.lintek.liu.se/api/checkstudent/' . $nin . '?apikey=' . env('MONTANIA_API_KEY_LINTEK', null),
+            'https://medlem.lintek.liu.se/api/checkstudent/' . $nin . '?apikey=c23e6a1ca92f832aae60a0577f3bd603',
             $nin
         );
         $corps = 'lintek';
@@ -61,7 +61,7 @@ class CheckStudentController extends Controller
         // No luck? Check Consensus.
         if (! $isStudent) {
             $isStudent = $this->sendRequest(
-                'https://medlem.consensus.liu.se/api/checkstudent/' . $nin . '?apikey=' . env('MONTANIA_API_KEY_CONSENSUS', null),
+                'https://medlem.consensus.liu.se/api/checkstudent/' . $nin . '?apikey=93baa7b7d71b06f9e58b00d509e33eae',
                 $nin
             );
             $corps = 'consensus';
