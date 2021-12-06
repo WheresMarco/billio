@@ -15,7 +15,7 @@ Hej {{ $name }}! Det här brevet är din "{{ $ticketType }}"-biljett till {{ $ev
 @if(!$modifiers->isEmpty())
 ## Du har valt följande
 @foreach($modifiers as $modifier => $modifierValue)
-* {{ $modifierValue->name }}
+- {{ $modifierValue->name }}
 @endforeach
 @endif
 
@@ -24,8 +24,8 @@ Kom ihåg att det är krav på Covidpass för att komma in på {{ $event }}.
 
 Du kan komma in på {{ $event }} på följande sätt:
 
-* Visa QR-koden nedan tillsammans med en giltig identitetshandling.
-* Visa upp biljettkoden **{{ $ticketCode }}** tillsammans med en giltig identitetshandling.
+- Visa QR-koden nedan tillsammans med en giltig identitetshandling.
+- Visa upp biljettkoden **{{ $ticketCode }}** tillsammans med en giltig identitetshandling.
 
 ![{{ $ticketCode }}](https://qrcode.tec-it.com/API/QRCode?quietzone=3&backcolor=fff&data={{ $ticketCode }} "{{ $ticketCode }}")
 
