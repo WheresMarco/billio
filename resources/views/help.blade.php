@@ -26,7 +26,7 @@
     <p>De allra flesta biljetter kan tyvärr inte återbetalas. Du kan alltid prova att kontakta arrangören direkt, för att se om de kan tänka sig att godkänna ditt återköp.</p>
 
     <h3 class="font-headline text-2xl mt-4">Kan jag sälja min biljett vidare?</h3>
-    <p>Ja, det kan du. Tänk på att informera den nya biljettinnehavaren att uppge ditt namn vid incheckning då vi har ingen information om vem som köpt den nya biljetten. Om ni vill ändra innnhavaren av biljetten kan ni <a href="mailto:hi@billio.app">kontakta oss</a> så hjälper vi till med det.</p>
+    <p>Ja, det kan du. Tänk på att informera den nya biljettinnehavaren att uppge ditt namn vid incheckning då vi har ingen information om vem som köpt den nya biljetten. Om ni vill ändra innehavaren av biljetten kan ni <a href="mailto:hi@billio.app">kontakta oss</a> så hjälper vi till med det.</p>
 
     <p>Inom kort kommer det dessutom att vara möjligt att sälja vidare er biljett via Billio. <a href="mailto:hi@billio.app">Kontakta oss</a> för att veta mer.</p>
 
