@@ -42,7 +42,7 @@ class TicketPurchased extends Mailable
      */
     public function build()
     {
-        return $this->from('hi@billio.app')
+        return $this->from('hi@billio.app', 'Billio')
                     ->subject($this->event->name . ': ' . $this->ticket->ticket_type()->first()->name . ' [' . $this->ticket->ticket_code . ']')
                     ->with([
                         'event'      => $this->event->name,
