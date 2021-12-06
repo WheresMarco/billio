@@ -96,7 +96,7 @@
             if (error.type === "card_error" || error.type === "validation_error") {
                 showMessage(error.message);
             } else {
-                showMessage("An unexpected error occured.");
+                showMessage("Ett okänt fel intraffade. Var god och försök igen.");
             }
 
             setLoading(false);
@@ -116,18 +116,18 @@
 
             switch (paymentIntent.status) {
                 case "processing":
-                showMessage("Your payment is processing.");
+                showMessage("Din betalning hanteras.");
                 break;
                 case "requires_payment_method":
-                showMessage("Your payment was not successful, please try again.");
+                showMessage("Din betalning gick inte igenom, vänligen försök igen.");
                 break;
                 default:
-                showMessage("Something went wrong.");
+                showMessage("Något gick fel, vänligen försök igen.");
                 break;
             }
         }
 
-        // ------- UI helpers -------
+        // Show messages from Stripe
         function showMessage(messageText) {
             const messageContainer = document.querySelector("#payment-error");
 
@@ -143,10 +143,11 @@
         // Show a spinner on payment submission
         function setLoading(isLoading) {
             if (isLoading) {
-                // Disable the button and show a spinner
-                console.log('Fix spinner');
+                // Disable the submit button
+                document.querySelector("#submit").disabled = true;
             } else {
-                console.log('Stop spinner');
+                // Enable the submit button again
+                document.querySelector("#submit").disabled = false;
             }
         }
     </script>
