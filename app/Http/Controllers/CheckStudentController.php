@@ -53,10 +53,13 @@ class CheckStudentController extends Controller
         $corps = 'lintek';
 
         // No luck? Check Stuff.
-        // if (! $isStudent) {
-        //     $isStudent = $this->sendRequest('https://medlem.stuff.liu.se/api/checkstudent/' . $nin . '?apikey=' . env('MONTANIA_API_KEY_STUFF', null), $nin);
-        //     $corps = 'stuff';
-        // }
+        if (! $isStudent) {
+            $isStudent = $this->sendRequest(
+                'https://medlem.stuff.liu.se/api/checkstudent/' . $nin . '?apikey=907a3e466d8a41f0875ae6cbd30a9b68',
+                $nin
+            );
+            $corps = 'stuff';
+        }
 
         // No luck? Check Consensus.
         if (! $isStudent) {
