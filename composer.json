@@ -89,6 +89,9 @@
         ],
         "post-update-cmd": [
             "@php artisan nova:publish"
+        ],
+        "listen-stripe": [
+            "stripe listen --forward-to https://billio.test/webhook/stripe"
         ]
     }
 }
