@@ -23,3 +23,6 @@ Route::post('/checkin', 'CheckInController@checkIn');
 
 // Search
 Route::get('/checkin/search', 'CheckInController@search');
+
+// Get all tickets
+Route::get('/checkin/tickets', 'CheckInController@getAllTickets');

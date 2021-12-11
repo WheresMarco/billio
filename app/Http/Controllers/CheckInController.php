@@ -7,6 +7,14 @@ use App\Models\Ticket;
 
 class CheckInController extends Controller
 {
+    public function getAllTickets()
+    {
+        // Get all tickets with user information
+        $tickets = Ticket::with('user', 'nin')->get();
+
+        return $tickets;
+    }
+
     public function checkIn(Request $request)
     {
         $uuid         = $request->uuid;
