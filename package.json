@@ -16,7 +16,7 @@
         "browser-sync-webpack-plugin": "^2.3.0",
         "laravel-mix": "*",
         "lodash": "*",
-        "postcss": "^8.4.4",
+        "postcss": "^8.4.6",
         "resolve-url-loader": "*",
         "sass": "*",
         "sass-loader": "*",
