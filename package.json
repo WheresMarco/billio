@@ -24,7 +24,7 @@
     },
     "dependencies": {
         "@tailwindcss/forms": "^0.3.4",
-        "alpinejs": "^3.6.1",
+        "alpinejs": "^3.9.6",
         "turbolinks": "*"
     }
 }
