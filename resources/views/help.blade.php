@@ -30,13 +30,6 @@
 
     <p>Inom kort kommer det dessutom att vara möjligt att sälja vidare er biljett via Billio. <a href="mailto:hi@billio.app">Kontakta oss</a> för att veta mer.</p>
 
-    <h3 class="font-headline text-2xl mt-4"> Coronaviruset (Covid-19) - Allmän information</h3>
-    <p>Vänligen håll dig uppdaterad om status och rekommendationer från <a href="https://www.folkhalsomyndigheten.se/smittskydd-beredskap/utbrott/aktuella-utbrott/covid-19/" target="_blank">Folkhälsomyndigheten</a>.</p>
-
-    <p>För de flesta evenemang krävs det nu Covidbevis för att komma in på evenemanget. Om du inte har beviset kan du inte komma in på evenemanget och dessutom inte få pengarna tillbaka.</p>
-
-    <p>Om ett evenemang behöver ställas in kommer ni få information direkt från arrangören om eventuellt återköp.</p>
-
     <a href="mailto:hi@billio.app" class="btn btn-pink mt-4">Jag behöver fortfarande hjälp!</a>
 </main>
 @endsection

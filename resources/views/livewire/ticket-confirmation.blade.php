@@ -55,7 +55,6 @@
         </p>
 
         <h3 class="font-headline text-2xl mt-4">Vid evenmanget</h3>
-        <p><strong>Kom ihåg att det är krav på Covidpass för att komma in på {{$tickets[0]->event->name}}.</strong></p>
 
         <p>Du kan kan komma in på evenemanget genom följande metoder:</p>
         <ul class="list-disc">

@@ -47,10 +47,6 @@
     </div>
 
     <div class="container mx-auto">
-        @if(count($event->ticket_types) > 0)
-            <div class="bg-pink text-white px-4 sm:px-8 py-2 rounded-md my-4 mt-8 text-center mx-4 lg:mx-0">Observera att du behöver ett giltigt Covidpass för att kunna delta på {{$event->name}}.</div>
-        @endif
-
         <section class="md:grid md:grid-cols-2 space-y-8 md:space-y-0 md:space-x-8 px-4 lg:px-0 py-4 pb-12">
             @foreach ($event->ticket_types as $ticketType)
                 @include('includes.ticket-type', $ticketType)

@@ -20,7 +20,6 @@ Hej {{ $name }}! Det här brevet är din "{{ $ticketType }}"-biljett till {{ $ev
 @endif
 
 ## Vid evenemanget
-Kom ihåg att det är krav på Covidpass för att komma in på {{ $event }}.
 
 Du kan komma in på {{ $event }} på följande sätt:
 

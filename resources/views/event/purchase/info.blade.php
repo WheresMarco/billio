@@ -8,8 +8,6 @@
 
 @section('content')
 <main class="container mx-auto py-8 px-4 md:w-2/3 lg:w-1/3">
-    <div class="bg-pink text-white px-2 sm:px-8 py-2 rounded-md mb-8 text-center sm:mx-4 lg:mx-0">Observera att du behöver ett giltigt Covidpass för att kunna delta på {{$event->name}}.</div>
-
     <form action="/event/{{$event->slug}}/{{$ticketType->slug}}/info" method="post">
         @csrf
         <input type="hidden" name="ticket_type_id" value="{{$ticketType->id}}">
