@@ -291,6 +291,7 @@ class PurchaseController extends Controller
         $event       = null;
 
         // Loop over cart
+        // TODO: Go over this. It's a bit messy, and incorrect.
         foreach ($cart as $ticket) {
             // Add ticket id to array
             $ticketUuids[] = $ticket->uuid;

@@ -47,7 +47,7 @@
     </div>
 
     <div class="container mx-auto">
-        <section class="md:grid md:grid-cols-2 space-y-8 md:space-y-0 md:space-x-8 px-4 lg:px-0 py-4 pb-12">
+        <section class="md:grid md:grid-cols-2 space-y-8 md:space-y-0 md:space-x-8 px-4 lg:px-0 py-12 pb-12">
             @foreach ($event->ticket_types as $ticketType)
                 @include('includes.ticket-type', $ticketType)
             @endforeach

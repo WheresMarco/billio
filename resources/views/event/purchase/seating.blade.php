@@ -7,26 +7,28 @@
 @extends('layouts.app')
 
 @section('content')
-<main>
-    <div class="wrapper">
-        <div class="purchase">
-            <form id="payment-form" action="/event/luciafesten/party/info">
-                @csrf
-                <h4>Steg 1 av 3</h4>
-                <h2>Välj platser</h2>
+    <main class="container mx-auto py-8 px-4 md:w-2/3 lg:w-1/3">
+        <form action="/event/{{ $event->slug }}/{{ $ticketType->slug }}/info" method="post">
+            @csrf
+            <input type="hidden" name="ticket_type_id" value="{{ $ticketType->id }}">
+            <input type="hidden" name="event_id" value="{{ $event->id }}">
 
-                <p>Du har valt tre <strong>"{{$ticketType->name}}"</strong>-biljetter för <strong>{{$event->name}}</strong>. Välj dina platser nedan. I nästa steg får du fylla i vilka som ska ha biljetterna. <strong><a href="#">Ändra biljetttyp eller antal</a></strong>.</p>
+            <h4 class="font-headline font-semibold text-grey">Steg 1 av 3</h4>
+            <h2 class="font-headline text-3xl">Välj platser</h2>
 
-                <br style="clear: both;">
+            <p>Du har valt tre <strong>"{{ $ticketType->name }}"</strong>-biljetter för
+                <strong>{{ $event->name }}</strong>. Välj dina platser nedan. I nästa steg får du fylla i vilka som ska ha
+                biljetterna. <strong><a href="#">Ändra biljetttyp eller antal</a></strong>.
+            </p>
 
-                <img src="{{ URL::to('/img/temppicker.png') }}" style="max-width: 100%;">
+            <br style="clear: both;">
 
-                <div>
-                    <input id="submit" type="submit" class="pink" value='Gå vidare' />
-                    <br style="clear: both;">
-                </div>
-            </form>
-        </div>
-    </div>
-</main>
+            <img src="{{ URL::to('/img/temppicker.png') }}" style="max-width: 100%;">
+
+            <div class="flex justify-between">
+                <a href="/event/{{ $event->slug }}/?clearcart" class="btn btn-grey">Avbryt</a>
+                <input id="submit" type="submit" class="btn btn-pink" value='Gå vidare till betalning' />
+            </div>
+        </form>
+    </main>
 @endsection
