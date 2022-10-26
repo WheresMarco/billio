@@ -13,7 +13,7 @@
             <input type="hidden" name="ticket_type_id" value="{{ $ticketType->id }}">
             <input type="hidden" name="event_id" value="{{ $event->id }}">
 
-            <h4 class="font-headline font-semibold text-grey">Steg 1 av 2</h4>
+            <h4 class="font-headline text-grey font-semibold">Steg 1 av 2</h4>
             <h2 class="font-headline text-3xl">Ange biljettuppgifter</h2>
 
             <p>Du har valt {{ count($cart) }} <strong>"{{ $ticketType->name }}"</strong>-@if (count($cart) > 1)
@@ -28,14 +28,14 @@
             @foreach ($cart as $key => $item)
                 <div class="my-4 rounded-md border p-5 shadow-xl" x-data="{ tickets{{ $key }}karmedlem: false }">
                     @if (count($cart) > 1)
-                        <h3 class="mb-2 font-headline text-2xl">Biljett #{{ $key + 1 }}</h3>
+                        <h3 class="font-headline mb-2 text-2xl">Biljett #{{ $key + 1 }}</h3>
                     @endif
 
                     <div class="grid sm:grid-cols-2 sm:space-x-2">
                         <label class="block">
                             <span class="text-gray-700">Förnamn</span>
                             <input type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
+                                class="focus:border-blue focus:ring-blue mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-opacity-50"
                                 id="firstName" name="tickets[{{ $key }}][firstName]" placeholder="Anna"
                                 value="{{ old('tickets[' . $key . '][firstName]') }}" required>
                         </label>
@@ -43,7 +43,7 @@
                         <label class="mt-4 block sm:mt-0">
                             <span class="text-gray-700">Efternamn</span>
                             <input type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
+                                class="focus:border-blue focus:ring-blue mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-opacity-50"
                                 id="lastName" name="tickets[{{ $key }}][lastName]" placeholder="Andersson"
                                 value="{{ old('tickets[' . $key . '][lastName]') }}" required>
                         </label>
@@ -52,7 +52,7 @@
                     <label class="mt-4 block sm:mt-2">
                         <span class="text-gray-700">E-postadress</span>
                         <input type="email"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
+                            class="focus:border-blue focus:ring-blue mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-opacity-50"
                             id="email" name="tickets[{{ $key }}][email]" placeholder="anna@andersson.se"
                             value="{{ old('tickets[' . $key . '][email]') }}" required>
                     </label>
@@ -64,7 +64,7 @@
                                     @if (!$modifier->hidden)
                                         <li class="rounded-md bg-gray-100 p-2 leading-relaxed">
                                             <input
-                                                class="cursor-pointer rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50 focus:ring-offset-0"
+                                                class="text-pink focus:border-blue focus:ring-blue cursor-pointer rounded border-gray-300 shadow-sm focus:ring focus:ring-opacity-50 focus:ring-offset-0"
                                                 id='tickets[{{ $key }}][modifiers][{{ $modifier->slug }}]'
                                                 name="tickets[{{ $key }}][modifiers][]"
                                                 value='{{ $modifier->slug }}' data-delta='{{ $modifier->delta }}'
@@ -72,7 +72,7 @@
                                             <label for='tickets[{{ $key }}][modifiers][{{ $modifier->slug }}]'
                                                 class="cursor-pointer">
                                                 {{ $modifier->name }} @if ($modifier->delta != 0)
-                                                    <span class="ml-2 font-bold text-grey">{{ $modifier->delta }}
+                                                    <span class="text-grey ml-2 font-bold">{{ $modifier->delta }}
                                                         SEK</span>
                                                 @endif
                                             </label>
@@ -83,13 +83,13 @@
                                 @if ($ticketType->check_student)
                                     <li class="rounded-md bg-gray-100 p-2 leading-relaxed">
                                         <input
-                                            class="cursor-pointer rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50 focus:ring-offset-0"
+                                            class="text-pink focus:border-blue focus:ring-blue cursor-pointer rounded border-gray-300 shadow-sm focus:ring focus:ring-opacity-50 focus:ring-offset-0"
                                             id='tickets[{{ $key }}][modifiers][karmedlem]' value='true'
                                             data-delta='-20' type="checkbox"
                                             x-model="tickets{{ $key }}karmedlem" />
                                         <label for='tickets[{{ $key }}][modifiers][karmedlem]'
                                             class="cursor-pointer">
-                                            Jag är kårmedlem <span class="ml-2 font-bold text-grey">-20 SEK</span>
+                                            Jag är kårmedlem <span class="text-grey ml-2 font-bold">-20 SEK</span>
                                         </label>
                                     </li>
                                 @endif
@@ -106,11 +106,11 @@
                                 <div class="flex flex-row">
                                     <input type="text" id="nin" name="tickets[{{ $key }}][nin]"
                                         placeholder="Valfritt"
-                                        class="mr-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
+                                        class="focus:border-blue focus:ring-blue mr-2 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-opacity-50"
                                         value="{{ old('tickets[' . $key . '][nin]') }}" />
                                     {{-- <input type="button" id="nin-verify" class='btn btn-blue' value="Validera" /> --}}
                                 </div>
-                                <span class="mt-2 inline-block text-sm text-grey">Skriv in ditt personnummer i formatet
+                                <span class="text-grey mt-2 inline-block text-sm">Skriv in ditt personnummer i formatet
                                     ÅÅMMDD-XXXX.</span>
                             </div>
                         </div>

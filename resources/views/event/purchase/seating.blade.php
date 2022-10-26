@@ -13,7 +13,7 @@
             <input type="hidden" name="ticket_type_id" value="{{ $ticketType->id }}">
             <input type="hidden" name="event_id" value="{{ $event->id }}">
 
-            <h4 class="font-headline font-semibold text-grey">Steg 1 av 3</h4>
+            <h4 class="font-headline text-grey font-semibold">Steg 1 av 3</h4>
             <h2 class="font-headline text-3xl">Välj platser</h2>
 
             <p>Du har valt tre <strong>"{{ $ticketType->name }}"</strong>-biljetter för

@@ -8,10 +8,10 @@
 
 @section('content')
 <main>
-    <div class="h-60 sm:h-96 bg-cover bg-center" style="background-image: url({{Storage::url($event->hero_image)}});"></div>
+    <div class="h-60 bg-cover bg-center sm:h-96" style="background-image: url({{Storage::url($event->hero_image)}});"></div>
 
-    <div class="container mx-auto px-4 lg:px-0 pb-10">
-        <h1 class="font-headline text-4xl text-pink pt-8">{{$event->name}}</h1>
+    <div class="container mx-auto px-4 pb-10 lg:px-0">
+        <h1 class="font-headline text-pink pt-8 text-4xl">{{$event->name}}</h1>
 
         <div x-data="{ closed: true }">
             <div :class="{ 'description small': closed === true }">{{ Illuminate\Mail\Markdown::parse($event->description) }}</div>
@@ -21,33 +21,33 @@
     </div>
 
     <div class="bg-gray-100">
-        <div class="container mx-auto md:grid md:grid-cols-2 md:space-x-8 px-4 lg:px-0 py-8 sm:py-4">
-            <div class="grid grid-cols-2 md:grid-cols-3 mb-2 sm:mb-0">
+        <div class="container mx-auto px-4 py-8 sm:py-4 md:grid md:grid-cols-2 md:space-x-8 lg:px-0">
+            <div class="mb-2 grid grid-cols-2 sm:mb-0 md:grid-cols-3">
                 <div>
-                    <h4 class="text-grey font-semibold"><x-heroicon-s-clock class="inline-block h-4 relative" style="margin-top: -2px;" /> Datum</h4>
+                    <h4 class="text-grey font-semibold"><x-heroicon-s-clock class="relative inline-block h-4" style="margin-top: -2px;" /> Datum</h4>
                     <span class="text-grey">{{$event->event_dates[0]->date_from->format('d/m - Y')}}</span>
                 </div>
 
                 <div>
-                    <h4 class="text-grey font-semibold"><x-heroicon-s-location-marker class="inline-block h-4 relative" style="margin-top: -3px;" /> Plats</h4>
+                    <h4 class="text-grey font-semibold"><x-heroicon-s-location-marker class="relative inline-block h-4" style="margin-top: -3px;" /> Plats</h4>
                     <span class="text-grey">{{$event->event_dates[0]->location}}</span>
                 </div>
 
                 <div class="mt-2 sm:mt-0">
-                    <h4 class="text-grey font-semibold"><x-heroicon-s-user-group class="inline-block h-4 relative" style="margin-top: -3px;" /> Värd</h4>
+                    <h4 class="text-grey font-semibold"><x-heroicon-s-user-group class="relative inline-block h-4" style="margin-top: -3px;" /> Värd</h4>
                     <span class="text-grey">{{$event->organisation->title}}</span>
                 </div>
             </div>
 
-            <div class="mt-4 sm:mt-0 sm:flex sm:justify-end sm:items-center">
-                <a href="mailto:{{$event->organisation->email}}" class="btn btn-grey mr-2 text-center w-full sm:w-auto mb-2 sm:mb-0">Kontakta värden</a>
-                <a href="{{$event->organisation->url}}" target="_blank" rel="noopener noreferrer" class="btn btn-grey text-center w-full sm:w-auto">Besök värdens webbplats</a>
+            <div class="mt-4 sm:mt-0 sm:flex sm:items-center sm:justify-end">
+                <a href="mailto:{{$event->organisation->email}}" class="btn btn-grey mr-2 mb-2 w-full text-center sm:mb-0 sm:w-auto">Kontakta värden</a>
+                <a href="{{$event->organisation->url}}" target="_blank" rel="noopener noreferrer" class="btn btn-grey w-full text-center sm:w-auto">Besök värdens webbplats</a>
             </div>
         </div>
     </div>
 
     <div class="container mx-auto">
-        <section class="md:grid md:grid-cols-2 space-y-8 md:space-y-0 md:space-x-8 px-4 lg:px-0 py-12 pb-12">
+        <section class="space-y-8 px-4 py-12 pb-12 md:grid md:grid-cols-2 md:space-y-0 md:space-x-8 lg:px-0">
             @foreach ($event->ticket_types as $ticketType)
                 @include('includes.ticket-type', $ticketType)
             @endforeach

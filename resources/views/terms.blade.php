@@ -6,7 +6,7 @@
 @section('content')
 <main class="container mx-auto py-8 px-4 md:w-2/3 lg:w-1/3">
     <h2 class="font-headline text-4xl">Allmänna villkor</h2>
-    <p class="bg-gray-100 rounded-md p-4 my-4">
+    <p class="my-4 rounded-md bg-gray-100 p-4">
         Den här sidan är enbart tillgänglig på engelska.
     </p>
 

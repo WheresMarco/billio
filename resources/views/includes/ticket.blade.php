@@ -1,4 +1,4 @@
-<div class="p-5 shadow-xl border rounded-md my-4 grid grid-cols-8 sm:gap-6">
+<div class="my-4 grid grid-cols-8 rounded-md border p-5 shadow-xl sm:gap-6">
     <div class="col-span-full sm:col-span-3">
         <img src="https://qrcode.tec-it.com/API/QRCode?quietzone=3&backcolor=fff&data={{$ticket->ticket_code}}" />
     </div>

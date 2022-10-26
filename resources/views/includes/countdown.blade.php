@@ -1,5 +1,5 @@
-<div class="bg-gray-100 p-2 rounded-md flex items-center my-2" x-data="timer('{{$cart->first()->updated_at}}')" x-init="init();">
-    <x-heroicon-o-clock class="h-5 inline-block mr-1" />
+<div class="my-2 flex items-center rounded-md bg-gray-100 p-2" x-data="timer('{{$cart->first()->updated_at}}')" x-init="init();">
+    <x-heroicon-o-clock class="mr-1 inline-block h-5" />
     <p>Vi har reserverat biljetterna i <strong x-text="time().minutes"></strong> minuter och <strong x-text="time().seconds"></strong> sekunder till.</p>
 </div>
 

@@ -25,20 +25,12 @@
             }
         }
         </style>
-        <div class="flex justify-center items-center">
+        <div class="flex items-center justify-center">
         <div
-            class="
-            loader
-            ease-linear
-            rounded-full
-            border-8 border-t-8 border-gray-200
-            h-32
-            w-32
-            mb-4
-            "
+            class="loader mb-4 h-32 w-32 rounded-full border-8 border-t-8 border-gray-200 ease-linear"
         ></div>
         </div>
-        <h2 class="font-headline text-2xl text-center">Laddar...</h2>
+        <h2 class="font-headline text-center text-2xl">Laddar...</h2>
         <p>Om sidan inte har uppdaterats på fem minuter var god <a href="mailto:hi@billio.app">kontakta oss</a>.</p>
     </div>
 @else
@@ -54,7 +46,7 @@
             <a href="{{$calender_link->google()}}" class="btn btn-orange orange" target="_blank">Lägg till i din Google Kalender</a>
         </p>
 
-        <h3 class="font-headline text-2xl mt-4">Vid evenmanget</h3>
+        <h3 class="font-headline mt-4 text-2xl">Vid evenmanget</h3>
 
         <p>Du kan kan komma in på evenemanget genom följande metoder:</p>
         <ul class="list-disc">
@@ -62,7 +54,7 @@
             <li class="ml-4">Visa biljettkoden nedan (eller från ditt mail) tillsammans med en giltig identitetshandling.</li>
         </ul>
 
-        @if(count($tickets) > 1)<h3 class="font-headline text-2xl mt-4">Era biljetter</h3>@endif
+        @if(count($tickets) > 1)<h3 class="font-headline mt-4 text-2xl">Era biljetter</h3>@endif
 
         @foreach ($tickets as $ticket)
             @include('includes.ticket', $ticket)

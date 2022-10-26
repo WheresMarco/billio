@@ -1,5 +1,5 @@
-    <section class="bg-dark-grey text-white sm:text-center py-16">
-        <div class="container mx-auto sm:text-center px-4 space-y-6 sm:w-9/12 lg:w-3/5">
+    <section class="bg-dark-grey py-16 text-white sm:text-center">
+        <div class="container mx-auto space-y-6 px-4 sm:w-9/12 sm:text-center lg:w-3/5">
             <div class="space-y-2">
                 <h1 class="font-headline text-4xl">Intresserad? Kontakta oss!</h1>
                 <p>Vi gärna visa hur Billio kan hjälpa er att göra era evenemang lättare att hantera.<br>Kontakta oss så återkommer vi med mer information.</p>

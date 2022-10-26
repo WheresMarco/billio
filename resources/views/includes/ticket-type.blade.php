@@ -2,16 +2,16 @@
     @csrf
     <input type="hidden" name="ticket_type_id" value="{{$ticketType->id}}">
 
-    <x-heroicon-o-ticket class="h-12 text-pink" />
+    <x-heroicon-o-ticket class="text-pink h-12" />
 
-    <h3 class="font-headline text-2xl mt-2 font-medium">{{$ticketType->name}}</h3>
+    <h3 class="font-headline mt-2 text-2xl font-medium">{{$ticketType->name}}</h3>
     <h4 class="text-base font-medium">{{$ticketType->price}} SEK</h4>
 
     <p>{{$ticketType->description}}</p>
 
     @if ( $ticketType->active && ! $ticketType->soldOut )
-        <label class="font-bold mb-2 inline-block">Antal biljetter:</label><br>
-        <input class="rounded-md w-1/4 sm:w-1/5 border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50 mr-1" type="number" name="quantity" id="quantity" value="1" min="1" max="{{$ticketType->limit_person}}" required>
+        <label class="mb-2 inline-block font-bold">Antal biljetter:</label><br>
+        <input class="focus:border-blue focus:ring-blue mr-1 w-1/4 rounded-md border-gray-300 shadow-sm focus:ring focus:ring-opacity-50 sm:w-1/5" type="number" name="quantity" id="quantity" value="1" min="1" max="{{$ticketType->limit_person}}" required>
         <input type="submit" class="btn btn-pink" value='Gå vidare' />
     @else
         @if ($ticketType->soldOut)
