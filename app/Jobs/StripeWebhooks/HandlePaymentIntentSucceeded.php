@@ -2,14 +2,13 @@
 
 namespace App\Jobs\StripeWebhooks;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Spatie\WebhookClient\Models\WebhookCall;
-use Illuminate\Support\Facades\Log;
-
 use App\Models\Ticket;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
+use Spatie\WebhookClient\Models\WebhookCall;
 
 class HandlePaymentIntentSucceeded implements ShouldQueue
 {
@@ -25,9 +24,9 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
 
     public function handle()
     {
-        $payload       = $this->webhookCall->payload;
+        $payload = $this->webhookCall->payload;
         $stripe_object = $payload['data']['object'];
-        $tickets       = explode(',', $stripe_object['metadata']['tickets']) ?? [];
+        $tickets = explode(',', $stripe_object['metadata']['tickets']) ?? [];
 
         foreach ($tickets as $ticket_id) {
             $ticket = Ticket::where('uuid', $ticket_id)->first();
@@ -35,7 +34,8 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
             if ($ticket) {
                 // Check correct status for ticket - awaiting_payment.
                 if ('awaiting_payment' !== $ticket->status) {
-                    Log::error('Ticket not awaiting payment ' . print_r($ticket->id, true));
+                    Log::error('Ticket not awaiting payment '.print_r($ticket->id, true));
+
                     return;
                 }
 

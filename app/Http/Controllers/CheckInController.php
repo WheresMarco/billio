@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Ticket;
+use Illuminate\Http\Request;
 
 class CheckInController extends Controller
 {
@@ -17,9 +17,9 @@ class CheckInController extends Controller
 
     public function checkIn(Request $request)
     {
-        $uuid         = $request->uuid;
+        $uuid = $request->uuid;
         $ticketStatus = $request->status;
-        $ticket       = Ticket::where('uuid', $uuid)->first();
+        $ticket = Ticket::where('uuid', $uuid)->first();
 
         if (null === $ticket) {
             return response()->json(['message' => 'Could not find ticket'], 404);
@@ -38,19 +38,19 @@ class CheckInController extends Controller
         $modifiers = [];
         $modifiers = array_map(
             function ($modifier) {
-                    return $modifier['name'];
+                return $modifier['name'];
             },
             $ticket->modifiers()->get()->toArray()
         );
 
         return [
-            'uuid'       => $ticket->uuid,
-            'name'       => $ticket->user()->first()->name,
-            'email'      => $ticket->user()->first()->email,
-            'code'       => $ticket->ticket_code,
-            'type'       => $ticket->ticket_type()->first()->name,
-            'modifiers'  => implode(', ', $modifiers),
-            'status'     => $ticket->status,
+            'uuid' => $ticket->uuid,
+            'name' => $ticket->user()->first()->name,
+            'email' => $ticket->user()->first()->email,
+            'code' => $ticket->ticket_code,
+            'type' => $ticket->ticket_type()->first()->name,
+            'modifiers' => implode(', ', $modifiers),
+            'status' => $ticket->status,
         ];
     }
 
@@ -74,19 +74,19 @@ class CheckInController extends Controller
         $modifiers = [];
         $modifiers = array_map(
             function ($modifier) {
-                    return $modifier['name'];
+                return $modifier['name'];
             },
             $ticket->modifiers()->get()->toArray()
         );
 
         return response()->json([
-            'uuid'       => $ticket->uuid,
-            'name'       => $ticket->user()->first()->name,
-            'email'      => $ticket->user()->first()->email,
-            'code'       => $ticket->ticket_code,
-            'type'       => $ticket->ticket_type()->first()->name,
-            'modifiers'  => implode(', ', $modifiers),
-            'status'     => $ticket->status,
+            'uuid' => $ticket->uuid,
+            'name' => $ticket->user()->first()->name,
+            'email' => $ticket->user()->first()->email,
+            'code' => $ticket->ticket_code,
+            'type' => $ticket->ticket_type()->first()->name,
+            'modifiers' => implode(', ', $modifiers),
+            'status' => $ticket->status,
         ], 200);
     }
 }

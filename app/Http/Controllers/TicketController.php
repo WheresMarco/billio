@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Mail;
-
 use App\Models\Ticket;
+use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
 {
     public function ticketsSold($eventID, $ticketTypeID)
     {
-        $tickets     = Ticket::where([['event_id', $eventID], ['ticket_type_id', $ticketTypeID]])->get();
+        $tickets = Ticket::where([['event_id', $eventID], ['ticket_type_id', $ticketTypeID]])->get();
         $ticketsSold = $tickets->count();
 
         return $ticketsSold;
@@ -19,13 +18,13 @@ class TicketController extends Controller
     /**
      * Resend a ticket to user.
      *
-     * @param Ticket $ticket
+     * @param  Ticket  $ticket
      * @return void
      */
     public function resendTicket(Ticket $ticket)
     {
-        $user         = $ticket->user()->first();
-        $event        = $ticket->event()->first();
+        $user = $ticket->user()->first();
+        $event = $ticket->event()->first();
         $organisation = $event->organisation()->first();
 
         // Email the ticket.
@@ -36,8 +35,8 @@ class TicketController extends Controller
      * Generate a ticket code.
      *
      * @since    1.0.0
-     * @access   public
-     * @param    int     $length - The length of the ticket code.
+     *
+     * @param  int  $length - The length of the ticket code.
      * @return   string
      */
     public function generateTicketCode(int $length = 6)
@@ -47,45 +46,45 @@ class TicketController extends Controller
         // Create ticket code that is not taken.
         $ticket_code = null;
 
-        while ( null === $ticket_code ) :
-            $temp_ticket_code = dechex( rand( $length / 2 + ( $length % 2 > 0 ), $max_random_number ) );
+        while (null === $ticket_code) {
+            $temp_ticket_code = dechex(rand($length / 2 + ($length % 2 > 0), $max_random_number));
 
             // Check if taken, if not assign to $uuid.
-            $ticket = Ticket::where( 'ticket_code', $temp_ticket_code )->first();
-            if ( ! $ticket ) :
+            $ticket = Ticket::where('ticket_code', $temp_ticket_code)->first();
+            if (! $ticket) {
                 $ticket_code = $temp_ticket_code;
-            endif;
-        endwhile;
+            }
+        }
 
         return $ticket_code;
     }
 
     /**
-    * Generates a unique ID
-    *
-    * @since    1.0.0
-    * @access   public
-    * @return   string
-    */
+     * Generates a unique ID
+     *
+     * @since    1.0.0
+     *
+     * @return   string
+     */
     public function genTicketUUID()
     {
         $uuid = null;
 
-        while ( null === $uuid ) :
-            $temp_uuid = sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-                rand( 0, 0xffff ), rand( 0, 0xffff ), // 32 bits for "time_low"
-                rand( 0, 0xffff ), // 16 bits for "time_mid"
-                rand( 0, 0x0fff ) | 0x4000, // 16 bits for "time_hi_and_version", four most significant bits holds version number 4
-                rand( 0, 0x3fff ) | 0x8000, // 16 bits, 8 bits for "clk_seq_hi_res", 8 bits for "clk_seq_low", two most significant bits holds zero and one for variant DCE1.1
-                rand( 0, 0xffff ), rand( 0, 0xffff ), rand( 0, 0xffff ) // 48 bits for "node"
+        while (null === $uuid) {
+            $temp_uuid = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+                rand(0, 0xFFFF), rand(0, 0xFFFF), // 32 bits for "time_low"
+                rand(0, 0xFFFF), // 16 bits for "time_mid"
+                rand(0, 0x0FFF) | 0x4000, // 16 bits for "time_hi_and_version", four most significant bits holds version number 4
+                rand(0, 0x3FFF) | 0x8000, // 16 bits, 8 bits for "clk_seq_hi_res", 8 bits for "clk_seq_low", two most significant bits holds zero and one for variant DCE1.1
+                rand(0, 0xFFFF), rand(0, 0xFFFF), rand(0, 0xFFFF) // 48 bits for "node"
             );
 
             // Check if taken, if not assign to $uuid.
-            $ticket = Ticket::where( 'uuid', $temp_uuid )->first();
-            if ( ! $ticket ) :
+            $ticket = Ticket::where('uuid', $temp_uuid)->first();
+            if (! $ticket) {
                 $uuid = $temp_uuid;
-            endif;
-        endwhile;
+            }
+        }
 
         return $uuid;
     }

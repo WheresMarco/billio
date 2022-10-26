@@ -2,15 +2,11 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
+use App\Models\Ticket;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-
-use App\Models\Ticket;
 
 class TicketPurchased
 {
@@ -35,6 +31,6 @@ class TicketPurchased
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('ticket.' . $this->ticket->uuid);
+        return new PrivateChannel('ticket.'.$this->ticket->uuid);
     }
 }

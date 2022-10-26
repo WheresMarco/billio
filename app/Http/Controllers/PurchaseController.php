@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-
-use App\Http\Controllers\CheckStudentController;
-
-use App\Models\TicketType;
-use App\Models\User;
-use App\Models\Ticket;
-use App\Models\Transaction;
 use App\Models\Modifier;
 use App\Models\Nin;
+use App\Models\Ticket;
+use App\Models\TicketType;
+use App\Models\Transaction;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PurchaseController extends Controller
 {
@@ -22,7 +19,7 @@ class PurchaseController extends Controller
         $cart = session()->get('cart');
 
         // If cart is empty redirect to event page
-        if (!$cart) {
+        if (! $cart) {
             return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Din köptid har gått ut, vänligen försök igen.');
         }
 
@@ -35,9 +32,9 @@ class PurchaseController extends Controller
         $event = $ticketType->event->first();
 
         return view('event.purchase.info', [
-            'cart'       => $cart,
-            'event'      => $event,
-            'ticketType' => $ticketType
+            'cart' => $cart,
+            'event' => $event,
+            'ticketType' => $ticketType,
         ]);
     }
 
@@ -53,7 +50,7 @@ class PurchaseController extends Controller
 
         return view('event.purchase.seating', [
             'event' => $event,
-            'ticketType' => $ticketType
+            'ticketType' => $ticketType,
         ]);
     }
 
@@ -63,7 +60,7 @@ class PurchaseController extends Controller
         $cart = session()->get('cart');
 
         // If cart is empty redirect to event page
-        if (!$cart) {
+        if (! $cart) {
             return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Din köptid har gått ut, vänligen försök igen.');
         }
 
@@ -83,11 +80,11 @@ class PurchaseController extends Controller
         $event = $ticketType->event->first();
 
         return view('event.purchase.payment', [
-            'total'         => $total,
+            'total' => $total,
             'client_secret' => $client_secret,
-            'cart'          => $cart,
-            'event'         => $event,
-            'ticketType'    => $ticketType
+            'cart' => $cart,
+            'event' => $event,
+            'ticketType' => $ticketType,
         ]);
     }
 
@@ -127,7 +124,7 @@ class PurchaseController extends Controller
 
         // Check if user is trying to buy more tickets than per person limit
         if ($ticketType->limit_person > 0 && $request->quantity > $ticketType->limit_person) {
-            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Du kan bara köpa ' . $ticketType->limit_person . ' biljetter per person.');
+            return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Du kan bara köpa '.$ticketType->limit_person.' biljetter per person.');
         }
 
         // Get the event
@@ -147,8 +144,8 @@ class PurchaseController extends Controller
         $tickets = $ticketType->tickets()->createMany(
             array_fill(0, $request->quantity, [
                 'event_id' => $event->id,
-                'price'    => 0,
-                'status'   => 'hold'
+                'price' => 0,
+                'status' => 'hold',
             ])
         );
 
@@ -163,13 +160,13 @@ class PurchaseController extends Controller
 
         // TODO Depending on seating or not, redirect to the appropriate page
 
-        return redirect('/event/' . $event->slug . '/' . $ticketType->slug . '/info');
+        return redirect('/event/'.$event->slug.'/'.$ticketType->slug.'/info');
     }
 
     /**
      * Update the cart with ticket information from checkout flow.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return void
      */
     public function updateCartWithTicketInfo(Request $request)
@@ -178,9 +175,9 @@ class PurchaseController extends Controller
 
         // Validate the request
         $this->validate($request, [
-            'event_id'       => 'required|exists:events,id',
+            'event_id' => 'required|exists:events,id',
             'ticket_type_id' => 'required|exists:ticket_types,id',
-            'tickets.*'      => 'array:firstName,lastName,email,modifiers,nin'
+            'tickets.*' => 'array:firstName,lastName,email,modifiers,nin',
         ]);
 
         // Get the ticket type
@@ -214,7 +211,7 @@ class PurchaseController extends Controller
                     $ticket['modifiers'][] = 'union-discount';
 
                     // Remove first two numbers if there is.
-                    $nin  = str_replace('-', '', $ticket['nin']);
+                    $nin = str_replace('-', '', $ticket['nin']);
                     if (12 === strlen($nin)) {
                         $nin = substr($nin, 2);
                     }
@@ -224,7 +221,7 @@ class PurchaseController extends Controller
 
                     // Update nin with ticket id
                     $nin->update([
-                        'ticket_id' => $cart[$key]->id
+                        'ticket_id' => $cart[$key]->id,
                     ]);
                 }
 
@@ -242,16 +239,16 @@ class PurchaseController extends Controller
                 // If user doesn't exist create one
                 if (! $user) {
                     $user = User::create([
-                        'name' => $ticket['firstName'] . ' ' . $ticket['lastName'],
-                        'email'      => $ticket['email'],
-                        'password'   => bcrypt(Str::random(10))
+                        'name' => $ticket['firstName'].' '.$ticket['lastName'],
+                        'email' => $ticket['email'],
+                        'password' => bcrypt(Str::random(10)),
                     ]);
                 }
 
                 // Loop over all modfiers and save on ticket
                 if (isset($ticket['modifiers'])) {
                     foreach ($ticket['modifiers'] as $ticketModifier) {
-                        $modifier = Modifier::where([['ticket_type_id', $cart[$key]->ticket_type->id], ['slug', $ticketModifier ]])->first();
+                        $modifier = Modifier::where([['ticket_type_id', $cart[$key]->ticket_type->id], ['slug', $ticketModifier]])->first();
                         $cart[$key]->modifiers()->save($modifier);
                     }
                 }
@@ -259,7 +256,7 @@ class PurchaseController extends Controller
                 // Update ticket
                 $cart[$key]->update([
                     'user_id' => $user->id,
-                    'status'  => 'awaiting_payment',
+                    'status' => 'awaiting_payment',
                 ]);
             }
         }
@@ -274,7 +271,7 @@ class PurchaseController extends Controller
         $request->session()->put('client_secret', $client_secret);
 
         // Redirect to payment page
-        return redirect('/event/' . $event->slug . '/' . $ticketType->slug . '/payment');
+        return redirect('/event/'.$event->slug.'/'.$ticketType->slug.'/payment');
     }
 
     /**
@@ -285,10 +282,10 @@ class PurchaseController extends Controller
      */
     public function createPaymentIntent($cart)
     {
-        $total       = 0;
+        $total = 0;
         $ticketUuids = [];
-        $ticketType  = null;
-        $event       = null;
+        $ticketType = null;
+        $event = null;
 
         // Loop over cart
         // TODO: Go over this. It's a bit messy, and incorrect.
@@ -315,7 +312,7 @@ class PurchaseController extends Controller
 
             // Update ticket with price
             $ticket->update([
-                'price' => $price
+                'price' => $price,
             ]);
 
             // Add price to total
@@ -335,10 +332,10 @@ class PurchaseController extends Controller
             'amount' => $total,
             'currency' => 'sek',
             'payment_method_types' => [
-                'card'
+                'card',
             ],
-            'description'   => $event->name . ' - ' . count($cart) . 'x ' . $ticketType->name,
-            'metadata'      => [
+            'description' => $event->name.' - '.count($cart).'x '.$ticketType->name,
+            'metadata' => [
                 'tickets' => implode(',', $ticketUuids),
             ],
         ]);
@@ -352,9 +349,9 @@ class PurchaseController extends Controller
         foreach ($cart as $ticket) {
             // Create a transaction
             $transaction = Transaction::create([
-                'user_id'   => $ticket->user_id,
+                'user_id' => $ticket->user_id,
                 'ticket_id' => $ticket->id,
-                'amount'    => $total,
+                'amount' => $total,
                 'stripe_id' => $paymentIntent['id'],
             ]);
 

@@ -2,16 +2,13 @@
 
 namespace App\Nova\Actions;
 
-use Illuminate\Bus\Queueable;
-use Laravel\Nova\Actions\Action;
-use Illuminate\Support\Collection;
-use Laravel\Nova\Fields\ActionFields;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Laravel\Nova\Fields\File;
-
 use App\Imports\TicketsImport;
+use Illuminate\Bus\Queueable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Fields\ActionFields;
+use Laravel\Nova\Fields\File;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ImportTickets extends Action
@@ -30,14 +27,15 @@ class ImportTickets extends Action
      *
      * @return string
      */
-    public function name() {
+    public function name()
+    {
         return __('Import Tickets');
     }
 
     /**
      * @return string
      */
-    public function uriKey() :string
+    public function uriKey(): string
     {
         return 'import-tickets';
     }

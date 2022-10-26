@@ -2,9 +2,9 @@
 
 namespace App\Nova\Filters;
 
+use App\Models\Modifier;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
-use App\Models\Modifier;
 
 class TicketModifier extends Filter
 {

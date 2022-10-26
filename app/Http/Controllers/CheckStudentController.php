@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Personnummer\Personnummer;
-use Illuminate\Support\Facades\Log;
-
 use App\Models\Nin;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Personnummer\Personnummer;
 
 class CheckStudentController extends Controller
 {
@@ -14,13 +13,13 @@ class CheckStudentController extends Controller
      * Check if student is member.
      *
      * @param [type] $nin
-     * @return boolean
+     * @return bool
      */
-    public function isStudentMember(String $nin)
+    public function isStudentMember(string $nin)
     {
-        $nin       = str_replace('-', '', $nin);
+        $nin = str_replace('-', '', $nin);
         $isStudent = false;
-        $corps     = 'false';
+        $corps = 'false';
 
         // Remove first two numbers if there is.
         if (12 === strlen($nin)) {
@@ -29,7 +28,7 @@ class CheckStudentController extends Controller
 
         // Check if NiN is valid.
         if (! Personnummer::valid($nin)) {
-            Log::debug('Not valid ' . $nin);
+            Log::debug('Not valid '.$nin);
 
             return false;
         }
@@ -47,7 +46,7 @@ class CheckStudentController extends Controller
 
         // Do request.
         $isStudent = $this->sendRequest(
-            'https://medlem.lintek.liu.se/api/checkstudent/' . $nin . '?apikey=c23e6a1ca92f832aae60a0577f3bd603',
+            'https://medlem.lintek.liu.se/api/checkstudent/'.$nin.'?apikey=c23e6a1ca92f832aae60a0577f3bd603',
             $nin
         );
         $corps = 'lintek';
@@ -55,7 +54,7 @@ class CheckStudentController extends Controller
         // No luck? Check Stuff.
         if (! $isStudent) {
             $isStudent = $this->sendRequest(
-                'https://medlem.stuff.liu.se/api/checkstudent/' . $nin . '?apikey=907a3e466d8a41f0875ae6cbd30a9b68',
+                'https://medlem.stuff.liu.se/api/checkstudent/'.$nin.'?apikey=907a3e466d8a41f0875ae6cbd30a9b68',
                 $nin
             );
             $corps = 'stuff';
@@ -64,7 +63,7 @@ class CheckStudentController extends Controller
         // No luck? Check Consensus.
         if (! $isStudent) {
             $isStudent = $this->sendRequest(
-                'https://medlem.consensus.liu.se/api/checkstudent/' . $nin . '?apikey=93baa7b7d71b06f9e58b00d509e33eae',
+                'https://medlem.consensus.liu.se/api/checkstudent/'.$nin.'?apikey=93baa7b7d71b06f9e58b00d509e33eae',
                 $nin
             );
             $corps = 'consensus';
@@ -72,7 +71,7 @@ class CheckStudentController extends Controller
 
         // Add to database for quick lookup when buying ticket.
         if ($isStudent) {
-            $nin_object = Nin::where([ [ 'nin', $nin ], [ 'ticket_id', null ] ])->first();
+            $nin_object = Nin::where([['nin', $nin], ['ticket_id', null]])->first();
 
             if (! $nin_object) {
                 $nin_object = new Nin();
@@ -96,13 +95,14 @@ class CheckStudentController extends Controller
 
         // If not 200 status code exit out.
         if (200 !== $result->getStatusCode()) {
-            Log::error('Cant access ' . $path);
+            Log::error('Cant access '.$path);
+
             return false;
         }
 
         // Convert result to something we can work with.
         $content_string = (string) $result->getBody();
-        $content        = json_decode($content_string);
+        $content = json_decode($content_string);
 
         return $content->checkstudent->$nin->member;
     }

@@ -2,24 +2,24 @@
 
 namespace App\Mail;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
-
-use App\Models\Ticket;
 use App\Models\Event;
 use App\Models\Organisation;
+use App\Models\Ticket;
 use App\Models\User;
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
 
 class TicketPurchased extends Mailable
 {
     use Queueable, SerializesModels;
 
     protected $ticket;
+
     protected $event;
+
     protected $organisation;
+
     protected $user;
 
     /**
@@ -29,10 +29,10 @@ class TicketPurchased extends Mailable
      */
     public function __construct(Ticket $ticket, Event $event, Organisation $organisation, User $user)
     {
-        $this->ticket       = $ticket;
-        $this->event        = $event;
+        $this->ticket = $ticket;
+        $this->event = $event;
         $this->organisation = $organisation;
-        $this->user         = $user;
+        $this->user = $user;
     }
 
     /**
@@ -43,16 +43,16 @@ class TicketPurchased extends Mailable
     public function build()
     {
         return $this->from('hi@billio.app', 'Billio')
-                    ->subject($this->event->name . ': ' . $this->ticket->ticket_type()->first()->name . ' [' . $this->ticket->ticket_code . ']')
+                    ->subject($this->event->name.': '.$this->ticket->ticket_type()->first()->name.' ['.$this->ticket->ticket_code.']')
                     ->with([
-                        'event'      => $this->event->name,
-                        'orgName'    => $this->organisation->title,
-                        'orgEmail'   => $this->organisation->email,
+                        'event' => $this->event->name,
+                        'orgName' => $this->organisation->title,
+                        'orgEmail' => $this->organisation->email,
                         'orgAddress' => $this->organisation->address,
-                        'name'       => $this->user->name,
+                        'name' => $this->user->name,
                         'ticketType' => $this->ticket->ticket_type()->first()->name,
                         'ticketCode' => $this->ticket->ticket_code,
-                        'modifiers'  => $this->ticket->modifiers()->get(),
+                        'modifiers' => $this->ticket->modifiers()->get(),
                     ])
                     ->markdown('emails.tickets.purchased');
     }

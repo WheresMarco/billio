@@ -2,36 +2,34 @@
 
 namespace App\Imports;
 
-use App\Models\User;
 use App\Models\Modifier;
+use App\Models\Nin;
 use App\Models\Ticket;
 use App\Models\TicketType;
-use App\Models\Nin;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use App\Http\Controllers\CheckStudentController;
-use Illuminate\Support\Str;
 
 class TicketsImport implements ToModel, WithHeadingRow
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param  array  $row
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function model(array $row)
     {
         if ($row['email'] == null) {
             return null;
         }
 
-        $email           = $row['email'] ?? '';
-        $nin             = $row['nin'] ?? '';
-        $name            = $row['name'] ?? '';
-        $eventID         = (int) $row['event_id'] ?? '';
-        $ticketType      = $row['ticket_type'] ?? '';
+        $email = $row['email'] ?? '';
+        $nin = $row['nin'] ?? '';
+        $name = $row['name'] ?? '';
+        $eventID = (int) $row['event_id'] ?? '';
+        $ticketType = $row['ticket_type'] ?? '';
         $ticketModifiers = $row['modifiers'] ? explode(',', $row['modifiers']) : [];
-        $status          = 'unused';
+        $status = 'unused';
 
         if ($eventID == null) {
             return null;
@@ -45,9 +43,9 @@ class TicketsImport implements ToModel, WithHeadingRow
             $nin_object = Nin::where([['nin', $nin], ['ticket_id', null]])->first();
 
             if (! $nin_object) {
-                $nin_object           = new Nin();
-                $nin_object->nin      = $nin;
-                $nin_object->corps    = 'import';
+                $nin_object = new Nin();
+                $nin_object->nin = $nin;
+                $nin_object->corps = 'import';
                 $nin_object->utilized = true;
                 $nin_object->save();
             }
@@ -58,9 +56,9 @@ class TicketsImport implements ToModel, WithHeadingRow
 
         if (! $user) {
             $user = User::create([
-                'email'    => $email,
-                'name'     => $name,
-                'password' => bcrypt(Str::random(10))
+                'email' => $email,
+                'name' => $name,
+                'password' => bcrypt(Str::random(10)),
             ]);
         }
 
@@ -74,11 +72,11 @@ class TicketsImport implements ToModel, WithHeadingRow
         $price = $ticketType->price;
 
         $ticket = new Ticket([
-            'event_id'       => $eventID,
-            'user_id'        => $user->id,
+            'event_id' => $eventID,
+            'user_id' => $user->id,
             'ticket_type_id' => $ticketType->id,
-            'price'          => $price,
-            'status'         => $status,
+            'price' => $price,
+            'status' => $status,
         ]);
 
         // Save the ticket

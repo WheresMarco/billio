@@ -2,10 +2,9 @@
 
 namespace App\Nova\Metrics;
 
+use App\Models\Ticket;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
-
-use App\Models\Ticket;
 
 class TicketStatus extends Partition
 {

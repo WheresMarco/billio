@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Event;
 use App\Models\Ticket;
 
@@ -37,7 +35,7 @@ class EventController extends Controller
         }
 
         return view('event.single', [
-            'event' => $event
+            'event' => $event,
         ]);
     }
 }

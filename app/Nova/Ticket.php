@@ -3,16 +3,12 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
-
-use Laravel\Nova\Fields\Text;
-
-use Laravel\Nova\Actions\Actionable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Nova\Actions\Actionable;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\MorphToMany;
+use Laravel\Nova\Fields\Text;
+use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 
 class Ticket extends Resource
 {
@@ -77,12 +73,12 @@ class Ticket extends Resource
             MorphToMany::make('Modifiers'),
 
             Text::make('Modifiers', function () {
-                if ( ! $this->modifiers->first() ) {
+                if (! $this->modifiers->first()) {
                     return;
                 }
 
                 $returnString = array_map(
-                    function($modifier) {
+                    function ($modifier) {
                         return $modifier->name;
                     },
                     $this->modifiers->all()

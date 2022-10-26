@@ -2,20 +2,21 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Models\Transaction;
 use App\Models\Ticket;
+use App\Models\Transaction;
+use Livewire\Component;
 use Spatie\CalendarLinks\Link;
 
 class TicketConfirmation extends Component
 {
     public $stripe_id;
+
     public $tickets;
 
     public function mount($stripe_id, $tickets)
     {
         $this->stripe_id = $stripe_id;
-        $this->tickets   = $tickets;
+        $this->tickets = $tickets;
     }
 
     public function pollForFinishedTicket()
@@ -73,7 +74,7 @@ class TicketConfirmation extends Component
         }
 
         return view('livewire.ticket-confirmation', [
-            'tickets'        => $this->tickets,
+            'tickets' => $this->tickets,
             'calender_link' => $calendar_link,
         ]);
     }

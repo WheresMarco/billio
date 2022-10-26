@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Nova\Actions\Actionable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Scout\Searchable;
-
 use App\Http\Controllers\TicketController;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Nova\Actions\Actionable;
+use Laravel\Scout\Searchable;
 
 class Ticket extends Model
 {
     use Actionable, Notifiable, Searchable;
+
     protected $fillable = [
         'uuid',
         'ticket_code',
@@ -20,7 +20,7 @@ class Ticket extends Model
         'ticket_type_id',
         'utlized',
         'status',
-        'price'
+        'price',
     ];
 
     /**

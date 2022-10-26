@@ -2,11 +2,10 @@
 
 namespace App\Console;
 
+use App\Jobs\RemoveTicketsAwaitingPayment;
+use App\Jobs\RemoveTicketsOnHold;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
-use App\Jobs\RemoveTicketsOnHold;
-use App\Jobs\RemoveTicketsAwaitingPayment;
 
 class Kernel extends ConsoleKernel
 {

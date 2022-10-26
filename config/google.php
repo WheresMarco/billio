@@ -17,13 +17,13 @@ return [
     | https://developers.google.com/console
     |
     */
-    'client_id'       => env('GOOGLE_CLIENT_ID', ''),
-    'client_secret'   => env('GOOGLE_CLIENT_SECRET', ''),
-    'redirect_uri'    => env('GOOGLE_REDIRECT', ''),
-    'scopes'          => [\Google_Service_Sheets::DRIVE, \Google_Service_Sheets::SPREADSHEETS],
-    'access_type'     => 'online',
+    'client_id' => env('GOOGLE_CLIENT_ID', ''),
+    'client_secret' => env('GOOGLE_CLIENT_SECRET', ''),
+    'redirect_uri' => env('GOOGLE_REDIRECT', ''),
+    'scopes' => [\Google_Service_Sheets::DRIVE, \Google_Service_Sheets::SPREADSHEETS],
+    'access_type' => 'online',
     'approval_prompt' => 'auto',
-    'prompt'          => 'consent', //"none", "consent", "select_account" default:none
+    'prompt' => 'consent', //"none", "consent", "select_account" default:none
 
     /*
     |----------------------------------------------------------------------------

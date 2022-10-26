@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\TicketController;
+use Illuminate\Database\Eloquent\Model;
 
 class TicketType extends Model
 {

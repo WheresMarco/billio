@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Http\Controllers\CheckStudentController;
+use Livewire\Component;
 
 class CheckStudent extends Component
 {
-    public $nin = "";
+    public $nin = '';
+
     public $valid = false;
 
     public function checkStudent()
