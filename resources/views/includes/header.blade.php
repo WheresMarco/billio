@@ -45,7 +45,7 @@
         </div>
     @endif
 
-    <header class="bg-dark-grey flex h-20 px-4 align-middle text-white lg:px-0">
+    <header class="flex h-20 align-middle bg-dark-grey text-white lg:px-0">
         <div class="container mx-auto flex flex-row items-center justify-between">
             <h1>
                 <a href="/" class="block w-36">
