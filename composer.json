@@ -25,6 +25,7 @@
         "gregoriohc/laravel-nova-theme-responsive": "*",
         "guzzlehttp/guzzle": "*",
         "laravel/framework": "*",
+        "laravel/horizon": "^5.10",
         "laravel/nova": "*",
         "laravel/scout": "*",
         "laravel/tinker": "*",
