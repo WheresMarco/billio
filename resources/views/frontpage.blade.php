@@ -1,66 +1,71 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="pt-16 pb-24 z-0  text-black sm:pt-40 sm:pb-40 bg-cover bg-slate-200" style="background-image: url('https://plus.unsplash.com/premium_photo-1661277650389-97b8c22f71a3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=100');">
+<div class="pt-16 pb-24 z-0  text-white sm:pt-40 sm:pb-40 bg-cover bg-blend-darken" style="background-image: url('{{ URL::to('/img/hero.jpg') }}');">
     <div class="container mx-auto space-y-6">
-        <h1 class="font-headline text-4xl font-medium sm:text-5xl sm:leading-tight max-w-2xl">Säg farväl till det jobbiga med att sälja biljetter</h1>
-        <p class="sm:text-xl max-w-xl">Vill ni sälja biljetter till ert nästa evenemang? Med Billio får ni ett komplett system från försäljning till incheckning. Med ett kraftfullt och snabbt system som kan hantera evenemang av alla dess storlekar, som dessutom är enkelt att använda.</p>
+        <h1 class="font-headline text-4xl font-medium sm:text-5xl sm:leading-tight max-w-xl">Att sälja biljetter ska vara enkelt</h1>
+        <p class="sm:text-xl max-w-xl">Vill du sälja biljetter till ditt nästa evenemang? Med Billio får du ett komplett system från försäljning till incheckning. Med ett kraftfullt och snabbt system som kan hantera evenemang av alla storlekar. På köpet är det dessutom enkelt att använda.</p>
 
-        <p class="space-x-2"><a href="mailto:hi@billio.app" class="btn btn-pink">Kom igång med Billio</a> <a href="/#app-info" class="btn btn-grey">Läs mer</a></p>
+        <p class="space-x-2"><a href="mailto:hi@billio.app" class="btn btn-pink">Kom igång med Billio</a> <a href="/#app-info" class="btn btn-white">Läs mer</a></p>
     </div>
 </div>
 
 <main>
     <div class="bg-gray-100">
-        <div class="container mx-auto space-y-6 py-10 px-4 lg:px-0">
+        <div class="container mx-auto py-10 px-4 lg:px-0" x-data="{ upcoming: true }">
 
-            <div class="max-w-md mx-auto pb-4">
-                <a href="#" class="btn btn-pink">Kommande evenemang</a> <a href="#" class="btn btn-grey">Tidigare evenemang</a>
+            <div class="mx-auto pb-10 flex justify-center">
+                <a @click="upcoming = true" class="btn btn-pink">Kommande evenemang</a><a @click="upcoming = false" class="btn btn-grey ml-2">Tidigare evenemang</a>
             </div>
-            @foreach ($events as $event)
-                @if ($event->upcoming())
-                    <div class="grid grid-cols-1 rounded-md bg-white sm:grid-cols-8 sm:gap-6 shadow-md">
-                        <a href="/event/{{$event->slug}}" class="rounded-tl-md rounded-tr-md bg-cover bg-center sm:col-span-3 sm:rounded-bl-md sm:rounded-tr-none" style="background-image: url({{Storage::url($event->excerpt_image)}}); min-height: 230px;"></a>
 
-                        <div class="p-4 pr-10 sm:col-span-5 sm:py-12 sm:pl-0">
-                            <h1><a href="/event/{{$event->slug}}" class="font-headline text-pink text-3xl font-normal">{{$event->name}}</a></h1>
-                            <p class="pb-4 pt-2"><a href="/event/{{$event->slug}}" class="font-normal">{{$event->excerpt}}</a></p>
+            <div x-show="upcoming" class="space-y-6">
+                @foreach ($events as $event)
+                    @if ($event->upcoming())
+                        <div class="grid grid-cols-1 rounded-md bg-white sm:grid-cols-8 sm:gap-6 shadow-md">
+                            <a href="/event/{{$event->slug}}" class="rounded-tl-md rounded-tr-md bg-cover bg-center sm:col-span-3 sm:rounded-bl-md sm:rounded-tr-none" style="background-image: url({{Storage::url($event->excerpt_image)}}); min-height: 230px;"></a>
 
-                            <div class="border-grey-100 grid grid-cols-2 border-t-2 py-4">
+                            <div class="p-4 pr-10 sm:col-span-5 sm:py-12 sm:pl-0">
+                                <h1><a href="/event/{{$event->slug}}" class="font-headline text-pink text-3xl font-normal">{{$event->name}}</a></h1>
+                                <p class="pb-4 pt-2"><a href="/event/{{$event->slug}}" class="font-normal">{{$event->excerpt}}</a></p>
+
+                                <div class="border-grey-100 grid grid-cols-2 border-t-2 py-4">
+                                    <div>
+                                        <h4 class="text-grey font-semibold"><x-heroicon-s-clock class="relative inline-block h-4" style="margin-top: -2px;" /> Datum</h4>
+                                        <span class="text-grey">{{$event->date_from ? $event->date_from->format('d/m - Y') : ''}}</span>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="text-grey font-semibold"><x-heroicon-s-user-group class="relative inline-block h-4" style="margin-top: -3px;" /> Värd</h4>
+                                        <span class="text-grey">{{$event->organisation->title}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+
+            <div x-show="!upcoming" class="space-y-6 ">
+                @foreach ($events as $event)
+                    @if ($event->upcoming() === false)
+                        <div class="group grid grid-cols-1 rounded-md bg-white transition duration-300 ease-in-out sm:grid-cols-8">
+                            <h1 class="font-headline text-grey group-hover:text-pink self-center justify-self-start pl-4 pt-4 text-3xl sm:col-span-3 sm:pt-0 sm:pl-8"><a class="font-normal" href="/event/{{$event->slug}}">{{$event->name}}</a></h1>
+
+                            <div class="grid grid-cols-2 p-4 sm:col-span-5 sm:p-0 sm:py-6">
                                 <div>
-                                    <h4 class="text-grey font-semibold"><x-heroicon-s-clock class="relative inline-block h-4" style="margin-top: -2px;" /> Datum</h4>
+                                    <h4 class="text-grey font-semibold group-hover:text-black"><x-heroicon-s-clock class="relative inline-block h-4" style="margin-top: -2px;" /> Datum</h4>
                                     <span class="text-grey">{{$event->date_from ? $event->date_from->format('d/m - Y') : ''}}</span>
                                 </div>
 
                                 <div>
-                                    <h4 class="text-grey font-semibold"><x-heroicon-s-user-group class="relative inline-block h-4" style="margin-top: -3px;" /> Värd</h4>
-                                    <span class="text-grey">{{$event->organisation->title}}</span>
+                                    <h4 class="text-grey font-semibold group-hover:text-black"><x-heroicon-s-user-group class="relative inline-block h-4" style="margin-top: -3px;" /> Värd</h4>
+                                    <span class="text-grey group-hover:text-black">{{$event->organisation->title}}</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endif
-            @endforeach
-
-            {{-- @foreach ($events as $event)
-                @if ($event->upcoming() === false)
-                    <div class="group grid grid-cols-1 rounded-md bg-white transition duration-300 ease-in-out sm:grid-cols-8">
-                        <h1 class="font-headline text-grey group-hover:text-pink self-center justify-self-start pl-4 pt-4 text-3xl sm:col-span-3 sm:pt-0 sm:pl-8"><a class="font-normal" href="/event/{{$event->slug}}">{{$event->name}}</a></h1>
-
-                        <div class="grid grid-cols-2 p-4 sm:col-span-5 sm:p-0 sm:py-6">
-                            <div>
-                                <h4 class="text-grey font-semibold group-hover:text-black"><x-heroicon-s-clock class="relative inline-block h-4" style="margin-top: -2px;" /> Datum</h4>
-                                <span class="text-grey">{{$event->date_from ? $event->date_from->format('d/m - Y') : ''}}</span>
-                            </div>
-
-                            <div>
-                                <h4 class="text-grey font-semibold group-hover:text-black"><x-heroicon-s-user-group class="relative inline-block h-4" style="margin-top: -3px;" /> Värd</h4>
-                                <span class="text-grey group-hover:text-black">{{$event->organisation->title}}</span>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-            @endforeach --}}
+                    @endif
+                @endforeach
+            </div>
         </div>
     </div>
 
