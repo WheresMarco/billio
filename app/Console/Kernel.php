@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->job(new RemoveTicketsOnHold)->everyFiveMinutes();
         $schedule->job(new RemoveTicketsAwaitingPayment)->everyFiveMinutes();
+        $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 
     /**
