@@ -58,7 +58,7 @@
 @push('scripts')
     <script src="https://js.stripe.com/v3/"></script>
     <script>
-        const stripe = Stripe('pk_live_lAzc5wNIdddKV2f8omgYwPwJ');
+        const stripe = Stripe('{{config('services.stripe.public')}}');
 
         let elements;
 
