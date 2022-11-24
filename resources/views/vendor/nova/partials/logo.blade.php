@@ -1,1 +1,1 @@
-<img src="{{ URL::to('/img/logo.png') }}" width="{{ $width ?? '126' }}" height="{{ $height ?? '24' }}">
+<img src="{{ URL::to('/img/logo-white.svg') }}" width="{{ $width ?? '126' }}" height="{{ $height ?? '24' }}">

@@ -6,9 +6,9 @@
         <div class="container mx-auto space-y-6">
             <h1 class="max-w-xl font-headline text-4xl font-medium sm:text-5xl sm:leading-tight">Att sälja biljetter ska vara
                 enkelt</h1>
-            <p class="max-w-xl sm:text-xl">Vill du sälja biljetter till ditt nästa evenemang? Med Billio får du ett komplett
-                system från försäljning till incheckning. Med ett kraftfullt och snabbt system som kan hantera evenemang av
-                alla storlekar. På köpet är det dessutom enkelt att använda.</p>
+            <p class="max-w-xl sm:text-xl">Nästa gång du ska sälja biljetter använd Billio. Med Billio får du ett komplett
+                system från försäljning till incheckning. Ett kraftfullt och snabbt system som kan hantera evenemang av
+                alla dess storlekar. På köpet är det dessutom enkelt att använda.</p>
 
             <p class="space-x-2"><a href="mailto:hi@billio.app" class="btn btn-pink">Kom igång med Billio</a> <a
                     href="/#app-info" class="btn btn-white">Läs mer</a></p>
