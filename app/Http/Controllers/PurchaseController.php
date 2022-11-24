@@ -29,7 +29,7 @@ class PurchaseController extends Controller
             return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Den här biljettypen finns inte.');
         }
 
-        $event = $ticketType->event->first();
+        $event = $ticketType->event;
 
         return view('event.purchase.info', [
             'cart' => $cart,
@@ -46,7 +46,7 @@ class PurchaseController extends Controller
             return redirect('/');
         }
 
-        $event = $ticketType->event->first();
+        $event = $ticketType->event;
 
         return view('event.purchase.seating', [
             'event' => $event,
@@ -77,7 +77,7 @@ class PurchaseController extends Controller
             return redirect()->route('event', ['eventSlug' => $eventSlug])->with('error', 'Den här biljettypen finns inte. Försök igen.');
         }
 
-        $event = $ticketType->event->first();
+        $event = $ticketType->event;
 
         return view('event.purchase.payment', [
             'total' => $total,
@@ -111,11 +111,13 @@ class PurchaseController extends Controller
         ]);
 
         // Empty cart when adding to cart
-        // TODO When emptying the cart remove the pending tickets from the database to free them up
+        // TODO: When emptying the cart remove the pending tickets from the database to free them up
         $request->session()->forget('cart');
 
         // Get the ticket type
         $ticketType = TicketType::find($request->ticket_type_id);
+
+        ray($ticketType);
 
         // Redirect to the event page if the ticket type doesn't exist
         if (! $ticketType) {
@@ -128,7 +130,7 @@ class PurchaseController extends Controller
         }
 
         // Get the event
-        $event = $ticketType->event->first();
+        $event = $ticketType->event;
 
         // Check if the event is sold out
         if ($event->sold_out) {
@@ -184,7 +186,7 @@ class PurchaseController extends Controller
         $ticketType = TicketType::find($request->ticket_type_id);
 
         // Get the event
-        $event = $ticketType->event->first();
+        $event = $ticketType->event;
 
         // Get cart from session
         $cart = $request->session()->get('cart', []);
@@ -294,10 +296,10 @@ class PurchaseController extends Controller
             $ticketUuids[] = $ticket->uuid;
 
             // Get the ticket type
-            $ticketType = $ticket->ticket_type->first();
+            $ticketType = $ticket->ticket_type;
 
             // Get the event
-            $event = $ticketType->event->first();
+            $event = $ticketType->event;
 
             // Get the price
             $price = $ticketType->price;
