@@ -26,11 +26,6 @@ class Event extends Model
         return $this->belongsTo('App\Models\Organisation');
     }
 
-    public function access_codes()
-    {
-        return $this->hasMany('App\Models\AccessCode');
-    }
-
     public function tickets()
     {
         return $this->hasMany('App\Models\Ticket');

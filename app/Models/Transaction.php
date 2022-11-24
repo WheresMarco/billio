@@ -10,7 +10,6 @@ class Transaction extends Model
         'ticket_id',
         'user_id',
         'amount',
-        'access_code_id',
         'stripe_id',
     ];
 

@@ -80,8 +80,6 @@ class Event extends Resource
 
             HasMany::make('Ticket Types'),
 
-            HasMany::make('Access Codes'),
-
             HasMany::make('Tickets'),
 
             Image::make('Hero image'),
