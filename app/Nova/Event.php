@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\DateTime;
 
 class Event extends Resource
 {
@@ -61,11 +62,21 @@ class Event extends Resource
             Text::make('Slug')
                 ->rules('required', 'max:255'),
 
+            DateTime::make('Date From')
+                ->sortable()
+                ->rules('required', 'date'),
+
+            DateTime::make('Date To')
+                ->sortable()
+                ->rules('required', 'date'),
+
+            Text::make('Location')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
             Markdown::make('Description'),
 
             Textarea::make('Excerpt'),
-
-            HasMany::make('Event Dates'),
 
             HasMany::make('Ticket Types'),
 

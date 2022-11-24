@@ -14,7 +14,7 @@ class FrontpageController extends Controller
     public function index()
     {
         return view('frontpage', [
-            'events' => Event::all(),
+            'events' => Event::all()->sortBy('date_to'),
         ]);
     }
 }

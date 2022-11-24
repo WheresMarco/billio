@@ -9,6 +9,8 @@ class Event extends Model
 {
     public $timestamps = false;
 
+    protected $casts = ['date_from' => 'datetime', 'date_to' => 'datetime'];
+
     /**
      * Check if upcoming date.
      *
@@ -16,17 +18,12 @@ class Event extends Model
      */
     public function upcoming()
     {
-        return count($this->event_dates()->get()) > 0 ? $this->event_dates()->get()[0]->date_to >= (new Carbon) : null;
+        return $this->date_to && Carbon::parse($this->date_to)->isFuture();
     }
 
     public function organisation()
     {
         return $this->belongsTo('App\Models\Organisation');
-    }
-
-    public function event_dates()
-    {
-        return $this->hasMany('App\Models\EventDate');
     }
 
     public function access_codes()

@@ -29,7 +29,7 @@
                             <div class="border-grey-100 grid grid-cols-2 border-t-2 py-4">
                                 <div>
                                     <h4 class="text-grey font-semibold"><x-heroicon-s-clock class="relative inline-block h-4" style="margin-top: -2px;" /> Datum</h4>
-                                    <span class="text-grey">{{$event->event_dates[0]->date_from->format('d/m - Y')}}</span>
+                                    <span class="text-grey">{{$event->date_from ? $event->date_from->format('d/m - Y') : ''}}</span>
                                 </div>
 
                                 <div>
@@ -50,7 +50,7 @@
                         <div class="grid grid-cols-2 p-4 sm:col-span-5 sm:p-0 sm:py-6">
                             <div>
                                 <h4 class="text-grey font-semibold group-hover:text-black"><x-heroicon-s-clock class="relative inline-block h-4" style="margin-top: -2px;" /> Datum</h4>
-                                <span class="text-grey group-hover:text-black">{{$event->event_dates[0]->date_from->format('d/m - Y')}}</span>
+                                <span class="text-grey">{{$event->date_from ? $event->date_from->format('d/m - Y') : ''}}</span>
                             </div>
 
                             <div>

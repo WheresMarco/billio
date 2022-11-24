@@ -68,7 +68,7 @@ class TicketConfirmation extends Component
             // Get event from the first ticket
             $event = $tickets[0]->event;
 
-            $calendar_link = Link::create($event->name, $event->event_dates[0]->date_from, $event->event_dates[0]->date_to)
+            $calendar_link = Link::create($event->name, $event->date_from, $event->date_to)
                 ->description($event->excerpt)
                 ->address($event->event_dates[0]->location);
         }

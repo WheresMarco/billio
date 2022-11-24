@@ -25,12 +25,12 @@
             <div class="mb-2 grid grid-cols-2 sm:mb-0 md:grid-cols-3">
                 <div>
                     <h4 class="text-grey font-semibold"><x-heroicon-s-clock class="relative inline-block h-4" style="margin-top: -2px;" /> Datum</h4>
-                    <span class="text-grey">{{$event->event_dates[0]->date_from->format('d/m - Y')}}</span>
+                    <span class="text-grey">{{$event->date_from ? $event->date_from->format('d/m - Y') : ''}}</span>
                 </div>
 
                 <div>
                     <h4 class="text-grey font-semibold"><x-heroicon-s-location-marker class="relative inline-block h-4" style="margin-top: -3px;" /> Plats</h4>
-                    <span class="text-grey">{{$event->event_dates[0]->location}}</span>
+                    <span class="text-grey">{{$event->location}}</span>
                 </div>
 
                 <div class="mt-2 sm:mt-0">
