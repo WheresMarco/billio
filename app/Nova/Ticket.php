@@ -67,9 +67,11 @@ class Ticket extends Resource
 
             BelongsTo::make('User'),
 
-            Text::make('Status'),
+            Text::make('Status')
+                ->rules('required'),
 
-            Text::make('Price'),
+            Text::make('Price')
+                ->rules('required'),
 
             MorphToMany::make('Modifiers'),
 

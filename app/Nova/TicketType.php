@@ -59,7 +59,8 @@ class TicketType extends Resource
             Text::make('Slug')
                 ->rules('required'),
 
-            Textarea::make('Description'),
+            Textarea::make('Description')
+                ->rules('required'),
 
             Number::make('Price')
                 ->rules('required'),

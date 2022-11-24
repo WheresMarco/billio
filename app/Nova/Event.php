@@ -74,17 +74,22 @@ class Event extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Markdown::make('Description'),
+            Markdown::make('Description')
+                ->rules('required'),
 
-            Textarea::make('Excerpt'),
+            Textarea::make('Excerpt')
+                ->rules('required'),
 
             HasMany::make('Ticket Types'),
 
             HasMany::make('Tickets'),
 
-            Image::make('Hero image'),
-            Image::make('Share image'),
-            Image::make('Excerpt image'),
+            Image::make('Hero image')
+                ->rules('required'),
+            Image::make('Share image')
+                ->rules('required'),
+            Image::make('Excerpt image')
+                ->rules('required'),
         ];
     }
 

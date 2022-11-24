@@ -54,7 +54,8 @@ class Organisation extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make('NiN'),
+            Text::make('NiN')
+                ->rules('required'),
 
             Text::make('Email')
                 ->sortable()
