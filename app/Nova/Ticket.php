@@ -40,6 +40,7 @@ class Ticket extends Resource
         'ticket_type_id',
         'user_id',
         'status',
+        'ticket_code',
     ];
 
     /**
@@ -58,7 +59,7 @@ class Ticket extends Resource
     public function fields(Request $request)
     {
         return [
-            Text::make('UUID')->readonly(),
+            Text::make('Ticket Code')->readonly(),
 
             BelongsTo::make('Event'),
 
@@ -135,6 +136,7 @@ class Ticket extends Resource
     {
         return [
             (new DownloadExcel)->withHeadings(),
+            new Actions\FinalizeTicket,
             new Actions\ResendTicket,
             new Actions\ImportTickets,
         ];
