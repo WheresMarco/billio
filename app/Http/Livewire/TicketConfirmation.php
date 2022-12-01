@@ -70,7 +70,7 @@ class TicketConfirmation extends Component
 
             $calendar_link = Link::create($event->name, $event->date_from, $event->date_to)
                 ->description($event->excerpt)
-                ->address($event->event_dates[0]->location);
+                ->address($event->location);
         }
 
         return view('livewire.ticket-confirmation', [
