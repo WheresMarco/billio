@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\DateTime;
+use Whitecube\NovaFlexibleContent\Flexible;
 
 class Event extends Resource
 {
@@ -74,8 +75,11 @@ class Event extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Markdown::make('Description')
-                ->rules('required'),
+            Flexible::make('Content', 'description')
+                ->addLayout('Simple Content Section', 'wysiwyg', [
+                    Text::make('Title'),
+                    Markdown::make('Content')
+                ]),
 
             Textarea::make('Excerpt')
                 ->rules('required'),

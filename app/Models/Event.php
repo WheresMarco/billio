@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
 
 class Event extends Model
 {
+    use HasFlexible;
+
     public $timestamps = false;
 
     protected $casts = ['date_from' => 'datetime', 'date_to' => 'datetime'];
@@ -34,5 +37,10 @@ class Event extends Model
     public function ticket_types()
     {
         return $this->hasMany('App\Models\TicketType');
+    }
+
+    public function getDescription()
+    {
+        return $this->flexible('description');
     }
 }
