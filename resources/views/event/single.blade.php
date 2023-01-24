@@ -10,6 +10,14 @@
 <main>
     <div class="h-60 bg-cover bg-center sm:h-96" style="background-image: url({{Storage::url($event->hero_image)}});"></div>
 
+    <div class="bg-gray-100">
+        <div class="container mx-auto pb-4 pt-4">
+            <a @click="upcoming = true" class="btn btn-pink">Om evenemanget</a>
+            <a @click="upcoming = false" class="btn btn-grey ml-2">Donera</a>
+            <a @click="upcoming = false" class="btn btn-grey ml-2">Kontaktinformation</a>
+        </div>
+    </div>
+
     <div class="container mx-auto px-4 pb-10 lg:px-0">
         <h1 class="font-headline text-pink pt-8 text-4xl">{{$event->name}}</h1>
 
