@@ -20,8 +20,9 @@
             <div class="container mx-auto py-10 px-4 lg:px-0" x-data="{ upcoming: true }">
 
                 <div class="mx-auto flex justify-center pb-10">
-                    <a @click="upcoming = true" class="btn btn-pink">Kommande evenemang</a><a @click="upcoming = false"
-                        class="btn btn-grey ml-2">Tidigare evenemang</a>
+                    <a @click="upcoming = true" class="btn" :class="{ 'btn-pink': upcoming }">Kommande
+                        evenemang</a><a @click="upcoming = false" class="btn ml-2"
+                        :class="{ 'btn-pink': !upcoming }">Tidigare evenemang</a>
                 </div>
 
                 <div x-show="upcoming" class="space-y-6">
@@ -70,7 +71,8 @@
                                 class="group grid grid-cols-1 rounded-md bg-white transition duration-300 ease-in-out sm:grid-cols-8">
                                 <h1
                                     class="self-center justify-self-start pl-4 pt-4 font-headline text-3xl text-grey group-hover:text-pink sm:col-span-3 sm:pt-0 sm:pl-8">
-                                    <a class="font-normal" href="/event/{{ $event->slug }}">{{ $event->name }}</a></h1>
+                                    <a class="font-normal" href="/event/{{ $event->slug }}">{{ $event->name }}</a>
+                                </h1>
 
                                 <div class="grid grid-cols-2 p-4 sm:col-span-5 sm:p-0 sm:py-6">
                                     <div>
