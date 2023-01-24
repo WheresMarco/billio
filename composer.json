@@ -40,7 +40,8 @@
         "spatie/laravel-cookie-consent": "*",
         "spatie/laravel-robots-middleware": "*",
         "spatie/laravel-stripe-webhooks": "*",
-        "tightenco/nova-google-analytics": "*"
+        "tightenco/nova-google-analytics": "*",
+        "whitecube/nova-flexible-content": "v0.2.14"
     },
     "require-dev": {
         "facade/ignition": "*",
