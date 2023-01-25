@@ -38,8 +38,6 @@ Route::prefix('event')->group(function () {
 
     Route::post('{eventSlug}/{ticketType}', 'PurchaseController@addToCart');
 
-    Route::get('{eventSlug}/{ticketType}/seating', 'PurchaseController@selectSeating');
-
     Route::get('{eventSlug}/{ticketType}/info', 'PurchaseController@info');
     Route::post('{eventSlug}/{ticketType}/info', 'PurchaseController@updateCartWithTicketInfo');
 

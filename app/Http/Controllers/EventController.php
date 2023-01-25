@@ -9,28 +9,18 @@ class EventController extends Controller
 {
     public function single($eventSlug)
     {
-        $event = Event::where('slug', $eventSlug)->first();
-
         // If have clear cart url parameter, clear cart from session and remove tickets
         if (request()->has('clearcart')) {
             $cart = session()->get('cart');
 
-            if ($cart) {
-                foreach ($cart as $ticketId => $ticket) {
-                    // Get ticket from database
-                    $ticket = Ticket::find($ticket['id']);
+            collect($cart)->map(function ($ticket) {
+                return Ticket::find($ticket['id'])->where('status', 'hold')->delete();
+            });
 
-                    // If status is hold delete ticket
-                    if ($ticket->status == 'hold') {
-                        $ticket->delete();
-                    }
-                }
-
-                session()->forget('cart');
-            }
+            session()->forget('cart');
         }
 
-        if (! $event) {
+        if (!$event = Event::where('slug', $eventSlug)->first()) {
             return redirect('/');
         }
 
