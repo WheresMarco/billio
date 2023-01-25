@@ -6,6 +6,7 @@ use App\Models\Modifier;
 use App\Models\Nin;
 use App\Models\Ticket;
 use App\Models\TicketType;
+use App\Models\TicketCustomField;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -173,13 +174,11 @@ class PurchaseController extends Controller
      */
     public function updateCartWithTicketInfo(Request $request)
     {
-        ray($request->all());
-
         // Validate the request
         $this->validate($request, [
             'event_id' => 'required|exists:events,id',
             'ticket_type_id' => 'required|exists:ticket_types,id',
-            'tickets.*' => 'array:firstName,lastName,email,modifiers,nin',
+            'tickets.*' => 'array:firstName,lastName,email,modifiers,nin,custom_fields',
         ]);
 
         // Get the ticket type
@@ -249,9 +248,34 @@ class PurchaseController extends Controller
 
                 // Loop over all modfiers and save on ticket
                 if (isset($ticket['modifiers'])) {
+                    // Remove all modifiers from ticket
+                    $databaseTicket->modifiers()->detach();
+
                     foreach ($ticket['modifiers'] as $ticketModifier) {
-                        $modifier = Modifier::where([['ticket_type_id', $cart[$key]->ticket_type->id], ['slug', $ticketModifier]])->first();
+                        $modifier = Modifier::where([['slug', $ticketModifier]])->first();
+                        ray($modifier);
                         $cart[$key]->modifiers()->save($modifier);
+                    }
+                }
+
+                // Loop over all custom fields and save on ticket
+                if (isset($ticket['custom_fields'])) {
+                    foreach ($ticket['custom_fields'] as $name => $value) {
+                        // Check if custom field exists
+                        $customField = TicketCustomField::where([['ticket_id', $cart[$key]->id], ['name', $name]])->first();
+
+                        // If custom field doesn't exist, create it
+                        if (! $customField) {
+                            $cart[$key]->customFields()->create([
+                                'name' => $name,
+                                'value' => $value,
+                            ]);
+                        } else {
+                            // Update custom field
+                            $customField->update([
+                                'value' => $value,
+                            ]);
+                        }
                     }
                 }
 

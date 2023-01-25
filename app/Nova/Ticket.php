@@ -89,6 +89,21 @@ class Ticket extends Resource
 
                 return implode(', ', $returnString);
             })->onlyOnIndex(),
+
+            Text::make('Custom Fields', function () {
+                if (! $this->customFields->first()) {
+                    return;
+                }
+
+                $returnString = array_map(
+                    function ($customField) {
+                        return $customField->name . ' ' . $customField->value;
+                    },
+                    $this->customFields->all()
+                );
+
+                return implode(', ', $returnString);
+            })->onlyOnIndex(),
         ];
     }
 

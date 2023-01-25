@@ -4,9 +4,13 @@ namespace App\Models;
 
 use App\Http\Controllers\TicketController;
 use Illuminate\Database\Eloquent\Model;
+use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
+use Illuminate\Support\Str;
 
 class TicketType extends Model
 {
+    use HasFlexible;
+
     public $timestamps = false;
 
     protected $appends = ['modifiers', 'sold_out'];
@@ -23,7 +27,7 @@ class TicketType extends Model
 
     public function modifiers()
     {
-        return $this->hasMany('App\Models\Modifier');
+        return $this->morphToMany('App\Models\Modifier', 'modifiables');
     }
 
     public function getModifiersAttribute()
@@ -38,5 +42,10 @@ class TicketType extends Model
         $tickets_sold = ( new TicketController() )->ticketsSold($this->event_id, $this->id);
 
         return $this->limit <= $tickets_sold;
+    }
+
+    public function getCustomFields()
+    {
+        return $this->flexible('custom_fields');
     }
 }

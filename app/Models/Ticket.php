@@ -63,6 +63,11 @@ class Ticket extends Model
         return $this->hasMany('App\Models\Transaction');
     }
 
+    public function customFields()
+    {
+        return $this->hasMany('App\Models\TicketCustomField');
+    }
+
     public function nin()
     {
         return $this->hasOne('App\Models\Nin');

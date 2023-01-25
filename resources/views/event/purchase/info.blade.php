@@ -57,53 +57,43 @@
                             value="{{ old('tickets[' . $key . '][email]') }}" required>
                     </label>
 
-                    @if (count($ticketType->modifiers) > 0)
+                    @if ($ticketType->getCustomFields()->count() > 1)
                         <hr>
                         <div class="mt-4">
                             <ul class="space-y-2">
-                                <li>
-                                    <label class="text-gray-700">Relation till LiTHe Blås</label>
-                                    <select name="cars" id="cars"
-                                        class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50">
-                                        <option value="volvo">Gamling</option>
-                                        <option value="saab">Gamlings +1</option>
-                                        <option value="mercedes">Balkesterperson</option>
-                                        <option value="audi">Övrig</option>
-                                    </select>
-                                </li>
+                                @foreach ($ticketType->getCustomFields() as $field)
+                                    @if ($field->title() == 'text')
+                                        <li>
+                                            <label class="text-gray-700"
+                                                for="tickets[{{ $key }}][custom_fields][{{ $field->question }}]">{{ $field->question }}</label>
+                                            <input type="text"
+                                                id="tickets[{{ $key }}][custom_fields][{{ $field->question }}]"
+                                                name="tickets[{{ $key }}][custom_fields][{{ $field->question }}]"
+                                                class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" />
+                                        </li>
+                                    @elseif ($field->title() == 'select')
+                                        <li>
+                                            <label class="text-gray-700"
+                                                for="tickets[{{ $key }}][custom_fields][{{ $field->question }}]">{{ $field->question }}</label>
+                                            <select
+                                                name="tickets[{{ $key }}][custom_fields][{{ $field->question }}]"
+                                                id="tickets[{{ $key }}][custom_fields][{{ $field->question }}]"
+                                                class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50">
+                                                @foreach ($field->options as $option)
+                                                    <option value="{{ Str::slug($option->option) }}">{{ $option->option }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-                                <li>
-                                    <label class="text-gray-700">Jag var aktiv</label>
-                                    <input type="text"
-                                        class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" />
-                                </li>
-
-                                <li>
-                                    <label class="text-gray-700">Specialkost</label>
-                                    <input type="text"
-                                        class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" />
-                                </li>
-
-                                <li>
-                                    <label class="text-gray-700">Jag önskar sitta bredvid</label>
-                                    <input type="text"
-                                        class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50" />
-                                </li>
-
-                                <li>
-                                    <label class="text-gray-700">Dryckespreferens</label>
-                                    <select name="cars" id="cars"
-                                        class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50">
-                                        <option value="volvo">Öl</option>
-                                        <option value="saab">Rött vin</option>
-                                        <option value="mercedes">Vitt vin</option>
-                                        <option value="audi">Alkoholfritt</option>
-                                    </select>
-                                </li>
-
-                                <br>
-                                <hr><br>
-
+                    @if (count($ticketType->modifiers) > 0)
+                        <div class="mt-4">
+                            <ul class="space-y-2">
                                 @foreach ($ticketType->modifiers as $modifier)
                                     @if (!$modifier->hidden)
                                         <li class="rounded-md bg-gray-100 p-2 leading-relaxed">
@@ -118,7 +108,7 @@
                                                 <strong>{{ $modifier->name }}</strong>
                                                 @if ($modifier->delta != 0)
                                                     <span class="ml-2 font-bold text-grey">{{ $modifier->delta }}
-                                                        SEK</span>
+                                                        kr</span>
                                                 @endif
                                             </label>
                                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.

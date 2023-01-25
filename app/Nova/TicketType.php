@@ -5,10 +5,12 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Whitecube\NovaFlexibleContent\Flexible;
+use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
+use NovaAttachMany\AttachMany;
 
 class TicketType extends Resource
 {
@@ -75,7 +77,18 @@ class TicketType extends Resource
             Number::make('Limit per person', 'limit_person')
                 ->rules('required'),
 
-            HasMany::make('Modifiers'),
+            Flexible::make('Custom Fields')
+                ->addLayout('Text field', 'text', [
+                    Text::make('Question'),
+                ])
+                ->addLayout('Select field', 'select', [
+                    Text::make('Question'),
+                    SimpleRepeatable::make('Options', 'options', [
+                        Text::make('Option'),
+                    ]),
+                ]),
+
+            AttachMany::make('Modifiers'),
         ];
     }
 

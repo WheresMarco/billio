@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "803fbd478d5dc0ec0a567b7bc3b51701",
+    "content-hash": "e78dfbc5482513a2ad85d423f2b2b655",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -798,6 +798,51 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.2"
             },
             "time": "2022-10-27T11:44:00+00:00"
+        },
+        {
+            "name": "dillingham/nova-attach-many",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dillingham/nova-attach-many.git",
+                "reference": "3a34356c9ad071b4fd7797b41e3942ac8d1f77e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dillingham/nova-attach-many/zipball/3a34356c9ad071b4fd7797b41e3942ac8d1f77e9",
+                "reference": "3a34356c9ad071b4fd7797b41e3942ac8d1f77e9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NovaAttachMany\\Providers\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NovaAttachMany\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Attach Many Nova field",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/dillingham/nova-attach-many/issues",
+                "source": "https://github.com/dillingham/nova-attach-many/tree/1.3.0"
+            },
+            "time": "2021-03-26T05:44:06+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -4418,6 +4463,106 @@
                 "source": "https://github.com/opis/closure/tree/3.6.3"
             },
             "time": "2022-01-27T09:35:39+00:00"
+        },
+        {
+            "name": "optimistdigital/nova-translations-loader",
+            "version": "3.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/optimistdigital/nova-translations-loader.git",
+                "reference": "d70d311b3c5b5722ebd27e1223f39e6a75b744b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/optimistdigital/nova-translations-loader/zipball/d70d311b3c5b5722ebd27e1223f39e6a75b744b2",
+                "reference": "d70d311b3c5b5722ebd27e1223f39e6a75b744b2",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^7.21 || ^8.0 || ^9.0",
+                "laravel/nova": "^3.0",
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OptimistDigital\\NovaTranslationsLoader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This Laravel Nova package helps developers load translations into their packages.",
+            "keywords": [
+                "laravel",
+                "nova",
+                "optimistdigital",
+                "translations"
+            ],
+            "support": {
+                "issues": "https://github.com/optimistdigital/nova-translations-loader/issues",
+                "source": "https://github.com/optimistdigital/nova-translations-loader/tree/3.1.4"
+            },
+            "time": "2022-04-08T12:27:58+00:00"
+        },
+        {
+            "name": "outl1ne/nova-simple-repeatable",
+            "version": "1.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/outl1ne/nova-simple-repeatable.git",
+                "reference": "61d2f43fe24e6f8cd044812bce905610b4d67814"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/outl1ne/nova-simple-repeatable/zipball/61d2f43fe24e6f8cd044812bce905610b4d67814",
+                "reference": "61d2f43fe24e6f8cd044812bce905610b4d67814",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^3.0",
+                "optimistdigital/nova-translations-loader": "^3.0.0",
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "OptimistDigital\\NovaSimpleRepeatable\\SimpleRepeatableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OptimistDigital\\NovaSimpleRepeatable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova simple repeatable rows field.",
+            "keywords": [
+                "Flexible",
+                "field",
+                "keyvalue",
+                "laravel",
+                "nova",
+                "repeatable",
+                "rows"
+            ],
+            "support": {
+                "issues": "https://github.com/outl1ne/nova-simple-repeatable/issues",
+                "source": "https://github.com/outl1ne/nova-simple-repeatable/tree/1.4.3"
+            },
+            "time": "2022-06-09T12:52:41+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
