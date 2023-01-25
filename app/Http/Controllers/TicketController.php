@@ -16,22 +16,6 @@ class TicketController extends Controller
     }
 
     /**
-     * Resend a ticket to user.
-     *
-     * @param  Ticket  $ticket
-     * @return void
-     */
-    public function resendTicket(Ticket $ticket)
-    {
-        $user = $ticket->user()->first();
-        $event = $ticket->event()->first();
-        $organisation = $event->organisation()->first();
-
-        // Email the ticket.
-        Mail::to($user)->send(new \App\Mail\TicketPurchased($ticket, $event, $organisation, $user));
-    }
-
-    /**
      * Generate a ticket code.
      *
      * @since    1.0.0
@@ -57,39 +41,5 @@ class TicketController extends Controller
         }
 
         return $ticket_code;
-    }
-
-    /**
-     * Generates a unique ID
-     *
-     * @since    1.0.0
-     *
-     * @return   string
-     */
-    public function genTicketUUID()
-    {
-        $uuid = null;
-
-        while (null === $uuid) {
-            $temp_uuid = sprintf(
-                '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-                rand(0, 0xFFFF),
-                rand(0, 0xFFFF), // 32 bits for "time_low"
-                rand(0, 0xFFFF), // 16 bits for "time_mid"
-                rand(0, 0x0FFF) | 0x4000, // 16 bits for "time_hi_and_version", four most significant bits holds version number 4
-                rand(0, 0x3FFF) | 0x8000, // 16 bits, 8 bits for "clk_seq_hi_res", 8 bits for "clk_seq_low", two most significant bits holds zero and one for variant DCE1.1
-                rand(0, 0xFFFF),
-                rand(0, 0xFFFF),
-                rand(0, 0xFFFF) // 48 bits for "node"
-            );
-
-            // Check if taken, if not assign to $uuid.
-            $ticket = Ticket::where('uuid', $temp_uuid)->first();
-            if (!$ticket) {
-                $uuid = $temp_uuid;
-            }
-        }
-
-        return $uuid;
     }
 }

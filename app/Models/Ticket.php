@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Nova\Actions\Actionable;
 use Laravel\Scout\Searchable;
+use Illuminate\Support\Str;
 
 class Ticket extends Model
 {
@@ -34,7 +35,7 @@ class Ticket extends Model
 
         // auto-sets values on creation
         static::creating(function ($query) {
-            $query->uuid = ( new TicketController() )->genTicketUUID();
+            $query->uuid = Str::uuid();
         });
     }
 

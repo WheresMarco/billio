@@ -9,6 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
+use Illuminate\Support\Facades\Mail;
 
 class ResendTicket extends Action implements ShouldQueue
 {
@@ -25,7 +26,11 @@ class ResendTicket extends Action implements ShouldQueue
     {
         foreach ($models as $model) {
             try {
-                (new TicketController())->resendTicket($model);
+                $user         = $model->user()->first();
+                $event        = $model->event()->first();
+                $organisation = $event->organisation()->first();
+                Mail::to($user)->send(new \App\Mail\TicketPurchased($model, $event, $organisation, $user));
+
                 $this->markAsFinished($model);
             } catch (Exception $e) {
                 $this->markAsFailed($model, $e);
