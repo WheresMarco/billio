@@ -17,9 +17,8 @@
 
     <main>
         <div class="bg-gray-100">
-            <div class="container mx-auto py-10 px-4 lg:px-0" x-data="{ upcoming: true }">
-
-                <div class="mx-auto flex justify-center pb-10">
+            <div class="container mx-auto pb-10 pt-6 px-4 lg:px-0" x-data="{ upcoming: true }">
+                <div class="mx-auto flex justify-center pb-6">
                     <a @click="upcoming = true" class="btn" :class="{ 'btn-pink': upcoming }">Kommande
                         evenemang</a><a @click="upcoming = false" class="btn ml-2"
                         :class="{ 'btn-pink': !upcoming }">Tidigare evenemang</a>
