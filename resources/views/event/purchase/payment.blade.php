@@ -68,10 +68,10 @@
 
         <div>
             <section class="rounded-md border border-gray-600 bg-light-grey p-4 text-white">
-                <h4 class="font-headline font-semibold text-grey">{{ $event->name }}</h4>
-                <h1 class="relative pb-2 font-headline text-2xl text-white">Varukorg</h1>
+                <h4 class="font-headline font-semibold text-grey">Sammanfattning</h4>
+                <h1 class="relative pb-2 font-headline text-2xl text-white">{{ $event->name }}</h1>
                 <div class="">
-                    <table class="relative overflow-x-auto">
+                    <table class="relative overflow-x-auto w-full">
                         <thead class="text-xs uppercase text-white">
                             <tr>
                                 <th class="text-left">Benämning</th>
@@ -80,15 +80,15 @@
                         </thead>
                         <tbody>
                             @foreach ($cart as $ticket)
-                                <tr class="border-b">
-                                    <td class="whitespace-nowrap py-1 font-medium text-gray-900">{{ $ticketType->name }}
+                                <tr class="border-b border-gray-600">
+                                    <td class="whitespace-nowrap py-1 font-medium text-white">{{ $ticketType->name }}
                                     </td>
                                     <td>{{ $ticketType->price }} kr</td>
                                 </tr>
                                 @if ($ticket->modifiers->count() > 0)
                                     @foreach ($ticket->modifiers as $modifier)
                                         <tr class="border-b">
-                                            <td class="whitespace-nowrap px-4 py-1 font-medium text-gray-900">—
+                                            <td class="whitespace-nowrap px-4 py-1 font-medium text-white">—
                                                 {{ $modifier->name }}</td>
                                             <td>{{ $modifier->delta }} kr</td>
                                         </tr>
@@ -97,7 +97,7 @@
                             @endforeach
                         </tbody>
 
-                        <tfoot class="border-spacing-4 border-t">
+                        <tfoot class="border-spacing-4 border-t border-gray-600">
                             <tr>
                                 <td class="font-semibold">Totalt</td>
                                 <td class="font-semibold">{{ $total }} kr</td>
@@ -130,7 +130,6 @@
                     variables: {
                         colorPrimary: '#4a90e2',
                         colorBackground: '#ffffff',
-                        // See all possible variables below
                     }
                 },
             });

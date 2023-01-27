@@ -99,18 +99,6 @@
             </div>
         </div>
 
-        <div class="container mx-auto mb-8">
-            <h2 class="relative mb-2 font-headline text-2xl text-white">Tidigare evenemang</h2>
-            <div class="grid grid-cols-6 gap-4">
-                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
-                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
-                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
-                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
-                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
-                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
-            </div>
-        </div>
-
         <div class="container mx-auto mb-4">
             <h2 class="relative mb-2 font-headline text-2xl text-white">Vad är Billio?</h2>
 

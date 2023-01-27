@@ -1,5 +1,5 @@
     <section class="bg-dark-grey text-grey">
-        <div class="container flex justify-between mx-auto border-t border-gray-600 py-8">
+        <div class="container flex justify-between mx-auto border-t border-gray-600 py-4">
             <div class="flex space-x-8">
             <a href="/privacy-policy">Integritetspolicy</a>
             <a href="/help">Hjälp</a>

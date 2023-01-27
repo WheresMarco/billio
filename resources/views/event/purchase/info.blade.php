@@ -163,7 +163,7 @@
                 @endforeach
 
                 <div class="mt-4 flex justify-between">
-                    <a href="/event/{{ $event->slug }}/?clearcart" class="btn btn-white">Avbryt</a>
+                    <a href="/event/{{ $event->slug }}/" class="btn btn-white">Avbryt</a>
                     <input id="submit" type="submit" class="btn btn-pink" value='Gå vidare till betalning' />
                 </div>
             </div>

@@ -17,7 +17,7 @@ Route::stripeWebhooks('/webhook/stripe');
 Auth::routes();
 
 // Home
-Route::get('/', 'FrontpageController@index')->name('frontpage');
+Route::get('/', 'FrontpageController@index')->name('frontpage')->middleware('clearcart');
 
 // Static pages
 Route::get('/terms', function () {
@@ -26,15 +26,15 @@ Route::get('/terms', function () {
 
 Route::get('/privacy-policy', function () {
     return view('privacy');
-});
+})->middleware('clearcart');
 
 Route::get('/help', function () {
     return view('help');
-});
+})->middleware('clearcart');
 
 // Event
 Route::prefix('event')->group(function () {
-    Route::get('{eventSlug}', 'EventController@single')->name('event')->middleware('accesscode');
+    Route::get('{eventSlug}', 'EventController@single')->name('event')->middleware('accesscode', 'clearcart');
 
     Route::post('{eventSlug}/{ticketType}', 'PurchaseController@addToCart')->middleware('isactivetickettype');
 

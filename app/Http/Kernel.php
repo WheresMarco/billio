@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'accesscode' => \App\Http\Middleware\CheckForAccessCode::class,
         'isactivetickettype' => \App\Http\Middleware\IsActiveTicketType::class,
+        'clearcart' => \App\Http\Middleware\ClearCart::class,
     ];
 
     /**
