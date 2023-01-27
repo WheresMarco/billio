@@ -39,6 +39,11 @@ class Event extends Model
         return $this->hasMany('App\Models\TicketType');
     }
 
+    public function access_codes()
+    {
+        return $this->hasMany('App\Models\AccessCode');
+    }
+
     public function getDescription()
     {
         return $this->flexible('description');

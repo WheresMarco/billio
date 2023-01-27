@@ -7,21 +7,72 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="container mx-auto py-8 px-4 md:w-2/3 lg:w-1/3" x-data="{ termsAccepted: false }">
-        <div class="purchase-error hidden" id="payment-error"></div>
-
-        <form id="payment-form">
-            @csrf
-            <h4 class="font-headline font-semibold text-grey">Steg 2 av 2</h4>
-            <h2 class="font-headline text-3xl">Betalning</h2>
-
+    <main class="container mx-auto grid grid-cols-3 gap-4 pb-6" x-data="{ termsAccepted: false }">
+        <div class="col-span-2">
             @include('includes.countdown')
 
-            <section class="mt-4 rounded-md border p-4">
-                <h3 class="font-headline text-xl font-semibold">Sammanfattning</h3>
+            <div class="purchase-error hidden" id="payment-error"></div>
+
+            <form id="payment-form" class="rounded-md border border-gray-600 bg-light-grey p-4 text-white">
+                @csrf
+                <h4 class="font-headline font-semibold text-grey">Steg 2 av 2</h4>
+                <h2 class="font-headline text-3xl">Betalning</h2>
+
+                <div class="grid grid-cols-2 space-x-2">
+                    <label class="block">
+                        <span class="text-white">Förnamn</span>
+                        <input type="text"
+                            class="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
+                            id="firstName" name="firstNamen" placeholder="Anna" required>
+                    </label>
+
+                    <label class="block">
+                        <span class="text-white">Efternamn</span>
+                        <input type="text"
+                            class="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
+                            id="lastName" name="lastName" placeholder="Andersson" required>
+                    </label>
+                </div>
+
+                <label class="mt-4 block">
+                    <span class="text-white">E-postadress att skicka kvittot till</span>
+                    <input type="email"
+                        class="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
+                        id="email" name="email" placeholder="anna@andersson.se" required>
+                </label>
+
+                <hr>
+
+                <div id="payment-element"></div>
+
+                <div class="py-4">
+                    <input id="terms"
+                        class="cursor-pointer rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50 focus:ring-offset-0"
+                        type="checkbox" x-model="termsAccepted" /> <label for="terms">Jag godkänner de <a href="/terms"
+                            class="font-medium" target="_blank">allmänna villkoren</a>.</label>
+                </div>
+
+                <div class="flex justify-between">
+                    <span class="mt-1 text-xs text-grey">Köpet hanteras säkert genom <a href="https://stripe.com"
+                            class="font-bold hover:text-white" target="_blank" rel="noopener noreferrer">Stripe</a> och dina
+                        betaluppgifter<br> är aldrig tillgängliga för <a href="https://billio.app"
+                            class="font-bold hover:text-white" target="_blank" rel="noopener noreferrer">Billio</a> eller <a
+                            href='{{ $event->organisation->url }}' class="font-bold hover:text-white" target="_blank"
+                            rel="noopener noreferrer">{{ $event->organisation->title }}</a>.</span>
+
+                    <input x-bind:disabled="!termsAccepted" id="submit" type="submit" class="btn btn-pink"
+                        value='Köp biljett för {{ $total }} kr' />
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <section class="rounded-md border border-gray-600 bg-light-grey p-4 text-white">
+                <h4 class="font-headline font-semibold text-grey">{{ $event->name }}</h4>
+                <h1 class="relative pb-2 font-headline text-2xl text-white">Varukorg</h1>
                 <div class="">
                     <table class="relative overflow-x-auto">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <thead class="text-xs uppercase text-white">
                             <tr>
                                 <th class="text-left">Benämning</th>
                                 <th class="text-left">Pris</th>
@@ -29,14 +80,16 @@
                         </thead>
                         <tbody>
                             @foreach ($cart as $ticket)
-                                <tr class="bg-white border-b">
-                                    <td class="py-1 font-medium text-gray-900 whitespace-nowrap">{{ $ticketType->name }}</td>
+                                <tr class="border-b">
+                                    <td class="whitespace-nowrap py-1 font-medium text-gray-900">{{ $ticketType->name }}
+                                    </td>
                                     <td>{{ $ticketType->price }} kr</td>
                                 </tr>
                                 @if ($ticket->modifiers->count() > 0)
                                     @foreach ($ticket->modifiers as $modifier)
-                                        <tr class="bg-white border-b">
-                                            <td class="px-4 py-1 font-medium text-gray-900 whitespace-nowrap">— {{ $modifier->name }}</td>
+                                        <tr class="border-b">
+                                            <td class="whitespace-nowrap px-4 py-1 font-medium text-gray-900">—
+                                                {{ $modifier->name }}</td>
                                             <td>{{ $modifier->delta }} kr</td>
                                         </tr>
                                     @endforeach
@@ -44,7 +97,7 @@
                             @endforeach
                         </tbody>
 
-                        <tfoot class="border-t border-spacing-4">
+                        <tfoot class="border-spacing-4 border-t">
                             <tr>
                                 <td class="font-semibold">Totalt</td>
                                 <td class="font-semibold">{{ $total }} kr</td>
@@ -53,55 +106,7 @@
                     </table>
                 </div>
             </section>
-
-            <hr>
-
-            <div class="grid grid-cols-2 space-x-2">
-                <label class="block">
-                    <span class="text-gray-700">Förnamn</span>
-                    <input type="text"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
-                        id="firstName" name="firstNamen" placeholder="Anna" required>
-                </label>
-
-                <label class="block">
-                    <span class="text-gray-700">Efternamn</span>
-                    <input type="text"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
-                        id="lastName" name="lastName" placeholder="Andersson" required>
-                </label>
-            </div>
-
-            <label class="mt-4 block">
-                <span class="text-gray-700">E-postadress att skicka kvittot till</span>
-                <input type="email"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
-                    id="email" name="email" placeholder="anna@andersson.se" required>
-            </label>
-
-            <hr>
-
-            <div id="payment-element"></div>
-
-            <div class="py-4">
-                <input id="terms"
-                    class="cursor-pointer rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50 focus:ring-offset-0"
-                    type="checkbox" x-model="termsAccepted" /> <label for="terms">Jag godkänner de <a href="/terms"
-                        class="font-medium" target="_blank">allmänna villkoren</a>.</label>
-            </div>
-
-            <div class="flex justify-between">
-                <span class="mt-1 text-xs text-grey">Köpet hanteras säkert genom <a href="https://stripe.com"
-                        class="font-bold hover:text-black" target="_blank" rel="noopener noreferrer">Stripe</a> och dina
-                    betaluppgifter<br> är aldrig tillgängliga för <a href="https://billio.app"
-                        class="font-bold hover:text-black" target="_blank" rel="noopener noreferrer">Billio</a> eller <a
-                        href='{{ $event->organisation->url }}' class="font-bold hover:text-black" target="_blank"
-                        rel="noopener noreferrer">{{ $event->organisation->title }}</a>.</span>
-
-                <input x-bind:disabled="!termsAccepted" id="submit" type="submit" class="btn btn-pink"
-                    value='Köp biljett för {{ $total }} kr' />
-            </div>
-        </form>
+        </div>
     </main>
 @endsection
 

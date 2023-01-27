@@ -4,12 +4,8 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="container mx-auto py-8 px-4 md:w-2/3 lg:w-1/3">
+<main class="container mx-auto mb-6 rounded-md border border-gray-600 bg-light-grey p-4 text-white">
     <h2 class="font-headline text-4xl">Integritetspolicy</h2>
-
-    <p class="my-4 rounded-md bg-gray-100 p-4">
-        Den här sidan är enbart tillgänglig på engelska.
-    </p>
 
     <p>Last updated: 21 november 2018.</p>
 

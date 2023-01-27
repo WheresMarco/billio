@@ -308,6 +308,7 @@ class PurchaseController extends Controller
                 'ticket_id' => $ticket->id,
                 'amount' => $total,
                 'stripe_id' => $paymentIntent['id'],
+                'access_code' => session()->get('access_code') ?? null,
             ]);
 
             // Check if transaction was created

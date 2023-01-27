@@ -5,7 +5,7 @@
         style="background-image: url('{{ URL::to('/img/hero.jpg') }}');">
         <div class="container mx-auto space-y-6">
             <h1 class="max-w-xl font-headline text-4xl font-medium sm:text-5xl sm:leading-tight">Att sälja biljetter ska vara
-                enkelt</h1>
+                <span class="text-pink">enkelt</span></h1>
             <p class="max-w-xl sm:text-xl">Nästa gång du ska sälja biljetter använd Billio. Med Billio får du ett komplett
                 system från försäljning till incheckning. Ett kraftfullt och snabbt system som kan hantera evenemang av
                 alla dess storlekar. På köpet är det dessutom enkelt att använda.</p>
@@ -16,66 +16,34 @@
     </div>
 
     <main>
-        <div class="bg-gray-100">
-            <div class="container mx-auto pb-10 pt-6 px-4 lg:px-0" x-data="{ upcoming: true }">
-                <div class="mx-auto flex justify-center pb-6">
-                    <a @click="upcoming = true" class="btn" :class="{ 'btn-pink': upcoming }">Kommande
-                        evenemang</a><a @click="upcoming = false" class="btn ml-2"
-                        :class="{ 'btn-pink': !upcoming }">Tidigare evenemang</a>
-                </div>
+        <div class="container mx-auto px-4 pb-6 pt-6 lg:px-0" x-data="{ upcoming: true }">
+            <h2 class="relative mb-2 font-headline text-2xl text-white">Kommande evenemang</h2>
 
-                <div x-show="upcoming" class="space-y-6">
-                    @foreach ($events as $event)
-                        @if ($event->upcoming())
-                            <div class="grid grid-cols-1 rounded-md bg-white shadow-md sm:grid-cols-8 sm:gap-6">
-                                <a href="/event/{{ $event->slug }}"
-                                    class="rounded-tl-md rounded-tr-md bg-cover bg-center sm:col-span-3 sm:rounded-bl-md sm:rounded-tr-none"
-                                    style="background-image: url({{ Storage::url($event->excerpt_image) }}); min-height: 230px;"></a>
+            <div class="mx-auto flex justify-center pb-6 hidden">
+                <a @click="upcoming = true" class="btn" :class="{ 'btn-pink': upcoming }">Kommande
+                    evenemang</a><a @click="upcoming = false" class="btn ml-2" :class="{ 'btn-pink': !upcoming }">Tidigare
+                    evenemang</a>
+            </div>
 
-                                <div class="p-4 pr-10 sm:col-span-5 sm:py-12 sm:pl-0">
-                                    <h1><a href="/event/{{ $event->slug }}"
-                                            class="font-headline text-3xl font-normal text-pink">{{ $event->name }}</a>
-                                    </h1>
-                                    <p class="pb-4 pt-2"><a href="/event/{{ $event->slug }}"
-                                            class="font-normal">{{ $event->excerpt }}</a></p>
+            <div x-show="upcoming" class="space-y-6">
+                @foreach ($events as $event)
+                    @if ($event->upcoming())
+                        <div
+                            class="grid grid-cols-1 rounded-md border border-gray-600 bg-light-grey text-white sm:grid-cols-8 sm:gap-6">
+                            <a href="/event/{{ $event->slug }}"
+                                class="rounded-tl-md rounded-tr-md bg-cover bg-center sm:col-span-3 sm:rounded-bl-md sm:rounded-tr-none"
+                                style="background-image: url({{ Storage::url($event->excerpt_image) }}); min-height: 230px;"></a>
 
-                                    <div class="border-grey-100 grid grid-cols-2 border-t-2 py-4">
-                                        <div>
-                                            <h4 class="font-semibold text-grey">
-                                                <x-heroicon-s-clock class="relative inline-block h-4"
-                                                    style="margin-top: -2px;" /> Datum
-                                            </h4>
-                                            <span
-                                                class="text-grey">{{ $event->date_from ? $event->date_from->format('d/m - Y') : '' }}</span>
-                                        </div>
-
-                                        <div>
-                                            <h4 class="font-semibold text-grey">
-                                                <x-heroicon-s-user-group class="relative inline-block h-4"
-                                                    style="margin-top: -3px;" /> Värd
-                                            </h4>
-                                            <span class="text-grey">{{ $event->organisation->title }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-
-                <div x-show="!upcoming" class="space-y-6">
-                    @foreach ($events as $event)
-                        @if ($event->upcoming() === false)
-                            <div
-                                class="group grid grid-cols-1 rounded-md bg-white transition duration-300 ease-in-out sm:grid-cols-8">
-                                <h1
-                                    class="self-center justify-self-start pl-4 pt-4 font-headline text-3xl text-grey group-hover:text-pink sm:col-span-3 sm:pt-0 sm:pl-8">
-                                    <a class="font-normal" href="/event/{{ $event->slug }}">{{ $event->name }}</a>
+                            <div class="p-4 pr-10 sm:col-span-5 sm:py-12 sm:pl-0">
+                                <h1><a href="/event/{{ $event->slug }}"
+                                        class="font-headline text-3xl font-normal text-pink">{{ $event->name }}</a>
                                 </h1>
+                                <p class="pb-4 pt-2"><a href="/event/{{ $event->slug }}"
+                                        class="font-normal">{{ $event->excerpt }}</a></p>
 
-                                <div class="grid grid-cols-2 p-4 sm:col-span-5 sm:p-0 sm:py-6">
+                                <div class="border-grey-100 grid grid-cols-2 border-gray-600 border-t-2 py-4">
                                     <div>
-                                        <h4 class="font-semibold text-grey group-hover:text-black">
+                                        <h4 class="font-headline font-semibold text-grey">
                                             <x-heroicon-s-clock class="relative inline-block h-4"
                                                 style="margin-top: -2px;" /> Datum
                                         </h4>
@@ -84,47 +52,83 @@
                                     </div>
 
                                     <div>
-                                        <h4 class="font-semibold text-grey group-hover:text-black">
+                                        <h4 class="font-headline font-semibold text-grey">
                                             <x-heroicon-s-user-group class="relative inline-block h-4"
                                                 style="margin-top: -3px;" /> Värd
                                         </h4>
-                                        <span
-                                            class="text-grey group-hover:text-black">{{ $event->organisation->title }}</span>
+                                        <span class="text-grey">{{ $event->organisation->title }}</span>
                                     </div>
                                 </div>
                             </div>
-                        @endif
-                    @endforeach
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+
+            <div x-show="!upcoming" class="space-y-6">
+                @foreach ($events as $event)
+                    @if ($event->upcoming() === false)
+                        <div
+                            class="group grid grid-cols-1 rounded-md bg-white transition duration-300 ease-in-out sm:grid-cols-8">
+                            <h1
+                                class="self-center justify-self-start pl-4 pt-4 font-headline text-3xl text-grey group-hover:text-pink sm:col-span-3 sm:pt-0 sm:pl-8">
+                                <a class="font-normal" href="/event/{{ $event->slug }}">{{ $event->name }}</a>
+                            </h1>
+
+                            <div class="grid grid-cols-2 p-4 sm:col-span-5 sm:p-0 sm:py-6">
+                                <div>
+                                    <h4 class="font-semibold text-grey group-hover:text-black">
+                                        <x-heroicon-s-clock class="relative inline-block h-4" style="margin-top: -2px;" />
+                                        Datum
+                                    </h4>
+                                    <span
+                                        class="text-grey">{{ $event->date_from ? $event->date_from->format('d/m - Y') : '' }}</span>
+                                </div>
+
+                                <div>
+                                    <h4 class="font-semibold text-grey group-hover:text-black">
+                                        <x-heroicon-s-user-group class="relative inline-block h-4"
+                                            style="margin-top: -3px;" /> Värd
+                                    </h4>
+                                    <span class="text-grey group-hover:text-black">{{ $event->organisation->title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+
+        <div class="container mx-auto mb-8">
+            <h2 class="relative mb-2 font-headline text-2xl text-white">Tidigare evenemang</h2>
+            <div class="grid grid-cols-6 gap-4">
+                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
+                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
+                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
+                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
+                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
+                <img src="/storage/YRVUlEONuIj1DnnstpVKnD7vsAXIdr5XjtVDsURz.jpg" class="h-52 grayscale">
+            </div>
+        </div>
+
+        <div class="container mx-auto mb-4">
+            <h2 class="relative mb-2 font-headline text-2xl text-white">Vad är Billio?</h2>
+
+            <div class="gap-4 md:grid md:grid-cols-3 lg:px-0">
+                <div class="col-span-2 rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
+                    <x-heroicon-o-sparkles class="h-12 text-pink" />
+                    <h3 class="pt-2 font-headline text-2xl font-medium">Anpassat för ert evenemang</h3>
+                    <p>När ni säljer biljetter med Billio får ni en egen sida för ert evenemang, med möjligheten att sälja olika
+                        biljettyper, biljettillägg, variationer (så som kostalternativ), och mycket mer.</p>
+
+                    <p>Med Billio får ni även möjligheten att skapa upp förköpslänkar som gör det möjligt att bjuda in personer
+                        att köpa biljetter före alla andra. Eller vill ni sälja förköp fysiskt och sedan importera in det i
+                        systemet? Det går också!</p>
+
+                    <p>Tillsammans med det här och flera andra funktioner gör det Billio till det moderna biljettsystemet.</p>
                 </div>
-            </div>
-        </div>
 
-        <div class="container mx-auto grid py-16 sm:grid-cols-2 sm:space-x-8" id="app-info">
-            <div class="mt-3 px-6 md:px-0 md:pl-4 lg:pl-0">
-                <x-heroicon-o-sparkles class="h-12 text-pink" />
-                <h3 class="pt-2 font-headline text-4xl">Anpassat för ert evenemang</h3>
-                <p>När ni säljer biljetter med Billio får ni en egen sida för ert evenemang, med möjligheten att sälja olika
-                    biljettyper, biljettillägg, variationer (så som kostalternativ), och mycket mer.</p>
-
-                <p>Med Billio får ni även möjligheten att skapa upp förköpslänkar som gör det möjligt att bjuda in personer
-                    att köpa biljetter före alla andra. Eller vill ni sälja förköp fysiskt och sedan importera in det i
-                    systemet? Det går också!</p>
-
-                <p>Tillsammans med det här och flera andra funktioner gör det Billio till det moderna biljettsystemet.</p>
-
-                <p class="mt-4 rounded-md bg-gray-100 p-4">
-                    <strong>Anordnar ni ert evenemang vid Linköpings Universitet?</strong><br> Nu har Billio stöd för
-                    Kårrabatter! <a href="mailto:hi@billio.app">Kontakta oss</a> för att höra mer om hur vi kan få Billio
-                    att fungera för er.
-                </p>
-            </div>
-
-            <img src="{{ URL::to('/img/eventpage.jpg') }}" class="w-full md:pr-10 lg:pr-0">
-        </div>
-
-        <div class="bg-gray-100 py-16">
-            <div class="container mx-auto space-y-4 px-4 md:grid md:grid-cols-3 md:space-y-0 md:space-x-8 lg:px-0">
-                <div class="rounded-md bg-white p-8 shadow-md">
+                <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
                     <x-heroicon-o-lightning-bolt class="h-12 text-orange" />
                     <h3 class="pt-2 font-headline text-2xl font-medium">Låga avgifter</h3>
                     <p>Med Billio betalar ni endast en låg avgift för varje biljett som säljs och inget mer. Inga dolda
@@ -132,7 +136,7 @@
                     </p>
                 </div>
 
-                <div class="rounded-md bg-white p-8 shadow-md">
+                <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
                     <x-heroicon-o-view-grid-add class="h-12 text-blue" />
                     <h3 class="pt-2 font-headline text-2xl font-medium">Flexibelt</h3>
                     <p>Vill ni sälja mer än bara biljetter? Med Billio kan ni sälja merchandise och andra tillägg för
@@ -140,30 +144,26 @@
                         kontanthantering.</p>
                 </div>
 
-                <div class="rounded-md bg-white p-8 shadow-md">
+                <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
                     <x-heroicon-o-shield-check class="h-12 text-pink" />
                     <h3 class="pt-2 font-headline text-2xl font-medium">Säkert</h3>
                     <p>All betalning hanteras av en säker tredjepart, och det garanterar att inga betaluppgifter någonsin
                         sparas hos oss. Billio driftas även på en säker server som rutinmässigt kontrolleras efter
                         säkerhetsluckor.</p>
                 </div>
+
+                <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
+                    <x-heroicon-o-emoji-happy class="h-12 text-pink" />
+                    <h3 class="pt-2 font-headline text-2xl font-medium">Smidigt hela vägen</h3>
+                    <p>Att köpa en biljett ska ta max några minuter. Med Billio är hela köpprocessen optimerad till att vara så
+                        snabb och smidig som möjligt för era gäster.</p>
+
+                    <p>Sedan när era gäster är på plats scannar dom en QR-kod för att komma in. Borta är tiden då det var långa
+                        köer för att komma in.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="container mx-auto grid py-16 sm:grid-cols-2 sm:space-x-4">
-            <img src="{{ URL::to('/img/checkout.jpg') }}" class="w-full md:pl-4 lg:pl-0">
-
-            <div class="mt-3 px-4 md:px-0 md:pr-4 lg:pl-0">
-                <x-heroicon-o-emoji-happy class="h-12 text-pink" />
-                <h3 class="pt-2 font-headline text-4xl">Smidigt hela vägen</h3>
-                <p>Att köpa en biljett ska ta max några minuter. Med Billio är hela köpprocessen optimerad till att vara så
-                    snabb och smidig som möjligt för era gäster.</p>
-
-                <p>Sedan när era gäster är på plats scannar dom en QR-kod för att komma in. Borta är tiden då det var långa
-                    köer för att komma in.</p>
-
-                <p><a href="mailto:hi@billio.app" class="btn btn-pink">Kom igång med Billio</a></p>
-            </div>
+            <p class="text-center mt-4"><a href="mailto:hi@billio.app" class="btn btn-pink">Vill du veta mer? Kontakta oss!</a></p>
         </div>
     </main>
 @endsection

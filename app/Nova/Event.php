@@ -84,6 +84,8 @@ class Event extends Resource
             Textarea::make('Excerpt')
                 ->rules('required'),
 
+            HasMany::make('Access Codes'),
+
             HasMany::make('Ticket Types'),
 
             HasMany::make('Tickets'),

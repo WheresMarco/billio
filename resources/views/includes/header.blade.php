@@ -45,15 +45,21 @@
     @livewireStyles
 </head>
 
-<body class="box-border">
+<body class="box-border bg-dark-grey">
     @if (session('error'))
-        <div class="flex h-10 items-center bg-blue text-white">
+        <div class="flex h-10 items-center bg-pink text-white">
             <p class="container mx-auto text-center">{{ session('error') }}</p>
         </div>
     @endif
 
-    <header class="flex bg-dark-grey px-4 py-2 align-middle text-white lg:px-0">
-        <div class="container mx-auto flex flex-row items-center justify-between">
+    @if (session('access_code'))
+        <div class="flex h-10 items-center bg-blue text-white">
+            <p class="container mx-auto text-center">Du har låst upp biljetterna för <strong>{{ session('access_code_event') }}</strong>.</p>
+        </div>
+    @endif
+
+    <header class="flex bg-dark-grey px-4 py-4 align-middle text-white lg:px-0">
+        <div class="container mx-auto flex flex-row items-center">
             <h1>
                 <a href="/" class="block w-28">
                     <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 257 105">
@@ -67,10 +73,15 @@
                 </a>
             </h1>
 
-            <nav>
-                <ul>
-                    <li class="btn btn-white"><a href="/help">Hjälp</a></li>
+            <nav class="ml-4">
+                <ul class="flex gap-4">
+                    <li class=""><a href="/help">Om Billio</a></li>
+                    <li class=""><a href="/help">Priser</a></li>
+                    <li class=""><a href="/help">Hjälp</a></li>
+                    <li class=""><a href="/help">Kontakta oss</a></li>
                 </ul>
             </nav>
+
+            <a href="#" class="btn btn-white justify-self-end">Mina Sidor</a>
         </div>
     </header>

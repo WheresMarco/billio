@@ -30,15 +30,14 @@
             class="loader mb-4 h-32 w-32 rounded-full border-8 border-t-8 border-gray-200 ease-linear"
         ></div>
         </div>
-        <h2 class="font-headline text-center text-2xl">Laddar...</h2>
-        <p>Om sidan inte har uppdaterats på fem minuter var god <a href="mailto:hi@billio.app">kontakta oss</a>.</p>
+        <h2 class="font-headline text-center text-6xl text-white">Laddar...</h2>
+        <p class="text-white">Om sidan inte har uppdaterats på fem minuter var god <a href="mailto:hi@billio.app">kontakta oss</a>.</p>
     </div>
 @else
-    <div>
-        <h4 class="bg-green-500 text-center">Green checkmark</h4>
-        <h2 class="font-headline text-4xl text-center mb-4">Allt klart!</h2>
+    <div class="text-white">
+        <h2 class="text-center font-headline text-4xl font-medium sm:text-6xl sm:leading-tight">Allt klart!</h2>
 
-        <p>Ni har nu {{count($tickets)}} <strong>"{{$tickets[0]->ticket_type->name}}"</strong>-@if(count($tickets) > 1)biljetter @else biljett @endif till <strong>{{$tickets[0]->event->name}}</strong>. @if(count($tickets) > 1)Dessa biljetter med tillhörande koder har även skickats till e-postadresserna som ni angav. @else Denna biljett med tillhörande kod har även skickats till e-postadressen som ni angav. @endif</p>
+        <p>Du har nu {{count($tickets)}} <strong>"{{$tickets[0]->ticket_type->name}}"</strong>-@if(count($tickets) > 1)biljetter @else biljett @endif till <strong>{{$tickets[0]->event->name}}</strong>. @if(count($tickets) > 1)Dessa biljetter med tillhörande koder har även skickats till e-postadresserna som ni angav. @else Denna biljett med tillhörande kod har även skickats till e-postadressen som ni angav. @endif</p>
 
         @if(count($tickets) > 1)<h3 class="font-headline mt-4 text-2xl">Era biljetter</h3>@endif
 
@@ -46,7 +45,7 @@
             @include('includes.ticket', $ticket)
         @endforeach
 
-        <p class="hidden">
+        <p>
             <a href="{{$calender_link->ics()}}" class="btn btn-orange ics-link" download="event.ics">Lägg till i din kalender</a>
             <a href="{{$calender_link->google()}}" class="btn btn-orange orange" target="_blank">Lägg till i din Google Kalender</a>
         </p>

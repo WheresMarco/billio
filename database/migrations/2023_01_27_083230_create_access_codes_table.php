@@ -14,21 +14,17 @@ class CreateAccessCodesTable extends Migration
     public function up()
     {
         Schema::create('access_codes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->unsignedBigInteger('event_id'); // unsigned for foreign key.
             $table->foreign('event_id') // foreign key column name.
                 ->references('id') // parent table primary key.
                 ->on('events') // parent table name.
                 ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
-            $table->unsignedBigInteger('ticket_type_id'); // unsigned for foreign key.
-            $table->foreign('ticket_type_id') // foreign key column name.
-                ->references('id') // parent table primary key.
-                ->on('ticket_types') // parent table name.
-                ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
-            $table->text('code');
+            $table->string('code');
             $table->bigInteger('limit');
             $table->dateTime('valid_from');
             $table->dateTime('valid_to');
+            $table->timestamps();
         });
     }
 

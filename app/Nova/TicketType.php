@@ -8,9 +8,11 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\HasMany;
 use Whitecube\NovaFlexibleContent\Flexible;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use NovaAttachMany\AttachMany;
+
 
 class TicketType extends Resource
 {
@@ -89,6 +91,8 @@ class TicketType extends Resource
                 ]),
 
             AttachMany::make('Modifiers'),
+
+            HasMany::make('Occurrences'),
         ];
     }
 

@@ -12,5 +12,4 @@ class Modifier extends Model
     {
         return $this->morphedByMany('App\Models\Ticket', 'ticket_modifiers');
     }
-
 }

@@ -11,6 +11,7 @@ class Transaction extends Model
         'user_id',
         'amount',
         'stripe_id',
+        'access_code',
     ];
 
     public function ticket()

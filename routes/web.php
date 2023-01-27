@@ -34,17 +34,17 @@ Route::get('/help', function () {
 
 // Event
 Route::prefix('event')->group(function () {
-    Route::get('{eventSlug}', 'EventController@single')->name('event');
+    Route::get('{eventSlug}', 'EventController@single')->name('event')->middleware('accesscode');
 
-    Route::post('{eventSlug}/{ticketType}', 'PurchaseController@addToCart');
+    Route::post('{eventSlug}/{ticketType}', 'PurchaseController@addToCart')->middleware('isactivetickettype');
 
-    Route::get('{eventSlug}/{ticketType}/info', 'PurchaseController@info');
-    Route::post('{eventSlug}/{ticketType}/info', 'PurchaseController@updateCartWithTicketInfo');
+    Route::get('{eventSlug}/{ticketType}/info', 'PurchaseController@info')->middleware('isactivetickettype');
+    Route::post('{eventSlug}/{ticketType}/info', 'PurchaseController@updateCartWithTicketInfo')->middleware('isactivetickettype');
 
-    Route::get('{eventSlug}/{ticketType}/payment', 'PurchaseController@payment');
-    Route::post('{eventSlug}/{ticketType}/payment', 'PurchaseController@createPaymentIntent');
+    Route::get('{eventSlug}/{ticketType}/payment', 'PurchaseController@payment')->middleware('isactivetickettype');
+    Route::post('{eventSlug}/{ticketType}/payment', 'PurchaseController@createPaymentIntent')->middleware('isactivetickettype');
 
-    Route::get('{eventSlug}/{ticketType}/confirmation', 'PurchaseController@confirmation');
+    Route::get('{eventSlug}/{ticketType}/confirmation', 'PurchaseController@confirmation')->middleware('isactivetickettype');
 });
 
 Nova::routes();

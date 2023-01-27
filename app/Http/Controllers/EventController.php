@@ -14,7 +14,14 @@ class EventController extends Controller
             $cart = session()->get('cart');
 
             collect($cart)->map(function ($ticket) {
-                return Ticket::find($ticket['id'])->where('status', 'hold')->delete();
+                // Get ticket by id and if status is hold, delete it
+                if ($ticket = Ticket::find($ticket->id)) {
+                    if ($ticket->status === 'hold') {
+                        $ticket->delete();
+                    }
+                }
+
+                return;
             });
 
             session()->forget('cart');
