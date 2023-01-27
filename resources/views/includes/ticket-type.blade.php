@@ -21,9 +21,9 @@
             <input type="submit" class="btn btn-blue" value='Välj biljett' />
         @else
             @if ($ticketType->soldOut)
-                <div class="btn btn-grey btn-disabled mt-1">Slutsålt</div>
+                <div class="btn btn-white btn-disabled mt-1">Slutsåld</div>
             @else
-                <div class="btn btn-grey btn-disabled mt-1">Inte tillgänglig</div>
+                <div class="btn btn-white btn-disabled mt-1">Inte tillgänglig just nu</div>
             @endif
         @endif
     </div>

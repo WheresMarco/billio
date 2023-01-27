@@ -17,7 +17,7 @@
                         <div class="mt-4">
                             @foreach ($event->getDescription() as $contentKey => $content)
                                 <a @click="activeTab = {{ $contentKey }}" class="btn bg-light-grey mr-2"
-                                    :class="{ 'btn-orange': activeTab === {{ $contentKey }} }">{{ $content->title }}</a>
+                                    :class="{ 'btn-blue': activeTab === {{ $contentKey }} }">{{ $content->title }}</a>
                             @endforeach
                         </div>
                     @endif
@@ -47,27 +47,23 @@
                 </div>
 
                 <div>
-                    <div class="rounded-md border border-gray-600 bg-light-grey p-4 text-white">
-                        <h1 class="relative pb-2 font-headline text-2xl text-white">{{ $event->name }}</h1>
-                        <h3 class="font-headline text-xl">Biljetter från XXX kr</h3>
-                    </div>
-
-                    <div class="mt-4 rounded-t-md border-t border-l border-r border-gray-600 bg-light-grey text-white">
+                    <div class="rounded-md border border-gray-600 bg-light-grey text-white">
                         <div class="p-4">
-                            <h4 class="font-headline text-xl font-medium">Datum</h4>
+                            <h1 class="relative pb-2 font-headline text-2xl text-white">{{ $event->name }}</h1>
+
+                            <h4 class="font-headline -mb-2 font-semibold">Datum</h4>
                             <p>{{ $event->date_from ? $event->date_from->format('d/m - Y') : '' }} -
                                 {{ $event->date_to ? $event->date_to->format('d/m - Y') : '' }}</p>
 
-                            <h4 class="pt-2 font-headline text-xl font-medium">Arrangör</h4>
-                            <p>{{ $event->organisation->title }}</p>
-                            <a href="#">Kontakta arrangören</a>
+                            <h4 class="pt-2 -mb-2 font-headline font-semibold">Plats</h4>
+                            <p>{{ $event->location }}</p>
 
-                            <h4 class="pt-2 font-headline text-xl font-medium">Plats</h4>
-                            <span>{{ $event->location }}</span>
+                            <h4 class="pt-2 -mb-2 font-headline font-semibold">Arrangör</h4>
+                            <p>{{ $event->organisation->title }}<br><a href="#" class="font-medium">Kontakta arrangören</a></p>
                         </div>
                     </div>
 
-                    <iframe class="map" class="rounded-b"
+                    <iframe class="rounded-md mt-4"
                         style="height: 300px; filter: grayscale(100%) invert(92%) contrast(83%);"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.6693059716295!2d139.72709271565213!3d35.66051838019914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b770913970d%3A0xccc3467fcb15b353!2zR29vZ2xl5ZCI5ZCM5Lya56S-44O75YWt5pys5pyo44Kq44OV44Kj44K5!5e0!3m2!1sja!2sjp!4v1589376190362!5m2!1sja!2sjp"
                         width="100%" height="324" frameborder="0" style="border:0;" allowfullscreen=""

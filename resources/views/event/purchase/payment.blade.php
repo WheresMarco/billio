@@ -125,7 +125,14 @@
         // Fetches a payment intent and captures the client secret
         async function initialize() {
             elements = stripe.elements({
-                clientSecret: '{{ $client_secret }}'
+                clientSecret: '{{ $client_secret }}',
+                appearance: {
+                    variables: {
+                        colorPrimary: '#4a90e2',
+                        colorBackground: '#ffffff',
+                        // See all possible variables below
+                    }
+                },
             });
 
             const paymentElement = elements.create("payment");

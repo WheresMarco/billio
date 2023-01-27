@@ -26,7 +26,7 @@
                     vardera biljett.</p>
 
                 @foreach ($cart as $key => $item)
-                    <div x-data="{ tickets{{ $key }}karmedlem: false }">
+                    <div x-data="{ tickets{{ $key }}karmedlem: false }" class="p-4 border border-dashed mb-4 rounded-md">
                         @if (count($cart) > 1)
                             <h3 class="mb-2 font-headline text-2xl">Biljett #{{ $key + 1 }}</h3>
                         @endif
@@ -160,8 +160,6 @@
                             </div>
                         @endif
                     </div>
-
-                    <hr>
                 @endforeach
 
                 <div class="mt-4 flex justify-between">
