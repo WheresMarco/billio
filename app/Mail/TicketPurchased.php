@@ -43,17 +43,18 @@ class TicketPurchased extends Mailable
     public function build()
     {
         return $this->from('hi@billio.app', 'Billio')
-                    ->subject($this->event->name.': '.$this->ticket->ticket_type()->first()->name.' ['.$this->ticket->ticket_code.']')
-                    ->with([
-                        'event' => $this->event->name,
-                        'orgName' => $this->organisation->title,
-                        'orgEmail' => $this->organisation->email,
-                        'orgAddress' => $this->organisation->address,
-                        'name' => $this->user->name,
-                        'ticketType' => $this->ticket->ticket_type()->first()->name,
-                        'ticketCode' => $this->ticket->ticket_code,
-                        'modifiers' => $this->ticket->modifiers()->get(),
-                    ])
-                    ->markdown('emails.tickets.purchased');
+            ->subject($this->event->name . ': ' . $this->ticket->ticket_type()->first()->name . ' [' . $this->ticket->ticket_code . ']')
+            ->with([
+                'event' => $this->event->name,
+                'occurrence' =>  $this->ticket->occurrence ? $this->ticket->occurrence->date_from->format('Y-m-d H:i') . ' - ' . $this->ticket->occurrence->date_to->format('Y-m-d H:i') . '(' . $this->ticket->occurrence->location . ')' : '',
+                'orgName' => $this->organisation->title,
+                'orgEmail' => $this->organisation->email,
+                'orgAddress' => $this->organisation->address,
+                'name' => $this->user->name,
+                'ticketType' => $this->ticket->ticket_type()->first()->name,
+                'ticketCode' => $this->ticket->ticket_code,
+                'modifiers' => $this->ticket->modifiers()->get(),
+            ])
+            ->markdown('emails.tickets.purchased');
     }
 }

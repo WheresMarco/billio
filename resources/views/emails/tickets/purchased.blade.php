@@ -8,7 +8,7 @@
 {{-- Body --}}
 # Här är din biljett till {{ $event }}
 
-Hej {{ $name }}! Det här brevet är din "{{ $ticketType }}"-biljett till {{ $event }}.
+Hej {{ $name }}! Det här brevet är din "{{ $ticketType }}"-biljett till {{ $event }}. @if ($occurrence !== '')Tillfället du har valt är {{ $occurrence }}@endif.
 
 **Var god och notera att innehållet i det är brevet är en giltig biljett. Håll det hemligt.**
 
