@@ -48,7 +48,7 @@ class Ticket extends Resource
      *
      * @var string
      */
-    public static $group = 'Ticket';
+    public static $group = 'Purchases';
 
     /**
      * Get the fields displayed by the resource.

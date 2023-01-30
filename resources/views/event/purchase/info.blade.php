@@ -18,7 +18,7 @@
                 <h4 class="font-headline font-semibold text-grey">Steg 1 av 2</h4>
                 <h2 class="font-headline text-3xl">Ange biljettuppgifter</h2>
 
-                <p>Du har valt {{ count($cart) }} <strong>"{{ $ticketType->name }}"</strong>-@if (count($cart) > 1)
+                <p class="mb-2">Du har valt {{ count($cart) }} <strong>"{{ $ticketType->name }}"</strong>-@if (count($cart) > 1)
                         biljetter
                     @else
                         biljett
@@ -56,6 +56,24 @@
                                 id="email" name="tickets[{{ $key }}][email]" placeholder="anna@andersson.se"
                                 value="{{ old('tickets[' . $key . '][email]') }}" required>
                         </label>
+
+                        @if ($ticketType->occurrences)
+                            <div class="mt-2">
+                                <label for="tickets[{{ $key }}][occurrence_id]">Välj tillfälle</label>
+                                <select
+                                    name="tickets[{{ $key }}][occurrence_id]"
+                                    id="tickets[{{ $key }}][occurrence_id]"
+                                    class="mt-1 w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50">
+                                    <option value="">-</option>
+
+                                    @foreach ($ticketType->occurrences as $occurrence)
+                                        <option value="{{ $occurrence->id }}" @if ($occurrence->isSoldOut) disabled @endif>
+                                            {{ $occurrence->date_from->format('Y-m-d H:i') }} - {{ $occurrence->date_to->format('Y-m-d H:i') }} ({{ $occurrence->location }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
 
                         @if ($ticketType->getCustomFields()->count() > 0)
                             <div class="mt-4">

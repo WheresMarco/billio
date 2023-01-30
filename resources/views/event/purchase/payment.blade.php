@@ -67,7 +67,7 @@
         </div>
 
         <div>
-            <section class="rounded-md border border-gray-600 bg-light-grey p-4 text-white">
+            <div class="rounded-md border border-gray-600 bg-light-grey p-4 text-white">
                 <h4 class="font-headline font-semibold text-grey">Sammanfattning</h4>
                 <h1 class="relative pb-2 font-headline text-2xl text-white">{{ $event->name }}</h1>
                 <div class="">
@@ -105,7 +105,9 @@
                         </tfoot>
                     </table>
                 </div>
-            </section>
+            </div>
+
+            <a href="/event/{{ $event->slug }}/" class="btn btn-white w-full text-center mt-4">Avbryt köp</a>
         </div>
     </main>
 @endsection

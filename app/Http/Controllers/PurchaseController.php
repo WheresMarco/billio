@@ -9,6 +9,7 @@ use App\Models\TicketType;
 use App\Models\TicketCustomField;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Occurrence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -114,7 +115,7 @@ class PurchaseController extends Controller
         $this->validate($request, [
             'event_id' => 'required|exists:events,id',
             'ticket_type_id' => 'required|exists:ticket_types,id',
-            'tickets.*' => 'array:firstName,lastName,email,modifiers,nin,custom_fields',
+            'tickets.*' => 'array:firstName,lastName,email,modifiers,nin,custom_fields,occurrence_id',
         ]);
 
         // Get the ticket type
@@ -179,6 +180,19 @@ class PurchaseController extends Controller
                     'email' => $ticket['email'],
                     'password' => bcrypt(Str::random(10)),
                 ]);
+            }
+
+            // Get occurrence by id and check that the limit hasn't been reached
+            if (isset($ticket['occurrence_id'])) {
+                $occurrence = Occurrence::find($ticket['occurrence_id']);
+
+                // Check if the limit has been reached
+                if ($occurrence->isSoldOut) {
+                    return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Detta tillfälle är tyvärr uppbokat.');
+                }
+
+                // Update ticket with occurrence id
+                $cart[$key]->occurrence_id = $occurrence->id;
             }
 
             // Loop over all modifiers and save on ticket
@@ -305,10 +319,11 @@ class PurchaseController extends Controller
             // Create a transaction
             $transaction = Transaction::create([
                 'user_id' => $ticket->user_id,
-                'ticket_id' => $ticket->id,
+                'purchase_id' => $ticket->id,
                 'amount' => $total,
                 'stripe_id' => $paymentIntent['id'],
                 'access_code' => session()->get('access_code') ?? null,
+                'purchase_type' => 'ticket',
             ]);
 
             // Check if transaction was created

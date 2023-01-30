@@ -1,31 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="z-0 bg-cover px-4 pt-16 pb-24 text-white bg-blend-darken sm:pt-40 sm:pb-40 lg:px-0"
-        style="background-image: url('{{ URL::to('/img/hero.jpg') }}');">
-        <div class="container mx-auto space-y-6">
-            <h1 class="max-w-xl font-headline text-4xl font-medium sm:text-5xl sm:leading-tight">Att sälja biljetter ska vara
-                <span class="text-pink">enkelt</span></h1>
-            <p class="max-w-xl sm:text-xl">Nästa gång du ska sälja biljetter använd Billio. Med Billio får du ett komplett
-                system från försäljning till incheckning. Ett kraftfullt och snabbt system som kan hantera evenemang av
-                alla dess storlekar. På köpet är det dessutom enkelt att använda.</p>
-
-            <p class="space-x-2"><a href="mailto:hi@billio.app" class="btn btn-pink">Kom igång med Billio</a> <a
-                    href="/#app-info" class="btn btn-white">Läs mer</a></p>
-        </div>
-    </div>
-
     <main>
-        <div class="container mx-auto px-4 pb-6 pt-6 lg:px-0" x-data="{ upcoming: true }">
+        <div class="z-0 bg-cover px-4 pt-16 pb-24 text-white bg-blend-darken sm:pt-40 sm:pb-40 lg:px-0"
+            style="background-image: url('{{ URL::to('/img/hero.jpg') }}');">
+            <div class="container mx-auto space-y-6">
+                <h1 class="max-w-xl font-headline text-4xl font-medium sm:text-5xl sm:leading-tight">Att sälja biljetter ska
+                    vara
+                    <span class="text-pink">enkelt</span>
+                </h1>
+                <p class="max-w-xl sm:text-xl">Nästa gång du ska sälja biljetter använd Billio. Med Billio får du ett
+                    komplett
+                    system från försäljning till incheckning. Ett kraftfullt och snabbt system som kan hantera evenemang av
+                    alla dess storlekar. På köpet är det dessutom enkelt att använda.</p>
+
+                <p class="space-x-2"><a href="mailto:hi@billio.app" class="btn btn-pink">Kom igång med Billio</a> <a
+                        href="/#app-info" class="btn btn-white">Läs mer</a></p>
+            </div>
+        </div>
+
+        <div class="container mx-auto lg:px-0 border-b py-8 mb-8 border-gray-600">
             <h2 class="relative mb-2 font-headline text-2xl text-white">Kommande evenemang</h2>
 
-            <div class="mx-auto flex justify-center pb-6 hidden">
-                <a @click="upcoming = true" class="btn" :class="{ 'btn-pink': upcoming }">Kommande
-                    evenemang</a><a @click="upcoming = false" class="btn ml-2" :class="{ 'btn-pink': !upcoming }">Tidigare
-                    evenemang</a>
-            </div>
-
-            <div x-show="upcoming" class="space-y-6">
+            <div class="space-y-4">
                 @foreach ($events as $event)
                     @if ($event->upcoming())
                         <div
@@ -41,7 +38,7 @@
                                 <p class="pb-4 pt-2"><a href="/event/{{ $event->slug }}"
                                         class="font-normal">{{ $event->excerpt }}</a></p>
 
-                                <div class="border-grey-100 grid grid-cols-2 border-gray-600 border-t-2 py-4">
+                                <div class="border-grey-100 grid grid-cols-2 border-t-2 border-gray-600 py-4">
                                     <div>
                                         <h4 class="font-headline font-semibold text-grey">
                                             <x-heroicon-s-clock class="relative inline-block h-4"
@@ -65,17 +62,22 @@
                 @endforeach
             </div>
 
-            <div x-show="!upcoming" class="space-y-6">
+            <h2 class="relative mb-2 mt-8 font-headline text-2xl text-white">Tidigare evenemang</h2>
+
+            <div class="grid grid-cols-3 gap-4">
                 @foreach ($events as $event)
                     @if ($event->upcoming() === false)
                         <div
-                            class="group grid grid-cols-1 rounded-md bg-white transition duration-300 ease-in-out sm:grid-cols-8">
+                            class="rounded-md border border-gray-600 bg-light-grey text-white p-4 opacity-50 hover:opacity-100 transition-all">
+                            <a href="/event/{{ $event->slug }}"
+                                class="rounded-tl-md rounded-tr-md bg-cover bg-center sm:col-span-3 sm:rounded-bl-md sm:rounded-tr-none"
+                                style="background-image: url({{ Storage::url($event->excerpt_image) }}); min-height: 230px;"></a>
                             <h1
-                                class="self-center justify-self-start pl-4 pt-4 font-headline text-3xl text-grey group-hover:text-pink sm:col-span-3 sm:pt-0 sm:pl-8">
+                                class="font-headline text-3xl">
                                 <a class="font-normal" href="/event/{{ $event->slug }}">{{ $event->name }}</a>
                             </h1>
 
-                            <div class="grid grid-cols-2 p-4 sm:col-span-5 sm:p-0 sm:py-6">
+                            <div class="grid grid-cols-2 mt-2 hidden">
                                 <div>
                                     <h4 class="font-semibold text-grey group-hover:text-black">
                                         <x-heroicon-s-clock class="relative inline-block h-4" style="margin-top: -2px;" />
@@ -99,59 +101,9 @@
             </div>
         </div>
 
+
         <div class="container mx-auto mb-4">
-            <h2 class="relative mb-2 font-headline text-2xl text-white">Vad är Billio?</h2>
-
-            <div class="gap-4 md:grid md:grid-cols-3 lg:px-0">
-                <div class="col-span-2 rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
-                    <x-heroicon-o-sparkles class="h-12 text-pink" />
-                    <h3 class="pt-2 font-headline text-2xl font-medium">Anpassat för ert evenemang</h3>
-                    <p>När ni säljer biljetter med Billio får ni en egen sida för ert evenemang, med möjligheten att sälja olika
-                        biljettyper, biljettillägg, variationer (så som kostalternativ), och mycket mer.</p>
-
-                    <p>Med Billio får ni även möjligheten att skapa upp förköpslänkar som gör det möjligt att bjuda in personer
-                        att köpa biljetter före alla andra. Eller vill ni sälja förköp fysiskt och sedan importera in det i
-                        systemet? Det går också!</p>
-
-                    <p>Tillsammans med det här och flera andra funktioner gör det Billio till det moderna biljettsystemet.</p>
-                </div>
-
-                <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
-                    <x-heroicon-o-lightning-bolt class="h-12 text-orange" />
-                    <h3 class="pt-2 font-headline text-2xl font-medium">Låga avgifter</h3>
-                    <p>Med Billio betalar ni endast en låg avgift för varje biljett som säljs och inget mer. Inga dolda
-                        kostnader! Och om era biljetter är gratis kostar inte Billio något att använda. Smidigt, eller hur?
-                    </p>
-                </div>
-
-                <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
-                    <x-heroicon-o-view-grid-add class="h-12 text-blue" />
-                    <h3 class="pt-2 font-headline text-2xl font-medium">Flexibelt</h3>
-                    <p>Vill ni sälja mer än bara biljetter? Med Billio kan ni sälja merchandise och andra tillägg för
-                        biljetten. Genom det kommer ni att ha pengarna på ert konto före evenemanget och reducera er
-                        kontanthantering.</p>
-                </div>
-
-                <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
-                    <x-heroicon-o-shield-check class="h-12 text-pink" />
-                    <h3 class="pt-2 font-headline text-2xl font-medium">Säkert</h3>
-                    <p>All betalning hanteras av en säker tredjepart, och det garanterar att inga betaluppgifter någonsin
-                        sparas hos oss. Billio driftas även på en säker server som rutinmässigt kontrolleras efter
-                        säkerhetsluckor.</p>
-                </div>
-
-                <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
-                    <x-heroicon-o-emoji-happy class="h-12 text-pink" />
-                    <h3 class="pt-2 font-headline text-2xl font-medium">Smidigt hela vägen</h3>
-                    <p>Att köpa en biljett ska ta max några minuter. Med Billio är hela köpprocessen optimerad till att vara så
-                        snabb och smidig som möjligt för era gäster.</p>
-
-                    <p>Sedan när era gäster är på plats scannar dom en QR-kod för att komma in. Borta är tiden då det var långa
-                        köer för att komma in.</p>
-                </div>
-            </div>
-
-            <p class="text-center mt-4"><a href="mailto:hi@billio.app" class="btn btn-pink">Vill du veta mer? Kontakta oss!</a></p>
+            @include('includes.bento')
         </div>
     </main>
 @endsection

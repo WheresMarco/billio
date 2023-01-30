@@ -45,12 +45,12 @@
             @include('includes.ticket', $ticket)
         @endforeach
 
-        <p>
+        <p class="hidden">
             <a href="{{$calender_link->ics()}}" class="btn btn-orange ics-link" download="event.ics">Lägg till i din kalender</a>
             <a href="{{$calender_link->google()}}" class="btn btn-orange orange" target="_blank">Lägg till i din Google Kalender</a>
         </p>
 
-        <p class="text-grey">Var god och kontakta {{$tickets[0]->event->organisation->title}} på <a href='mailto:{{$tickets[0]->event->organisation->email}}'>{{$tickets[0]->event->organisation->email}}</a> om du har några frågor om evenemanget. Vid biljettfrågor kontakta Billio på <a href="mailto:hi@billio.app">hi@billio.app</a>.</p>
+        <p class="text-grey">Var god och kontakta {{$tickets[0]->event->organisation->title}} på <a href='mailto:{{$tickets[0]->event->organisation->email}}'>{{$tickets[0]->event->organisation->email}}</a> om du har några frågor om evenemanget. Vid biljettfrågor kontakta <a href="/contact">Billio</a>.</p>
     </div>
 @endif
 

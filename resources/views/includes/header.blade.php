@@ -76,9 +76,9 @@
 
                 <nav class="ml-5">
                     <ul class="flex gap-6 mt-1.5">
-                        <li class=""><a href="/about">Om Billio</a></li>
-                        <li class=""><a href="/help">Hjälp</a></li>
-                        <li class=""><a href="/contact">Kontakta oss</a></li>
+                        <li><a class="hover:bg-slate-700 hover:transition-all inline-block hover:no-underline px-2 py-1 rounded-md" href="/about">Om Billio</a></li>
+                        <li><a class="hover:bg-slate-700 hover:transition-all inline-block hover:no-underline px-2 py-1 rounded-md" href="/help">Hjälp</a></li>
+                        <li><a class="hover:bg-slate-700 hover:transition-all inline-block hover:no-underline px-2 py-1 rounded-md" href="/contact">Kontakta oss</a></li>
                     </ul>
                 </nav>
             </div>

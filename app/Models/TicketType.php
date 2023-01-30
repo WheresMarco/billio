@@ -25,6 +25,11 @@ class TicketType extends Model
         return $this->hasMany('App\Models\Ticket');
     }
 
+    public function occurrences()
+    {
+        return $this->belongsToMany('App\Models\Occurrence', 'ticket_type_occurrences');
+    }
+
     public function modifiers()
     {
         return $this->morphToMany('App\Models\Modifier', 'modifiables');

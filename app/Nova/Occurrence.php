@@ -24,7 +24,7 @@ class Occurrence extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'date_from';
 
     /**
      * The logical group associated with the resource.
@@ -41,6 +41,16 @@ class Occurrence extends Resource
     public static $search = [
         'id',
     ];
+
+    /**
+     * Get the value that should be displayed to represent the resource.
+     *
+     * @return string
+     */
+    public function title()
+    {
+        return $this->date_from . ' - ' . $this->date_to . ' (' . $this->location . ')';
+    }
 
     /**
      * Get the fields displayed by the resource.
@@ -62,6 +72,9 @@ class Occurrence extends Resource
                 ->rules('required', 'date'),
 
             Text::make('Location'),
+
+            Number::make('Delta Price')
+                ->rules('required', 'integer'),
 
             Number::make('Ticket Limit')
                 ->rules('required', 'integer', 'min:0'),

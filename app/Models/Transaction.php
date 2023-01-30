@@ -7,16 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     protected $fillable = [
-        'ticket_id',
+        'purchase_id',
         'user_id',
         'amount',
         'stripe_id',
         'access_code',
+        'purchase_type',
     ];
 
     public function ticket()
     {
-        return $this->belongsTo('App\Models\Ticket');
+        return $this->belongsTo('App\Models\Ticket', 'purchase_id');
+    }
+
+    public function donation()
+    {
+        return $this->belongsTo('App\Models\Donation', 'purchase_id');
     }
 
     public function user()

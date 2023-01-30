@@ -1,4 +1,4 @@
-<div class="my-4 grid grid-cols-8 rounded-md border p-5 shadow-xl sm:gap-6">
+<div class="my-4 grid grid-cols-8 sm:gap-6 p-4 border border-dashed mb-4 rounded-md">
     <div class="col-span-full sm:col-span-3">
         <img src="https://qrcode.tec-it.com/API/QRCode?quietzone=3&backcolor=fff&data={{$ticket->ticket_code}}" />
     </div>
@@ -7,7 +7,7 @@
         <h3 class="font-headline text-2xl">{{$ticket->user->name}}</h3>
         <p>{{$ticket->user->email}}</p>
 
-        <hr class="my-2">
+        <hr>
 
         @if (!$ticket->modifiers->isEmpty())
             <h4 class="font-headline text-xl">Tillval</h4>

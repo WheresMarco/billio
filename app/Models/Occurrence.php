@@ -29,7 +29,12 @@ class Occurrence extends Model
         return $this->hasMany(Ticket::class);
     }
 
-    public function getTicketLimitLeftAttribute()
+    public function ticketTypes()
+    {
+        return $this->belongsToMany(TicketType::class);
+    }
+
+    public function getTicketsLeftAttribute()
     {
         return $this->ticket_limit - $this->tickets()->count();
     }

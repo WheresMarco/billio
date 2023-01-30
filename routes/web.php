@@ -18,19 +18,11 @@ Auth::routes();
 
 // Home
 Route::get('/', 'FrontpageController@index')->name('frontpage')->middleware('clearcart');
-
-// Static pages
-Route::get('/terms', function () {
-    return view('terms');
-});
-
-Route::get('/privacy-policy', function () {
-    return view('privacy');
-})->middleware('clearcart');
-
-Route::get('/help', function () {
-    return view('help');
-})->middleware('clearcart');
+Route::view('/about', 'about')->middleware('clearcart');
+Route::view('/contact', 'contact')->middleware('clearcart');
+Route::view('/terms', 'terms');
+Route::view('/privacy-policy', 'privacy')->middleware('clearcart');
+Route::view('/help', 'help')->middleware('clearcart');
 
 // Event
 Route::prefix('event')->group(function () {

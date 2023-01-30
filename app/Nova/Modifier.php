@@ -39,7 +39,7 @@ class Modifier extends Resource
      *
      * @var string
      */
-    public static $group = 'Ticket';
+    public static $group = 'Items';
 
     /**
      * Get the fields displayed by the resource.
