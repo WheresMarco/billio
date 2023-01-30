@@ -44,6 +44,11 @@ class Ticket extends Model
         return $this->belongsTo('App\Models\TicketType');
     }
 
+    public function occurrence()
+    {
+        return $this->belongsTo('App\Models\Occurrence');
+    }
+
     public function event()
     {
         return $this->belongsTo('App\Models\Event');
