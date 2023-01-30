@@ -6,12 +6,11 @@ use App\Http\Controllers\TicketController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Nova\Actions\Actionable;
-use Laravel\Scout\Searchable;
 use Illuminate\Support\Str;
 
 class Ticket extends Model
 {
-    use Actionable, Notifiable, Searchable;
+    use Actionable, Notifiable;
 
     protected $fillable = [
         'uuid',
@@ -77,15 +76,5 @@ class Ticket extends Model
     public function nin()
     {
         return $this->hasOne('App\Models\Nin');
-    }
-
-    public function toSearchableArray()
-    {
-        $array = $this->toArray();
-
-        // $array['name']  = $this->user()->first()->name;
-        // $array['email'] = $this->user()->first()->email;
-
-        return $array;
     }
 }

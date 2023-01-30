@@ -15,7 +15,6 @@
     ],
     "require": {
         "php": "*",
-        "algolia/algoliasearch-client-php": "*",
         "anaseqal/nova-import": "*",
         "blade-ui-kit/blade-heroicons": "*",
         "blade-ui-kit/blade-icons": "*",
@@ -28,7 +27,6 @@
         "laravel/framework": "*",
         "laravel/horizon": "^5.10",
         "laravel/nova": "*",
-        "laravel/scout": "*",
         "laravel/tinker": "*",
         "laravel/ui": "*",
         "livewire/livewire": "*",
