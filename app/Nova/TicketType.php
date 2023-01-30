@@ -69,6 +69,8 @@ class TicketType extends Resource
             Number::make('Price')
                 ->rules('required'),
 
+            Number::make('Sorting Order'),
+
             Boolean::make('Active'),
 
             Boolean::make('Check student'),
