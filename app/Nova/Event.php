@@ -93,11 +93,11 @@ class Event extends Resource
             HasMany::make('Tickets'),
 
             Image::make('Hero image')
-                ->rules('required'),
+                ->creationRules('required'),
             Image::make('Share image')
-                ->rules('required'),
+                ->creationRules('required'),
             Image::make('Excerpt image')
-                ->rules('required'),
+                ->creationRules('required'),
 
             AttachMany::make('Donation Types'),
         ];
