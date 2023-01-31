@@ -58,9 +58,9 @@
         </div>
     @endif
 
-    <header class="flex bg-dark-grey px-4 pb-4 pt-3 align-middle text-white lg:px-0">
-        <div class="container mx-auto flex justify-between">
-            <div class="flex flex-row items-center">
+    <header class="">
+        <div class="container mx-auto flex justify-between px-4 pb-4 pt-4 align-middle text-white lg:px-0">
+            <div class="md:flex flex-row items-center">
                 <h1>
                     <a href="/" class="block w-28">
                         <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 257 105">
@@ -74,8 +74,8 @@
                     </a>
                 </h1>
 
-                <nav class="ml-5">
-                    <ul class="flex gap-6 mt-1.5">
+                <nav class="md:ml-5">
+                    <ul class="flex gap-4 md:gap-6 mt-2 md:mt-1.5 -ml-2 md:-ml-0">
                         <li><a class="hover:bg-slate-700 hover:transition-all inline-block hover:no-underline px-2 py-1 rounded-md" href="/about">Om Billio</a></li>
                         <li><a class="hover:bg-slate-700 hover:transition-all inline-block hover:no-underline px-2 py-1 rounded-md" href="/help">Hjälp</a></li>
                         <li><a class="hover:bg-slate-700 hover:transition-all inline-block hover:no-underline px-2 py-1 rounded-md" href="/contact">Kontakta oss</a></li>
@@ -83,6 +83,6 @@
                 </nav>
             </div>
 
-            <div class="items-center mt-1.5"><a href="/my-account" class="btn btn-white">Mina Sidor</a></div>
+            <div class="items-center mt-1.5 hidden"><a href="/my-account" class="btn btn-white">Mina Sidor</a></div>
         </div>
     </header>

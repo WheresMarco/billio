@@ -95,6 +95,8 @@ class TicketType extends Resource
             AttachMany::make('Modifiers'),
 
             AttachMany::make('Occurrences'),
+
+            AttachMany::make('Donation Types'),
         ];
     }
 

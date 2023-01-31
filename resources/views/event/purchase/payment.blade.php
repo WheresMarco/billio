@@ -7,11 +7,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="container mx-auto grid grid-cols-3 gap-4 pb-6" x-data="{ termsAccepted: false }">
+    <main class="container mx-auto grid md:grid-cols-3 gap-y-4 md:gap-4 pb-6 px-4 md:px-0" x-data="{ termsAccepted: false }">
         <div class="col-span-2">
             @include('includes.countdown')
 
-            <div class="purchase-error hidden" id="payment-error"></div>
+            <div class="purchase-error rounded-md border bg-red-700 border-red-900 p-4 text-white mb-4 hidden" id="payment-error"></div>
 
             <form id="payment-form" class="rounded-md border border-gray-600 bg-light-grey p-4 text-white">
                 @csrf
@@ -204,11 +204,6 @@
 
             messageContainer.classList.remove("hidden");
             messageContainer.textContent = messageText;
-
-            setTimeout(function() {
-                messageContainer.classList.add("hidden");
-                messageText.textContent = "";
-            }, 4000);
         }
 
         // Show a spinner on payment submission

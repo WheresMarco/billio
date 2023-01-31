@@ -202,11 +202,6 @@
 
             messageContainer.classList.remove("hidden");
             messageContainer.textContent = messageText;
-
-            setTimeout(function() {
-                messageContainer.classList.add("hidden");
-                messageText.textContent = "";
-            }, 4000);
         }
 
         // Show a spinner on payment submission

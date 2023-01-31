@@ -11,6 +11,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\DateTime;
 use Whitecube\NovaFlexibleContent\Flexible;
+use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
+use NovaAttachMany\AttachMany;
 
 class Event extends Resource
 {
@@ -96,6 +98,8 @@ class Event extends Resource
                 ->rules('required'),
             Image::make('Excerpt image')
                 ->rules('required'),
+
+            AttachMany::make('Donation Types'),
         ];
     }
 

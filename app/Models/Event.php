@@ -36,8 +36,12 @@ class Event extends Model
 
     public function ticket_types()
     {
-        // Return ticket types sort by sorting order
         return $this->hasMany('App\Models\TicketType')->orderBy('sorting_order');
+    }
+
+    public function donation_types()
+    {
+        return $this->morphToMany('App\Models\DonationType', 'donatables', 'donatables', 'donatable_id', 'donation_type_id');
     }
 
     public function access_codes()

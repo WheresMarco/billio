@@ -115,7 +115,15 @@ class PurchaseController extends Controller
         $this->validate($request, [
             'event_id' => 'required|exists:events,id',
             'ticket_type_id' => 'required|exists:ticket_types,id',
-            'tickets.*' => 'array:firstName,lastName,email,modifiers,nin,custom_fields,occurrence_id',
+            'tickets.*.firstName' => 'required|string',
+            'tickets.*.lastName' => 'required|string',
+            'tickets.*.email' => 'required|email',
+            'tickets.*.modifiers' => 'array',
+            'tickets.*.modifiers.*' => 'exists:modifiers,id',
+            'tickets.*.nin' => 'nullable|digits:10',
+            'tickets.*.custom_fields' => 'array',
+            'tickets.*.custom_fields.*' => 'exists:ticket_custom_fields,id',
+            'tickets.*.occurrence_id' => 'nullable|exists:occurrences,id',
         ]);
 
         // Get the ticket type
@@ -171,6 +179,11 @@ class PurchaseController extends Controller
             // Get ticket from database. If no ticket is found, redirect to event page
             if (!$databaseTicket = Ticket::find($cart[$key]->id)) {
                 return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Din köptid har gått ut, vänligen försök igen.');
+            }
+
+            // Check if valid email
+            if (!filter_var($ticket['email'], FILTER_VALIDATE_EMAIL)) {
+                return redirect()->back()->with('error', 'E-postadressen du matade in är inte giltig.')->withInput();
             }
 
             // Get user by email. If user doesn't exist create one

@@ -7,9 +7,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="container mx-auto grid grid-cols-3 gap-4 pb-6">
+    <main class="container mx-auto grid gap-4 px-4 pb-6 md:grid-cols-3 md:px-0">
         <form action="/event/{{ $event->slug }}/{{ $ticketType->slug }}/info" method="post" class="col-span-2">
             @include('includes.countdown')
+
+            @if ($errors->any())
+                <div class="mb-4 rounded-md border border-red-900 bg-red-700 p-4 text-white">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="rounded-md border border-gray-600 bg-light-grey p-4 text-white">
                 @csrf
                 <input type="hidden" name="ticket_type_id" value="{{ $ticketType->id }}">
@@ -26,7 +37,7 @@
                     vardera biljett.</p>
 
                 @foreach ($cart as $key => $item)
-                    <div x-data="{ tickets{{ $key }}karmedlem: false }" class="p-4 border border-dashed mb-4 rounded-md">
+                    <div x-data="{ tickets{{ $key }}karmedlem: false }" class="mb-4 rounded-md border border-dashed p-4">
                         @if (count($cart) > 1)
                             <h3 class="mb-2 font-headline text-2xl">Biljett #{{ $key + 1 }}</h3>
                         @endif
@@ -60,15 +71,16 @@
                         @if ($ticketType->occurrences)
                             <div class="mt-2">
                                 <label for="tickets[{{ $key }}][occurrence_id]">Välj tillfälle</label>
-                                <select
-                                    name="tickets[{{ $key }}][occurrence_id]"
+                                <select name="tickets[{{ $key }}][occurrence_id]"
                                     id="tickets[{{ $key }}][occurrence_id]"
                                     class="mt-1 w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50">
                                     <option value="">-</option>
 
                                     @foreach ($ticketType->occurrences as $occurrence)
-                                        <option value="{{ $occurrence->id }}" @if ($occurrence->isSoldOut) disabled @endif>
-                                            {{ $occurrence->date_from->format('Y-m-d H:i') }} - {{ $occurrence->date_to->format('Y-m-d H:i') }} ({{ $occurrence->location }})
+                                        <option value="{{ $occurrence->id }}"
+                                            @if ($occurrence->isSoldOut) disabled @endif>
+                                            {{ $occurrence->date_from->format('Y-m-d H:i') }} -
+                                            {{ $occurrence->date_to->format('Y-m-d H:i') }} ({{ $occurrence->location }})
                                         </option>
                                     @endforeach
                                 </select>
@@ -76,6 +88,7 @@
                         @endif
 
                         @if ($ticketType->getCustomFields()->count() > 0)
+                            <hr>
                             <div class="mt-4">
                                 <ul class="space-y-2">
                                     @foreach ($ticketType->getCustomFields() as $field)
@@ -187,7 +200,7 @@
             </div>
         </form>
 
-        <div>
+        <div class="hidden md:block">
             <div class="rounded-md border border-gray-600 bg-light-grey p-4 text-white">
                 <h4 class="font-headline font-semibold text-grey">Om Evengemanget</h4>
                 <h1 class="relative pb-2 font-headline text-2xl text-white">{{ $event->name }}</h1>

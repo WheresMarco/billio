@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="container mx-auto lg:px-0 border-b py-8 mb-8 border-gray-600">
+        <div class="container mx-auto lg:px-0 border-b py-8 mb-8 border-gray-600 px-4 md:px-0">
             <h2 class="relative mb-2 font-headline text-2xl text-white">Kommande evenemang</h2>
 
             <div class="space-y-4">
@@ -64,7 +64,7 @@
 
             <h2 class="relative mb-2 mt-8 font-headline text-2xl text-white">Tidigare evenemang</h2>
 
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid md:grid-cols-3 gap-4">
                 @foreach ($events as $event)
                     @if ($event->upcoming() === false)
                         <div
@@ -102,7 +102,7 @@
         </div>
 
 
-        <div class="container mx-auto mb-4">
+        <div class="container mx-auto mb-4 px-4 md:px-0">
             @include('includes.bento')
         </div>
     </main>

@@ -4,8 +4,8 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="container mx-auto mb-6 rounded-md border border-gray-600 bg-light-grey p-4 text-white">
-    <h2 class="font-headline text-4xl">Allmänna villkor</h2>
+<main class="container mx-auto mb-8 mt-4 px-4 md:px-0 text-white">
+    <h2 class="font-headline text-2xl">Allmänna villkor</h2>
 
     <p>Your tickets will be delivered electronically to your email and displayed on this website within a few seconds from your purchase.</p>
 

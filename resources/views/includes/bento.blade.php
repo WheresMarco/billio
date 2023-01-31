@@ -4,7 +4,7 @@
     check-in. Med en kraftfull och snabb tjänst som kan hantera evenemang av alla storlekar.</p>
 
 <div class="gap-4 md:grid md:grid-cols-3 lg:px-0">
-    <div class="col-span-2 rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
+    <div class="col-span-2 rounded-md border border-gray-600 bg-light-grey p-4 md:p-8 text-white shadow-md mb-4 md:mb-0">
         <x-heroicon-o-sparkles class="h-12 text-orange" />
         <h3 class="pt-2 font-headline text-2xl font-medium">Anpassat för ert evenemang</h3>
         <p>När ni säljer biljetter med Billio får ni en egen sida för ert evenemang, med möjligheten att sälja olika
@@ -17,7 +17,7 @@
         <p>Tillsammans med det här och flera andra funktioner gör det Billio till det moderna biljettsystemet.</p>
     </div>
 
-    <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
+    <div class="rounded-md border border-gray-600 bg-light-grey p-4 md:p-8 text-white shadow-md mb-4 md:mb-0">
         <x-heroicon-o-lightning-bolt class="h-12 text-blue" />
         <h3 class="pt-2 font-headline text-2xl font-medium">Låga avgifter</h3>
         <p>Med Billio betalar ni endast en låg avgift för varje biljett som säljs och inget mer. Inga dolda
@@ -25,7 +25,7 @@
         </p>
     </div>
 
-    <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
+    <div class="rounded-md border border-gray-600 bg-light-grey p-4 md:p-8 text-white shadow-md mb-4 md:mb-0">
         <x-heroicon-o-view-grid-add class="h-12 text-pink" />
         <h3 class="pt-2 font-headline text-2xl font-medium">Flexibelt</h3>
         <p>Vill ni sälja mer än bara biljetter? Med Billio kan ni sälja merchandise och andra tillägg för
@@ -33,7 +33,7 @@
             kontanthantering.</p>
     </div>
 
-    <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
+    <div class="rounded-md border border-gray-600 bg-light-grey p-4 md:p-8 text-white shadow-md mb-4 md:mb-0">
         <x-heroicon-o-shield-check class="h-12 text-blue" />
         <h3 class="pt-2 font-headline text-2xl font-medium">Säkert</h3>
         <p>All betalning hanteras av en säker tredjepart, och det garanterar att inga betaluppgifter någonsin
@@ -41,7 +41,7 @@
             säkerhetsluckor.</p>
     </div>
 
-    <div class="rounded-md border border-gray-600 bg-light-grey p-8 text-white shadow-md">
+    <div class="rounded-md border border-gray-600 bg-light-grey p-4 md:p-8 text-white shadow-md mb-4 md:mb-0">
         <x-heroicon-o-emoji-happy class="h-12 text-orange" />
         <h3 class="pt-2 font-headline text-2xl font-medium">Smidigt hela vägen</h3>
         <p>Att köpa en biljett ska ta max några minuter. Med Billio är hela köpprocessen optimerad till att vara så

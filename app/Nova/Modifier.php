@@ -64,6 +64,8 @@ class Modifier extends Resource
             Number::make('Delta')
             ->rules('required'),
 
+            Number::make('Limit'),
+
             Boolean::make('Hidden'),
         ];
     }
