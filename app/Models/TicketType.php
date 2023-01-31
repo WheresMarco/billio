@@ -32,12 +32,7 @@ class TicketType extends Model
 
     public function modifiers()
     {
-        return $this->morphToMany('App\Models\Modifier', 'modifiables');
-    }
-
-    public function donation_types()
-    {
-        return $this->morphToMany('App\Models\DonationType', 'donatables', 'donatables', 'donatable_id', 'donation_type_id');
+        return $this->hasMany('App\Models\Modifier');
     }
 
     public function getModifiersAttribute()

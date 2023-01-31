@@ -7,6 +7,7 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\BelongsTo;
 
 class Modifier extends Resource
 {
@@ -50,6 +51,8 @@ class Modifier extends Resource
     public function fields(Request $request)
     {
         return [
+            BelongsTo::make('Ticket Type'),
+
             Text::make('Name')
                 ->help('The name of the modifier.')
                 ->sortable()

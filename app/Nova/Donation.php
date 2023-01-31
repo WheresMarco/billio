@@ -53,8 +53,6 @@ class Donation extends Resource
         return [
             BelongsTo::make('Event'),
 
-            BelongsTo::make('Donation Type'),
-
             BelongsTo::make('User'),
 
             Number::make('Amount')

@@ -118,11 +118,7 @@ class PurchaseController extends Controller
             'tickets.*.firstName' => 'required|string',
             'tickets.*.lastName' => 'required|string',
             'tickets.*.email' => 'required|email',
-            'tickets.*.modifiers' => 'array',
-            'tickets.*.modifiers.*' => 'exists:modifiers,id',
             'tickets.*.nin' => 'nullable|digits:10',
-            'tickets.*.custom_fields' => 'array',
-            'tickets.*.custom_fields.*' => 'exists:ticket_custom_fields,id',
             'tickets.*.occurrence_id' => 'nullable|exists:occurrences,id',
         ]);
 

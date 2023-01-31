@@ -110,9 +110,6 @@ class TicketType extends Resource
 
             AttachMany::make('Occurrences')
                 ->help('Add occurrences to the ticket type.'),
-
-            AttachMany::make('Donation Types')
-                ->help('WIP: Add donation types to the ticket type.'),
         ];
     }
 

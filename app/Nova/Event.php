@@ -104,9 +104,6 @@ class Event extends Resource
                 ->help('The excerpt image is used in the event list')
                 ->creationRules('required'),
 
-            AttachMany::make('Donation Types')
-                ->help('WIP: What donation types are available for this event?'),
-
             HasMany::make('Access Codes'),
             HasMany::make('Ticket Types'),
             HasMany::make('Tickets'),
