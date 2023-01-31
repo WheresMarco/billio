@@ -51,22 +51,30 @@ class Modifier extends Resource
     {
         return [
             Text::make('Name')
+                ->help('The name of the modifier.')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
             Text::make('Slug')
+                ->help('The slug of the modifier. This is used in the URL. It should be unique and not change.')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
             Textarea::make('Description')
+                ->help('The description of the modifier.')
                 ->rules('required'),
 
             Number::make('Delta')
-            ->rules('required'),
+                ->help('The amount to add to the base price of the item. Enter a negative number to subtract from the base price.')
+                ->rules('required'),
 
-            Number::make('Limit'),
+            Number::make('Limit')
+                ->help('The maximum number of times this modifier can be applied to an item. Enter 0 for unlimited.')
+                ->rules('required'),
 
-            Boolean::make('Hidden'),
+            Boolean::make('Hidden')
+                ->help('Whether or not this modifier is hidden from the user. Used at the moment for kårrabatt.')
+                ->rules('required'),
         ];
     }
 

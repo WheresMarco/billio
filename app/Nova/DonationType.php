@@ -52,18 +52,29 @@ class DonationType extends Resource
     {
         return [
             Text::make('Name')
+                ->help('The name of the donation type.')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
             Textarea::make('Description')
+                ->help('The description of the donation type.')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Number::make('Amount'),
+            Number::make('Amount')
+                ->help('The amount of the donation type. Enter 0 to enable the user to enter their own amount.')
+                ->sortable()
+                ->rules('required', 'max:255'),
 
-            Number::make('Sorting Order'),
+            Number::make('Sorting Order')
+                ->help('The sorting order of the donation type.')
+                ->sortable()
+                ->rules('required', 'max:255'),
 
-            BelongsTo::make('Event'),
+            BelongsTo::make('Event')
+                ->help('The event the donation type belongs to.')
+                ->sortable()
+                ->rules('required', 'max:255'),
         ];
     }
 

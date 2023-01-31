@@ -61,22 +61,32 @@ class Occurrence extends Resource
     public function fields(Request $request)
     {
         return [
-            BelongsTo::make('Event'),
+            BelongsTo::make('Event')
+                ->help('The event this occurrence belongs to.')
+                ->sortable()
+                ->rules('required', 'exists:events,id'),
 
             DateTime::make('Date From')
+                ->help('The date and time this occurrence starts.')
                 ->sortable()
                 ->rules('required', 'date'),
 
             DateTime::make('Date To')
+                ->help('The date and time this occurrence ends.')
                 ->sortable()
                 ->rules('required', 'date'),
 
-            Text::make('Location'),
+            Text::make('Location')
+                ->help('The location of this occurrence.')
+                ->sortable()
+                ->rules('required', 'max:255'),
 
             Number::make('Delta Price')
+                ->help('WIP: If you want another price for this occurrence, enter it here. Otherwise leave it empty and the main ticket type price will be used.')
                 ->rules('required', 'integer'),
 
             Number::make('Ticket Limit')
+                ->help('The maximum number of tickets that can be sold for this occurrence. Leave empty for no limit.')
                 ->rules('required', 'integer', 'min:0'),
         ];
     }

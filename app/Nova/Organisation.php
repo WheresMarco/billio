@@ -51,25 +51,31 @@ class Organisation extends Resource
     {
         return [
             Text::make('Title')
+                ->help('The name of the organisation')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
             Text::make('NiN')
+                ->help('The organisation\'s National Identification Number')
                 ->rules('required'),
 
             Text::make('Email')
+                ->help('The organisation\'s email address. Will be shown to the user.')
                 ->sortable()
                 ->rules('required', 'email', 'max:254'),
 
             Text::make('Phone')
+                ->help('The organisation\'s phone number. Will not be shown to the user.')
                 ->sortable()
                 ->rules('required', 'max:254'),
 
             Text::make('URL')
+                ->help('The organisation\'s website. Will be shown to the user.')
                 ->sortable()
                 ->rules('required', 'max:254'),
 
             Textarea::make('Address')
+                ->help('The organisation\'s address. Will be shown to the user.')
                 ->creationRules('required'),
         ];
     }

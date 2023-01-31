@@ -52,20 +52,27 @@ class AccessCode extends Resource
     {
         return [
             Text::make('Code')
+                ->help('This is the code that will be used to access the tickets. (https://billio.test/event/[EVENT_SLUG]?access_code=[CODE])')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            BelongsTo::make('Event'),
+            BelongsTo::make('Event')
+                ->help('The event that the code is valid for.')
+                ->sortable()
+                ->rules('required'),
 
             Number::make('Limit')
+                ->help('The number of tickets that can be purchased with this code.')
                 ->sortable()
                 ->rules('required', 'numeric', 'min:1'),
 
             DateTime::make('Valid From')
+                ->help('The date and time that the code will be valid from.')
                 ->sortable()
                 ->rules('required', 'date'),
 
             DateTime::make('Valid To')
+                ->help('The date and time that the code will be valid to.')
                 ->sortable()
                 ->rules('required', 'date'),
         ];

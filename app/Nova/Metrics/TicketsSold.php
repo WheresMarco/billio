@@ -16,7 +16,8 @@ class TicketsSold extends Value
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Ticket::class);
+        // Return count of tickets sold for the event
+        return $this->count($request, Ticket::class, 'id');
     }
 
     /**

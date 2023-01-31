@@ -51,6 +51,13 @@ class Ticket extends Resource
     public static $group = 'Purchases';
 
     /**
+     * The visual style used for the table. Available options are 'tight' and 'default'.
+     *
+     * @var string
+     */
+    public static $tableStyle = 'tight';
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -76,7 +83,7 @@ class Ticket extends Resource
             MorphToMany::make('Modifiers'),
 
             Text::make('Modifiers', function () {
-                if (! $this->modifiers->first()) {
+                if (!$this->modifiers->first()) {
                     return;
                 }
 
@@ -91,7 +98,7 @@ class Ticket extends Resource
             })->onlyOnIndex(),
 
             Text::make('Custom Fields', function () {
-                if (! $this->customFields->first()) {
+                if (!$this->customFields->first()) {
                     return;
                 }
 

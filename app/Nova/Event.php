@@ -56,50 +56,60 @@ class Event extends Resource
     public function fields(Request $request)
     {
         return [
-            BelongsTo::make('Organisation'),
+            BelongsTo::make('Organisation')
+                ->help('What organisation is this event for?'),
 
             Text::make('Name')
+                ->help('Name of the event')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
             Text::make('Slug')
+                ->help('The slug is used in the URL for this event. It should be unique and not change.')
                 ->rules('required', 'max:255'),
 
             DateTime::make('Date From')
+                ->help('When does the event start?')
                 ->sortable()
                 ->rules('required', 'date'),
 
             DateTime::make('Date To')
+                ->help('When does the event end?')
                 ->sortable()
                 ->rules('required', 'date'),
 
             Text::make('Location')
+            ->help('Whare is the main location for the event?')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
             Flexible::make('Content', 'description')
+                ->help('The content for the event page')
                 ->addLayout('Simple Content Section', 'wysiwyg', [
                     Text::make('Title'),
                     Markdown::make('Content')
                 ]),
 
             Textarea::make('Excerpt')
+                ->help('The excerpt is used in the event list and on social media')
                 ->rules('required'),
 
-            HasMany::make('Access Codes'),
-
-            HasMany::make('Ticket Types'),
-
-            HasMany::make('Tickets'),
-
             Image::make('Hero image')
+                ->help('The hero image is used on the event page')
                 ->creationRules('required'),
             Image::make('Share image')
+                ->help('The share image is used on social media')
                 ->creationRules('required'),
             Image::make('Excerpt image')
+                ->help('The excerpt image is used in the event list')
                 ->creationRules('required'),
 
-            AttachMany::make('Donation Types'),
+            AttachMany::make('Donation Types')
+                ->help('WIP: What donation types are available for this event?'),
+
+            HasMany::make('Access Codes'),
+            HasMany::make('Ticket Types'),
+            HasMany::make('Tickets'),
         ];
     }
 
