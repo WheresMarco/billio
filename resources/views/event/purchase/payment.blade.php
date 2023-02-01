@@ -8,8 +8,48 @@
 
 @section('content')
     <main class="container mx-auto grid md:grid-cols-3 gap-y-4 md:gap-4 pb-6 px-4 md:px-0" x-data="{ termsAccepted: false }">
-        <div class="col-span-2">
+        <div class="md:col-span-2">
             @include('includes.countdown')
+
+            <div class="rounded-md border border-gray-600 bg-light-grey p-4 mb-4 text-white md:hidden">
+                <h4 class="font-headline font-semibold text-grey">Sammanfattning</h4>
+                <h1 class="relative pb-2 font-headline text-2xl text-white">{{ $event->name }}</h1>
+                <div class="">
+                    <table class="relative overflow-x-auto w-full">
+                        <thead class="text-xs uppercase text-white">
+                            <tr>
+                                <th class="text-left">Benämning</th>
+                                <th class="text-left">Pris</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($cart as $ticket)
+                                <tr class="border-b border-gray-600">
+                                    <td class="whitespace-nowrap py-1 font-medium text-white">{{ $ticketType->name }}
+                                    </td>
+                                    <td>{{ $ticketType->price }} kr</td>
+                                </tr>
+                                @if ($ticket->modifiers->count() > 0)
+                                    @foreach ($ticket->modifiers as $modifier)
+                                        <tr class="border-b">
+                                            <td class="whitespace-nowrap px-4 py-1 font-medium text-white">*
+                                                {{ $modifier->name }}</td>
+                                            <td>{{ $modifier->delta }} kr</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        </tbody>
+
+                        <tfoot class="border-spacing-4 border-t border-gray-600">
+                            <tr>
+                                <td class="font-semibold">Totalt</td>
+                                <td class="font-semibold">{{ $total }} kr</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
 
             <div class="purchase-error rounded-md border bg-red-700 border-red-900 p-4 text-white mb-4 hidden" id="payment-error"></div>
 
@@ -41,9 +81,7 @@
                         id="email" name="email" placeholder="anna@andersson.se" required>
                 </label>
 
-                <hr>
-
-                <div id="payment-element"></div>
+                <div id="payment-element" class="bg-white p-4 mt-4 rounded-md"></div>
 
                 <div class="py-4">
                     <input id="terms"
@@ -67,7 +105,7 @@
         </div>
 
         <div>
-            <div class="rounded-md border border-gray-600 bg-light-grey p-4 text-white">
+            <div class="rounded-md border border-gray-600 bg-light-grey p-4 text-white hidden md:block">
                 <h4 class="font-headline font-semibold text-grey">Sammanfattning</h4>
                 <h1 class="relative pb-2 font-headline text-2xl text-white">{{ $event->name }}</h1>
                 <div class="">
@@ -88,7 +126,7 @@
                                 @if ($ticket->modifiers->count() > 0)
                                     @foreach ($ticket->modifiers as $modifier)
                                         <tr class="border-b">
-                                            <td class="whitespace-nowrap px-4 py-1 font-medium text-white">—
+                                            <td class="whitespace-nowrap px-4 py-1 font-medium text-white">*
                                                 {{ $modifier->name }}</td>
                                             <td>{{ $modifier->delta }} kr</td>
                                         </tr>
@@ -106,8 +144,6 @@
                     </table>
                 </div>
             </div>
-
-            <a href="/event/{{ $event->slug }}/" class="btn btn-white w-full text-center mt-4">Avbryt köp</a>
         </div>
     </main>
 @endsection

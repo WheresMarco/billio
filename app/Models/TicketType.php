@@ -32,7 +32,8 @@ class TicketType extends Model
 
     public function modifiers()
     {
-        return $this->hasMany('App\Models\Modifier');
+        // Return modifiers sorted by sorting_order
+        return $this->hasMany('App\Models\Modifier')->orderBy('sorting_order');
     }
 
     public function getModifiersAttribute()

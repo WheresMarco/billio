@@ -67,6 +67,11 @@ class Modifier extends Resource
                 ->help('The description of the modifier.')
                 ->rules('required'),
 
+            Number::make('Sorting Order')
+                ->help('The sorting order of the modifier. Used to sort modifiers in the frontend.')
+                ->default(0)
+                ->rules('required'),
+
             Number::make('Delta')
                 ->help('The amount to add to the base price of the item. Enter a negative number to subtract from the base price.')
                 ->rules('required'),

@@ -13,23 +13,20 @@
                 <div class="col-span-2">
                     <img src={{ Storage::url($event->hero_image) }} alt="" class="rounded-md">
 
-                    <div class="mt-4 rounded-md border border-gray-600 bg-light-grey text-white md:hidden">
-                        <div class="p-4">
-                            <h1 class="relative pb-2 font-headline text-2xl text-white">{{ $event->name }}</h1>
+                    <div class="rounded-md border border-gray-600 bg-light-grey p-4 mt-4 text-white md:hidden">
+                        <h1 class="relative font-headline text-2xl text-white">{{ $event->name }}</h1>
+                    </div>
 
-                            <h4 class="-mb-2 font-headline font-semibold">Datum</h4>
-                            <p>{{ $event->date_from ? $event->date_from->format('d/m - Y') : '' }} -
-                                {{ $event->date_to ? $event->date_to->format('d/m - Y') : '' }}</p>
+                    <div class="mt-4 rounded-md border border-gray-600 bg-light-grey p-4 text-white md:hidden">
+                        <h4 class="-mb-2 font-headline font-semibold">Datum</h4>
+                        <p>{{ $event->date_from ? $event->date_from->format('d/m - Y') : '' }} -
+                            {{ $event->date_to ? $event->date_to->format('d/m - Y') : '' }}</p>
 
-                            <h4 class="-mb-2 pt-2 font-headline font-semibold">Plats</h4>
-                            <p>{{ $event->location }}</p>
+                        <h4 class="-mb-2 pt-2 font-headline font-semibold">Plats</h4>
+                        <p>{{ $event->location }}</p>
 
-                            <h4 class="-mb-2 pt-2 font-headline font-semibold">Arrangör</h4>
-                            <p>{{ $event->organisation->title }}<br><a href="#" class="font-medium">Kontakta
-                                    arrangören</a></p>
-
-                            <a href="#tickets" class="btn btn-pink mt-2 w-full text-center">Köp biljetter</a>
-                        </div>
+                        <h4 class="-mb-2 pt-2 font-headline font-semibold">Arrangör</h4>
+                        <p>{{ $event->organisation->title }} ({{ $event->organisation->email }})</p>
                     </div>
 
                     @if ($event->getDescription() && $event->getDescription()->count() > 1)

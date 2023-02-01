@@ -142,11 +142,11 @@
                                                     class="cursor-pointer">
                                                     <strong>{{ $modifier->name }}</strong>
                                                     @if ($modifier->delta != 0)
-                                                        <span class="ml-2 font-bold text-grey">{{ $modifier->delta }}
-                                                            kr</span>
+                                                        <span class="font-bold text-grey">({{ $modifier->delta }}
+                                                            kr)</span>
                                                     @endif
                                                 </label>
-                                                <p>{{ $modifier->description }}</p>
+                                                {{ Illuminate\Mail\Markdown::parse($modifier->description) }}
                                             </li>
                                         @endif
                                     @endforeach
