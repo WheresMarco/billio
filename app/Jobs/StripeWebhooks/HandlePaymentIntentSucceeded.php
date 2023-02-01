@@ -9,6 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Spatie\WebhookClient\Models\WebhookCall;
+use Illuminate\Support\Facades\Mail;
 
 class HandlePaymentIntentSucceeded implements ShouldQueue
 {
@@ -26,7 +27,26 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
     {
         $payload = $this->webhookCall->payload;
         $stripe_object = $payload['data']['object'];
-        $tickets = explode(',', $stripe_object['metadata']['tickets']) ?? [];
+        $tickets = isset($stripe_object['metadata']['tickets']) ? explode(',', $stripe_object['metadata']['tickets']) ?? [] : [];
+        $donation_id = isset($stripe_object['metadata']['donation_id']) ? $stripe_object['metadata']['donation_id'] : null;
+
+        if ($donation_id) {
+            $donation = \App\Models\Donation::where('id', $donation_id)->first();
+
+            if ($donation) {
+                // Check correct status for donation - awaiting_payment.
+                if ('awaiting_payment' !== $donation->status) {
+                    Log::error('Donation not awaiting payment '.print_r($donation->id, true));
+
+                    return;
+                }
+
+                $donation->status = 'paid';
+                $donation->save();
+            }
+
+            return;
+        }
 
         foreach ($tickets as $ticket_id) {
             $ticket = Ticket::where('uuid', $ticket_id)->first();

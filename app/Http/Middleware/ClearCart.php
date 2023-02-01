@@ -20,16 +20,20 @@ class ClearCart
         if ($request->session()->has('cart')) {
             $cart = $request->session()->get('cart');
 
-            collect($cart)->map(function ($ticket) {
-                // Get ticket by id and if status is hold, delete it
-                if ($ticket = Ticket::find($ticket->id)) {
-                    if ($ticket->status === 'hold') {
-                        $ticket->delete();
+            if (isset($cart->amount)) {
+                $cart->delete();
+            } else {
+                collect($cart)->map(function ($ticket) {
+                    // Get ticket by id and if status is hold, delete it
+                    if ($ticket = Ticket::find($ticket->id)) {
+                        if ($ticket->status === 'hold') {
+                            $ticket->delete();
+                        }
                     }
-                }
 
-                return;
-            });
+                    return;
+                });
+            }
 
             session()->forget('cart');
         }

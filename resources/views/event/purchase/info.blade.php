@@ -129,7 +129,7 @@
                             <div class="mt-4">
                                 <ul class="space-y-2">
                                     @foreach ($ticketType->modifiers as $modifier)
-                                        @if (!$modifier->hidden)
+                                        @if ($modifier->modifier_type !== 'hidden')
                                             <li class="rounded-md border p-2 leading-relaxed">
                                                 <input
                                                     class="cursor-pointer rounded border-gray-300 text-pink shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50 focus:ring-offset-0"

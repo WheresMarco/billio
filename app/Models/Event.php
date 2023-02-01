@@ -34,6 +34,11 @@ class Event extends Model
         return $this->hasMany('App\Models\Ticket');
     }
 
+    public function donations()
+    {
+        return $this->hasMany('App\Models\Donation');
+    }
+
     public function ticket_types()
     {
         return $this->hasMany('App\Models\TicketType')->orderBy('sorting_order');

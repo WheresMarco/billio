@@ -10,9 +10,9 @@ use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Number;
 use Whitecube\NovaFlexibleContent\Flexible;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
-use NovaAttachMany\AttachMany;
 
 class Event extends Resource
 {
@@ -79,7 +79,7 @@ class Event extends Resource
                 ->rules('required', 'date'),
 
             Text::make('Location')
-            ->help('Whare is the main location for the event?')
+                ->help('Whare is the main location for the event?')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
@@ -88,6 +88,14 @@ class Event extends Resource
                 ->addLayout('Simple Content Section', 'wysiwyg', [
                     Text::make('Title'),
                     Markdown::make('Content')
+                ])
+                ->addLayout('Donations', 'donations', [
+                    Text::make('Title'),
+                    Markdown::make('Content'),
+                    SimpleRepeatable::make('Goals', 'goals', [
+                        Number::make('Amount'),
+                        Markdown::make('Goal'),
+                    ])
                 ]),
 
             Textarea::make('Excerpt')

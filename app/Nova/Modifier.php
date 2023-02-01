@@ -3,11 +3,11 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Select;
 
 class Modifier extends Resource
 {
@@ -67,6 +67,12 @@ class Modifier extends Resource
                 ->help('The description of the modifier.')
                 ->rules('required'),
 
+            Select::make('Modifier Type')->options([
+                'modifier' => 'Default Modifier',
+                'donation' => 'Donation',
+                'hidden' => 'Hidden',
+            ]),
+
             Number::make('Sorting Order')
                 ->help('The sorting order of the modifier. Used to sort modifiers in the frontend.')
                 ->default(0)
@@ -78,10 +84,6 @@ class Modifier extends Resource
 
             Number::make('Limit')
                 ->help('The maximum number of times this modifier can be applied to an item. Enter 0 for unlimited.')
-                ->rules('required'),
-
-            Boolean::make('Hidden')
-                ->help('Whether or not this modifier is hidden from the user. Used at the moment for kårrabatt.')
                 ->rules('required'),
         ];
     }

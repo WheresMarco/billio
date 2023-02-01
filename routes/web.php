@@ -28,6 +28,11 @@ Route::view('/help', 'help')->middleware('clearcart');
 Route::prefix('event')->group(function () {
     Route::get('{eventSlug}', 'EventController@single')->name('event')->middleware('accesscode', 'clearcart');
 
+    Route::post('{eventSlug}/donate', 'DonationController@addToCart');
+    Route::get('{eventSlug}/donate/payment', 'DonationController@payment');
+    Route::post('{eventSlug}/donate/payment', 'DonationController@createPaymentIntent');
+    Route::get('{eventSlug}/donate/confirmation', 'DonationController@confirmation');
+
     Route::post('{eventSlug}/{ticketType}', 'PurchaseController@addToCart')->middleware('isactivetickettype');
 
     Route::get('{eventSlug}/{ticketType}/info', 'PurchaseController@info')->middleware('isactivetickettype');

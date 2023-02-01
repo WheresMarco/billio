@@ -830,6 +830,12 @@ hr {
 .col-span-full {
   grid-column: 1 / -1;
 }
+.col-start-2 {
+  grid-column-start: 2;
+}
+.col-start-1 {
+  grid-column-start: 1;
+}
 .float-left {
   float: left;
 }
@@ -1005,8 +1011,14 @@ hr {
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
 .flex-row {
   flex-direction: row;
+}
+.flex-col {
+  flex-direction: column;
 }
 .items-center {
   align-items: center;
@@ -1047,6 +1059,9 @@ hr {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+.overflow-hidden {
+  overflow: hidden;
 }
 .overflow-x-auto {
   overflow-x: auto;
@@ -1108,6 +1123,10 @@ hr {
 .border-red-900 {
   --tw-border-opacity: 1;
   border-color: rgb(127 29 29 / var(--tw-border-opacity));
+}
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 .bg-light-grey {
   --tw-bg-opacity: 1;
@@ -1215,6 +1234,9 @@ hr {
 .pb-6 {
   padding-bottom: 1.5rem;
 }
+.pt-1 {
+  padding-top: 0.25rem;
+}
 .text-left {
   text-align: left;
 }
@@ -1311,6 +1333,14 @@ hr {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
+.text-green-100 {
+  --tw-text-opacity: 1;
+  color: rgb(220 252 231 / var(--tw-text-opacity));
+}
+.text-green-700 {
+  --tw-text-opacity: 1;
+  color: rgb(21 128 61 / var(--tw-text-opacity));
+}
 .no-underline {
   -webkit-text-decoration-line: none;
           text-decoration-line: none;
@@ -1329,6 +1359,11 @@ hr {
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-none {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .ring {
@@ -1524,6 +1559,10 @@ hr {
     grid-column: span 2 / span 2;
   }
 
+  .md\:col-start-2 {
+    grid-column-start: 2;
+  }
+
   .md\:mb-0 {
     margin-bottom: 0px;
   }
@@ -1578,6 +1617,10 @@ hr {
 
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .md\:gap-4 {

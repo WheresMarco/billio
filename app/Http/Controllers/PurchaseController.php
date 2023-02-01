@@ -300,8 +300,8 @@ class PurchaseController extends Controller
             ]);
         }
 
-        // If total is 0 redirect to event page. No free tickets!
-        if ($total <= 0) {
+        // If total is 10 redirect to event page. No free tickets! And nothing under Stripes minimum.
+        if ($total <= 10) {
             return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Något gick fel. Vänligen försök igen.');
         }
 
