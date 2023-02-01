@@ -60,14 +60,14 @@
 
                 <div class="grid grid-cols-2 space-x-2">
                     <label class="block">
-                        <span class="text-white">Förnamn</span>
+                        <span class="text-white">Förnamn på kvittot</span>
                         <input type="text"
                             class="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
                             id="firstName" name="firstNamen" placeholder="Anna" required>
                     </label>
 
                     <label class="block">
-                        <span class="text-white">Efternamn</span>
+                        <span class="text-white">Efternamn på kvittot</span>
                         <input type="text"
                             class="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50"
                             id="lastName" name="lastName" placeholder="Andersson" required>
