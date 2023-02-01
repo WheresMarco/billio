@@ -19,6 +19,7 @@
         "blade-ui-kit/blade-heroicons": "*",
         "blade-ui-kit/blade-icons": "*",
         "cartalyst/stripe-laravel": "*",
+        "classic-o/nova-media-library": "^1.0",
         "coconutcraig/laravel-postmark": "*",
         "dillingham/nova-attach-many": "1.3.0",
         "fideloper/proxy": "*",

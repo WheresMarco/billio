@@ -83,6 +83,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             new \Llaski\NovaScheduledJobs\NovaScheduledJobsTool,
             new NovaImport,
+            new \ClassicO\NovaMediaLibrary\NovaMediaLibrary(),
         ];
     }
 
