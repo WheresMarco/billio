@@ -2,7 +2,7 @@
     <div wire:poll.keep-alive="pollForFinishedTicket()">
         <style>
         .loader {
-            border-top-color: #4a90e2;
+            border-top-color: #d052a5;
             -webkit-animation: spinner 1.5s linear infinite;
             animation: spinner 1.5s linear infinite;
         }
@@ -27,11 +27,11 @@
         </style>
         <div class="flex items-center justify-center">
         <div
-            class="loader mb-4 h-32 w-32 rounded-full border-8 border-t-8 border-gray-200 ease-linear"
+            class="loader mb-8 h-32 w-32 rounded-full border-8 border-t-8 border-gray-200 ease-linear"
         ></div>
         </div>
-        <h2 class="font-headline text-center text-6xl text-white">Laddar...</h2>
-        <p class="text-white">Om sidan inte har uppdaterats på fem minuter var god <a href="mailto:hi@billio.app">kontakta oss</a>.</p>
+        <h2 class="font-headline text-center text-6xl text-white mb-4">Arbetar...</h2>
+        <p class="text-white text-center">Om sidan inte har uppdaterats på fem minuter var god <a href="mailto:hi@billio.app">kontakta oss</a>.</p>
     </div>
 @else
     <div class="text-white">

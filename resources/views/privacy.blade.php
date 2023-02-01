@@ -4,49 +4,76 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="container mx-auto mb-8 mt-4 px-4 text-white md:px-0">
-    <h2 class="font-headline text-2xl">Integritetspolicy</h2>
+    <main class="container mx-auto mb-8 mt-4 px-4 text-white md:px-0">
+        <h2 class="font-headline text-2xl">Integritetspolicy</h2>
 
-    <p>Last updated: 21 november 2018.</p>
+        <p class="italic">Senast uppdaterad: 1 febuari 2023.</p>
 
-    <p>Billio ("us", "we", or "our") operates https://billio.app (the "Site"). This page informs you of our policies regarding the collection, use and disclosure of Personal Information we receive from users of the Site.</p>
+        <p><a href="https://wheresmar.co" target="_blank">Marco Hyyryläinen</a> ("oss", "vi" eller "vår") driver https://billio.app ("Webbplatsen"). Denna sida informerar dig om våra
+            policyer angående insamling, användning och avslöjande av personlig information som vi får från användare av
+            webbplatsen.</p>
 
-    <p>We use your Personal Information only for providing and improving the Site. By using the Site, you agree to the collection and use of information in accordance with this policy.</p>
+        <p>Vi använder din personliga information endast för att tillhandahålla och förbättra webbplatsen. Genom att använda
+            webbplatsen samtycker du till insamling och användning av information i enlighet med denna policy.</p>
 
-    <h3 class="font-headline text-xl">Information Collection And Use</h3>
-    <p>While using our Site, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to your name ("Personal Information").</p>
+        <h3 class="font-headline text-xl">Informationsinsamling och användning</h3>
+        <p>När du använder vår webbplats kan vi be dig att förse oss med viss personligt identifierbar information som kan
+            användas för att kontakta eller identifiera dig. Personligt identifierbar information kan innefatta, men är inte
+            begränsad till ditt namn, e-postadress, och/eller personnummer ("Personlig information").</p>
 
-    <h3 class="font-headline text-xl">Log Data</h3>
-    <p>Like many site operators, we collect information that your browser sends whenever you visit our Site ("Log Data").</p>
+        <h3 class="font-headline text-xl">Logga data</h3>
+        <p>Liksom många webbplatsoperatörer samlar vi in information som din webbläsare skickar när du besöker vår webbplats
+            ("loggdata").</p>
 
-    <p>This Log Data may include information such as your computer's Internet Protocol ("IP") address, browser type, browser version, the pages of our Site that you visit, the time and date of your visit, the time spent on those pages and other statistics.</p>
+        <p>Denna loggdata kan innehålla information som din dators Internet Protocol ("IP") adress, webbläsartyp,
+            webbläsarversion, sidorna på vår webbplats som du besöker, tid och datum för ditt besök, tiden som spenderats på
+            dessa sidor och annat statistik.</p>
 
-    <p>In addition, we may use third party services such as Google Analytics that collect, monitor and analyze this.</p>
+        <p>Dessutom kan vi använda tredjepartstjänster som Google Analytics som samlar in, övervakar och analyserar detta.
+        </p>
 
-    <h3 class="font-headline text-xl">Communications</h3>
-    <p>We may use your Personal Information to contact you with more information about Billio.</p>
+        <h3 class="font-headline text-xl">Kommunikationer</h3>
+        <p>Vi kan komma att använda dina personuppgifter för att kontakta dig med mer information om Billio.</p>
 
-    <h3>Payment information</h3>
-    <p>If you choose to buy a ticket, we may collect credit card or additional payment information from you. However, it’s important to note that we do not store any of this payment information or process any of your payments on our servers, but rather use a third party payment service known as ‘Stripe.’ Therefore, any information regarding your payment processing and security must be verified in <a href="https://stripe.com/us/terms" target="_blank" rel="noopener noreferrer">Stripe’s own Terms of Service Agreement</a> and <a href="https://stripe.com/us/privacy" rel="noopener noreferrer">Privacy Policy</a>.</p>
+        <h3 class="font-headline text-xl">Betalningsinformation</h3>
+        <p>Om du väljer att köpa en biljett kan vi komma att samla in kreditkorts- eller ytterligare betalningsinformation
+            från dig. Det är dock viktigt att notera att vi inte lagrar någon av denna betalningsinformation eller bearbetar
+            någon av dina betalningar på våra servrar, utan använder en tredje parts betalningstjänst som kallas "Stripe."
+            Därför all information om din betalningshantering och säkerhet måste verifieras i <a href="https://stripe.com/us/terms" target="_blank">Stripes egna användarvillkor</a>
+            och <a href="https://stripe.com/us/privacy" target="_blank">sekretesspolicy</a>.</p>
 
-    <p>The payment processor, ‘Stripe’, may provide us with unique authentication tokens to make payments requests with. The payment processor ‘Stripe’ may also provide us with information such as your name, credit card type, expiration date, and the last four digits of your credit card number. This information is used only to make single payment requests.</p>
+        <p>Betalningsbehandlaren, "Stripe", kan förse oss med unika autentiseringstokens att göra betalningsförfrågningar
+            med. Betalningsbehandlaren "Stripe" kan också förse oss med information som ditt namn, kreditkortstyp,
+            utgångsdatum och de fyra sista siffrorna i ditt kreditkortsnummer. Denna information används endast för att göra
+            enstaka betalningsförfrågningar.</p>
 
-    <h3 class="font-headline text-xl">Cookies</h3>
-    <p>Cookies are files with small amount of data, which may include an anonymous unique identifier. Cookies are sent to your browser from a web site and stored on your computer's hard drive.</p>
+        <h3 class="font-headline text-xl">Kakor / Cookies</h3>
+        <p>Cookies är filer med små mängder data, som kan innehålla en anonym unik identifierare. Cookies skickas till din
+            webbläsare från en webbplats och lagras på din dators hårddisk.</p>
 
-    <p>Like many sites, we use "cookies" to collect information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Site.</p>
+        <p>Liksom många webbplatser använder vi "cookies" för att samla in information. Du kan instruera din webbläsare att
+            vägra alla cookies eller att indikera när en cookie skickas. Men om du inte accepterar cookies kanske du inte
+            kan använda vissa delar av vår webbplats.</p>
 
-    <h3 class="font-headline text-xl">Security</h3>
-    <p>The security of your Personal Information is important to us, but remember that no method of transmission over the Internet, or method of electronic storage, is 100% secure. While we strive to use commercially acceptable means to protect your Personal Information, we cannot guarantee its absolute security.</p>
+        <h3 class="font-headline text-xl">Säkerhet</h3>
+        <p>Säkerheten för din personliga information är viktig för oss, men kom ihåg att ingen metod för överföring över
+            Internet, eller metod för elektronisk lagring, är 100 % säker. Även om vi strävar efter att använda kommersiellt
+            acceptabla metoder för att skydda din personliga information, kan vi inte garantera dess absoluta säkerhet.</p>
 
-    <h3 class="font-headline text-xl">Changes To This Privacy Policy</h3>
-    <p>This Privacy Policy is effective as of 21 november 2018 and will remain in effect except with respect to any changes in its provisions in the future, which will be in effect immediately after being posted on this page.</p>
+        <h3 class="font-headline text-xl">Ändringar av denna integritetspolicy</h3>
+        <p>Denna integritetspolicy träder i kraft den 1 feburari 2022 och kommer att förbli i kraft förutom med avseende på
+            eventuella ändringar i dess bestämmelser i framtiden, som kommer att träda i kraft omedelbart efter att de har
+            publicerats på denna sida.</p>
 
-    <p>We reserve the right to update or change our Privacy Policy at any time and you should check this Privacy Policy periodically. Your continued use of the Service after we post any modifications to the Privacy Policy on this page will constitute your acknowledgment of the modifications and your consent to abide and be bound by the modified Privacy Policy.</p>
+        <p>Vi förbehåller oss rätten att uppdatera eller ändra vår integritetspolicy när som helst och du bör kontrollera
+            denna integritetspolicy regelbundet. Din fortsatta användning av tjänsten efter att vi publicerat några
+            ändringar av integritetspolicyn på denna sida kommer att utgöra ditt erkännande av ändringarna och ditt samtycke
+            till att följa och vara bunden av den ändrade integritetspolicyn.</p>
 
-    <p>If we make any material changes to this Privacy Policy, we will notify you either through the email address you have provided us, or by placing a prominent notice on our website.</p>
+        <p>Om vi gör några väsentliga ändringar i denna integritetspolicy kommer vi att meddela dig antingen via den
+            e-postadress du har angett till oss eller genom att placera ett framträdande meddelande på vår webbplats.</p>
 
-    <h3 class="font-headline text-xl">Contact Us</h3>
-    <p>If you have any questions about this Privacy Policy, <a href="mailto:hi@billio.app">please contact us</a>.</p>
-</main>
+        <h3 class="font-headline text-xl">Kontakta oss</h3>
+        <p>Om du har några frågor om denna integritetspolicy, vänligen <a href="/contact">kontakta oss</a>.</p>
+    </main>
 @endsection

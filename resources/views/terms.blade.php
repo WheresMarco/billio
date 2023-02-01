@@ -4,20 +4,20 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="container mx-auto mb-8 mt-4 px-4 md:px-0 text-white">
-    <h2 class="font-headline text-2xl">Allmänna villkor</h2>
+    <main class="container mx-auto mb-8 mt-4 px-4 text-white md:px-0">
+        <h2 class="font-headline text-2xl">Allmänna villkor</h2>
 
-    <p>Your tickets will be delivered electronically to your email and displayed on this website within a few seconds from your purchase.</p>
+        <p>Dina biljetter kommer att levereras elektroniskt till din e-post och visas på denna webbplats inom några sekunder
+            från ditt köp.</p>
 
-    <p>The purchase amount will be withdrawn immediately from the card supplied.</p>
+        <p>Köpesumman dras omedelbart från det medföljande kortet.</p>
 
-    <p>Your purchase from (and agreement with) the event organizer is protected
-    by applicable Swedish law, which (in conjunction with Billio's terms)
-    has the following important implications:</p>
+        <p>Ditt köp från (och avtal med) evenemangsarrangören är skyddat enligt tillämplig svensk lag, vilket (i förening
+            med Billios villkor) har följande viktiga konsekvenser:</p>
 
-    <ul class="list-disc">
-        <li class="ml-4">Once your tickets has been delivered to you, <strong>you cannot withdraw your purchase</strong>. You are free to resell or give away the ticket, however.</li>
-        <li class="ml-4">Your tickets are personal, meaning that <strong>you may have to identify yourself</strong> using valid passport, national identification card, driver's license or student identification card in order to utilize the tickets.</li>
-    </ul>
-</main>
+        <ul class="list-disc">
+            <li class="ml-4">När dina biljetter har levererats till dig <strong>kan du inte ångra ditt köp</strong>. Du är dock fri att sälja vidare eller ge bort biljetten.</li>
+            <li class="ml-4">Dina biljetter är personliga, vilket innebär att <strong>du kan behöva identifiera dig</strong> med giltigt pass, nationellt ID-kort, körkort eller studentlegitimation för att kunna använda biljetterna.</li>
+        </ul>
+    </main>
 @endsection

@@ -33,7 +33,7 @@ Var god och kontakta **{{ $orgName }}** på **{{ $orgEmail }}** om du har några
 {{-- Footer --}}
 @slot('footer')
 @component('mail::footer')
-Du får det här mailet för att du har köpt en biljett till {{ $event }} genom att använda det moderna biljettsystemet Billio. Om du har några frågor var god och kontakta {{ $orgName }} på {{ $orgEmail }}.
+Du får det här mailet för att du har köpt en biljett till {{ $event }} genom det moderna biljettsystemet Billio. Om du har några frågor var god och kontakta {{ $orgName }} på {{ $orgEmail }}.
 {{ $orgAddress }}
 @endcomponent
 @endslot

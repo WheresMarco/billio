@@ -14,8 +14,8 @@
                     system från försäljning till incheckning. Ett kraftfullt och snabbt system som kan hantera evenemang av
                     alla dess storlekar. På köpet är det dessutom enkelt att använda.</p>
 
-                <p class="space-x-2"><a href="mailto:hi@billio.app" class="btn btn-pink">Kom igång med Billio</a> <a
-                        href="/#app-info" class="btn btn-white">Läs mer</a></p>
+                <p class="space-x-2"><a href="/contact" class="btn btn-pink">Kom igång med Billio</a> <a
+                        href="/about" class="btn btn-white">Läs mer</a></p>
             </div>
         </div>
 
@@ -51,7 +51,7 @@
                                     <div>
                                         <h4 class="font-headline font-semibold text-grey">
                                             <x-heroicon-s-user-group class="relative inline-block h-4"
-                                                style="margin-top: -3px;" /> Värd
+                                                style="margin-top: -3px;" /> Arrangör
                                         </h4>
                                         <span class="text-grey">{{ $event->organisation->title }}</span>
                                     </div>
@@ -90,7 +90,7 @@
                                 <div>
                                     <h4 class="font-semibold text-grey group-hover:text-black">
                                         <x-heroicon-s-user-group class="relative inline-block h-4"
-                                            style="margin-top: -3px;" /> Värd
+                                            style="margin-top: -3px;" /> Arrangör
                                     </h4>
                                     <span class="text-grey group-hover:text-black">{{ $event->organisation->title }}</span>
                                 </div>
