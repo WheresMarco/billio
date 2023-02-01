@@ -8,7 +8,7 @@
         <h3 class="mt-2 -mb-1 font-headline text-2xl font-medium">{{ $ticketType->name }}</h3>
         <h4 class="text-base font-medium">{{ $ticketType->price }} kr</h4>
 
-        <p>{{ $ticketType->description }}</p>
+        {{ Illuminate\Mail\Markdown::parse($ticketType->description) }}
     </div>
 
     <div>
