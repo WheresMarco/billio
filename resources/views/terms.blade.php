@@ -4,7 +4,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="container mx-auto mb-8 mt-4 px-4 text-white md:px-0">
+    <main class="container mx-auto mb-8 mt-4 px-4 text-white xl:px-0">
         <h2 class="font-headline text-2xl">Allmänna villkor</h2>
 
         <p>Dina biljetter kommer att levereras elektroniskt till din e-post och visas på denna webbplats inom några sekunder

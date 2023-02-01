@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="container mx-auto grid md:grid-cols-3 gap-y-4 md:gap-4 pb-6 px-4 md:px-0" x-data="{ termsAccepted: false }">
+    <main class="container mx-auto grid md:grid-cols-3 gap-y-4 md:gap-4 pb-6 px-4 xl:px-0" x-data="{ termsAccepted: false }">
         <div class="md:col-span-2">
             @include('includes.countdown')
 

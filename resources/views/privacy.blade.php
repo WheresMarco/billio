@@ -4,7 +4,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="container mx-auto mb-8 mt-4 px-4 text-white md:px-0">
+    <main class="container mx-auto mb-8 mt-4 px-4 text-white xl:px-0">
         <h2 class="font-headline text-2xl">Integritetspolicy</h2>
 
         <p class="italic">Senast uppdaterad: 1 febuari 2023.</p>

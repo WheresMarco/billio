@@ -4,7 +4,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="container mx-auto mb-8 mt-4 px-4 text-white md:px-0">
+    <main class="container mx-auto mb-8 mt-4 px-4 text-white xl:px-0">
         <h2 class="font-headline text-2xl font-medium">Hjälp</h2>
         <p>På denna sida har vi samlat några vanliga frågor. Om detta inte hjälper dig så kan du alltid kontakta oss på <a
                 href="mailto:hi@billio.app">hi@billio.app</a>.</p>

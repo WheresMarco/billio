@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main x-data="{ activeTab: 'om-evenemanget' }" class="px-4 md:px-0">
+    <main x-data="{ activeTab: 'om-evenemanget' }" class="px-4 xl:px-0">
         <div class="container mx-auto pb-8">
             <div class="grid grid-cols-1 gap-y-4 md:grid-cols-3 md:gap-4">
                 <div class="col-span-2">
@@ -54,45 +54,67 @@
 
                     <!-- List out donation goals -->
                     @if ($donation_goals)
-                        <div class="mt-4 rounded-md border border-gray-600 bg-light-grey p-4 text-white" x-show="activeTab === 'donera'">
-                            <h2 class="relative font-headline text-2xl text-white">Donationsnivåer</h2>
-                            <p class="mb-2">Totalt insamlat: {{ $donations_amount }} kr</p>
+                        <div x-show="activeTab === 'donera'">
+                            @if ($next_donation_goal)
+                                <div class="mt-4 rounded-md border border-gray-600 bg-light-grey p-4 pb-0 text-white md:hidden">
+                                    <h4 class="mb-2 font-headline font-semibold">Donationer</h4>
 
-                            <ul>
-                                @foreach ($donation_goals as $donationGoal)
-                                    <li
-                                        class="@if ($donationGoal->amount <= $donations_amount) bg-green-600 @endif mb-2 rounded-md border border-gray-600 p-4">
-                                        <span class="text-xl">{{ $donationGoal->amount }}
-                                            kr</span><br>{{ $donationGoal->goal }}
-                                    </li>
-                                @endforeach
-                            </ul>
+                                    <div class="flex justify-between">
+                                        <p class="font-medium">0 kr</p>
+                                        <p class="font-medium">{{ $next_donation_goal->amount }} kr</p>
+                                    </div>
 
-                            <h3 class="relative mt-4 -mb-2 font-headline text-xl text-white">Donera valfritt belopp</h3>
-                            <form action="/event/{{ $event->slug }}/donate" method="post">
-                                @csrf
-                                <input type="hidden" name="event_id" value="{{ $event->id }}">
-                                <input type="number" name="amount" value="100" min="10" max="10000"
-                                    class="mr-1 w-1/4 rounded-md border-gray-300 bg-transparent shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50 sm:w-1/5">
-                                <button type="submit" class="btn btn-pink mt-4">Donera</button>
-                            </form>
+                                    <div class="h-2.5 w-full rounded-full bg-white">
+                                        <div class="h-2.5 rounded-full bg-pink"
+                                            style="width: {{ $next_donation_goal->percentage }}%"></div>
+                                    </div>
+                                    <p class="text-center text-gray-200">{{ $next_donation_goal->percentage }}% av nivå
+                                        {{ $next_donation_goal->key + 1 }} uppnådd.</p>
+                                    </p>
+                                </div>
+                            @endif
 
-                            <p class="mt-2 text-grey">Vid belopp över 10 000 kr hänvisar vi att kontakta arrangören för att
-                                hantera
-                                donationen.</p>
+                            <div class="mt-4 rounded-md border border-gray-600 bg-light-grey p-4 text-white">
+                                <h2 class="relative font-headline text-2xl text-white">Donationsnivåer</h2>
+                                <p class="mb-2">Totalt insamlat: {{ $donations_amount }} kr</p>
+
+                                <ul>
+                                    @foreach ($donation_goals as $donationGoal)
+                                        <li
+                                            class="@if ($donationGoal->amount <= $donations_amount) bg-green-600 @endif mb-2 rounded-md border border-gray-600 p-4">
+                                            <span class="text-xl">{{ $donationGoal->amount }}
+                                                kr</span><br>{{ $donationGoal->goal }}
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                                <h3 class="relative mt-4 -mb-2 font-headline text-xl text-white">Donera valfritt belopp</h3>
+                                <form action="/event/{{ $event->slug }}/donate" method="post">
+                                    @csrf
+                                    <input type="hidden" name="event_id" value="{{ $event->id }}">
+                                    <input type="number" name="amount" value="100" min="10" max="10000"
+                                        class="mr-1 w-1/4 rounded-md border-gray-300 bg-transparent shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50 sm:w-1/5">
+                                    <button type="submit" class="btn btn-pink mt-4">Donera</button>
+                                </form>
+
+                                <p class="mt-2 text-grey">Vid belopp över 10 000 kr hänvisar vi att kontakta arrangören för
+                                    att
+                                    hantera
+                                    donationen.</p>
+                            </div>
                         </div>
                     @endif
 
                     <div x-show="activeTab != 'donera'">
-                    @if (count($event->ticket_types) > 0)
-                        <h1 class="relative mt-4 -mb-2 font-headline text-2xl text-white" id="tickets">Biljetter</h1>
-                    @endif
+                        @if (count($event->ticket_types) > 0)
+                            <h1 class="relative mt-4 -mb-2 font-headline text-2xl text-white" id="tickets">Biljetter</h1>
+                        @endif
 
-                    @foreach ($event->ticket_types as $ticketType)
-                        <div class="mt-4 rounded-md border border-gray-600 bg-light-grey p-4 text-white">
-                            @include('includes.ticket-type', $ticketType)
-                        </div>
-                    @endforeach
+                        @foreach ($event->ticket_types as $ticketType)
+                            <div class="mt-4 rounded-md border border-gray-600 bg-light-grey p-4 text-white">
+                                @include('includes.ticket-type', $ticketType)
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -127,7 +149,7 @@
                                     style="width: {{ $next_donation_goal->percentage }}%"></div>
                             </div>
                             <p class="text-center text-gray-200">{{ $next_donation_goal->percentage }}% av nivå
-                                {{ $next_donation_goal->key }} uppnådd.</p>
+                                {{ $next_donation_goal->key + 1  }} uppnådd.</p>
                             <p>Detta evenemang har olika donationsnivåer. Läs mer om dessa under fliken "Donera".</p>
                         </div>
                     @endif

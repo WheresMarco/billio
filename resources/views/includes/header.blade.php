@@ -53,8 +53,8 @@
     @endif
 
     @if (session('access_code'))
-        <div class="flex h-10 items-center bg-blue text-white">
-            <p class="container mx-auto text-center">Du har låst upp biljetterna för <strong>{{ session('access_code_event') }}</strong>.</p>
+        <div class="flex items-center bg-blue text-white px-4">
+            <p class="container mx-auto md:text-center">Du har låst upp biljetterna för <strong>{{ session('access_code_event') }}</strong>.</p>
         </div>
     @endif
 

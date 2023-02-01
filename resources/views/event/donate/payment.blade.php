@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="container mx-auto grid md:grid-cols-4 gap-4 pb-6 px-4 md:px-0" x-data="{ termsAccepted: false }">
+    <main class="container mx-auto grid md:grid-cols-4 gap-4 pb-6 px-4 xl:px-0" x-data="{ termsAccepted: false }">
         <div class="md:col-span-2 md:col-start-2">
             <div class="purchase-error rounded-md border bg-red-700 border-red-900 p-4 text-white mb-4 hidden" id="payment-error"></div>
 

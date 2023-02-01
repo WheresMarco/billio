@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="container mx-auto grid gap-4 px-4 pb-6 md:grid-cols-3 md:px-0">
+    <main class="container mx-auto grid gap-4 px-4 pb-6 md:grid-cols-3 xl:px-0">
         <form action="/event/{{ $event->slug }}/{{ $ticketType->slug }}/info" method="post" class="col-span-2">
             @include('includes.countdown')
 
