@@ -8,7 +8,6 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\HasMany;
 use Whitecube\NovaFlexibleContent\Flexible;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use NovaAttachMany\AttachMany;
@@ -104,9 +103,6 @@ class TicketType extends Resource
                         Text::make('Option'),
                     ]),
                 ]),
-
-            AttachMany::make('Modifiers')
-                ->help('Add modifiers to the ticket type.'),
 
             AttachMany::make('Occurrences')
                 ->help('Add occurrences to the ticket type.'),
