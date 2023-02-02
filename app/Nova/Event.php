@@ -130,6 +130,7 @@ class Event extends Resource
             (new Metrics\TicketsSold)->onlyOnDetail(),
             (new Metrics\TicketType)->onlyOnDetail(),
             (new Metrics\TicketStatus)->onlyOnDetail(),
+            (new Metrics\TicketOccurrences)->onlyOnDetail(),
         ];
     }
 
