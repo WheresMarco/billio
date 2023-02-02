@@ -143,7 +143,7 @@
                                                     class="cursor-pointer">
                                                     <strong>{{ $modifier->name }}</strong>
                                                     @if ($modifier->delta != 0)
-                                                        <span class="font-bold text-grey">({{ $modifier->delta }}
+                                                        <span class="font-bold text-grey">({{ number_format($modifier->delta, 0, ',', ' ') }}
                                                             kr)</span>
                                                     @endif
                                                 </label>

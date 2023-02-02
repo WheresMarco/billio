@@ -57,7 +57,7 @@
                             rel="noopener noreferrer">{{ $event->organisation->title }}</a>.</span>
 
                     <input x-bind:disabled="!termsAccepted" id="submit" type="submit" class="btn btn-pink"
-                        value='Donera {{ $total }} kr' />
+                        value='Donera {{ number_format($total, 0, ',', ' ') }} kr' />
                 </div>
             </form>
         </div>
