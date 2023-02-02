@@ -43,6 +43,13 @@ class TicketType extends Model
         return $modifiers;
     }
 
+    public function getTicketsLeftAttribute()
+    {
+        $tickets_sold = ( new TicketController() )->ticketsSold($this->event_id, $this->id);
+
+        return $this->limit - $tickets_sold;
+    }
+
     public function getSoldOutAttribute()
     {
         $tickets_sold = ( new TicketController() )->ticketsSold($this->event_id, $this->id);
