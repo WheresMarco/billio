@@ -7,15 +7,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="container mx-auto grid md:grid-cols-3 gap-y-4 md:gap-4 pb-6 px-4 xl:px-0" x-data="{ termsAccepted: false }">
+    <main class="container mx-auto grid gap-y-4 px-4 pb-6 md:grid-cols-3 md:gap-4 xl:px-0" x-data="{ termsAccepted: false }">
         <div class="md:col-span-2">
             @include('includes.countdown')
 
-            <div class="rounded-md border border-gray-600 bg-light-grey p-4 mb-4 text-white md:hidden">
+            <div class="mb-4 rounded-md border border-gray-600 bg-light-grey p-4 text-white md:hidden">
                 <h4 class="font-headline font-semibold text-grey">Sammanfattning</h4>
                 <h1 class="relative pb-2 font-headline text-2xl text-white">{{ $event->name }}</h1>
                 <div class="">
-                    <table class="relative overflow-x-auto w-full">
+                    <table class="relative w-full overflow-x-auto">
                         <thead class="text-xs uppercase text-white">
                             <tr>
                                 <th class="text-left">Benämning</th>
@@ -27,14 +27,14 @@
                                 <tr class="border-b border-gray-600">
                                     <td class="whitespace-nowrap py-1 font-medium text-white">{{ $ticketType->name }}
                                     </td>
-                                    <td>{{ $ticketType->price }} kr</td>
+                                    <td>{{ number_format($ticketType->price, 0, ',', ' ') }} kr</td>
                                 </tr>
                                 @if ($ticket->modifiers->count() > 0)
                                     @foreach ($ticket->modifiers as $modifier)
                                         <tr class="border-b">
                                             <td class="whitespace-nowrap px-4 py-1 font-medium text-white">*
                                                 {{ $modifier->name }}</td>
-                                            <td>{{ $modifier->delta }} kr</td>
+                                            <td>{{ number_format($modifier->delta, 0, ',', ' ') }} kr</td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -44,14 +44,15 @@
                         <tfoot class="border-spacing-4 border-t border-gray-600">
                             <tr>
                                 <td class="font-semibold">Totalt</td>
-                                <td class="font-semibold">{{ $total }} kr</td>
+                                <td class="font-semibold">{{ number_format($total, 0, ',', ' ') }} kr</td>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
             </div>
 
-            <div class="purchase-error rounded-md border bg-red-700 border-red-900 p-4 text-white mb-4 hidden" id="payment-error"></div>
+            <div class="purchase-error mb-4 hidden rounded-md border border-red-900 bg-red-700 p-4 text-white"
+                id="payment-error"></div>
 
             <form id="payment-form" class="rounded-md border border-gray-600 bg-light-grey p-4 text-white">
                 @csrf
@@ -81,7 +82,7 @@
                         id="email" name="email" placeholder="anna@andersson.se" required>
                 </label>
 
-                <div id="payment-element" class="bg-white p-4 mt-4 rounded-md"></div>
+                <div id="payment-element" class="mt-4 rounded-md bg-white p-4"></div>
 
                 <div class="py-4">
                     <input id="terms"
@@ -99,17 +100,17 @@
                             rel="noopener noreferrer">{{ $event->organisation->title }}</a>.</span>
 
                     <input x-bind:disabled="!termsAccepted" id="submit" type="submit" class="btn btn-pink"
-                        value='Köp biljett för {{ $total }} kr' />
+                        value='Köp biljett för {{ number_format($total, 0, ',', ' ') }} kr' />
                 </div>
             </form>
         </div>
 
         <div>
-            <div class="rounded-md border border-gray-600 bg-light-grey p-4 text-white hidden md:block">
+            <div class="hidden rounded-md border border-gray-600 bg-light-grey p-4 text-white md:block">
                 <h4 class="font-headline font-semibold text-grey">Sammanfattning</h4>
                 <h1 class="relative pb-2 font-headline text-2xl text-white">{{ $event->name }}</h1>
                 <div class="">
-                    <table class="relative overflow-x-auto w-full">
+                    <table class="relative w-full overflow-x-auto">
                         <thead class="text-xs uppercase text-white">
                             <tr>
                                 <th class="text-left">Benämning</th>
@@ -121,14 +122,14 @@
                                 <tr class="border-b border-gray-600">
                                     <td class="whitespace-nowrap py-1 font-medium text-white">{{ $ticketType->name }}
                                     </td>
-                                    <td>{{ $ticketType->price }} kr</td>
+                                    <td>{{ number_format($ticketType->price, 0, ',', ' ') }} kr</td>
                                 </tr>
                                 @if ($ticket->modifiers->count() > 0)
                                     @foreach ($ticket->modifiers as $modifier)
                                         <tr class="border-b">
                                             <td class="whitespace-nowrap px-4 py-1 font-medium text-white">*
                                                 {{ $modifier->name }}</td>
-                                            <td>{{ $modifier->delta }} kr</td>
+                                            <td>{{ number_format($modifier->delta, 0, ',', ' ') }} kr</td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -138,7 +139,7 @@
                         <tfoot class="border-spacing-4 border-t border-gray-600">
                             <tr>
                                 <td class="font-semibold">Totalt</td>
-                                <td class="font-semibold">{{ $total }} kr</td>
+                                <td class="font-semibold">{{ number_format($total, 0, ',', ' ') }} kr</td>
                             </tr>
                         </tfoot>
                     </table>

@@ -88,6 +88,9 @@ class Occurrence extends Resource
             Number::make('Ticket Limit')
                 ->help('The maximum number of tickets that can be sold for this occurrence. Leave empty for no limit.')
                 ->rules('required', 'integer', 'min:0'),
+
+            Number::make('Tickets Left')
+                ->readonly(),
         ];
     }
 

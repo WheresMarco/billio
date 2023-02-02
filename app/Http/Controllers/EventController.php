@@ -14,7 +14,7 @@ class EventController extends Controller
         }
 
         // Get all the ticks for this event and then get the modifiers for each ticket where the modifier_type is 'donation'
-        $ticketModifiers = Ticket::where('event_id', $event->id)->with(['modifiers' => function ($query) {
+        $ticketModifiers = Ticket::where('event_id', $event->id)->where('status', 'unused')->orWhere('status', 'used')->with(['modifiers' => function ($query) {
             $query->where('modifier_type', 'donation');
         }])->get()->pluck('modifiers')->flatten();
 

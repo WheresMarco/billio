@@ -72,9 +72,10 @@
                             <div class="mt-2">
                                 <label for="tickets[{{ $key }}][occurrence_id]">Välj tillfälle</label>
                                 <select name="tickets[{{ $key }}][occurrence_id]"
+                                    required
                                     id="tickets[{{ $key }}][occurrence_id]"
                                     class="mt-1 w-full rounded-md border-gray-300 text-black shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50">
-                                    <option value="">-</option>
+                                    <option value="" disabled selected>-</option>
 
                                     @foreach ($ticketType->occurrences as $occurrence)
                                         <option value="{{ $occurrence->id }}"
@@ -142,7 +143,7 @@
                                                     class="cursor-pointer">
                                                     <strong>{{ $modifier->name }}</strong>
                                                     @if ($modifier->delta != 0)
-                                                        <span class="font-bold text-grey">({{ $modifier->delta }}
+                                                        <span class="font-bold text-grey">({{ number_format($modifier->delta, 0, ',', ' ') }}
                                                             kr)</span>
                                                     @endif
                                                 </label>

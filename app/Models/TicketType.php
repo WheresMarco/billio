@@ -43,11 +43,26 @@ class TicketType extends Model
         return $modifiers;
     }
 
+    public function getTicketsLeftAttribute()
+    {
+        $tickets_sold = ( new TicketController() )->ticketsSold($this->event_id, $this->id);
+
+        return $this->limit - $tickets_sold;
+    }
+
     public function getSoldOutAttribute()
     {
         $tickets_sold = ( new TicketController() )->ticketsSold($this->event_id, $this->id);
 
-        return $this->limit <= $tickets_sold;
+        // Also check if all the occurrences are sold out
+        $occurrences_sold_out = true;
+        foreach ($this->occurrences as $occurrence) {
+            if (!$occurrence->isSoldOut) {
+                $occurrences_sold_out = false;
+            }
+        }
+
+        return ($this->limit <= $tickets_sold) || $occurrences_sold_out;
     }
 
     public function getCustomFields()

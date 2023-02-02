@@ -90,6 +90,9 @@ class TicketType extends Resource
                 ->help('The limit of the ticket type.')
                 ->rules('required'),
 
+            Number::make('Tickets Left')
+                ->readonly(),
+
             Number::make('Limit per person', 'limit_person')
                 ->help('The limit per person of the ticket type.')
                 ->rules('required'),
