@@ -41,6 +41,6 @@ class Occurrence extends Model
 
     public function getIsSoldOutAttribute()
     {
-        return $this->ticket_limit_left === 0;
+        return $this->tickets_left <= 0;
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Nova\Actions\Actionable;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Text;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
@@ -70,6 +71,8 @@ class Ticket extends Resource
 
             BelongsTo::make('Event'),
 
+            BelongsTo::make('Occurrence'),
+
             BelongsTo::make('Ticket Type'),
 
             BelongsTo::make('User'),
@@ -110,7 +113,7 @@ class Ticket extends Resource
                 );
 
                 return implode(', ', $returnString);
-            })->onlyOnIndex(),
+            }),
         ];
     }
 

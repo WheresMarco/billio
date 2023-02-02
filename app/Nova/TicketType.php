@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\Textarea;
 use Whitecube\NovaFlexibleContent\Flexible;
 use OptimistDigital\NovaSimpleRepeatable\SimpleRepeatable;
 use NovaAttachMany\AttachMany;
+use AlexAzartsev\Heroicon\Heroicon;
 
 
 class TicketType extends Resource
@@ -65,6 +66,8 @@ class TicketType extends Resource
                 ->help('The slug of the ticket type. This is used in the URL.')
                 ->rules('required'),
 
+            Heroicon::make('Icon'),
+
             Textarea::make('Description')
                 ->help('The description of the ticket type.')
                 ->rules('required'),
@@ -86,6 +89,9 @@ class TicketType extends Resource
             Number::make('Limit')
                 ->help('The limit of the ticket type.')
                 ->rules('required'),
+
+            Number::make('Tickets Left')
+                ->readonly(),
 
             Number::make('Limit per person', 'limit_person')
                 ->help('The limit per person of the ticket type.')

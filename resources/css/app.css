@@ -59,6 +59,12 @@
         margin: 20px 0;
     }
 
+    .ticketTypeIcon svg {
+        height: 3rem;
+        margin-right: 0.5rem;
+        float: left;
+    }
+
     .description.small {
         max-height: 240px;
         overflow: hidden;

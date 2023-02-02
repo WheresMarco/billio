@@ -15,6 +15,7 @@
     ],
     "require": {
         "php": "*",
+        "alexazartsev/heroicon": "v1.0.3",
         "anaseqal/nova-import": "*",
         "blade-ui-kit/blade-heroicons": "*",
         "blade-ui-kit/blade-icons": "*",

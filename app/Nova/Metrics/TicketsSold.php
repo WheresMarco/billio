@@ -16,21 +16,11 @@ class TicketsSold extends Value
      */
     public function calculate(NovaRequest $request)
     {
-        // Return count of tickets sold for the event
-        return $this->count($request, Ticket::class, 'id');
-    }
+        // Get the number of tickets sold for this event by event_id
+        $ticketsSold = Ticket::where('event_id', $request->resourceId)->count();
 
-    /**
-     * Get the ranges available for the metric.
-     *
-     * @return array
-     */
-    public function ranges()
-    {
-        return [
-            7 => '7 Days',
-            30 => '30 Days',
-        ];
+        // Return the number of tickets sold
+        return $this->result($ticketsSold);
     }
 
     /**
@@ -40,7 +30,7 @@ class TicketsSold extends Value
      */
     public function cacheFor()
     {
-        // return now()->addMinutes(5);
+        return now()->addMinutes(5);
     }
 
     /**

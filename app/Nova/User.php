@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\HasMany;
 
 class User extends Resource
 {
@@ -63,6 +64,8 @@ class User extends Resource
                 ->updateRules('nullable', 'string', 'min:8'),
 
             Boolean::make('Admin'),
+
+            HasMany::make('Tickets'),
         ];
     }
 

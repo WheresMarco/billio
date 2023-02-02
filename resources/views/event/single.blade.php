@@ -26,7 +26,7 @@
                         <p>{{ $event->location }}</p>
 
                         <h4 class="-mb-2 pt-2 font-headline font-semibold">Arrangör</h4>
-                        <p>{{ $event->organisation->title }} ({{ $event->organisation->email }})</p>
+                        <p><a href="{{ $event->organisation->url }}" target="_blank">{{ $event->organisation->title }}</a> ({{ $event->organisation->email }})</p>
                     </div>
 
                     @if ($event->getDescription() && $event->getDescription()->count() > 1)
@@ -61,7 +61,7 @@
 
                                     <div class="flex justify-between">
                                         <p class="font-medium">0 kr</p>
-                                        <p class="font-medium">{{ $next_donation_goal->amount }} kr</p>
+                                        <p class="font-medium">{{ number_format($next_donation_goal->amount, 0, ',', ' ') }} kr</p>
                                     </div>
 
                                     <div class="h-2.5 w-full rounded-full bg-white">
@@ -76,13 +76,13 @@
 
                             <div class="mt-4 rounded-md border border-gray-600 bg-light-grey p-4 text-white">
                                 <h2 class="relative font-headline text-2xl text-white">Donationsnivåer</h2>
-                                <p class="mb-2">Totalt insamlat: {{ $donations_amount }} kr</p>
+                                <p class="mb-2">Totalt insamlat: {{ number_format($donations_amount, 0, ',', ' ') }} kr</p>
 
                                 <ul>
                                     @foreach ($donation_goals as $donationGoal)
                                         <li
                                             class="@if ($donationGoal->amount <= $donations_amount) bg-green-600 @endif mb-2 rounded-md border border-gray-600 p-4">
-                                            <span class="text-xl">{{ $donationGoal->amount }}
+                                            <span class="text-xl">{{ number_format($donationGoal->amount, 0, ',', ' ') }}
                                                 kr</span><br>{{ $donationGoal->goal }}
                                         </li>
                                     @endforeach
@@ -132,7 +132,7 @@
                         <p>{{ $event->location }}</p>
 
                         <h4 class="-mb-2 pt-2 font-headline font-semibold">Arrangör</h4>
-                        <p>{{ $event->organisation->title }} ({{ $event->organisation->email }})</p>
+                        <p><a href="{{ $event->organisation->url }}" target="_blank">{{ $event->organisation->title }}</a> ({{ $event->organisation->email }})</p>
                     </div>
 
                     @if ($next_donation_goal)
@@ -141,7 +141,7 @@
 
                             <div class="flex justify-between">
                                 <p class="font-medium">0 kr</p>
-                                <p class="font-medium">{{ $next_donation_goal->amount }} kr</p>
+                                <p class="font-medium">{{ number_format($next_donation_goal->amount, 0, ',', ' ') }} kr</p>
                             </div>
 
                             <div class="h-2.5 w-full rounded-full bg-white">
