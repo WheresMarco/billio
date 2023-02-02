@@ -16,7 +16,17 @@ class TicketStatus extends Partition
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Ticket::class, 'status');
+        $tickets = Ticket::where('event_id', $request->resourceId)->get()->groupBy('status');
+
+        // Create an array to hold the ticket types and their count
+        $ticketStatus = [];
+
+        // Loop through the tickets and add the ticket type and count to the array
+        foreach ($tickets as $ticket) {
+            $ticketStatus[$ticket[0]->status] = $ticket->count();
+        }
+
+        return $this->result($ticketStatus);
     }
 
     /**
@@ -26,7 +36,7 @@ class TicketStatus extends Partition
      */
     public function cacheFor()
     {
-        // return now()->addMinutes(5);
+        return now()->addMinutes(5);
     }
 
     /**

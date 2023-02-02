@@ -3,7 +3,7 @@
         @csrf
         <input type="hidden" name="ticket_type_id" value="{{ $ticketType->id }}">
 
-        <x-heroicon-o-ticket class="h-12 text-white float-left relative -top-0.5 mr-2" />
+        <div class="ticketTypeIcon">{!! $ticketType->icon !!}</div>
 
         <h3 class="mt-2 -mb-1 font-headline text-2xl font-medium">{{ $ticketType->name }}</h3>
         <h4 class="text-base font-medium">{{ $ticketType->price }} kr</h4>
