@@ -26,7 +26,7 @@
                         <p>{{ $event->location }}</p>
 
                         <h4 class="-mb-2 pt-2 font-headline font-semibold">Arrangör</h4>
-                        <p>{{ $event->organisation->title }} ({{ $event->organisation->email }})</p>
+                        <p><a href="{{ $event->organisation->url }}" target="_blank">{{ $event->organisation->title }}</a> ({{ $event->organisation->email }})</p>
                     </div>
 
                     @if ($event->getDescription() && $event->getDescription()->count() > 1)
@@ -132,7 +132,7 @@
                         <p>{{ $event->location }}</p>
 
                         <h4 class="-mb-2 pt-2 font-headline font-semibold">Arrangör</h4>
-                        <p>{{ $event->organisation->title }} ({{ $event->organisation->email }})</p>
+                        <p><a href="{{ $event->organisation->url }}" target="_blank">{{ $event->organisation->title }}</a> ({{ $event->organisation->email }})</p>
                     </div>
 
                     @if ($next_donation_goal)
