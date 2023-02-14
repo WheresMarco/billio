@@ -25,6 +25,10 @@ class TicketModifier extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
+        $query->whereHas('modifiers', function ($query) use ($value) {
+            $query->where('modifier_id', $value);
+        });
+
         return $query;
     }
 
