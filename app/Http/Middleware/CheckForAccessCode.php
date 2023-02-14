@@ -20,11 +20,20 @@ class CheckForAccessCode
             // Get the event from the slug
             $event = \App\Models\Event::where('slug', $request->route('eventSlug'))->first();
 
-            // Check if the access code is valid
-            // TODO: Check limits and dates
+            // Get the access code
             $accessCode = \App\Models\AccessCode::where('code', $request->input('access_code'))
                 ->where('event_id', $event->id)
                 ->first();
+
+            // Check if the date is valid
+            if ($accessCode && $accessCode->valid_until && $accessCode->valid_until->isPast()) {
+                $accessCode = null;
+            }
+
+            // Check if limit is reached
+            if ($accessCode && $accessCode->limit && $accessCode->transactions()->count() >= $accessCode->limit) {
+                $accessCode = null;
+            }
 
             if ($accessCode) {
                 $request->session()->put('access_code', $accessCode->code);
