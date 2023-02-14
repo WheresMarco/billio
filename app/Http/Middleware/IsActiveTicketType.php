@@ -28,16 +28,30 @@ class IsActiveTicketType
         }
 
         // Check if the ticket type is active or if you have an valid access code
-        if (!$ticketType->active && !$request->session()->has('access_code')) {
-            // Check if access code is valid for the event
-            // TODO: Check limits and dates
+        if (!$ticketType->active || $request->session()->has('access_code')) {
+            // Get the access code
             $accessCode = \App\Models\AccessCode::where('code', $request->session()->get('access_code'))
                 ->where('event_id', $event->id)
                 ->first();
 
+            // Check if the date is valid
+            if ($accessCode && $accessCode->valid_until && $accessCode->valid_until->isPast()) {
+                $accessCode = null;
+            }
+
+            // Check if limit is reached
+            if ($accessCode && $accessCode->limit && $accessCode->transactions()->count() >= $accessCode->limit) {
+                $accessCode = null;
+            }
+
             if ($accessCode) {
                 return $next($request);
             }
+
+            // Remove the access code from the session
+            $request->session()->forget('access_code');
+            $request->session()->forget('access_code_event');
+            $request->session()->forget('access_code_event_id');
 
             return redirect()->route('event', ['eventSlug' => $event->slug]);
         }
