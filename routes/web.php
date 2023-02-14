@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,12 @@ Route::prefix('event')->group(function () {
     Route::post('{eventSlug}/{ticketType}/payment', 'PurchaseController@createPaymentIntent')->middleware('isactivetickettype');
 
     Route::get('{eventSlug}/{ticketType}/confirmation', 'PurchaseController@confirmation')->middleware('isactivetickettype');
+});
+
+// QR Code
+Route::get('/code/{qrCode}', function ($qrcode) {
+    $qrcode = preg_replace('/[^A-Za-z0-9\-]/', '', $qrcode);
+    return response()->file(QrCode::size(800)->format('png')->generate($qrcode));
 });
 
 Nova::routes();

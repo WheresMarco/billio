@@ -38,6 +38,7 @@
         "personnummer/personnummer": "*",
         "revolution/laravel-google-sheets": "*",
         "sentry/sentry-laravel": "*",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/calendar-links": "*",
         "spatie/laravel-cookie-consent": "*",
         "spatie/laravel-robots-middleware": "*",
