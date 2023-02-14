@@ -201,6 +201,9 @@
 
             if (error.type === "card_error" || error.type === "validation_error") {
                 showMessage(error.message);
+
+                // Scroll to the top of the page
+                window.scrollTo(0, 0);
             } else {
                 showMessage("Ett okänt fel intraffade. Var god och försök igen.");
             }
