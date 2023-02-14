@@ -312,7 +312,7 @@ class PurchaseController extends Controller
             'payment_method_types' => [
                 'card',
             ],
-            'description' => $event->name . ' - ' . count($cart) . 'x ' . $ticketType->name,
+            'description' => $event->name . ' - ' . count($cart) . 'st ' . $ticketType->name,
             'metadata' => [
                 'tickets' => implode(',', $ticketUuids),
             ],
