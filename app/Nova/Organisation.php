@@ -77,6 +77,16 @@ class Organisation extends Resource
             Textarea::make('Address')
                 ->help('The organisation\'s address. Will be shown to the user.')
                 ->creationRules('required'),
+
+            Text::make('Stripe Public Key')
+                ->help('The organisation\'s Stripe public key.')
+                ->sortable()
+                ->rules('required', 'max:254'),
+
+            Text::make('Stripe Secret Key')
+                ->help('The organisation\'s Stripe secret key.')
+                ->sortable()
+                ->rules('required', 'max:254'),
         ];
     }
 

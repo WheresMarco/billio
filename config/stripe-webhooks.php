@@ -6,7 +6,8 @@ return [
      * Stripe will sign each webhook using a secret. You can find the used secret at the
      * webhook configuration settings: https://dashboard.stripe.com/account/webhooks.
      */
-    'signing_secret' => env('STRIPE_WEBHOOK_SECRET'),
+    'signing_secret_lb' => env('STRIPE_WEBHOOK_SECRET_LB'),
+    'signing_secret_rs' => env('STRIPE_WEBHOOK_SECRET_RS'),
 
     /*
      * You can define the job that should be run when a certain webhook hits your application

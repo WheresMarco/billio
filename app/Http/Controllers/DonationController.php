@@ -64,6 +64,20 @@ class DonationController extends Controller
             return redirect('/')->with('error', 'Något gick fel. Försök igen.');
         }
 
+        // Get the orginization for the event
+        $organisation = $event->organisation;
+
+        // Get the Stripe platform secret key
+        $secret_key = $organisation->stripe_secret_key;
+
+        // If no secret key is found redirect to event page
+        if (!$secret_key) {
+            return redirect()->route('event', ['eventSlug' => $event->slug])->with('error', 'Något gick fel. Vänligen försök igen.');
+        }
+
+        // Set the Stripe API key for this org.
+        \Stripe::setApiKey($secret_key);
+
         // Create a PaymentIntent with amount and currency
         $paymentIntent = \Stripe::paymentIntents()->create([
             'amount' => $donation->amount,
@@ -119,6 +133,7 @@ class DonationController extends Controller
         return view('event.donate.payment', [
             'total'         => $cart->amount,
             'client_secret' => $client_secret,
+            'stripe_public_key' => $event->organisation->stripe_public_key,
             'cart'          => $cart,
             'event'         => $event,
         ]);
