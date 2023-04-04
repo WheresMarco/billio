@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Nova\Actions\Actionable;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Text;
@@ -83,6 +84,8 @@ class Ticket extends Resource
             Text::make('Price')
                 ->rules('required'),
 
+            HasMany::make('Custom Fields', 'customFields', TicketCustomField::class),
+
             MorphToMany::make('Modifiers'),
 
             Text::make('Modifiers', function () {
@@ -112,8 +115,8 @@ class Ticket extends Resource
                     $this->customFields->all()
                 );
 
-                return implode(', ', $returnString);
-            }),
+                return implode('| ', $returnString);
+            })->onlyOnIndex(),
         ];
     }
 
@@ -137,6 +140,8 @@ class Ticket extends Resource
     public function filters(Request $request)
     {
         return [
+            new Filters\Event,
+            new Filters\Occurrence,
             new Filters\TicketType,
             new Filters\TicketModifier,
         ];
