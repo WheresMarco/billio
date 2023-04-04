@@ -13,8 +13,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::stripeWebhooks('/webhook/stripe');
+Route::stripeWebhooks('/stripe/{configKey}');
 Auth::routes();
 
 // Home

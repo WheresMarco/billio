@@ -8,7 +8,7 @@
 {{-- Body --}}
 # Här är din biljett till {{ $event }}
 
-Hej {{ $name }}! Det här brevet är din "{{ $ticketType }}"-biljett till {{ $event }}. @if ($occurrence !== '')Tillfället du har valt är {{ $occurrence }}@endif.
+Hej! Det här brevet är din "{{ $ticketType }}"-biljett till {{ $event }}.@if ($occurrence !== '') Tillfället du har valt är {{ $occurrence }}.@endif
 
 **Var god och notera att innehållet i det är brevet är en giltig biljett. Håll det hemligt.**
 
@@ -19,12 +19,10 @@ Hej {{ $name }}! Det här brevet är din "{{ $ticketType }}"-biljett till {{ $ev
 @endforeach
 @endif
 
-## Vid evenemanget
-
 Du kan komma in på {{ $event }} på följande sätt:
 
 - Visa QR-koden nedan tillsammans med en giltig identitetshandling.
-- Visa upp biljettkoden **{{ $ticketCode }}** tillsammans med en giltig identitetshandling.
+- Ange biljettkoden **{{ $ticketCode }}** tillsammans med en giltig identitetshandling.
 
 ![{{ $ticketCode }}](https://qrcode.tec-it.com/API/QRCode?quietzone=3&backcolor=fff&data={{ $ticketCode }} "{{ $ticketCode }}")
 

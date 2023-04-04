@@ -9,7 +9,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Spatie\WebhookClient\Models\WebhookCall;
-use Illuminate\Support\Facades\Mail;
 
 class HandlePaymentIntentSucceeded implements ShouldQueue
 {

@@ -68,7 +68,7 @@
                                 value="{{ old('tickets[' . $key . '][email]') }}" required>
                         </label>
 
-                        @if ($ticketType->occurrences)
+                        @if ($ticketType->occurrences && $ticketType->occurrences->count() > 0)
                             <div class="mt-2">
                                 <label for="tickets[{{ $key }}][occurrence_id]">Välj tillfälle</label>
                                 <select name="tickets[{{ $key }}][occurrence_id]"

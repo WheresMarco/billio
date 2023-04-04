@@ -56,6 +56,12 @@ class TicketType extends Model
 
         // Also check if all the occurrences are sold out
         $occurrences_sold_out = true;
+
+        // Does this ticket type have occurrences? If not, it's not sold out
+        if ($this->occurrences->count() == 0) {
+            $occurrences_sold_out = false;
+        }
+
         foreach ($this->occurrences as $occurrence) {
             if (!$occurrence->isSoldOut) {
                 $occurrences_sold_out = false;
