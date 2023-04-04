@@ -138,6 +138,7 @@ class Ticket extends Resource
     {
         return [
             new Filters\TicketType,
+            new Filters\Occurrence,
             new Filters\TicketModifier,
         ];
     }
