@@ -137,8 +137,9 @@ class Ticket extends Resource
     public function filters(Request $request)
     {
         return [
-            new Filters\TicketType,
+            new Filters\Event,
             new Filters\Occurrence,
+            new Filters\TicketType,
             new Filters\TicketModifier,
         ];
     }
