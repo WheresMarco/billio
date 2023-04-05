@@ -78,6 +78,10 @@ class Ticket extends Resource
 
             BelongsTo::make('User'),
 
+            Text::make('User Email', function () {
+                return $this->user->email ?? '';
+            })->onlyOnIndex(),
+
             Text::make('Status')
                 ->rules('required'),
 
