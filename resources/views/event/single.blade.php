@@ -54,7 +54,7 @@
 
                     <!-- List out donation goals -->
                     @if ($donation_goals)
-                        <div x-show="activeTab === 'donera'">
+                        <div x-show="activeTab === 'donera' || activeTab === 'deltagarbetalning'">
                             @if ($next_donation_goal)
                                 <div class="mt-4 rounded-md border border-gray-600 bg-light-grey p-4 pb-0 text-white md:hidden">
                                     <h4 class="mb-2 font-headline font-semibold">Donationer</h4>
@@ -75,18 +75,20 @@
                             @endif
 
                             <div class="mt-4 rounded-md border border-gray-600 bg-light-grey p-4 text-white">
-                                <h2 class="relative font-headline text-2xl text-white">Donationsnivåer</h2>
-                                <p class="mb-2">Totalt insamlat: {{ number_format($donations_amount, 0, ',', ' ') }} kr</p>
+                                <div x-show="activeTab != 'deltagarbetalning'">
+                                    <h2 class="relative font-headline text-2xl text-white">Donationsnivåer</h2>
+                                    <p class="mb-2">Totalt insamlat: {{ number_format($donations_amount, 0, ',', ' ') }} kr</p>
 
-                                <ul>
-                                    @foreach ($donation_goals as $donationGoal)
-                                        <li
-                                            class="@if ($donationGoal->amount <= $donations_amount) bg-green-600 @endif mb-2 rounded-md border border-gray-600 p-4">
-                                            <span class="text-xl">{{ number_format($donationGoal->amount, 0, ',', ' ') }}
-                                                kr</span><br>{{ $donationGoal->goal }}
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                    <ul>
+                                        @foreach ($donation_goals as $donationGoal)
+                                            <li
+                                                class="@if ($donationGoal->amount <= $donations_amount) bg-green-600 @endif mb-2 rounded-md border border-gray-600 p-4">
+                                                <span class="text-xl">{{ number_format($donationGoal->amount, 0, ',', ' ') }}
+                                                    kr</span><br>{{ $donationGoal->goal }}
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
 
                                 <h3 class="relative mt-4 -mb-2 font-headline text-xl text-white">Donera valfritt belopp</h3>
                                 <form action="/event/{{ $event->slug }}/donate" method="post">
@@ -105,7 +107,7 @@
                         </div>
                     @endif
 
-                    <div x-show="activeTab != 'donera'">
+                    <div x-show="activeTab != 'donera' && activeTab != 'deltagarbetalning'">
                         @if (count($event->ticket_types) > 0)
                             <h1 class="relative mt-4 -mb-2 font-headline text-2xl text-white" id="tickets">Biljetter</h1>
                         @endif
