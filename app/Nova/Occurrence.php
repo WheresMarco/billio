@@ -82,7 +82,7 @@ class Occurrence extends Resource
                 ->rules('required', 'max:255'),
 
             Number::make('Delta Price')
-                ->help('WIP: If you want another price for this occurrence, enter it here. Otherwise leave it empty and the main ticket type price will be used.')
+                ->help('If you want another price for this occurrence, enter it here. Otherwise leave it empty and the main ticket type price will be used.')
                 ->rules('required', 'integer'),
 
             Number::make('Ticket Limit')
