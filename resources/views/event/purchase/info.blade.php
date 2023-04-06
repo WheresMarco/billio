@@ -80,8 +80,8 @@
                                     @foreach ($ticketType->occurrences as $occurrence)
                                         <option value="{{ $occurrence->id }}"
                                             @if ($occurrence->isSoldOut) disabled @endif>
-                                            {{ $occurrence->date_from->format('Y-m-d H:i') }} -
-                                            {{ $occurrence->date_to->format('Y-m-d H:i') }} ({{ $occurrence->location }})
+                                            {{ $occurrence->date_from->format('Y-m-d H:i') }} till
+                                            {{ $occurrence->date_to->format('Y-m-d H:i') }} ({{ $occurrence->location }}) @if ($occurrence->delta_price != 0)({{ $occurrence->delta_price }} kr)@endif
                                         </option>
                                     @endforeach
                                 </select>

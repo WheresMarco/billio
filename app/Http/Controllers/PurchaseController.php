@@ -291,6 +291,12 @@ class PurchaseController extends Controller
             $total = $total + $ticketType->price + $modifiersPrice;
             $ticket_total = $ticketType->price + $modifiersPrice;
 
+            // Do the same but with occurrence delta_price
+            if (isset($ticket->occurrence)) {
+                $total = $total + $ticket->occurrence->delta_price;
+                $ticket_total = $ticket_total + $ticket->occurrence->delta_price;
+            }
+
             // Add ticket uuid to array
             $ticketUuids[] = $ticket->uuid;
 

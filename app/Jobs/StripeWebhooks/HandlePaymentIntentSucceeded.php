@@ -40,6 +40,23 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
                     return;
                 }
 
+                // Get the email from the metadata.
+                $email = $stripe_object['receipt_email'];
+
+                // Get the user from the email.
+                $user = \App\Models\User::where('email', $email)->first();
+
+                // If the user doesn't exist, create it.
+                if (!$user) {
+                    $user = \App\Models\User::create([
+                        'name' => $email,
+                        'email' => $email,
+                        'password' => \Illuminate\Support\Str::random(32),
+                    ]);
+                }
+
+                // Update the donation with the user_id.
+                $donation->user_id = $user->id;
                 $donation->status = 'paid';
                 $donation->save();
             }

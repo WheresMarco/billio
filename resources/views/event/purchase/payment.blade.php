@@ -133,6 +133,13 @@
                                         </tr>
                                     @endforeach
                                 @endif
+                                @if ($ticket->occurrence_id)
+                                    <tr class="border-b">
+                                        <td class="whitespace-nowrap px-4 py-1 font-medium text-white">
+                                            {{ $ticket->occurrence->date_from }} till<br> {{ $ticket->occurrence->date_to }}</td>
+                                        <td>{{ number_format($ticket->occurrence->delta_price, 0, ',', ' ') }} kr</td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
 
