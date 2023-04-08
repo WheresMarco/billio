@@ -24,6 +24,9 @@ Route::view('/terms', 'terms');
 Route::view('/privacy-policy', 'privacy')->middleware('clearcart');
 Route::view('/help', 'help')->middleware('clearcart');
 
+// Check in
+Route::get('/checkin', 'CheckInController@index')->name('checkin');
+
 // Event
 Route::prefix('event')->group(function () {
     Route::get('{eventSlug}', 'EventController@single')->name('event')->middleware('accesscode', 'clearcart');

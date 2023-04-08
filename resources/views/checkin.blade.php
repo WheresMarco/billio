@@ -1,0 +1,10 @@
+@section('title', 'Om oss | Billio')
+@section('og-title', 'Om oss | Billio')
+
+@extends('layouts.app')
+
+@section('content')
+<main class="container mx-auto mb-4 mt-4 px-4 xl:px-0 text-white">
+    <livewire:check-in />
+</main>
+@endsection
