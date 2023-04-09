@@ -4,7 +4,7 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="container mx-auto mb-4 mt-4 px-4 xl:px-0 text-white">
+<main class="container mx-auto text-white">
     <livewire:check-in />
 </main>
 @endsection

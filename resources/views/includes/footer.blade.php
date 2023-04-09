@@ -1,4 +1,4 @@
-    <section class="bg-dark-grey text-grey">
+    <section class="bg-dark-grey text-grey" id="footer">
         <div class="container mx-auto justify-between border-t border-gray-600 py-4 px-4 md:flex xl:px-0">
             <div class="flex space-x-8">
                 <a href="/privacy-policy">Integritetspolicy</a>

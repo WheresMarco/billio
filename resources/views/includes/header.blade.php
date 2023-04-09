@@ -58,7 +58,7 @@
         </div>
     @endif
 
-    <header class="">
+    <header id="header">
         <div class="container mx-auto flex justify-between px-4 pb-4 pt-4 align-middle text-white lg:px-0">
             <div class="md:flex flex-row items-center">
                 <h1>
