@@ -34,6 +34,7 @@
         "livewire/livewire": "*",
         "llaski/nova-scheduled-jobs": "*",
         "maatwebsite/laravel-nova-excel": "*",
+        "olssonm/l5-very-basic-auth": "^6.9",
         "outl1ne/nova-simple-repeatable": "1.4.3",
         "personnummer/personnummer": "*",
         "revolution/laravel-google-sheets": "*",
