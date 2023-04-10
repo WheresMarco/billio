@@ -1,5 +1,5 @@
-@section('title', 'Om oss | Billio')
-@section('og-title', 'Om oss | Billio')
+@section('title', 'Check in | Billio')
+@section('og-title', 'Check in | Billio')
 
 @extends('layouts.app')
 
