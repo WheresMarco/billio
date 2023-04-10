@@ -25,7 +25,11 @@ Route::view('/privacy-policy', 'privacy')->middleware('clearcart');
 Route::view('/help', 'help')->middleware('clearcart');
 
 // Check in
-Route::get('/checkin', 'CheckInController@index')->name('checkin');
+Route::get('/checkin', [
+    'as' => 'checkin',
+    'uses' => 'CheckInController@index',
+    'middleware' => 'auth.very_basic:lb50,sollos'
+]);
 
 // Event
 Route::prefix('event')->group(function () {
