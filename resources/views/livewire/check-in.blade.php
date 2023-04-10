@@ -27,7 +27,7 @@
             <div>
                 <strong>{{ $ticket->user->name }}</strong><br>
                 {{ $ticket->ticket_type->name }} ({{ $ticket->ticket_code }}) <br>
-                <span class="text-sm">{{ $ticket->occurrence->date_from->format('Y-m-d H:i') }} till {{ $ticket->occurrence->date_to->format('Y-m-d H:i') }}</span>
+                @if ($ticket->occurrence)<span class="text-sm">{{ $ticket->occurrence->date_from->format('Y-m-d H:i') }} till {{ $ticket->occurrence->date_to->format('Y-m-d H:i') }}</span>@endif
                 <div class="text-sm">
                     {{ $ticket->user->email }} <br>
                     @if ($ticket->modifiers)
