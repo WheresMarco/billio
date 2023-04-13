@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Jobs\RemoveTicketsAwaitingPayment;
+use App\Jobs\RemoveDonationsAwaitingPayment;
 use App\Jobs\RemoveTicketsOnHold;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->job(new RemoveTicketsOnHold)->everyFiveMinutes();
         $schedule->job(new RemoveTicketsAwaitingPayment)->everyFiveMinutes();
+        $schedule->job(new RemoveDonationsAwaitingPayment)->everyFiveMinutes();
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 
