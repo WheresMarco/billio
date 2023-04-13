@@ -70,7 +70,7 @@
             </div>
         @endforelse
 
-        <div class="text-white px-2">
+        <div class="px-2">
             {{ $tickets->links() }}
         </div>
     </div>
