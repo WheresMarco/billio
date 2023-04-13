@@ -33,6 +33,7 @@ class CheckIn extends Component
         return view(
             'livewire.check-in',
             [
+                'currentEvent' => $this->event,
                 'events' => Event::all(),
                 'tickets' => $tickets,
             ]
