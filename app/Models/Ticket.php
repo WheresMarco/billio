@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Nova\Actions\Actionable;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 
 class Ticket extends Model
 {
-    use Actionable, Notifiable;
+    use Actionable, Notifiable, Searchable;
 
     protected $fillable = [
         'uuid',
@@ -76,5 +77,28 @@ class Ticket extends Model
     public function nin()
     {
         return $this->hasOne('App\Models\Nin');
+    }
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        if ($this->user()->first()) {
+            $array['name']  = $this->user()->first()->name;
+            $array['email'] = $this->user()->first()->email;
+        }
+
+        // Create a findable status, so that we can filter it with Algolia
+        switch ($this->status) {
+            case 'unused':
+            case 'utilized':
+                $array['findable'] = 1;
+                break;
+            default:
+                $array['findable'] = 0;
+                break;
+        }
+
+        return $array;
     }
 }
