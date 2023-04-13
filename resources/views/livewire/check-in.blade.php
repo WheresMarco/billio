@@ -2,7 +2,7 @@
     <div class="flex justify-between mb-2 mt-2 px-2 xl:px-0">
         <div>
             <select wire:model="event" class="text-black w-full lg:w-auto rounded-md">
-                <option value="">Välj evenemang</option>
+                <option value="0">Välj evenemang</option>
                 @foreach ($events as $event)
                     <option value="{{ $event->id }}">{{ $event->name }}</option>
                 @endforeach
