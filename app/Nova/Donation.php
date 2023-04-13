@@ -55,6 +55,9 @@ class Donation extends Resource
 
             BelongsTo::make('User'),
 
+            Text::make('Status')
+                ->rules('required'),
+
             Number::make('Amount')
                 ->rules('required'),
         ];
