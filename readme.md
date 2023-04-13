@@ -19,6 +19,7 @@ Requirements
 
 - [The requirements for Laravel](https://laravel.com/docs/master/installation).
 - An Stripe account (to process payments).
+- An Algolia account (to handle check in, searches tickets table).
 - For student ID check you need API-keys from the local student unions.
 
 Installation

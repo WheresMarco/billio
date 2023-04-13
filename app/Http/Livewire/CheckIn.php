@@ -11,7 +11,7 @@ class CheckIn extends Component
 {
     use WithPagination;
 
-    public $event  = null;
+    public $event  = 0;
     public $search = '';
 
     public function changeStatus($id, $status)
@@ -25,16 +25,9 @@ class CheckIn extends Component
     public function render()
     {
         // Get tickets by ticket code or user name or user email based on event
-        $tickets = Ticket::where('event_id', $this->event)
-            ->where('status', '!=', 'awaiting_payment')
-            ->where('status', '!=', 'hold')
-            ->where(function ($query) {
-                $query->where('ticket_code', 'like', '%' . $this->search . '%')
-                    ->orWhereHas('user', function ($query) {
-                        $query->where('name', 'like', '%' . $this->search . '%')
-                            ->orWhere('email', 'like', '%' . $this->search . '%');
-                    });
-            })
+        $tickets = Ticket::search($this->search)
+            ->where('event_id', $this->event)
+            ->where('findable', 1)
             ->paginate(5);
 
         return view(
