@@ -52,6 +52,20 @@ class TicketType extends Model
 
     public function getSoldOutAttribute()
     {
+        // Special SOF-checks
+        if (Str::contains($this->event->slug, 'sof')) {
+            if (Str::contains($this->slug, 'complete')) {
+                // Get the occurrences for this event by event_id
+                $occurrences = Occurrence::where('event_id', $this->event_id)->get();
+
+                foreach ($occurrences as $occurrence) {
+                    if ($occurrence->isSoldOut) {
+                        return true;
+                    }
+                }
+            }
+        }
+
         $tickets_sold = ( new TicketController() )->ticketsSold($this->event_id, $this->id);
 
         // Also check if all the occurrences are sold out
