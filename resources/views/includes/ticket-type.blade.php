@@ -1,4 +1,4 @@
-<form action="/event/{{ $event['slug'] }}/{{ $ticketType->slug }}" method="post">
+<form action="/event/{{ $event->slug }}/{{ $ticketType->slug }}" method="post">
     <div>
         @csrf
         <input type="hidden" name="ticket_type_id" value="{{ $ticketType->id }}">
