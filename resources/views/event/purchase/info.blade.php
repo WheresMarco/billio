@@ -81,7 +81,7 @@
                                         <option value="{{ $occurrence->id }}"
                                             @if ($occurrence->isSoldOut) disabled @endif>
                                             {{ $occurrence->date_from->format('Y-m-d H:i') }} till
-                                            {{ $occurrence->date_to->format('Y-m-d H:i') }} ({{ $occurrence->location }}) @if ($occurrence->delta_price != 0)({{ $occurrence->delta_price }} kr)@endif
+                                            {{ $occurrence->date_to->format('Y-m-d H:i') }} ({{ $occurrence->location }}) @if ($occurrence->delta_price != 0)({{ $occurrence->delta_price }} kr) @if ($occurrence->isSoldOut) SLUTSÅLD @endif @endif
                                         </option>
                                     @endforeach
                                 </select>
