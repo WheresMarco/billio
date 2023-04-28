@@ -1,4 +1,4 @@
-<form action="/event/{{ $event->slug }}/{{ $ticketType->slug }}" method="post">
+<form action="/event/{{ $event['slug'] }}/{{ $ticketType->slug }}" method="post">
     <div>
         @csrf
         <input type="hidden" name="ticket_type_id" value="{{ $ticketType->id }}">
@@ -12,7 +12,7 @@
     </div>
 
     <div>
-        @if (($ticketType->active && !$ticketType->soldOut) || (session('access_code_event') && session('access_code_event_id') == $event->id))
+        @if (($ticketType->active && !$ticketType->soldOut) || ((session('access_code_event') && session('access_code_event_id') == $event['id']) && !$ticketType->soldOut))
             <label class="mb-2 inline-block font-bold">Antal biljetter:</label><br>
             <input
                 class="mr-1 w-1/4 rounded-md border-gray-300 bg-transparent shadow-sm focus:border-blue focus:ring focus:ring-blue focus:ring-opacity-50 sm:w-1/5"

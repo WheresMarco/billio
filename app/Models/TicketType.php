@@ -66,6 +66,15 @@ class TicketType extends Model
 //            }
 //        }
 
+        // If ticket type slug is "complete" and access code is "kartege" return false, else return true
+        if ($this->slug == 'complete' && session('access_code_event') && session('access_code') == 'kartege') {
+            return false;
+        }
+
+        if ($this->slug == 'complete') {
+            return true;
+        }
+
         $tickets_sold = ( new TicketController() )->ticketsSold($this->event_id, $this->id);
 
         // Also check if all the occurrences are sold out
