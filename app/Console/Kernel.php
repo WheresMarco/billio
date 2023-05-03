@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->job(new RemoveTicketsOnHold)->everyFiveMinutes();
-//        $schedule->job(new RemoveTicketsAwaitingPayment)->everyFiveMinutes();
+        $schedule->job(new RemoveTicketsAwaitingPayment)->everyFiveMinutes();
         $schedule->job(new RemoveDonationsAwaitingPayment)->everyFiveMinutes();
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
