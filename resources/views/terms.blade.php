@@ -17,7 +17,7 @@
 
         <ul class="list-disc">
             <li class="ml-4">När dina biljetter har levererats till dig <strong>kan du inte ångra ditt köp</strong>. Du är dock fri att sälja vidare eller ge bort biljetten.</li>
-            <li class="ml-4">Dina biljetter är personliga, vilket innebär att <strong>du kan behöva identifiera dig</strong> med giltigt pass, nationellt ID-kort, körkort eller studentlegitimation för att kunna använda biljetterna.</li>
+            <li class="ml-4"><strong>Du kan behöva identifiera dig</strong> med giltigt pass, nationellt ID-kort, körkort eller studentlegitimation för att kunna använda biljetterna.</li>
         </ul>
     </main>
 @endsection
