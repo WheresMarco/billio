@@ -28,7 +28,7 @@ Route::view('/help', 'help')->middleware('clearcart');
 Route::get('/checkin', [
     'as' => 'checkin',
     'uses' => 'CheckInController@index',
-    'middleware' => 'auth.very_basic:sof,kul'
+    'middleware' => 'auth.very_basic:fos,skoj'
 ]);
 
 // Event
