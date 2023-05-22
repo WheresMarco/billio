@@ -20,9 +20,9 @@
         </div>
 
         <div class="container mx-auto lg:px-0 border-b py-8 mb-8 border-gray-600 px-4 xl:px-0">
-            <h2 class="relative mb-2 font-headline text-2xl text-white">Kommande evenemang</h2>
+            <h2 class="relative mb-2 font-headline text-2xl text-white hidden">Kommande evenemang</h2>
 
-            <div class="space-y-4">
+            <div class="space-y-4 hidden">
                 @foreach ($events as $event)
                     @if ($event->upcoming())
                         <div
@@ -62,9 +62,12 @@
                 @endforeach
             </div>
 
-            <h2 class="relative mb-2 mt-8 font-headline text-2xl text-white">Tidigare evenemang</h2>
+            <h2 class="relative mb-2 mt-0 font-headline text-2xl text-white">Tidigare evenemang</h2>
 
             <div class="grid md:grid-cols-3 gap-4">
+                @php
+                    $events = $events->reverse();
+                @endphp
                 @foreach ($events as $event)
                     @if ($event->upcoming() === false)
                         <div
